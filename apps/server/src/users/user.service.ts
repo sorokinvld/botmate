@@ -11,16 +11,17 @@ export class UserService {
     @InjectRepository(User) private readonly userRepo: Repository<User>,
   ) {}
 
-  public createUser(createUserInput: CreateUserInput) {
+  async createUser(createUserInput: CreateUserInput) {
     const user = {
       ...createUserInput,
     };
 
-    this.userRepo.create({
-      ...createUserInput,
+    const newUser = this.userRepo.create({
+      ...user,
     });
 
-    return user;
+    await this.userRepo.save(newUser);
+    return newUser;
   }
 
   async getUserByEmail(email: string): Promise<User> {
