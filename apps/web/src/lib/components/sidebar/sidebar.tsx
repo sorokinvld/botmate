@@ -1,12 +1,17 @@
 import {
+	Avatar,
+	Box,
 	Divider,
 	Flex,
+	Heading,
 	HStack,
 	IconButton,
 	Image,
 	Spacer,
 	Stack,
+	Text,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import {
 	HiHome,
 	HiBell,
@@ -65,7 +70,7 @@ type SidebarProps = {
 };
 function Sidebar({}: SidebarProps) {
 	return (
-		<Flex flexDirection='column' p={4} gap={6}>
+		<Flex flexDirection='column' p={4} gap={6} h='100vh' overflow='auto'>
 			<HStack width='full'>
 				<Image opacity={0.8} boxSize='8' src='/assets/botmate-logo.png' />
 				<Spacer />
@@ -95,6 +100,32 @@ function Sidebar({}: SidebarProps) {
 				<SidebarItem label='Groups' icon={<HiUsers />} href={'/groups'} />
 				<SidebarItem label='Channels' icon={<HiRss />} href={'/channels'} />
 			</Stack>
+
+			<Spacer />
+
+			<Link href='/profile'>
+				<HStack
+					p={4}
+					borderWidth='1px'
+					rounded='xl'
+					bg='#1d1e2b'
+					cursor='pointer'
+					userSelect='none'
+					_hover={{
+						transform: 'translateY(-5px)',
+						shadow: 'lg',
+					}}
+					transition='all 0.4s ease-in-out'
+				>
+					<Avatar draggable={false} src='https://bit.ly/code-beast' />
+					<Box>
+						<Heading fontSize={12}>Monawwar Abdullah</Heading>
+						<Text fontSize='sm' opacity={0.8}>
+							@xencodes
+						</Text>
+					</Box>
+				</HStack>
+			</Link>
 		</Flex>
 	);
 }
