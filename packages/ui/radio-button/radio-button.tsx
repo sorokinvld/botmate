@@ -10,9 +10,7 @@ function RadioButton({ options, onChange, isLoading }: RadioButtonProps) {
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	useEffect(() => {
-		if (onChange) {
-			onChange(options[activeIndex]);
-		}
+		onChange?.(options[activeIndex]);
 	}, [onChange, activeIndex, options]);
 
 	return (

@@ -1,5 +1,4 @@
 import {
-	Box,
 	Divider,
 	Flex,
 	HStack,
@@ -7,9 +6,7 @@ import {
 	Image,
 	Spacer,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
-import { RiGithubFill } from 'react-icons/ri';
 import {
 	HiHome,
 	HiBell,
@@ -17,10 +14,10 @@ import {
 	HiChartBar,
 	HiLightningBolt,
 	HiAnnotation,
-	HiShoppingCart,
 	HiPuzzle,
 	HiRss,
 	HiUsers,
+	HiShieldCheck,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
@@ -51,6 +48,11 @@ const sidebarItems = [
 		label: 'Action Builder',
 		icon: <HiLightningBolt />,
 		href: '/builder',
+	},
+	{
+		label: 'Moderations',
+		icon: <HiShieldCheck />,
+		href: '/moderations',
 	},
 	{
 		label: 'Marketplace',

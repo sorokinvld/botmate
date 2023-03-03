@@ -1,13 +1,4 @@
-import {
-	Box,
-	Center,
-	Flex,
-	Heading,
-	HStack,
-	Spacer,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Box, Heading, HStack, Spacer, Stack, Text } from '@chakra-ui/react';
 
 type StatsProps = {
 	title: string;
@@ -18,7 +9,7 @@ type StatsProps = {
 function Stats({ title, value, icon, label }: StatsProps) {
 	return (
 		<Box p={4} bg='#2c2c2c57' rounded='lg' borderWidth='1px'>
-			<HStack>
+			<HStack alignItems='flex-start'>
 				<Stack>
 					<Text size='md'>{title}</Text>
 					<Heading>{value}</Heading>

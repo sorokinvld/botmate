@@ -47,7 +47,7 @@ Home.getLayout = (page: React.ReactElement) => (
 		title='Dashboard'
 		action={
 			<Box>
-				<RadioButton options={['All', 'Bots', 'Channels']} />
+				<RadioButton options={['Start', 'Stop']} />
 			</Box>
 		}
 	>
