@@ -23,6 +23,7 @@ import {
 	HiRss,
 	HiUsers,
 	HiShieldCheck,
+	HiUser,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
@@ -32,36 +33,43 @@ const sidebarItems = [
 		label: 'Dashboard',
 		icon: <HiHome />,
 		href: '/',
+		match: /^\/$/,
 	},
 	{
 		label: 'Commands',
 		icon: <HiAnnotation />,
 		href: '/commands',
+		match: /^\/commands/,
 	},
 	{
 		label: 'Analytics',
 		icon: <HiChartBar />,
 		href: '/analytics',
+		match: /^\/analytics/,
 	},
 	{
 		label: 'Notifications',
 		icon: <HiBell />,
 		href: '/notifications',
+		match: /^\/notifications/,
 	},
 	{
 		label: 'Action Builder',
 		icon: <HiLightningBolt />,
 		href: '/builder',
+		match: /^\/builder/,
 	},
 	{
 		label: 'Moderations',
 		icon: <HiShieldCheck />,
 		href: '/moderations',
+		match: /^\/moderations/,
 	},
 	{
 		label: 'Marketplace',
 		icon: <HiPuzzle />,
 		href: '/marketplace',
+		match: /^\/marketplace/,
 	},
 ];
 
@@ -74,11 +82,13 @@ function Sidebar({}: SidebarProps) {
 			<HStack width='full'>
 				<Image opacity={0.8} boxSize='8' src='/assets/botmate-logo.png' />
 				<Spacer />
-				<IconButton
-					size='md'
-					aria-label='settings'
-					icon={<HiCog size={18} />}
-				/>
+				<Link href='/settings'>
+					<IconButton
+						size='md'
+						aria-label='settings'
+						icon={<HiCog size={18} />}
+					/>
+				</Link>
 			</HStack>
 
 			<Search />
@@ -90,6 +100,7 @@ function Sidebar({}: SidebarProps) {
 						label={item.label}
 						icon={item.icon}
 						href={item.href}
+						match={item.match}
 					/>
 				))}
 			</Stack>
@@ -97,8 +108,18 @@ function Sidebar({}: SidebarProps) {
 			<Divider />
 
 			<Stack>
-				<SidebarItem label='Groups' icon={<HiUsers />} href={'/groups'} />
-				<SidebarItem label='Channels' icon={<HiRss />} href={'/channels'} />
+				<SidebarItem
+					label='Help and Support'
+					icon={<HiUser />}
+					href={'/help-support'}
+					match={/^\/help-support/}
+				/>
+				<SidebarItem
+					label='News and Updates'
+					icon={<HiRss />}
+					href={'/news-updates'}
+					match={/^\/news-updates/}
+				/>
 			</Stack>
 
 			<Spacer />

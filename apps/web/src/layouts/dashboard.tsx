@@ -10,12 +10,14 @@ type DashboardLayoutProps = {
 	action?: React.ReactNode;
 	children: React.ReactNode;
 	goBack?: boolean;
+	noPadding?: boolean;
 };
 function DashboardLayout({
 	title,
 	children,
 	action,
 	goBack,
+	noPadding,
 }: DashboardLayoutProps) {
 	const r = useRouter();
 	const borderColor = '#60606077';
@@ -68,7 +70,7 @@ function DashboardLayout({
 						{action}
 					</HStack>
 
-					<Box flexGrow={1} p={4} overflow='auto'>
+					<Box flexGrow={1} p={noPadding ? 0 : 4} overflow='auto'>
 						{children}
 					</Box>
 				</Flex>

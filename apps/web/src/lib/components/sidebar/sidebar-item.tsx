@@ -6,16 +6,18 @@ type SidebarItemProps = {
 	icon: React.ReactNode;
 	label: string;
 	href: string;
+	active?: boolean;
+	match: RegExp;
 };
 function SidebarItem({
 	//
 	icon,
 	label,
 	href,
+	match,
 }: SidebarItemProps) {
 	const r = useRouter();
-	const active =
-		href === '/' ? href === r.pathname : r.pathname.startsWith(href);
+	const active = match?.test(r.pathname);
 
 	return (
 		<Link href={href}>
