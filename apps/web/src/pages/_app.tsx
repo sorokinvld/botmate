@@ -6,8 +6,11 @@ import {
 	createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { ChakraProvider } from '@chakra-ui/react';
 
-import '../styles/globals.css';
+import theme from '../theme';
+import '@fontsource/inter/400.css';
+import '@fontsource/open-sans/700.css';
 
 const httpLink = createHttpLink({
 	uri: 'http://localhost:8080/graphql',
@@ -33,7 +36,9 @@ const client = new ApolloClient({
 function BotMate({ Component, pageProps }: AppProps) {
 	return (
 		<ApolloProvider client={client}>
-			<Component {...pageProps} />
+			<ChakraProvider theme={theme}>
+				<Component {...pageProps} />
+			</ChakraProvider>
 		</ApolloProvider>
 	);
 }
