@@ -1,5 +1,6 @@
 import {
 	Box,
+	Divider,
 	Flex,
 	HStack,
 	IconButton,
@@ -17,6 +18,9 @@ import {
 	HiLightningBolt,
 	HiAnnotation,
 	HiShoppingCart,
+	HiPuzzle,
+	HiRss,
+	HiUsers,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
@@ -36,7 +40,7 @@ const sidebarItems = [
 	{
 		label: 'Analytics',
 		icon: <HiChartBar />,
-		href: '/broadcast',
+		href: '/analytics',
 	},
 	{
 		label: 'Notifications',
@@ -50,7 +54,7 @@ const sidebarItems = [
 	},
 	{
 		label: 'Marketplace',
-		icon: <HiShoppingCart />,
+		icon: <HiPuzzle />,
 		href: '/marketplace',
 	},
 ];
@@ -84,25 +88,12 @@ function Sidebar({}: SidebarProps) {
 				))}
 			</Stack>
 
-			<Box>
-				<Text fontSize={12} color='#a1a1a1'>
-					Telegram
-				</Text>
+			<Divider />
 
-				<Stack mt={4} spacing={1}>
-					<SidebarItem
-						label='Channels'
-						icon={<RiGithubFill />}
-						href={'/github'}
-					/>
-					<SidebarItem
-						label='Groups'
-						icon={<RiGithubFill />}
-						href={'/github'}
-					/>
-					<SidebarItem label='Users' icon={<RiGithubFill />} href={'/github'} />
-				</Stack>
-			</Box>
+			<Stack>
+				<SidebarItem label='Groups' icon={<HiUsers />} href={'/groups'} />
+				<SidebarItem label='Channels' icon={<HiRss />} href={'/channels'} />
+			</Stack>
 		</Flex>
 	);
 }
