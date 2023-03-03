@@ -6,7 +6,7 @@ const Button: StyleConfig = {
 	},
 	variants: {
 		solid: {
-			backgroundColor: '#292a35',
+			backgroundColor: '#1d1e2b',
 			borderColor: '#ffffff29',
 			borderWidth: '1px',
 		},
