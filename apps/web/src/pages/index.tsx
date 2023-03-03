@@ -1,4 +1,5 @@
-import { Heading } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Heading } from '@chakra-ui/react';
+import { RadioButton } from 'ui';
 import { DashboardLayout } from '../layouts/dashboard';
 
 function Home() {
@@ -6,7 +7,16 @@ function Home() {
 }
 
 Home.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout title='Dashboard'>{page}</DashboardLayout>
+	<DashboardLayout
+		title='Dashboard'
+		action={
+			<Box>
+				<RadioButton isLoading options={['All', 'Bots', 'Channels']} />
+			</Box>
+		}
+	>
+		{page}
+	</DashboardLayout>
 );
 
 export default Home;

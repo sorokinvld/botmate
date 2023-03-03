@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack } from '@chakra-ui/react';
 import { Sidebar } from '@/lib/components/sidebar';
 
 type DashboardLayoutProps = {
@@ -6,7 +6,8 @@ type DashboardLayoutProps = {
 	action?: React.ReactNode;
 	children: React.ReactNode;
 };
-function DashboardLayout({ title, children }: DashboardLayoutProps) {
+function DashboardLayout({ title, children, action }: DashboardLayoutProps) {
+	console.log('action', action);
 	const borderColor = '#60606077';
 	return (
 		<Flex h='100vh' overflow='auto'>
@@ -14,9 +15,15 @@ function DashboardLayout({ title, children }: DashboardLayoutProps) {
 				<Sidebar />
 			</Box>
 			<Box flexGrow={1}>
-				<Box p={4} borderBottomWidth='1px' borderBottomColor={borderColor}>
+				<HStack
+					p={4}
+					spacing={6}
+					borderBottomWidth='1px'
+					borderBottomColor={borderColor}
+				>
 					<Heading size='md'>{title}</Heading>
-				</Box>
+					<Box>{action}</Box>
+				</HStack>
 				<Box p={4}>{children}</Box>
 			</Box>
 		</Flex>
