@@ -22,7 +22,6 @@ import {
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
 
-// generate sidebar items
 const sidebarItems = [
 	{
 		label: 'Dashboard',

@@ -2,18 +2,23 @@ import type { StyleConfig } from '@chakra-ui/styled-system';
 
 const Button: StyleConfig = {
 	baseStyle: {
-		backgroundColor: '#292a35',
 		textTransform: 'uppercase',
 	},
-	variants: {},
+	variants: {
+		solid: {
+			backgroundColor: '#292a35',
+			borderColor: '#ffffff29',
+			borderWidth: '1px',
+		},
+	},
 	sizes: {
 		md: {
-			fontSize: 13,
+			fontSize: 12,
 		},
 	},
 	defaultProps: {
-		size: 'md',
-		variant: 'outline',
+		size: 'sm',
+		variant: 'solid',
 	},
 };
 

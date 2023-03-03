@@ -14,7 +14,9 @@ function SidebarItem({
 	href,
 }: SidebarItemProps) {
 	const r = useRouter();
-	const active = r.pathname === href;
+	const active =
+		href === '/' ? href === r.pathname : r.pathname.startsWith(href);
+
 	return (
 		<Link href={href}>
 			<HStack
