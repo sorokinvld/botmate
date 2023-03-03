@@ -29,7 +29,7 @@ function DashboardLayout({
 			</Head>
 			<Flex h='100vh' overflow='hidden'>
 				<Box
-					w='72'
+					w='80'
 					borderRightWidth='1px'
 					borderRightColor={borderColor}
 					overflow='auto'
@@ -37,7 +37,7 @@ function DashboardLayout({
 					<Sidebar />
 				</Box>
 
-				<Flex flexGrow={1} flexDirection='column'>
+				<Flex w='full' flexDirection='column'>
 					<HStack
 						p={4}
 						w='full'

@@ -12,16 +12,15 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
 	HiHome,
 	HiBell,
 	HiCog,
 	HiChartBar,
-	HiLightningBolt,
 	HiAnnotation,
 	HiPuzzle,
 	HiRss,
-	HiUsers,
 	HiShieldCheck,
 	HiUser,
 } from 'react-icons/hi';
@@ -54,12 +53,6 @@ const sidebarItems = [
 		match: /^\/notifications/,
 	},
 	{
-		label: 'Action Builder',
-		icon: <HiLightningBolt />,
-		href: '/builder',
-		match: /^\/builder/,
-	},
-	{
 		label: 'Moderations',
 		icon: <HiShieldCheck />,
 		href: '/moderations',
@@ -77,6 +70,8 @@ type SidebarProps = {
 	//
 };
 function Sidebar({}: SidebarProps) {
+	const r = useRouter();
+
 	return (
 		<Flex flexDirection='column' p={4} gap={6} h='100vh' overflow='auto'>
 			<HStack width='full'>
@@ -124,29 +119,33 @@ function Sidebar({}: SidebarProps) {
 
 			<Spacer />
 
-			<Link href='/profile'>
-				<HStack
-					p={4}
-					borderWidth='1px'
-					rounded='xl'
-					bg='#1d1e2b'
-					cursor='pointer'
-					userSelect='none'
-					_hover={{
-						transform: 'translateY(-5px)',
-						shadow: 'lg',
-					}}
-					transition='all 0.4s ease-in-out'
-				>
-					<Avatar draggable={false} src='https://bit.ly/code-beast' />
-					<Box>
-						<Heading fontSize={12}>Monawwar Abdullah</Heading>
-						<Text fontSize='sm' opacity={0.8}>
-							@xencodes
-						</Text>
-					</Box>
-				</HStack>
-			</Link>
+			{/* 
+					todo: make this a component
+				*/}
+			<HStack
+				p={4}
+				borderWidth='1px'
+				rounded='xl'
+				bg='#1d1e2b'
+				cursor='pointer'
+				userSelect='none'
+				_hover={{
+					transform: 'translateY(-5px)',
+					shadow: 'lg',
+				}}
+				transition='all 0.4s ease-in-out'
+				onClick={() => r.push('/profile')}
+			>
+				<Avatar draggable={false} src='https://bit.ly/code-beast' />
+				<Box>
+					<Heading fontSize={12} noOfLines={1}>
+						Monawwar Abdullah
+					</Heading>
+					<Text fontSize='sm' opacity={0.8}>
+						@xencodes
+					</Text>
+				</Box>
+			</HStack>
 		</Flex>
 	);
 }

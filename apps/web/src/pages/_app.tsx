@@ -11,6 +11,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import theme from '../theme';
 
+import '../styles/globals.css';
 import '@fontsource/inter/400.css';
 import '@fontsource/open-sans/700.css';
 

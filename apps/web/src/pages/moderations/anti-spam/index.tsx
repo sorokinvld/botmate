@@ -10,8 +10,8 @@ function AntiSpam() {
 
 AntiSpam.getLayout = (page: React.ReactElement) => (
 	<DashboardLayout
-		title='AntiSpam'
-		noPadding
+		title='Anti Spam'
+		goBack
 		action={
 			<>
 				<Spacer />
@@ -19,7 +19,7 @@ AntiSpam.getLayout = (page: React.ReactElement) => (
 			</>
 		}
 	>
-		<ModerationsLayout>{page}</ModerationsLayout>
+		{page}
 	</DashboardLayout>
 );
 
