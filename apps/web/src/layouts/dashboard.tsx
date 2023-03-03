@@ -1,15 +1,9 @@
-import {
-	Box,
-	Flex,
-	Heading,
-	HStack,
-	IconButton,
-	Spacer,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
 import { Sidebar } from '@/lib/components/sidebar';
 import Head from 'next/head';
 import { HiArrowLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 type DashboardLayoutProps = {
 	title: string;
@@ -52,11 +46,22 @@ function DashboardLayout({
 					>
 						<HStack spacing={4}>
 							{goBack ? (
-								<IconButton
-									onClick={r.back}
-									aria-label='go-back'
-									icon={<HiArrowLeft />}
-								></IconButton>
+								<motion.div
+									initial={{ x: -50, opacity: 0 }}
+									animate={{ x: 0, opacity: 1 }}
+									exit={{ x: 50, opacity: 0 }}
+									transition={{
+										type: 'spring',
+										stiffness: 260,
+										damping: 20,
+									}}
+								>
+									<IconButton
+										onClick={r.back}
+										aria-label='go-back'
+										icon={<HiArrowLeft />}
+									/>
+								</motion.div>
 							) : null}
 							<Heading size='md'>{title}</Heading>
 						</HStack>

@@ -8,6 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 import theme from '../theme';
 
 import '@fontsource/inter/400.css';
@@ -46,9 +47,11 @@ function BotMate({ Component, pageProps }: AppPropsWithLayout) {
 	const layout = getLayout(<Component {...pageProps} />);
 
 	return (
-		<ApolloProvider client={client}>
-			<ChakraProvider theme={theme}>{layout}</ChakraProvider>
-		</ApolloProvider>
+		<AnimatePresence mode='wait' initial={false}>
+			<ApolloProvider client={client}>
+				<ChakraProvider theme={theme}>{layout}</ChakraProvider>
+			</ApolloProvider>
+		</AnimatePresence>
 	);
 }
 
