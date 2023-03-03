@@ -12,7 +12,7 @@ const styles = {
 	global: (props: StyleFunctionProps) => ({
 		body: {
 			color: mode('gray.800', 'whiteAlpha.800')(props),
-			bg: mode('gray.100', '#141214')(props),
+			bg: mode('gray.100', '#191A23')(props),
 		},
 		html: {
 			fontSize: '14px',

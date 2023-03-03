@@ -23,7 +23,7 @@ function RadioButton({ options, onChange, isLoading }: RadioButtonProps) {
 						px={3}
 						key={index}
 						height='30px'
-						bg={index === activeIndex ? '#4c4c4c58' : 'transparent'}
+						bg={index === activeIndex ? '#292a35' : 'transparent'}
 						cursor='pointer'
 						borderTopWidth='1px'
 						borderBottomWidth='1px'

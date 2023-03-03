@@ -21,7 +21,9 @@ function SidebarItem({
 				px={3}
 				py={1.5}
 				opacity={active ? 1 : 0.6}
-				bg={active ? '#4c4c4c58' : 'transparent'}
+				bg={active ? '#272832' : 'transparent'}
+				borderWidth='1px'
+				borderColor={active ? '#ffffff29' : 'transparent'}
 				rounded='md'
 				userSelect='none'
 				cursor='pointer'

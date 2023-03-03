@@ -8,7 +8,7 @@ type StatsProps = {
 };
 function Stats({ title, value, icon, label }: StatsProps) {
 	return (
-		<Box p={4} bg='#2c2c2c57' rounded='lg' borderWidth='1px'>
+		<Box p={4} bg='#1d1e2b' rounded='lg' borderWidth='1px'>
 			<HStack alignItems='flex-start'>
 				<Stack>
 					<Text size='md'>{title}</Text>

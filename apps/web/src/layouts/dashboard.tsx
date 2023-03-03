@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Spacer } from '@chakra-ui/react';
 import { Sidebar } from '@/lib/components/sidebar';
 import Head from 'next/head';
 
@@ -28,7 +28,7 @@ function DashboardLayout({ title, children, action }: DashboardLayoutProps) {
 						height='60px'
 					>
 						<Heading size='md'>{title}</Heading>
-						<Box>{action}</Box>
+						{action}
 					</HStack>
 
 					<Box p={4}>{children}</Box>
