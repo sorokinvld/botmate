@@ -1,9 +1,45 @@
-import { Box, Button, ButtonGroup, Heading } from '@chakra-ui/react';
-import { RadioButton } from 'ui';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import { RadioButton, Stats } from 'ui';
+import {
+	FcAbout,
+	FcDeleteDatabase,
+	FcLineChart,
+	FcOk,
+	FcSms,
+} from 'react-icons/fc';
 import { DashboardLayout } from '../layouts/dashboard';
 
 function Home() {
-	return <>Home</>;
+	return (
+		<>
+			<SimpleGrid columns={4} spacing={4}>
+				<Stats
+					title='Bot Status'
+					value={'OK'}
+					icon={<FcOk />}
+					label='Bot is functional'
+				/>
+				<Stats
+					title='Messages'
+					value={'34,555'}
+					icon={<FcSms />}
+					label='Last 24 hours'
+				/>
+				<Stats
+					title='Users Activity'
+					value={'340'}
+					icon={<FcLineChart />}
+					label='Last 30 days'
+				/>
+				<Stats
+					title='Errors Reported'
+					value={'340'}
+					icon={<FcDeleteDatabase />}
+					label='Last 7 days'
+				/>
+			</SimpleGrid>
+		</>
+	);
 }
 
 Home.getLayout = (page: React.ReactElement) => (

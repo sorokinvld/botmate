@@ -1,0 +1,38 @@
+import {
+	Box,
+	Center,
+	Flex,
+	Heading,
+	HStack,
+	Spacer,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
+
+type StatsProps = {
+	title: string;
+	value: string | number;
+	icon: React.ReactNode;
+	label?: string;
+};
+function Stats({ title, value, icon, label }: StatsProps) {
+	return (
+		<Box p={4} bg='#2c2c2c57' rounded='lg' borderWidth='1px'>
+			<HStack>
+				<Stack>
+					<Text size='md'>{title}</Text>
+					<Heading>{value}</Heading>
+				</Stack>
+				<Spacer />
+				<Box rounded='xl' fontSize='6xl'>
+					{icon}
+				</Box>
+			</HStack>
+			<Text mt={2} fontSize={12} opacity={0.8}>
+				{label}
+			</Text>
+		</Box>
+	);
+}
+
+export { Stats };
