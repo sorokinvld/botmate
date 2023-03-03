@@ -6,7 +6,7 @@ function Commands() {
 }
 
 Commands.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout>{page}</DashboardLayout>
+	<DashboardLayout title='Commands'>{page}</DashboardLayout>
 );
 
 export default Commands;
