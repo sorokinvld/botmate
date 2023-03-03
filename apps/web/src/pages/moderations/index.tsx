@@ -8,7 +8,7 @@ import {
 	Spacer,
 	Text,
 } from '@chakra-ui/react';
-import { ChatSelector, ModerationItem } from '@/lib/components/moderation';
+import { ChatSelector, ModerationItem } from '@/libs/components/moderation';
 import {
 	HiBadgeCheck,
 	HiCake,

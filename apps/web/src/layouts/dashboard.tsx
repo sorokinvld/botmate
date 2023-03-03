@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
-import { Sidebar } from '@/lib/components/sidebar';
+import { Sidebar } from '@/libs/components/sidebar';
 import Head from 'next/head';
 import { HiArrowLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';

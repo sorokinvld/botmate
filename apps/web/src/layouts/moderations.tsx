@@ -1,4 +1,4 @@
-import { SidebarItem } from '@/lib/components/sidebar';
+import { SidebarItem } from '@/libs/components/sidebar';
 import { Box, Flex, Stack } from '@chakra-ui/react';
 import { HiFilter, HiStop } from 'react-icons/hi';
 
