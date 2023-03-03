@@ -27,7 +27,7 @@ function SidebarItem({
 				cursor='pointer'
 				transition='all 0.2s'
 				_hover={{
-					opacity: 1,
+					opacity: active ? 1 : 0.8,
 				}}
 			>
 				<Box fontSize='lg'>{icon}</Box>

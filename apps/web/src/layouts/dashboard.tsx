@@ -20,10 +20,12 @@ function DashboardLayout({ title, children, action }: DashboardLayoutProps) {
 					spacing={6}
 					borderBottomWidth='1px'
 					borderBottomColor={borderColor}
+					height='60px'
 				>
 					<Heading size='md'>{title}</Heading>
 					<Box>{action}</Box>
 				</HStack>
+
 				<Box p={4}>{children}</Box>
 			</Box>
 		</Flex>

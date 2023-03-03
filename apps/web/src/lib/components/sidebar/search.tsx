@@ -5,7 +5,7 @@ import {
 	InputRightElement,
 	Kbd,
 } from '@chakra-ui/react';
-import { FiSearch, FiSlack } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 
 type SearchProps = {};
 

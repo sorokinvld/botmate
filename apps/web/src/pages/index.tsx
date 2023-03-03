@@ -3,7 +3,7 @@ import { RadioButton } from 'ui';
 import { DashboardLayout } from '../layouts/dashboard';
 
 function Home() {
-	return <>hello</>;
+	return <>Home</>;
 }
 
 Home.getLayout = (page: React.ReactElement) => (
@@ -11,7 +11,7 @@ Home.getLayout = (page: React.ReactElement) => (
 		title='Dashboard'
 		action={
 			<Box>
-				<RadioButton isLoading options={['All', 'Bots', 'Channels']} />
+				<RadioButton options={['All', 'Bots', 'Channels']} />
 			</Box>
 		}
 	>
