@@ -152,9 +152,12 @@ importers:
       '@apollo/react-hooks': ^4.0.0
       '@babel/core': ^7.0.0
       '@chakra-ui/react': ^2.5.1
+      '@chakra-ui/styled-system': ^2.6.1
+      '@chakra-ui/theme-tools': ^2.0.16
       '@emotion/react': ^11.10.6
       '@emotion/styled': ^11.10.6
       '@fontsource/inter': ^4.5.15
+      '@fontsource/montserrat': ^4.5.14
       '@fontsource/open-sans': ^4.5.14
       '@types/node': ^17.0.12
       '@types/react': ^18.0.22
@@ -175,9 +178,12 @@ importers:
       '@apollo/client': 3.7.9_gdcq4dv6opitr3wbfwyjmanyra
       '@apollo/react-hooks': 4.0.0_gdcq4dv6opitr3wbfwyjmanyra
       '@chakra-ui/react': 2.5.1_llidv3byuxn3l2nsibklt32qgu
+      '@chakra-ui/styled-system': 2.6.1
+      '@chakra-ui/theme-tools': 2.0.16_es2flcfvdj7o2v4vs237ptvmhy
       '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
       '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
       '@fontsource/inter': 4.5.15
+      '@fontsource/montserrat': 4.5.14
       '@fontsource/open-sans': 4.5.14
       daisyui: 2.51.3
       framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
@@ -1289,6 +1295,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@chakra-ui/anatomy/2.1.1:
+    resolution: {integrity: sha512-LUHAoqJAgxAqmyckG5bUpBrfEo1FleEyY+1A8hkWciy58gZ+h3GoY9oBpHcdo7XdHPpy3G+3hieK/7i9NLwxAw==}
+    dev: false
+
   /@chakra-ui/anatomy/2.1.2:
     resolution: {integrity: sha512-pKfOS/mztc4sUXHNc8ypJ1gPWSolWT770jrgVRfolVbYlki8y5Y+As996zMF6k5lewTu6j9DQequ7Cc9a69IVQ==}
     dev: false
@@ -2055,6 +2065,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@chakra-ui/shared-utils/2.0.4:
+    resolution: {integrity: sha512-JGWr+BBj3PXGZQ2gxbKSD1wYjESbYsZjkCeE2nevyVk4rN3amV1wQzCnBAhsuJktMaZD6KC/lteo9ou9QUDzpA==}
+    dev: false
+
   /@chakra-ui/shared-utils/2.0.5:
     resolution: {integrity: sha512-4/Wur0FqDov7Y0nCXl7HbHzCg4aq86h+SXdoUeuCMD3dSj7dpsVnStLYhng1vxvlbUnLpdF4oz5Myt3i/a7N3Q==}
     dev: false
@@ -2210,6 +2224,17 @@ packages:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.5.1_xqp3pgpqjlfxxa3zxu4zoc4fba
       react: 18.2.0
+    dev: false
+
+  /@chakra-ui/theme-tools/2.0.16_es2flcfvdj7o2v4vs237ptvmhy:
+    resolution: {integrity: sha512-B/LD+2LNDeHYd/LVCHIJqckVZfhrycTUpNbhRVAiDRaS0AAcsPxKas7liTFkkMkM076YjiHlcla3KpVX+E9tzg==}
+    peerDependencies:
+      '@chakra-ui/styled-system': '>=2.0.0'
+    dependencies:
+      '@chakra-ui/anatomy': 2.1.1
+      '@chakra-ui/shared-utils': 2.0.4
+      '@chakra-ui/styled-system': 2.6.1
+      color2k: 2.0.2
     dev: false
 
   /@chakra-ui/theme-tools/2.0.17_es2flcfvdj7o2v4vs237ptvmhy:
@@ -2499,6 +2524,10 @@ packages:
 
   /@fontsource/inter/4.5.15:
     resolution: {integrity: sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==}
+    dev: false
+
+  /@fontsource/montserrat/4.5.14:
+    resolution: {integrity: sha512-fTvrteVzuFUePhr4QYBGoK8G/YHLJ3IhF1HhKg0AxcFvZajJT7rM7ULdmKLSd2PkX44R3aaFZq1zDbmjbGGI+w==}
     dev: false
 
   /@fontsource/open-sans/4.5.14:

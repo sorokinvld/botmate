@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import {
 	ApolloClient,
@@ -7,8 +8,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ChakraProvider } from '@chakra-ui/react';
-
 import theme from '../theme';
+
 import '@fontsource/inter/400.css';
 import '@fontsource/open-sans/700.css';
 
@@ -33,12 +34,20 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
-function BotMate({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+	getLayout?: (page: React.ReactElement) => React.ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+	Component: NextPageWithLayout;
+};
+function BotMate({ Component, pageProps }: AppPropsWithLayout) {
+	const getLayout = Component.getLayout ?? ((page) => page);
+	const layout = getLayout(<Component {...pageProps} />);
+
 	return (
 		<ApolloProvider client={client}>
-			<ChakraProvider theme={theme}>
-				<Component {...pageProps} />
-			</ChakraProvider>
+			<ChakraProvider theme={theme}>{layout}</ChakraProvider>
 		</ApolloProvider>
 	);
 }
