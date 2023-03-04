@@ -31,7 +31,7 @@ function Stats({ title, value, icon, label, index }: StatsProps) {
 				delay: index ? index * 0.1 : 0,
 			}}
 		>
-			<Box p={4} bg={bg} rounded='lg' borderWidth='1px'>
+			<Box p={4} bg={bg} rounded='md' borderWidth='1px'>
 				<HStack alignItems='flex-start'>
 					<Stack>
 						<Text size='md'>{title}</Text>

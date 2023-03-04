@@ -34,7 +34,7 @@ function ModerationItem({
 		<Box
 			p={4}
 			borderWidth='1px'
-			rounded='xl'
+			rounded='md'
 			bg={bg}
 			cursor='pointer'
 			draggable={false}
