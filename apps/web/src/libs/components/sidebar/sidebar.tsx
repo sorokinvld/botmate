@@ -72,7 +72,7 @@ const sidebarItems = [
 	{
 		label: 'Settings',
 		icon: <HiCog />,
-		href: '/settings/general',
+		href: '/settings/appearence',
 		match: /^\/settings/,
 	},
 ];

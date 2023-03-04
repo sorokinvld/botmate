@@ -28,7 +28,7 @@ function General() {
 }
 
 General.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout title='Settings / General' noPadding>
+	<DashboardLayout title='Settings / Appearence' noPadding>
 		<SettingsLayout>{page}</SettingsLayout>
 	</DashboardLayout>
 );

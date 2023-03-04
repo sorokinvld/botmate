@@ -7,6 +7,7 @@ import {
 	HiLink,
 	HiServer,
 	HiSwitchVertical,
+	HiUser,
 } from 'react-icons/hi';
 
 type SettingsLayoutProps = {
@@ -23,16 +24,22 @@ function SettingsLayout({ children }: SettingsLayoutProps) {
 
 					<Stack>
 						<SidebarItem
-							label='General'
-							href='/settings/general'
+							label='Appearence'
+							href='/settings/appearence'
 							icon={<HiColorSwatch />}
-							match={/^\/settings\/general/}
+							match={/^\/settings\/appearence/}
 						/>
 						<SidebarItem
-							label='BotMate Assistant'
-							href='/settings/bot'
+							label='Accounts'
+							href='/settings/accounts'
+							icon={<HiUser />}
+							match={/^\/settings\/accounts/}
+						/>
+						<SidebarItem
+							label='Management'
+							href='/settings/management'
 							icon={<HiAdjustments />}
-							match={/^\/settings\/variables/}
+							match={/^\/settings\/management/}
 						/>
 					</Stack>
 				</Stack>
