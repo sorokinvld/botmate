@@ -9,6 +9,7 @@ const config = {
   useSystemColorMode: true,
 };
 
+// todo: create common package for theme sharing
 const styles = {
   global: (props: StyleFunctionProps) => ({
     body: {

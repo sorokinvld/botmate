@@ -1,19 +1,52 @@
 import { SidebarItem } from '@/libs/components/sidebar';
-import { Box, Flex, Stack } from '@chakra-ui/react';
-import { HiFilter, HiStop } from 'react-icons/hi';
+import { Flex, Box, Text, Stack } from '@chakra-ui/react';
+import {
+  HiAdjustments,
+  HiBeaker,
+  HiColorSwatch,
+  HiLink,
+  HiServer,
+  HiSwitchVertical,
+  HiUser,
+} from 'react-icons/hi';
 
-const items = [
+import {
+  HiCake,
+  HiFilter,
+  HiLightningBolt,
+  HiShieldCheck,
+  HiStop,
+} from 'react-icons/hi';
+
+const ModerationsList = [
   {
     label: 'Filters',
-    href: '/moderations',
     icon: <HiFilter />,
-    match: /^\/moderations$/,
+    description: 'Filter messages based on keywords, links, and more.',
+    href: '/moderations/filters',
+    match: /\/moderations\/filters/,
   },
   {
-    label: 'Anti-spam',
-    href: '/moderations/anti-spam',
+    label: 'Anti Spam',
     icon: <HiStop />,
-    match: /^\/moderations\/anti-spam$/,
+    description: 'Enable anti-spam to prevent spam messages from being sent.',
+    href: '/moderations/anti-spam',
+    badge: 'beta',
+    match: /\/moderations\/anti-spam/,
+  },
+  {
+    label: 'Admins',
+    icon: <HiShieldCheck />,
+    description: 'View and manage adminstrators of your chat.',
+    href: '/moderations/admins',
+    match: /\/moderations\/admins/,
+  },
+  {
+    label: 'Actions Runner',
+    icon: <HiLightningBolt />,
+    description: 'Run actions based on the given conditions.',
+    href: '/moderations/actions',
+    match: /\/moderations\/actions/,
   },
 ];
 
@@ -22,25 +55,14 @@ type ModerationsLayoutProps = {
 };
 function ModerationsLayout({ children }: ModerationsLayoutProps) {
   return (
-    <Flex flex={1} flexDirection="row">
-      <Stack
-        w="52"
-        borderRightWidth="1px"
-        borderRightColor="#60606077"
-        height="xl"
-        p={4}
-      >
-        {items.map((item) => (
-          <SidebarItem
-            key={item.label}
-            label={item.label}
-            href={item.href}
-            icon={item.icon}
-            match={item.match}
-          />
+    <Flex h="full" flexGrow={1} overflow="auto">
+      <Stack w="60" h="full" borderRightWidth="1px" p={4}>
+        {ModerationsList.map((item) => (
+          <SidebarItem key={item.label} {...item} />
         ))}
       </Stack>
-      <Box flex="1" p={4}>
+
+      <Box flexGrow={1} p={4} overflow="auto">
         {children}
       </Box>
     </Flex>

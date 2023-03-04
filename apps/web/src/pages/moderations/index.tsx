@@ -17,6 +17,7 @@ import {
   HiStop,
 } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+import { ModerationsLayout } from '@/layouts/moderations';
 
 const ModerationsList = [
   {
@@ -88,6 +89,7 @@ function Moderations() {
 Moderations.getLayout = (page: React.ReactElement) => (
   <DashboardLayout
     title="Moderations"
+    noPadding
     action={
       <>
         <Spacer />
@@ -95,7 +97,7 @@ Moderations.getLayout = (page: React.ReactElement) => (
       </>
     }
   >
-    {page}
+    <ModerationsLayout>{page}</ModerationsLayout>
   </DashboardLayout>
 );
 

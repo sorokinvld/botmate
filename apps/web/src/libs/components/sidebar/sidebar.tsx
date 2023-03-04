@@ -27,6 +27,7 @@ import {
   HiUser,
   HiMoon,
   HiSun,
+  HiOutlineBell,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
@@ -52,15 +53,9 @@ const sidebarItems = [
     match: /^\/analytics/,
   },
   {
-    label: 'Notifications',
-    icon: <HiBell />,
-    href: '/notifications',
-    match: /^\/notifications/,
-  },
-  {
     label: 'Moderations',
     icon: <HiShieldCheck />,
-    href: '/moderations',
+    href: '/moderations/filters',
     match: /^\/moderations/,
   },
   {
@@ -97,10 +92,7 @@ function Sidebar({}: SidebarProps) {
         <IconButton
           size="md"
           aria-label="settings"
-          icon={
-            colorMode === 'light' ? <HiMoon size={20} /> : <HiSun size={20} />
-          }
-          onClick={toggleColorMode}
+          icon={<HiOutlineBell size={18} />}
         />
       </HStack>
 

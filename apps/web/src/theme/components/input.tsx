@@ -5,7 +5,6 @@ const Input: StyleConfig = {
   baseStyle: (props) => ({
     field: {
       bg: 'transparent',
-      // borderColor: '#454545af',
       borderWidth: 1.5,
       ':focus': {
         bg: mode('secondary.light', 'secondary.dark')(props),

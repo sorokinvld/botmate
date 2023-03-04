@@ -7,11 +7,13 @@ import {
 } from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
 
-type SearchProps = {};
+type SearchProps = {
+  w?: string;
+};
 
-function Search(props: SearchProps) {
+function Search({ w = 'full' }: SearchProps) {
   return (
-    <InputGroup>
+    <InputGroup w={w}>
       <InputLeftElement>
         <FiSearch />
       </InputLeftElement>

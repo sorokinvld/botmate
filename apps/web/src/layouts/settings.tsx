@@ -16,7 +16,7 @@ type SettingsLayoutProps = {
 function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
     <Flex h="full" flexGrow={1} overflow="auto">
-      <Stack w="72" h="full" borderRightWidth="1px" p={4} spacing={6}>
+      <Stack w="60" h="full" borderRightWidth="1px" p={4} spacing={6}>
         <Stack>
           <Text opacity={0.7} fontSize={12}>
             General
