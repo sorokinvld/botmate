@@ -59,7 +59,7 @@ function Moderations() {
 				<GridItem colSpan={{ base: 10, lg: 7 }}>
 					<Text mb={4} opacity={0.8}>
 						<chakra.span fontWeight='bold'>Note:</chakra.span> Make sure that
-						the bot is an admin of your chat before using any of the above
+						the bot is an admin of your chat before using any of the below
 						features.
 					</Text>
 					<SimpleGrid columns={{ base: 1, lg: 3 }} spacing={4}>
