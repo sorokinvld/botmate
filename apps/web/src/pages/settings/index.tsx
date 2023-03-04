@@ -3,7 +3,7 @@ import React from 'react';
 // NOTE: This page is redirected to /settings/general
 
 function Settings() {
-	return <></>;
+  return <></>;
 }
 
 export default Settings;

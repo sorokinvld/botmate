@@ -1,32 +1,32 @@
 {
-	"name": "botmate",
-	"version": "0.0.0",
-	"private": true,
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
-	"scripts": {
-		"build": "turbo run build",
-		"dev": "turbo run dev",
-		"lint": "turbo run lint",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"codegen": "graphql-codegen --config codegen.yaml"
-	},
-	"devDependencies": {
-		"@graphql-codegen/cli": "3.2.1",
-		"@graphql-codegen/client-preset": "2.1.0",
-		"@graphql-codegen/import-types-preset": "^2.2.6",
-		"@graphql-codegen/typescript": "^3.0.1",
-		"@graphql-codegen/typescript-operations": "^3.0.1",
-		"@graphql-codegen/typescript-react-apollo": "^3.3.7",
-		"@graphql-typed-document-node/core": "^3.1.2",
-		"eslint-config-custom": "workspace:*",
-		"prettier": "latest",
-		"turbo": "latest"
-	},
-	"engines": {
-		"node": ">=14.0.0"
-	},
-	"packageManager": "pnpm@7.17.1"
+  "name": "botmate",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "graphql-codegen --config codegen.yaml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "3.2.1",
+    "@graphql-codegen/client-preset": "2.1.0",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
+    "@graphql-codegen/typescript": "^3.0.1",
+    "@graphql-codegen/typescript-operations": "^3.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@graphql-typed-document-node/core": "^3.1.2",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@7.17.1"
 }

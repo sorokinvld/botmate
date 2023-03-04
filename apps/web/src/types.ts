@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -21,19 +21,19 @@ export type Scalars = {
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   user: User;
 };
 
 export type QueryUserArgs = {
-  id: Scalars["Int"];
+  id: Scalars['Int'];
 };
 
 export type User = {
-  __typename?: "User";
-  createdAt: Scalars["DateTime"];
-  email: Scalars["String"];
-  id: Scalars["Int"];
-  name: Scalars["String"];
-  password: Scalars["String"];
+  __typename?: 'User';
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  password: Scalars['String'];
 };

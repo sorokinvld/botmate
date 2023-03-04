@@ -5,35 +5,35 @@ import { components } from './theme/components';
 import { colors } from './theme/colors';
 
 const config = {
-	initialColorMode: 'dark',
-	useSystemColorMode: true,
+  initialColorMode: 'dark',
+  useSystemColorMode: true,
 };
 
 const styles = {
-	global: (props: StyleFunctionProps) => ({
-		body: {
-			color: mode('gray.800', 'whiteAlpha.800')(props),
-			bg: mode('primary.light', 'primary.dark')(props),
-		},
-		html: {
-			fontSize: '14px',
-		},
-	}),
+  global: (props: StyleFunctionProps) => ({
+    body: {
+      color: mode('gray.800', 'whiteAlpha.800')(props),
+      bg: mode('primary.light', 'primary.dark')(props),
+    },
+    html: {
+      fontSize: '14px',
+    },
+  }),
 };
 
 const theme = extendTheme({
-	config,
-	styles,
-	colors,
-	components,
-	fonts: {
-		heading: `'Open Sans', sans-serif`,
-		body: `'Inter', sans-serif`,
-	},
-	fontSizes: {
-		md: '1rem',
-		sm: '0.875rem',
-	},
+  config,
+  styles,
+  colors,
+  components,
+  fonts: {
+    heading: `'Open Sans', sans-serif`,
+    body: `'Inter', sans-serif`,
+  },
+  fontSizes: {
+    md: '1rem',
+    sm: '0.875rem',
+  },
 });
 
 export default theme;

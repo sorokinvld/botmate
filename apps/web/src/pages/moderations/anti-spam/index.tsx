@@ -5,22 +5,22 @@ import { ModerationsLayout } from '@/layouts/moderations';
 import { ChatSelector } from '@/libs/components/moderation';
 
 function AntiSpam() {
-	return <div>Filters</div>;
+  return <div>Filters</div>;
 }
 
 AntiSpam.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout
-		title='Anti Spam'
-		goBack
-		action={
-			<>
-				<Spacer />
-				<ChatSelector />
-			</>
-		}
-	>
-		{page}
-	</DashboardLayout>
+  <DashboardLayout
+    title="Anti Spam"
+    goBack
+    action={
+      <>
+        <Spacer />
+        <ChatSelector />
+      </>
+    }
+  >
+    {page}
+  </DashboardLayout>
 );
 
 export default AntiSpam;
