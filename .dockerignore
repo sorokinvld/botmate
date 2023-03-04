@@ -1,0 +1,8 @@
+node_modules
+.eslintrc.js
+.prettierrc
+.editorconfig
+.vscode/
+dist/
+.next
+README.md
