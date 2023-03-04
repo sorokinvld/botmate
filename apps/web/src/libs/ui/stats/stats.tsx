@@ -1,5 +1,13 @@
 import { motion } from 'framer-motion';
-import { Box, Heading, HStack, Spacer, Stack, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Heading,
+	HStack,
+	Spacer,
+	Stack,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
 
 type StatsProps = {
 	title: string;
@@ -9,6 +17,8 @@ type StatsProps = {
 	index?: number;
 };
 function Stats({ title, value, icon, label, index }: StatsProps) {
+	const bg = useColorModeValue('seconday.light', 'secondary.dark');
+
 	return (
 		<motion.div
 			initial={{ y: -50, opacity: 0 }}
@@ -21,7 +31,7 @@ function Stats({ title, value, icon, label, index }: StatsProps) {
 				delay: index ? index * 0.1 : 0,
 			}}
 		>
-			<Box p={4} bg='#1d1e2b' rounded='lg' borderWidth='1px'>
+			<Box p={4} bg={bg} rounded='lg' borderWidth='1px'>
 				<HStack alignItems='flex-start'>
 					<Stack>
 						<Text size='md'>{title}</Text>

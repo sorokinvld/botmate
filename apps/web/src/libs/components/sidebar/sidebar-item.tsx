@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -18,6 +18,7 @@ function SidebarItem({
 }: SidebarItemProps) {
 	const r = useRouter();
 	const active = match?.test(r.pathname);
+	const bgColor = useColorModeValue('secondary.light', 'secondary.dark');
 
 	return (
 		<Link href={href}>
@@ -25,9 +26,9 @@ function SidebarItem({
 				px={3}
 				py={1.5}
 				opacity={active ? 1 : 0.6}
-				bg={active ? '#1d1e2b' : 'transparent'}
+				bg={active ? bgColor : 'transparent'}
 				borderWidth='1px'
-				borderColor={active ? '#ffffff29' : 'transparent'}
+				borderColor={!active ? 'transparent' : 'auto'}
 				rounded='md'
 				userSelect='none'
 				cursor='pointer'

@@ -1,25 +1,24 @@
-import { DashboardLayout } from '@/layouts/dashboard';
-import { Button, ButtonGroup } from '@chakra-ui/react';
 import React from 'react';
-import { MdSave } from 'react-icons/md';
+import { DashboardLayout } from '@/layouts/dashboard';
+import { Box, GridItem, Heading, SimpleGrid } from '@chakra-ui/react';
 
 function CommandsCreate() {
-	return <div>CommandsCreate</div>;
+	return (
+		<Box h='full'>
+			<SimpleGrid columns={10} h='full'>
+				<GridItem colSpan={{ base: 10, lg: 7 }} borderRightWidth='1px' p={4}>
+					<Box>1</Box>
+				</GridItem>
+				<GridItem colSpan={{ base: 10, lg: 3 }} p={4}>
+					1
+				</GridItem>
+			</SimpleGrid>
+		</Box>
+	);
 }
 
 CommandsCreate.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout
-		goBack
-		title='Create Command'
-		action={
-			<>
-				{/* <ButtonGroup gap={0}>
-					<Button leftIcon={<MdSave />}>Save</Button>
-					<Button variant='outline'>Cancel</Button>
-				</ButtonGroup> */}
-			</>
-		}
-	>
+	<DashboardLayout goBack noPadding title='Create Command'>
 		{page}
 	</DashboardLayout>
 );

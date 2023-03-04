@@ -1,6 +1,6 @@
 import React from 'react';
 import { DashboardLayout } from '@/layouts/dashboard';
-import { RadioButton } from 'ui';
+import { RadioButton } from '@/libs/ui';
 
 function Marketplace() {
 	return <div>Marketplace</div>;

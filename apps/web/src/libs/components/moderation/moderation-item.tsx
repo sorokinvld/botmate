@@ -1,4 +1,13 @@
-import { Badge, Box, Heading, HStack, Spacer, Text } from '@chakra-ui/react';
+import {
+	Badge,
+	Box,
+	Heading,
+	HStack,
+	Spacer,
+	Text,
+	useColorMode,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 type ModerationItemProps = {
@@ -16,17 +25,19 @@ function ModerationItem({
 	badge,
 }: ModerationItemProps) {
 	const r = useRouter();
+	const bg = useColorModeValue('secondary.light', 'secondary.dark');
+	const { colorMode } = useColorMode();
 
 	return (
 		<Box
 			p={4}
 			borderWidth='1px'
 			rounded='xl'
-			bg='#1d1e2b'
+			bg={bg}
 			cursor='pointer'
 			draggable={false}
 			_hover={{
-				shadow: 'xl',
+				shadow: colorMode === 'dark' ? 'xl' : 'lg',
 			}}
 			_active={{
 				transform: 'scale(0.98)',

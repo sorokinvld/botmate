@@ -6,9 +6,7 @@ function Settings() {
 }
 
 Settings.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout title='Settings' goBack>
-		{page}
-	</DashboardLayout>
+	<DashboardLayout title='Settings'>{page}</DashboardLayout>
 );
 
 export default Settings;

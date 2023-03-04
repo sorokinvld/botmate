@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import { RadioButton, Stats } from 'ui';
+import { RadioButton, Stats } from '@/libs/ui';
 import { FcDeleteDatabase, FcLineChart, FcOk, FcSms } from 'react-icons/fc';
 import { DashboardLayout } from '@/layouts/dashboard';
 

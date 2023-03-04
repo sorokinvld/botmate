@@ -10,6 +10,8 @@ import {
 	Spacer,
 	Stack,
 	Text,
+	useColorMode,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,10 +25,13 @@ import {
 	HiRss,
 	HiShieldCheck,
 	HiUser,
+	HiMoon,
+	HiSun,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
 
+// todo: get values from constants
 const sidebarItems = [
 	{
 		label: 'Dashboard',
@@ -64,6 +69,12 @@ const sidebarItems = [
 		href: '/marketplace',
 		match: /^\/marketplace/,
 	},
+	{
+		label: 'Settings',
+		icon: <HiCog />,
+		href: '/settings',
+		match: /^\/settings/,
+	},
 ];
 
 type SidebarProps = {
@@ -71,19 +82,26 @@ type SidebarProps = {
 };
 function Sidebar({}: SidebarProps) {
 	const r = useRouter();
+	const { colorMode, toggleColorMode } = useColorMode();
+	const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
 	return (
 		<Flex flexDirection='column' p={4} gap={6} h='100vh' overflow='auto'>
 			<HStack width='full'>
-				<Image opacity={0.8} boxSize='8' src='/assets/botmate-logo.png' />
+				<Image
+					opacity={0.8}
+					boxSize='8'
+					src={`/assets/botmate-logo-${colorMode}.svg`}
+				/>
 				<Spacer />
-				<Link href='/settings'>
-					<IconButton
-						size='md'
-						aria-label='settings'
-						icon={<HiCog size={18} />}
-					/>
-				</Link>
+				<IconButton
+					size='md'
+					aria-label='settings'
+					icon={
+						colorMode === 'light' ? <HiMoon size={20} /> : <HiSun size={20} />
+					}
+					onClick={toggleColorMode}
+				/>
 			</HStack>
 
 			<Search />
@@ -126,7 +144,7 @@ function Sidebar({}: SidebarProps) {
 				p={4}
 				borderWidth='1px'
 				rounded='xl'
-				bg='#1d1e2b'
+				bg={profileBg}
 				cursor='pointer'
 				userSelect='none'
 				_hover={{

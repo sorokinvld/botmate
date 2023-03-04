@@ -20,7 +20,6 @@ function DashboardLayout({
 	noPadding,
 }: DashboardLayoutProps) {
 	const r = useRouter();
-	const borderColor = '#60606077';
 
 	return (
 		<>
@@ -28,12 +27,7 @@ function DashboardLayout({
 				<title>{title + ' | BotMate'}</title>
 			</Head>
 			<Flex h='100vh' overflow='hidden'>
-				<Box
-					w='80'
-					borderRightWidth='1px'
-					borderRightColor={borderColor}
-					overflow='auto'
-				>
+				<Box w='80' borderRightWidth='1px' overflow='auto'>
 					<Sidebar />
 				</Box>
 
@@ -43,7 +37,6 @@ function DashboardLayout({
 						w='full'
 						spacing={6}
 						borderBottomWidth='1px'
-						borderBottomColor={borderColor}
 						height='60px'
 					>
 						<HStack spacing={4}>
