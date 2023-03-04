@@ -1,6 +1,6 @@
 import React from 'react';
 import { DashboardLayout } from '@/layouts/dashboard';
-import { Box, GridItem, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
 
 function CommandsCreate() {
 	return (

@@ -1,12 +1,9 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
+
+// NOTE: This page is redirected to /settings/general
 
 function Settings() {
-	return <div>Settings</div>;
+	return <></>;
 }
-
-Settings.getLayout = (page: React.ReactElement) => (
-	<DashboardLayout title='Settings'>{page}</DashboardLayout>
-);
 
 export default Settings;
