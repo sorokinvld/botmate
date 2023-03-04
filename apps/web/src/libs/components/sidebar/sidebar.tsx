@@ -87,7 +87,8 @@ function Sidebar({}: SidebarProps) {
         <Spacer />
         <IconButton
           size="md"
-          aria-label="settings"
+          aria-label="notifications"
+          variant="outline"
           icon={<HiOutlineBell size={14} />}
         />
       </HStack>
