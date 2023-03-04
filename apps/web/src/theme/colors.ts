@@ -10,7 +10,7 @@ export const colors = {
 	},
 
 	secondary: {
-		light: '#f5f6f8',
+		light: '#f5f6f859',
 		dark: '#1d1e2b',
 	},
 	text: {},

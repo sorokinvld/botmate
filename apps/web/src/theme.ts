@@ -6,7 +6,7 @@ import { colors } from './theme/colors';
 
 const config = {
 	initialColorMode: 'dark',
-	useSystemColorMode: false,
+	useSystemColorMode: true,
 };
 
 const styles = {

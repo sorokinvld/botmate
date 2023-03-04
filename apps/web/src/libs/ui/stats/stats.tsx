@@ -17,7 +17,7 @@ type StatsProps = {
 	index?: number;
 };
 function Stats({ title, value, icon, label, index }: StatsProps) {
-	const bg = useColorModeValue('seconday.light', 'secondary.dark');
+	const bg = useColorModeValue('secondary.light', 'secondary.dark');
 
 	return (
 		<motion.div

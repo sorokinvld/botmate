@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
+// todo: move this to ui folder
+
 type ModerationItemProps = {
 	title: string;
 	icon: React.ReactNode;
@@ -37,7 +39,7 @@ function ModerationItem({
 			cursor='pointer'
 			draggable={false}
 			_hover={{
-				shadow: colorMode === 'dark' ? 'xl' : 'lg',
+				shadow: colorMode === 'dark' ? 'xl' : 'base',
 			}}
 			_active={{
 				transform: 'scale(0.98)',
