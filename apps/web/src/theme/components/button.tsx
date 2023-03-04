@@ -1,13 +1,15 @@
 import type { StyleConfig } from '@chakra-ui/styled-system';
-import { mode } from '@chakra-ui/theme-tools';
 
 const Button: StyleConfig = {
   baseStyle: {
     textTransform: 'uppercase',
+    _focus: {
+      boxShadow: '0 0 0 2px #9eacfa',
+    },
   },
   variants: {
-    solid: (props) => ({
-      backgroundColor: mode('primary.light', 'primary.dark')(props),
+    solid: () => ({
+      backgroundColor: '#5458c5',
       borderWidth: '1px',
       _active: {
         transform: 'scale(0.95)',
@@ -22,7 +24,7 @@ const Button: StyleConfig = {
   },
   defaultProps: {
     size: 'sm',
-    variant: 'solid',
+    variant: 'outline',
   },
 };
 
