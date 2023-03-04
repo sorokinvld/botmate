@@ -73,7 +73,7 @@ type SidebarProps = {
 };
 function Sidebar({}: SidebarProps) {
   const r = useRouter();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
   return (
@@ -88,7 +88,7 @@ function Sidebar({}: SidebarProps) {
         <IconButton
           size="md"
           aria-label="settings"
-          icon={<HiOutlineBell size={18} />}
+          icon={<HiOutlineBell size={14} />}
         />
       </HStack>
 

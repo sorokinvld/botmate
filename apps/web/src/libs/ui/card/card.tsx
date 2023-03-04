@@ -1,4 +1,5 @@
 import {
+  BoxProps,
   Box,
   Heading,
   HStack,
@@ -11,13 +12,13 @@ type CardProps = {
   description: string;
   icon?: React.ReactNode;
   children?: React.ReactNode;
-};
-function Card({ title, description, icon, children }: CardProps) {
+} & BoxProps;
+function Card({ title, description, icon, children, ...rest }: CardProps) {
   const bg = useColorModeValue('secondary.light', '#1d1e2b6e');
 
   return (
-    <Box>
-      <Box mt={2} borderWidth="1px" p={4} bg={bg} rounded="lg">
+    <Box {...rest}>
+      <Box mt={2} rounded="lg">
         <HStack alignItems="flex-start" opacity={0.7}>
           {icon && <Box fontSize="4xl">{icon}</Box>}
           <Box>

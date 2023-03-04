@@ -6,8 +6,9 @@ type SidebarItemProps = {
   icon: React.ReactNode;
   label: string;
   href: string;
-  active?: boolean;
   match: RegExp;
+  active?: boolean;
+  description?: string;
 };
 function SidebarItem({
   //
