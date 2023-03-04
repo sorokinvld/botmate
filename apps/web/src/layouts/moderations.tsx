@@ -4,6 +4,7 @@ import {
   HiAdjustments,
   HiBeaker,
   HiColorSwatch,
+  HiGlobeAlt,
   HiLink,
   HiServer,
   HiSwitchVertical,
@@ -35,7 +36,7 @@ const ModerationsList = [
     match: /\/moderations\/anti-spam/,
   },
   {
-    label: 'Admins',
+    label: 'Administators',
     icon: <HiShieldCheck />,
     description: 'View and manage adminstrators of your chat.',
     href: '/moderations/admins',
@@ -47,6 +48,13 @@ const ModerationsList = [
     description: 'Run actions based on the given conditions.',
     href: '/moderations/actions',
     match: /\/moderations\/actions/,
+  },
+  {
+    label: 'Federation',
+    icon: <HiGlobeAlt />,
+    description: 'Manage federation settings for your chat.',
+    href: '/moderations/federation',
+    match: /\/moderations\/federation/,
   },
 ];
 
@@ -62,7 +70,7 @@ function ModerationsLayout({ children }: ModerationsLayoutProps) {
         ))}
       </Stack>
 
-      <Box flexGrow={1} p={4} overflow="auto">
+      <Box flexGrow={1} p={4} overflow="auto" maxW="6xl">
         {children}
       </Box>
     </Flex>
