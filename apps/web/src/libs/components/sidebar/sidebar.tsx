@@ -13,11 +13,9 @@ import {
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   HiHome,
-  HiBell,
   HiCog,
   HiChartBar,
   HiAnnotation,
@@ -25,8 +23,6 @@ import {
   HiRss,
   HiShieldCheck,
   HiUser,
-  HiMoon,
-  HiSun,
   HiOutlineBell,
 } from 'react-icons/hi';
 import { Search } from './search';
