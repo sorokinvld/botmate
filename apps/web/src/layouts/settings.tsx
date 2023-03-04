@@ -3,12 +3,8 @@ import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import {
 	HiAdjustments,
 	HiBeaker,
-	HiBookmark,
-	HiBookOpen,
-	HiCog,
 	HiColorSwatch,
 	HiLink,
-	HiReceiptTax,
 	HiServer,
 	HiSwitchVertical,
 } from 'react-icons/hi';

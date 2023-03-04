@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { ChatSelector, ModerationItem } from '@/libs/components/moderation';
 import {
-	HiBadgeCheck,
 	HiCake,
 	HiFilter,
 	HiLightningBolt,
