@@ -1,3 +1,4 @@
+import { BotMateLogo } from '@/assets/logo';
 import {
   Avatar,
   Box,
@@ -6,7 +7,6 @@ import {
   Heading,
   HStack,
   IconButton,
-  Image,
   Spacer,
   Stack,
   Text,
@@ -79,11 +79,7 @@ function Sidebar({}: SidebarProps) {
   return (
     <Flex flexDirection="column" p={4} gap={6} h="100vh" overflow="auto">
       <HStack width="full">
-        <Image
-          opacity={0.8}
-          boxSize="8"
-          src={`/assets/botmate-logo-${colorMode}.svg`}
-        />
+        <BotMateLogo height="25px" width="25px" />
         <Spacer />
         <IconButton
           size="md"
