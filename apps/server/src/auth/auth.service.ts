@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '@/users/user.service';
-import { User } from '@/entities/user.entity';
+import { User } from '@botmate/database';
 
 @Injectable()
 export class AuthService {
@@ -35,5 +35,6 @@ export class AuthService {
     if (!decoded) return null;
 
     const user = this.userService.getUserByEmail(decoded.email);
+    console.log('user', user);
   }
 }

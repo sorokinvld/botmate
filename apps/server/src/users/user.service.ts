@@ -1,38 +1,32 @@
-import { User } from '@/entities/user.entity';
+import { PrismaService } from '@/database/prisma.service';
+import { User } from '@botmate/database';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { GetUserArgs } from './dto/args/get-user.args';
-import { CreateUserInput } from './dto/input/create-user.input';
+
+type CreateUserDTO = Omit<User, 'id'>;
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private readonly userRepo: Repository<User>,
-  ) {}
+  constructor(private db: PrismaService) {}
 
-  async createUser(createUserInput: CreateUserInput) {
-    const user = {
-      ...createUserInput,
-    };
-
-    const newUser = this.userRepo.create({
-      ...user,
+  async createUser(createUserInput: CreateUserDTO) {
+    const newUser = await this.db.user.create({
+      data: {
+        ...createUserInput,
+      },
     });
 
-    await this.userRepo.save(newUser);
     return newUser;
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    const user = await this.userRepo.findOne({ where: { email } });
+    const user = await this.db.user.findFirst({ where: { email } });
     return user;
   }
 
-  async getUser(getUserArgs: GetUserArgs): Promise<User> {
-    const user = await this.userRepo.findOne({
+  async getUser(id: number): Promise<User> {
+    const user = await this.db.user.findFirst({
       where: {
-        id: getUserArgs.id,
+        id: id,
       },
     });
 

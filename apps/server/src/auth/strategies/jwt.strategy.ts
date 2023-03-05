@@ -1,4 +1,4 @@
-import { User } from '@/entities/user.entity';
+import { User } from '@botmate/database';
 import { UserService } from '@/users/user.service';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';

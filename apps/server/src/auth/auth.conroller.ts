@@ -1,11 +1,17 @@
 import { Request } from 'express';
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-
-import { CreateUserInput } from '@/users/dto/input/create-user.input';
+import { User } from '@botmate/database';
 import { UserService } from '@/users/user.service';
-import { User } from '@/entities/user.entity';
+import { CreateUserDTO } from '@/common/dto/user';
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +27,12 @@ export class AuthController {
   }
 
   @Post('register')
-  register(@Body() body: CreateUserInput) {
-    return this.userService.createUser(body);
+  async register(@Body() body: CreateUserDTO) {
+    try {
+      const userData = await this.userService.createUser(body);
+      return userData;
+    } catch (e) {
+      throw new HttpException('An error occurred while creating user', 500);
+    }
   }
 }
