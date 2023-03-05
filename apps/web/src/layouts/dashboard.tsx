@@ -1,9 +1,20 @@
-import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
-import { AppSidebar } from '@/libs/components/app-sidebar';
 import Head from 'next/head';
-import { HiArrowLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
+import { HiArrowLeft } from 'react-icons/hi';
+import { AppSidebar } from '@/libs/components';
+import { useAuth } from '@/features';
+import { useEffect } from 'react';
 
 type DashboardLayoutProps = {
   title: string;
@@ -20,6 +31,30 @@ function DashboardLayout({
   noPadding,
 }: DashboardLayoutProps) {
   const r = useRouter();
+  const auth = useAuth();
+
+  useEffect(() => {
+    const exclude = ['/welcome'];
+
+    if (auth.user === null) {
+      if (auth.isLoading) return;
+
+      if (exclude.includes(r.pathname)) return;
+
+      r.push('/welcome');
+    }
+  }, [auth]);
+
+  if (auth.isLoading || auth.user === null) {
+    return (
+      <Center h="100vh" opacity={0.7}>
+        <HStack spacing={4}>
+          <Spinner />
+          <Text>loading user data...</Text>
+        </HStack>
+      </Center>
+    );
+  }
 
   return (
     <>

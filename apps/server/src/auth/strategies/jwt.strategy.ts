@@ -1,4 +1,4 @@
-import { User } from '@botmate/database';
+import { User } from '@prisma/client';
 import { UserService } from '@/users/user.service';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';

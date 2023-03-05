@@ -6,7 +6,7 @@ import { DashboardLayout } from '@/layouts/dashboard';
 function Home() {
   return (
     <>
-      <SimpleGrid columns={4} spacing={4}>
+      <SimpleGrid columns={{ base: 1, lg: 4 }} spacing={4}>
         <Stats
           title="Bot Status"
           value={'OK'}

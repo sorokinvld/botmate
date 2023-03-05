@@ -1,8 +1,7 @@
 import { PrismaService } from '@/database/prisma.service';
-import { User } from '@botmate/database';
+import { User } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-
-type CreateUserDTO = Omit<User, 'id'>;
+import { CreateUserDTO } from 'common';
 
 @Injectable()
 export class UserService {
@@ -31,6 +30,11 @@ export class UserService {
     });
 
     return user;
+  }
+
+  async getUsersCount() {
+    const usersCount = await this.db.user.count();
+    return usersCount;
   }
 
   public getUsers(): User[] {

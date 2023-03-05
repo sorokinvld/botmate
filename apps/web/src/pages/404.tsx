@@ -1,12 +1,19 @@
-import { DashboardLayout } from '@/layouts/dashboard';
 import React from 'react';
+import { Button, Center } from '@chakra-ui/react';
 
+// todo: make a nice ui
 function NotFound() {
-  return <div>This page is on vacation. Please try again later.</div>;
+  return (
+    <Center h="100vh">
+      <Button
+        onClick={() => {
+          window.location.href = '/';
+        }}
+      >
+        404. Reload
+      </Button>
+    </Center>
+  );
 }
-
-NotFound.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout title="Error: 404">{page}</DashboardLayout>
-);
 
 export default NotFound;

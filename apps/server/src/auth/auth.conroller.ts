@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { User } from '@botmate/database';
+import { User } from '@prisma/client';
 import { UserService } from '@/users/user.service';
-import { CreateUserDTO } from '@/common/dto/user';
+import { CreateUserDTO } from 'common';
 
 @Controller('auth')
 export class AuthController {

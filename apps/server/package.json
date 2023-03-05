@@ -20,7 +20,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@botmate/database": "workspace:^1.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
@@ -30,6 +29,7 @@
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
     "class-validator": "^0.14.0",
+    "common": "workspace:^1.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",

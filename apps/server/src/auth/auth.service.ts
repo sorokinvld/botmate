@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '@/users/user.service';
-import { User } from '@botmate/database';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
