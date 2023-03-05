@@ -9,7 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
-import theme from '../theme';
+import { theme } from '@botmate/theme';
 
 import '../styles/globals.css';
 import '@fontsource/inter/400.css';

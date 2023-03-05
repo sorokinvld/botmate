@@ -151,6 +151,7 @@ importers:
       '@apollo/client': ^3.7.9
       '@apollo/react-hooks': ^4.0.0
       '@babel/core': ^7.0.0
+      '@botmate/theme': workspace:0.0.1-prerelease.1
       '@chakra-ui/anatomy': ^2.1.1
       '@chakra-ui/react': ^2.5.1
       '@chakra-ui/styled-system': ^2.6.1
@@ -178,6 +179,7 @@ importers:
     dependencies:
       '@apollo/client': 3.7.9_gdcq4dv6opitr3wbfwyjmanyra
       '@apollo/react-hooks': 4.0.0_gdcq4dv6opitr3wbfwyjmanyra
+      '@botmate/theme': link:../../packages/theme
       '@chakra-ui/anatomy': 2.1.1
       '@chakra-ui/react': 2.5.1_llidv3byuxn3l2nsibklt32qgu
       '@chakra-ui/styled-system': 2.6.1
