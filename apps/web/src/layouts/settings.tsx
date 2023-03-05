@@ -1,4 +1,4 @@
-import { SidebarItem } from '@/libs/components/sidebar';
+import { SidebarItem } from '@/libs/components/app-sidebar';
 import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import {
   HiAdjustments,

@@ -1,5 +1,5 @@
 import { Card } from '@/libs/ui';
-import { HStack, Input, Spacer, Stack, Switch, Text } from '@chakra-ui/react';
+import { HStack, Spacer, Stack, Switch, Text } from '@chakra-ui/react';
 
 type FiltersBlacklistWordsProps = {};
 function FiltersAdvanced({}: FiltersBlacklistWordsProps) {

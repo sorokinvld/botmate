@@ -2,7 +2,6 @@ import { BotMateLogo } from '@/assets/logo';
 import {
   Avatar,
   Box,
-  Divider,
   Flex,
   Heading,
   HStack,
@@ -10,7 +9,6 @@ import {
   Spacer,
   Stack,
   Text,
-  useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -20,9 +18,7 @@ import {
   HiChartBar,
   HiAnnotation,
   HiPuzzle,
-  HiRss,
   HiShieldCheck,
-  HiUser,
   HiOutlineBell,
 } from 'react-icons/hi';
 import { Search } from './search';
@@ -71,9 +67,8 @@ const sidebarItems = [
 type SidebarProps = {
   //
 };
-function Sidebar({}: SidebarProps) {
+function AppSidebar({}: SidebarProps) {
   const r = useRouter();
-  const { colorMode } = useColorMode();
   const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
   return (
@@ -101,23 +96,6 @@ function Sidebar({}: SidebarProps) {
             match={item.match}
           />
         ))}
-      </Stack>
-
-      <Divider />
-
-      <Stack>
-        <SidebarItem
-          label="Help and Support"
-          icon={<HiUser />}
-          href={'/help-support'}
-          match={/^\/help-support/}
-        />
-        <SidebarItem
-          label="News and Updates"
-          icon={<HiRss />}
-          href={'/news-updates'}
-          match={/^\/news-updates/}
-        />
       </Stack>
 
       <Spacer />
@@ -153,4 +131,4 @@ function Sidebar({}: SidebarProps) {
   );
 }
 
-export { Sidebar };
+export { AppSidebar };

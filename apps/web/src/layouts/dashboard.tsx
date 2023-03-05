@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
-import { Sidebar } from '@/libs/components/sidebar';
+import { AppSidebar } from '@/libs/components/app-sidebar';
 import Head from 'next/head';
 import { HiArrowLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';
@@ -28,7 +28,7 @@ function DashboardLayout({
       </Head>
       <Flex h="100vh" overflow="hidden">
         <Box w="80" borderRightWidth="1px" overflow="auto">
-          <Sidebar />
+          <AppSidebar />
         </Box>
 
         <Flex w="full" flexDirection="column">

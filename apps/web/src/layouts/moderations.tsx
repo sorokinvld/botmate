@@ -1,4 +1,4 @@
-import { SidebarItem } from '@/libs/components/sidebar';
+import { SidebarItem } from '@/libs/components/app-sidebar';
 import { Flex, Box, Text, Stack } from '@chakra-ui/react';
 import {
   HiAdjustments,
@@ -8,6 +8,7 @@ import {
   HiLink,
   HiPlay,
   HiServer,
+  HiSpeakerphone,
   HiSwitchVertical,
   HiUser,
 } from 'react-icons/hi';
@@ -57,6 +58,12 @@ const ModerationsList = [
     icon: <HiGlobeAlt />,
     href: '/moderations/federation',
     match: /\/moderations\/federation/,
+  },
+  {
+    label: 'Announcement',
+    icon: <HiSpeakerphone />,
+    href: '/moderations/announcement',
+    match: /\/moderations\/announcement/,
   },
 ];
 
