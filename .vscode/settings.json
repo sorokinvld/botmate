@@ -1,5 +1,9 @@
 {
-	"yaml.schemas": {
-		"https://json.schemastore.org/yamllint.json": "file:///Users/xencodes/dev/botmate/codegen.yaml"
-	}
+  "yaml.schemas": {
+    "https://json.schemastore.org/yamllint.json": "file:///Users/xencodes/dev/botmate/codegen.yaml"
+  },
+  "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" }
+  ]
 }
