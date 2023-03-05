@@ -48,7 +48,7 @@ function BotMate({ Component, pageProps }: AppPropsWithLayout) {
   const layout = getLayout(<Component {...pageProps} />);
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence>
       <ApolloProvider client={client}>
         <ChakraProvider theme={theme}>{layout}</ChakraProvider>
       </ApolloProvider>
