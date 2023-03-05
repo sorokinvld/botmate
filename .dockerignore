@@ -1,8 +1,8 @@
-node_modules
+**/node_modules
 .eslintrc.js
 .prettierrc
 .editorconfig
 .vscode/
-dist/
-.next
+**/dist
+**/.next
 README.md

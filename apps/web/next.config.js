@@ -1,13 +1,14 @@
 module.exports = {
-	reactStrictMode: true,
-	transpilePackages: ['ui'],
-	async redirects() {
-		return [
-			{
-				source: '/settings',
-				destination: '/settings/general',
-				permanent: true,
-			},
-		];
-	},
+  reactStrictMode: true,
+  transpilePackages: ['ui'],
+  output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/settings',
+        destination: '/settings/general',
+        permanent: true,
+      },
+    ];
+  },
 };
