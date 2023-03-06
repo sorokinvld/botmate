@@ -5,14 +5,15 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({ origin: 'http://localhost:3000' });
+  app.setGlobalPrefix('/api');
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('BotMate API')
+    .setDescription('BotMate API description')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+
+  const document = SwaggerModule.createDocument(app, config, {});
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(8080);
