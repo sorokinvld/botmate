@@ -2,9 +2,11 @@ import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ErrorResponse } from '../api';
 
+const { NODE_ENV = 'development' } = process.env;
+
 const simpleBaseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:8080',
-  prepareHeaders: (headers, { getState }) => {
+  baseUrl: NODE_ENV === 'production' ? '/' : 'http://localhost:8080',
+  prepareHeaders: (headers) => {
     const token = localStorage.getItem('botmate-token');
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
