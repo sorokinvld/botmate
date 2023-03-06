@@ -15,6 +15,7 @@
     "gen": "plop"
   },
   "devDependencies": {
+    "@xencodes/prisma-class-generator": "0.2.5",
     "eslint-config-custom": "workspace:*",
     "plop": "^3.1.2",
     "prettier": "latest",

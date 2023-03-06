@@ -1,8 +1,13 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
+}
+
+generator prismaClassGenerator {
+  provider      = "prisma-class-generator"
+  output        = "../apps/server/src/generated"
+  dryRun        = false
+  makeIndexFile = false
+  classPostfix  = "Props"
 }
 
 datasource db {
