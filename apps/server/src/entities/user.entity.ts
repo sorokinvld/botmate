@@ -1,29 +1,33 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@ObjectType()
 @Entity({ name: 'users' })
 export class User {
-  @Field(() => Int)
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @ApiProperty()
   @Column()
   name: string;
 
-  @Field()
+  @ApiProperty()
   @Column({ unique: true })
   email: string;
 
-  @Field()
+  @ApiProperty()
   @Column({ nullable: false })
   password: string;
 
-  @Field()
-  @Column({
-    type: 'date',
-    default: () => 'CURRENT_TIMESTAMP',
-  })
-  createdAt: Date;
+  @ApiPropertyOptional()
+  @Column()
+  avatar: string;
+
+  @ApiPropertyOptional()
+  @Column()
+  isAdmin: boolean;
+
+  @ApiPropertyOptional()
+  @Column()
+  createdAt: string;
 }

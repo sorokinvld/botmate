@@ -6,17 +6,16 @@ import {
   Text,
   useDisclosure,
   Modal,
-  Button,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  ButtonGroup,
   Input,
   Switch,
   FormControl,
   FormHelperText,
+  ModalCloseButton,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -28,7 +27,7 @@ type MessageTypesOption = {
 };
 type MessageTypesType = {
   label: string;
-  exceptionExample?: string;
+  example?: string;
   options?: {
     [key: string]: MessageTypesOption;
   };
@@ -36,7 +35,7 @@ type MessageTypesType = {
 const MessageTypes: MessageTypesType[] = [
   {
     label: 'Links',
-    exceptionExample: 'www.domain.com',
+    example: 'www.domain.com',
   },
   {
     label: 'Mentions',
@@ -46,7 +45,7 @@ const MessageTypes: MessageTypesType[] = [
   },
   {
     label: 'Files',
-    exceptionExample: 'png',
+    example: 'png',
     options: {
       limit_file_size: {
         label: 'Limit file size',
@@ -60,7 +59,7 @@ const MessageTypes: MessageTypesType[] = [
   },
   {
     label: 'Stickers',
-    exceptionExample: 't.me/addstickers/...',
+    example: 't.me/addstickers/...',
   },
 ];
 
@@ -109,15 +108,16 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
       >
         <ModalOverlay />
         <ModalContent>
+          <ModalCloseButton />
           <ModalHeader>{activeMsgType?.label}</ModalHeader>
           <ModalBody>
             <Stack spacing={4}>
               <RadioButton options={['Allow', 'Block']} />
               <FormControl>
                 <Input placeholder="Enter your filter" />
-                {activeMsgType?.exceptionExample && (
+                {activeMsgType?.example && (
                   <FormHelperText>
-                    Example: <b>{activeMsgType.exceptionExample}</b>
+                    Example: <b>{activeMsgType.example}</b>
                   </FormHelperText>
                 )}
               </FormControl>
@@ -138,9 +138,9 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
           </ModalBody>
 
           <ModalFooter>
-            <ButtonGroup>
+            {/* <ButtonGroup>
               <Button onClick={d.onClose}>Close</Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

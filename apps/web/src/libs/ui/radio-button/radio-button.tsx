@@ -11,9 +11,15 @@ type RadioButtonProps = {
   options: string[];
   onChange?(value: string): void;
   isLoading?: boolean;
+  activeIndex?: number;
 };
-function RadioButton({ options, onChange, isLoading }: RadioButtonProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+function RadioButton({
+  options,
+  onChange,
+  isLoading,
+  activeIndex: active,
+}: RadioButtonProps) {
+  const [activeIndex, setActiveIndex] = useState(active ?? 0);
   const bg = useColorModeValue('secondary.light', '#232332');
 
   useEffect(() => {

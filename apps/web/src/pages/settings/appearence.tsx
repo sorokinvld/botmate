@@ -1,17 +1,29 @@
 import React from 'react';
 import { RadioButton } from '@/libs/ui';
 import { SettingsOption } from '@/libs/ui/settings';
-import { Select, Stack } from '@chakra-ui/react';
+import { Select, Stack, useColorMode } from '@chakra-ui/react';
 import { DashboardLayout } from '@/layouts/dashboard';
 import { SettingsLayout } from '@/layouts/settings';
 
 function General() {
+  const { colorMode, setColorMode } = useColorMode();
+
   return (
     <Stack spacing={6}>
       <SettingsOption
         label="Color Scheme"
         description="Change the color scheme of the dashboard."
-        action={<RadioButton options={['Light', 'Dark', 'System']} />}
+        action={
+          <RadioButton
+            activeIndex={
+              colorMode === 'light' ? 0 : colorMode === 'dark' ? 1 : 2
+            }
+            onChange={(value) => {
+              setColorMode(value.toLowerCase());
+            }}
+            options={['Light', 'Dark', 'System']}
+          />
+        }
       />
 
       <SettingsOption
@@ -28,7 +40,7 @@ function General() {
 }
 
 General.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout title="Settings / Appearence" noPadding>
+  <DashboardLayout title="Settings • Appearence" noPadding>
     <SettingsLayout>{page}</SettingsLayout>
   </DashboardLayout>
 );

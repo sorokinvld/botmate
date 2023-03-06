@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: botmate
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  botmate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_NAME: botmate
+    depends_on:
+      - db
+    ports:
+      - 7000:8080
