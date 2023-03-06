@@ -10,18 +10,17 @@ import {
 import { ApiProperty, ApiTags, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { User } from '@prisma/client';
-import { UserProps } from '@/generated/user';
 import { UserService } from '@modules/users/user.service';
-import { CreateUserDTO } from '@modules/users/dto/create-user.dto';
 import { LoginUserDTO } from './dto/login-user-dto';
+import { User } from '@/entities/user.entity';
+import { RegisterUserDTO } from './dto/register-user.dto';
 
 class LoginApiResponse {
   @ApiProperty()
   accessToken: string;
 
   @ApiProperty()
-  user: UserProps;
+  user: User;
 }
 
 class ErrorResponse {
@@ -42,7 +41,6 @@ export class AuthController {
 
   @Post('login')
   @UseGuards(LocalAuthGuard)
-  @ApiBody({ type: LoginUserDTO })
   @ApiResponse({
     status: 200,
     description: 'Login successful',
@@ -59,7 +57,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() body: CreateUserDTO) {
+  async register(@Body() body: RegisterUserDTO) {
     try {
       const userData = await this.userService.createUser(body);
       return userData;

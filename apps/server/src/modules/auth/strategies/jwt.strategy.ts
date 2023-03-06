@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User } from '@/entities/user.entity';
 import { UserService } from '@modules/users/user.service';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';

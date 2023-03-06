@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User } from '@/entities/user.entity';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
