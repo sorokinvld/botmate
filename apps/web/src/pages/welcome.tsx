@@ -12,19 +12,21 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
-import { useLoginMutation } from '@/features/auth';
+import { setCredentials, useLoginMutation } from '@/features/auth';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import { ApiResponse, CreateUserDTO } from 'common';
+import { useDispatch } from 'react-redux';
 
-// todd: add framer motion animation
+// todd: add framer motion animation and multi steps
 function Welcome() {
   const toast = useToast();
   const [login, { isLoading, error }] = useLoginMutation();
   const form = useForm<CreateUserDTO>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const err = error as ApiResponse;
+    const err = error as ApiResponse<any>;
     if (err) {
       const message = err.data?.message;
       toast({
@@ -32,13 +34,15 @@ function Welcome() {
         description: message,
         status: 'error',
         duration: 5000,
-        isClosable: true,
+        position: 'bottom-right',
       });
     }
   }, [error]);
 
   async function loginUser(data: CreateUserDTO) {
     const response = await login(data).unwrap();
+    dispatch(setCredentials(response));
+    localStorage.setItem('botmate-token', response.accessToken);
   }
 
   return (

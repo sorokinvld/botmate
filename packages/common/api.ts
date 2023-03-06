@@ -1,6 +1,1 @@
-export type ApiResponse<TData = {}> = {
-  data?: TData & {
-    message?: string;
-  };
-  status?: number;
-};
+export type ApiResponse<TData = {}> = TData | ({ status?: number } & {});

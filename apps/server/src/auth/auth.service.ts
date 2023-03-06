@@ -22,9 +22,10 @@ export class AuthService {
     const payload = { email: user.email, sub: user.id };
 
     return {
-      access_token: this.jwtService.sign(payload, {
+      accessToken: this.jwtService.sign(payload, {
         secret: 'secret',
       }),
+      user,
     };
   }
 

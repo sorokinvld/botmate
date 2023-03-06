@@ -10,7 +10,7 @@ const authApi = apiSlice.injectEndpoints({
     getProfile: builder.query<User, void>({
       query: () => '/users/profile',
     }),
-    login: builder.mutation<ApiResponse<User>, LoginUserDTO>({
+    login: builder.mutation<ApiResponse<any>, LoginUserDTO>({
       query: (user) => ({
         url: '/auth/login',
         method: 'POST',

@@ -13,5 +13,12 @@ export const colors = {
     light: '#eaeaea52',
     dark: '#1d1e2b6e',
   },
+
+  alert: {
+    error: {
+      light: '#ff0000',
+      dark: '#f35050d4',
+    },
+  },
   text: {},
 };
