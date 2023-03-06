@@ -15,7 +15,6 @@ services:
       - 8080:8080
 
   botmate:
-    container_name: botmate_app
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,7 +22,7 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USERNAME: postgres
-      DB_PASSWORD: example
+      DB_PASSWORD: password
       DB_NAME: botmate
     depends_on:
       - db

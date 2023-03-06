@@ -30,5 +30,5 @@ COPY --from=installer  /app/apps/web/out ./client
 
 RUN pnpm i -P
 
-EXPOSE 3000
+EXPOSE 8080
 CMD node main.js
