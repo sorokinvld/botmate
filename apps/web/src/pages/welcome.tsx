@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -9,14 +9,37 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
-import { useAuth } from '@/features';
+import { useLoginMutation } from '@/features/auth';
+import { useForm } from 'react-hook-form';
 import Head from 'next/head';
+import { ApiResponse, CreateUserDTO } from 'common';
 
 // todd: add framer motion animation
 function Welcome() {
-  const {} = useAuth();
+  const toast = useToast();
+  const [login, { isLoading, error }] = useLoginMutation();
+  const form = useForm<CreateUserDTO>();
+
+  useEffect(() => {
+    const err = error as ApiResponse;
+    if (err) {
+      const message = err.data?.message;
+      toast({
+        title: 'An error occurred.',
+        description: message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [error]);
+
+  async function loginUser(data: CreateUserDTO) {
+    const response = await login(data).unwrap();
+  }
 
   return (
     <Flex h="100vh" px={{ base: 4, lg: 0 }}>
@@ -40,18 +63,22 @@ function Welcome() {
           Please create an account to get started.
         </Text>
 
-        <Stack mt={6} spacing={6}>
-          <FormControl>
-            <FormLabel> Email</FormLabel>
-            <Input placeholder="Email" />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input placeholder="Email" />
-          </FormControl>
+        <form onSubmit={form.handleSubmit(loginUser)}>
+          <Stack mt={6} spacing={6}>
+            <FormControl>
+              <FormLabel> Email</FormLabel>
+              <Input {...form.register('email')} placeholder="Email" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input {...form.register('password')} placeholder="Password" />
+            </FormControl>
 
-          <Button variant="solid">Login</Button>
-        </Stack>
+            <Button type="submit" variant="solid" isLoading={isLoading}>
+              Login
+            </Button>
+          </Stack>
+        </form>
       </Box>
     </Flex>
   );

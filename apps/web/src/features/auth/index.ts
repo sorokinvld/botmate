@@ -1,2 +1,3 @@
 export * from './use-auth';
-export * from './reducer';
+export * from './auth-slice';
+export * from './auth-api';

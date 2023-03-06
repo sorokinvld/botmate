@@ -48,6 +48,9 @@ function DashboardLayout({
   if (auth.isLoading || auth.user === null) {
     return (
       <Center h="100vh" opacity={0.7}>
+        <Head>
+          <title>Loading...</title>
+        </Head>
         <HStack spacing={4}>
           <Spinner />
           <Text>loading user data...</Text>

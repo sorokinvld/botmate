@@ -22,8 +22,10 @@ const Button: StyleConfig = {
     }),
   },
   sizes: {
-    md: {
-      fontSize: 12,
+    sm: {
+      px: 4,
+      py: 2,
+      height: 9,
     },
   },
   defaultProps: {
