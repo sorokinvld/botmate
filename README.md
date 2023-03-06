@@ -1,73 +1,43 @@
-# Turborepo starter
+# BotMate
 
-This is an official pnpm starter turborepo.
+BotMate is a web-based application for building custom chat bots for Telegram. With BotMate, users can create custom commands using JavaScript to satisfy their needs. It also comes with built-in functions to make development easier and a marketplace for exploring community-built bots that can be configured to fit the user's needs.
 
-## What's inside?
+## 🎁 Features
 
-This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+- Build and deploy custom Telegram bots quickly and easily
+- Custom JavaScript commands for creating unique bot functionality
+- Marketplace for discovering community-built bots that can be customized to fit your needs
 
-### Apps and Packages
+## 🛡️ Moderations
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+BotMate's moderation system is designed specifically for Telegram groups and channels. It includes a number of features and tools to help you maintain control over your groups and keep them running smoothly. These features include:
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### 🔍 Filtering system
 
-### Utilities
+Set up rules and filters to keep your groups safe and secure. You can blacklist certain words or phrases, limit the frequency of certain commands, and more.
 
-This turborepo has some additional tools already setup for you:
+### 🏃‍♂️ Actions runner
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Automate tasks and actions within your groups to save time and streamline your workflow.
 
-### Build
+### 🌐 Federation
 
-To build all apps and packages, run the following command:
+Manage and control multiple groups and channels from a single bot.
 
-```
-cd my-turborepo
-pnpm run build
-```
+### 📢 Announcements
 
-### Develop
+Broadcast messages to all of your group and channels at once or schedule them to be sent at a later time.
 
-To develop all apps and packages, run the following command:
+With BotMate's moderation system, you can be confident that your Telegram groups and channels are running smoothly and efficiently.
 
-```
-cd my-turborepo
-pnpm run dev
-```
+## 📕 Getting Started
 
-### Remote Caching
+To get started with BotMate, simply sign up for an account on the BotMate website. From there, you can start building and customizing your bots using the platform's intuitive interface.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## 📝 Contributing
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+BotMate is an open-source project, and we welcome contributions from the community. If you're interested in contributing, please check out our contributing guidelines for more information.
 
-```
-cd my-turborepo
-pnpm dlx turbo login
-```
+## 📚 License
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-pnpm dlx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+BotMate is licensed under the MIT License.
