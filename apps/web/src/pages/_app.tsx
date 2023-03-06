@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Provider as ReduxProvider } from 'react-redux';
 import { theme } from '@botmate/theme';
 import { store } from '@/libs/redux/store';
-import { AuthProvider, useAuth } from '@/features/auth';
+import { AuthProvider } from '@/features/auth';
 
 import '../styles/globals.css';
 import '@fontsource/inter/400.css';
@@ -23,13 +23,13 @@ function BotMate({ Component, pageProps }: AppPropsWithLayout) {
   const layout = getLayout(<Component {...pageProps} />);
 
   return (
-    <ReduxProvider store={store}>
-      <AuthProvider>
+    <ChakraProvider theme={theme}>
+      <ReduxProvider store={store}>
         <AnimatePresence>
-          <ChakraProvider theme={theme}>{layout}</ChakraProvider>
+          <AuthProvider>{layout}</AuthProvider>
         </AnimatePresence>
-      </AuthProvider>
-    </ReduxProvider>
+      </ReduxProvider>
+    </ChakraProvider>
   );
 }
 

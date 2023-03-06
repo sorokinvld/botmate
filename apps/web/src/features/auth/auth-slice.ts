@@ -1,24 +1,26 @@
+import { UserProps } from '@/libs/api';
 import { RootState } from '@/libs/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  user: null as UserProps | null,
+  isLoading: true,
+};
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    isUserFirst: false,
-    accessToken: null,
-  },
+  initialState,
   reducers: {
-    setCredentials(state, action) {
-      const { user, accessToken } = action.payload;
+    setUser(state, action: { payload: { user: UserProps } }) {
+      const { user } = action.payload;
 
       state.user = user;
-      state.accessToken = accessToken;
+      state.isLoading = false;
     },
   },
 });
 
 export const authReducer = authSlice.reducer;
-export const { setCredentials } = authSlice.actions;
+export const { setUser } = authSlice.actions;
 
-export const selectUser = (state: RootState) => state.auth.user;
+export const selectUser = (state: RootState) => state.auth;

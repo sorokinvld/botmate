@@ -12,26 +12,24 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
-import { setCredentials, useLoginMutation } from '@/features/auth';
+import { setUser } from '@/features/auth';
+import { LoginUserDto, useAuthControllerLoginMutation } from '@/libs/api';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
-import { ApiResponse, CreateUserDTO } from 'common';
 import { useDispatch } from 'react-redux';
 
 // todd: add framer motion animation and multi steps
 function Welcome() {
   const toast = useToast();
-  const [login, { isLoading, error }] = useLoginMutation();
-  const form = useForm<CreateUserDTO>();
+  const [login, { isLoading, error }] = useAuthControllerLoginMutation();
+  const form = useForm<LoginUserDto>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const err = error as ApiResponse<any>;
-    if (err) {
-      const message = err.data?.message;
+    if (error) {
       toast({
         title: 'An error occurred.',
-        description: message,
+        description: error.message,
         status: 'error',
         duration: 5000,
         position: 'bottom-right',
@@ -39,10 +37,13 @@ function Welcome() {
     }
   }, [error]);
 
-  async function loginUser(data: CreateUserDTO) {
-    const response = await login(data).unwrap();
-    dispatch(setCredentials(response));
-    localStorage.setItem('botmate-token', response.accessToken);
+  async function loginUser(data: LoginUserDto) {
+    try {
+      const response = await login({ loginUserDto: data }).unwrap();
+      dispatch(setUser(response));
+      localStorage.setItem('botmate-token', response.accessToken);
+      window.location.href = '/';
+    } catch (e) {}
   }
 
   return (
