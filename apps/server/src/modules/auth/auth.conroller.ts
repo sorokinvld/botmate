@@ -7,12 +7,31 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { ApiProperty, ApiTags, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { User } from '@prisma/client';
-import { UserService } from '@/users/user.service';
-import { CreateUserDTO } from 'common';
+import { UserProps } from '@/generated/user';
+import { UserService } from '@modules/users/user.service';
+import { CreateUserDTO } from '@modules/users/dto/create-user.dto';
 
+class LoginUserDTO {
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
+}
+
+class LoginApiResponse {
+  @ApiProperty()
+  accessToken: string;
+
+  @ApiProperty()
+  user: UserProps;
+}
+
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -22,7 +41,14 @@ export class AuthController {
 
   @Post('login')
   @UseGuards(LocalAuthGuard)
-  login(@Req() req: Request) {
+  @ApiResponse({
+    status: 200,
+    description: 'Login successful',
+    type: LoginApiResponse,
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  login(@Req() req: Request, @Body() _body: LoginUserDTO) {
     return this.authService.login(req.user as User);
   }
 

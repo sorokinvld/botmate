@@ -1,7 +1,7 @@
-import { PrismaService } from '@/database/prisma.service';
+import { PrismaService } from '@modules/db/prisma.service';
 import { User } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { CreateUserDTO } from 'common';
+import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -11,6 +11,7 @@ export class UserService {
     const newUser = await this.db.user.create({
       data: {
         ...createUserInput,
+        avatar: 'https://bit.ly/code-beast',
       },
     });
 

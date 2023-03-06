@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { UserService } from '@/users/user.service';
+import { UserService } from '@modules/users/user.service';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
