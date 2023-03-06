@@ -1,9 +1,8 @@
 import { Request } from 'express';
 import { User } from '@prisma/client';
-import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { LoginUserDTO } from 'common';
 import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
 import { UserProps } from '@/generated/user';
 
@@ -14,10 +13,6 @@ export class UsersController {
 
   @Get('/profile')
   @UseGuards(JwtAuthGuard)
-  @ApiProperty({
-    description: 'The user profile',
-    type: LoginUserDTO,
-  })
   @ApiOkResponse({
     description: 'The user profile',
     type: UserProps,

@@ -14,14 +14,7 @@ import { User } from '@prisma/client';
 import { UserProps } from '@/generated/user';
 import { UserService } from '@modules/users/user.service';
 import { CreateUserDTO } from '@modules/users/dto/create-user.dto';
-
-class LoginUserDTO {
-  @ApiProperty()
-  email: string;
-
-  @ApiProperty()
-  password: string;
-}
+import { LoginUserDTO } from './dto/login-user-dto';
 
 class LoginApiResponse {
   @ApiProperty()

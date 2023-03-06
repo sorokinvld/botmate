@@ -69,7 +69,6 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.0.0
       '@typescript-eslint/parser': ^5.0.0
       class-validator: ^0.14.0
-      common: workspace:^1.0.0
       eslint: ^8.0.1
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
@@ -98,7 +97,6 @@ importers:
       '@types/passport-jwt': 3.0.8
       '@types/passport-local': 1.0.35
       class-validator: 0.14.0
-      common: link:../../packages/common
       passport: 0.6.0
       passport-jwt: 4.0.1
       passport-local: 1.0.0
@@ -144,7 +142,6 @@ importers:
       '@types/node': ^17.0.12
       '@types/react': ^18.0.22
       '@types/react-dom': ^18.0.7
-      common: workspace:^1.0.0
       eslint: 7.32.0
       eslint-config-custom: workspace:*
       framer-motion: ^10.0.1
@@ -167,7 +164,6 @@ importers:
       '@fontsource/inter': 4.5.15
       '@fontsource/open-sans': 4.5.14
       '@reduxjs/toolkit': 1.9.3_k4ae6lp43ej6mezo3ztvx6pykq
-      common: link:../../packages/common
       framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
       next: 13.2.1_6m24vuloj5ihw4zc5lbsktc4fu
       react: 18.2.0
