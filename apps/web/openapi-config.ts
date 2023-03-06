@@ -1,7 +1,7 @@
 import type { ConfigFile } from '@rtk-query/codegen-openapi';
 
 const config: ConfigFile = {
-  schemaFile: 'http://localhost:8080/docs-json',
+  schemaFile: 'http://localhost:8080/api/docs-json',
   apiFile: './src/libs/redux/base-query.ts',
   apiImport: 'apiSlice',
   outputFile: './src/libs/api.ts',
