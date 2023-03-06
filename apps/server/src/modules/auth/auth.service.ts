@@ -22,11 +22,15 @@ export class AuthService {
     const payload = { email: user.email, sub: user.id };
 
     return {
-      accessToken: this.jwtService.sign(payload, {
-        secret: 'secret',
-      }),
+      accessToken: this.sign(payload),
       user,
     };
+  }
+
+  sign(data: any) {
+    return this.jwtService.sign(data, {
+      secret: 'secret',
+    });
   }
 
   async verify(token: string) {

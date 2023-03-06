@@ -7,7 +7,12 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiProperty, ApiTags, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  ApiTags,
+  ApiResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserService } from '@modules/users/user.service';
@@ -56,11 +61,20 @@ export class AuthController {
     return this.authService.login(req.user as User);
   }
 
+  @ApiOkResponse({
+    type: LoginApiResponse,
+  })
   @Post('register')
-  async register(@Body() body: RegisterUserDTO) {
+  async register(@Body() body: RegisterUserDTO): Promise<LoginApiResponse> {
     try {
       const userData = await this.userService.createUser(body);
-      return userData;
+      return {
+        accessToken: this.authService.sign({
+          id: userData.id,
+          email: userData.email,
+        }),
+        user: userData,
+      };
     } catch (e) {
       throw new HttpException('An error occurred while creating user', 500);
     }

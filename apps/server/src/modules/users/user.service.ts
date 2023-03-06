@@ -16,6 +16,7 @@ export class UserService {
       ...createUserInput,
       isAdmin: totalUsers === 0,
       createdAt: new Date().toString(),
+      avatar: 'https://bit.ly/code-beast',
     });
 
     await this.userRepo.save(newUser);
