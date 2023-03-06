@@ -1,9 +1,9 @@
-import { UserProps } from '@/libs/api';
+import { User } from '@/libs/api';
 import { RootState } from '@/libs/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: null as UserProps | null,
+  user: null as User | null,
   isLoading: true,
 };
 
@@ -11,7 +11,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser(state, action: { payload: { user: UserProps } }) {
+    setUser(state, action: { payload: { user: User } }) {
       const { user } = action.payload;
 
       state.user = user;

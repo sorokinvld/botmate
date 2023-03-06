@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
 import { setUser } from '@/features/auth';
-import { LoginUserDto, useAuthControllerLoginMutation } from '@/libs/api';
+import { RegisterUserDto, useAuthControllerRegisterMutation } from '@/libs/api';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';
@@ -21,8 +21,8 @@ import { useDispatch } from 'react-redux';
 // todd: add framer motion animation and multi steps
 function Welcome() {
   const toast = useToast();
-  const [login, { isLoading, error }] = useAuthControllerLoginMutation();
-  const form = useForm<LoginUserDto>();
+  const [register, { isLoading, error }] = useAuthControllerRegisterMutation();
+  const form = useForm<RegisterUserDto>();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,10 +37,14 @@ function Welcome() {
     }
   }, [error]);
 
-  async function loginUser(data: LoginUserDto) {
+  async function loginUser(data: RegisterUserDto) {
     try {
-      const response = await login({ loginUserDto: data }).unwrap();
-      dispatch(setUser(response));
+      const response = await register({ registerUserDto: data }).unwrap();
+      dispatch(
+        setUser({
+          user: response.user,
+        }),
+      );
       localStorage.setItem('botmate-token', response.accessToken);
       window.location.href = '/';
     } catch (e) {}
@@ -72,6 +76,11 @@ function Welcome() {
           <Stack mt={6} spacing={6}>
             <FormControl>
               <FormLabel> Email</FormLabel>
+              <Input {...form.register('name')} placeholder="Email" />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel> Email</FormLabel>
               <Input {...form.register('email')} placeholder="Email" />
             </FormControl>
             <FormControl>
@@ -80,7 +89,7 @@ function Welcome() {
             </FormControl>
 
             <Button type="submit" variant="solid" isLoading={isLoading}>
-              Login
+              Submit
             </Button>
           </Stack>
         </form>

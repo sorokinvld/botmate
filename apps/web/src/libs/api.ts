@@ -31,7 +31,7 @@ const injectedRtkApi = api
         query: (queryArg) => ({
           url: `/api/auth/register`,
           method: 'POST',
-          body: queryArg.createUserDto,
+          body: queryArg.registerUserDto,
         }),
         invalidatesTags: ['auth'],
       }),
@@ -40,27 +40,30 @@ const injectedRtkApi = api
   });
 export { injectedRtkApi as userApi };
 export type UsersControllerProfileApiResponse =
-  /** status 200 The user profile */ UserProps;
+  /** status 200 The user profile */ User;
 export type UsersControllerProfileApiArg = void;
 export type AuthControllerLoginApiResponse =
   /** status 200 Login successful */ LoginApiResponse;
 export type AuthControllerLoginApiArg = {
   loginUserDto: LoginUserDto;
 };
-export type AuthControllerRegisterApiResponse = unknown;
+export type AuthControllerRegisterApiResponse =
+  /** status 200  */ LoginApiResponse;
 export type AuthControllerRegisterApiArg = {
-  createUserDto: CreateUserDto;
+  registerUserDto: RegisterUserDto;
 };
-export type UserProps = {
+export type User = {
   id: number;
   name: string;
   email: string;
-  avatar?: string;
   password: string;
+  avatar?: string;
+  isAdmin?: boolean;
+  createdAt?: string;
 };
 export type LoginApiResponse = {
   accessToken: string;
-  user: UserProps;
+  user: User;
 };
 export type ErrorResponse = {
   message: string;
@@ -70,10 +73,12 @@ export type LoginUserDto = {
   email: string;
   password: string;
 };
-export type CreateUserDto = {
+export type RegisterUserDto = {
   name: string;
   email: string;
   password: string;
+  avatar?: string;
+  isAdmin?: boolean;
 };
 export const {
   useUsersControllerProfileQuery,
