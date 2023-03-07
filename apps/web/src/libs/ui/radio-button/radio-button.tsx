@@ -50,6 +50,8 @@ function RadioButton({
             borderRightRadius={index === options.length - 1 ? 'md' : 'none'}
             borderLeftRadius={index === 0 ? 'md' : 'none'}
             onClick={() => {
+              if (loading) return;
+              if (index === activeIndex) return;
               setActiveIndex(index);
               onChange?.(option.value);
             }}
