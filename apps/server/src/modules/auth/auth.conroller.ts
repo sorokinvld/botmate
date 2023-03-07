@@ -18,8 +18,8 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserService } from '@modules/users/user.service';
 import { LoginUserDTO } from './dto/login-user-dto';
 import { User } from '@/entities/user.entity';
-import { RegisterUserDTO } from './dto/register-user.dto';
 import { ErrorResponse } from '@common/error.response';
+import { CreateUserDTO } from '../users/dto/create-user.dto';
 
 class LoginApiResponse {
   @ApiProperty()
@@ -58,7 +58,7 @@ export class AuthController {
     type: LoginApiResponse,
   })
   @Post('register')
-  async register(@Body() body: RegisterUserDTO): Promise<LoginApiResponse> {
+  async register(@Body() body: CreateUserDTO): Promise<LoginApiResponse> {
     try {
       const userData = await this.userService.createUser(body);
       return {

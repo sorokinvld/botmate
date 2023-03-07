@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
 import { setUser } from '@/libs/store';
-import { RegisterUserDto, useAuthControllerRegisterMutation } from '@/libs/api';
+import { CreateUserDto, useAuthControllerRegisterMutation } from '@/libs/api';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';
@@ -22,7 +22,7 @@ import { useDispatch } from 'react-redux';
 function Welcome() {
   const toast = useToast();
   const [register, { isLoading, error }] = useAuthControllerRegisterMutation();
-  const form = useForm<RegisterUserDto>();
+  const form = useForm<CreateUserDto>();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,9 +37,9 @@ function Welcome() {
     }
   }, [error]);
 
-  async function loginUser(data: RegisterUserDto) {
+  async function loginUser(data: CreateUserDto) {
     try {
-      const response = await register({ registerUserDto: data }).unwrap();
+      const response = await register({ createUserDto: data }).unwrap();
       dispatch(
         setUser({
           user: response.user,

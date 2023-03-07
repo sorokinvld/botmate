@@ -31,7 +31,7 @@ const injectedRtkApi = api
         query: (queryArg) => ({
           url: `/api/auth/register`,
           method: 'POST',
-          body: queryArg.registerUserDto,
+          body: queryArg.createUserDto,
         }),
         invalidatesTags: ['auth'],
       }),
@@ -68,7 +68,7 @@ export type AuthControllerLoginApiArg = {
 export type AuthControllerRegisterApiResponse =
   /** status 200  */ LoginApiResponse;
 export type AuthControllerRegisterApiArg = {
-  registerUserDto: RegisterUserDto;
+  createUserDto: CreateUserDto;
 };
 export type BotControllerGetBotsApiResponse =
   /** status 200 Get all bots */ Bot[];
@@ -110,13 +110,11 @@ export type LoginUserDto = {
   email: string;
   password: string;
 };
-export type RegisterUserDto = {
+export type CreateUserDto = {
   name: string;
   email: string;
   password: string;
   avatar?: string;
-  role?: 'admin' | 'user';
-  bots: Bot[];
 };
 export type OmitTypeClass = {
   id: string;
