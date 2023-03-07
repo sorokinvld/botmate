@@ -23,7 +23,7 @@ const ModerationsList = [
     match: /\/moderations\/roles/,
   },
   {
-    label: 'Anti Spam',
+    label: 'Anti-spam',
     icon: <HiStop />,
     href: '/moderations/anti-spam',
     badge: 'beta',
@@ -44,8 +44,8 @@ const ModerationsList = [
   {
     label: 'Entertainment',
     icon: <HiPlay />,
-    href: '/moderations/federation',
-    match: /\/moderations\/federation/,
+    href: '/moderations/entertainment',
+    match: /\/moderations\/entertainment/,
   },
   {
     label: 'Federation',

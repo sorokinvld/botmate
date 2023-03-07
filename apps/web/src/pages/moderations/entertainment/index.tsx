@@ -4,13 +4,13 @@ import { Spacer } from '@chakra-ui/react';
 import { ModerationsLayout } from '@layouts';
 import { ChatSelector } from '@features/moderation';
 
-function AntiSpam() {
-  return <div>AntiSpam</div>;
+function Entertainment() {
+  return <div>Entertainment</div>;
 }
 
-AntiSpam.getLayout = (page: React.ReactElement) => (
+Entertainment.getLayout = (page: React.ReactElement) => (
   <DashboardLayout
-    title="Anti-spam"
+    title="Entertainment"
     noPadding
     action={
       <>
@@ -23,4 +23,4 @@ AntiSpam.getLayout = (page: React.ReactElement) => (
   </DashboardLayout>
 );
 
-export default AntiSpam;
+export default Entertainment;
