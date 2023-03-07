@@ -15,7 +15,7 @@ export class UserService {
     const newUser = this.userRepo.create({
       ...createUserInput,
       role: totalUsers === 0 ? UserRole.ADMIN : UserRole.USER,
-      createdAt: new Date().toString(),
+      createdAt: new Date().toISOString(),
       avatar: 'https://bit.ly/code-beast',
     });
 
