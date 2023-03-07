@@ -1,7 +1,6 @@
 import { BotMateLogo } from '@components';
-import { useUser, useActiveBot } from '@hooks';
+import { useActiveBot } from '@hooks';
 import {
-  Avatar,
   Box,
   Flex,
   Heading,
@@ -10,9 +9,7 @@ import {
   Spacer,
   Stack,
   Text,
-  useColorModeValue,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import {
   HiHome,
   HiCog,
@@ -23,6 +20,7 @@ import {
   HiOutlineBell,
 } from 'react-icons/hi';
 import { SidebarItem } from './sidebar-item';
+import { ProfileSidebar } from '../profile-sidebar';
 
 // todo: get values from constants
 const sidebarItems = [
@@ -68,10 +66,7 @@ type SidebarProps = {
   //
 };
 function AppSidebar({}: SidebarProps) {
-  const r = useRouter();
-  const user = useUser();
   const activeBot = useActiveBot();
-  const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
   return (
     <Flex flexDirection="column" p={4} gap={6} h="100vh" overflow="auto">
@@ -114,30 +109,7 @@ function AppSidebar({}: SidebarProps) {
       {/* 
 					todo: make this a component
 				*/}
-      <HStack
-        p={4}
-        borderWidth="1px"
-        rounded="xl"
-        bg={profileBg}
-        cursor="pointer"
-        userSelect="none"
-        _hover={{
-          transform: 'translateY(-5px)',
-          shadow: 'lg',
-        }}
-        transition="all 0.4s ease-in-out"
-        onClick={() => r.push('/profile')}
-      >
-        <Avatar draggable={false} src={user.avatar} />
-        <Box>
-          <Heading fontSize={12} noOfLines={1}>
-            {user.name}
-          </Heading>
-          <Text fontSize="sm" opacity={0.8}>
-            {user.email}
-          </Text>
-        </Box>
-      </HStack>
+      <ProfileSidebar />
     </Flex>
   );
 }
