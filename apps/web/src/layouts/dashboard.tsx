@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
 import { HiArrowLeft } from 'react-icons/hi';
 import { AppSidebar } from '@/libs/components';
-import { selectUser } from '@/features';
-import { useSelector } from 'react-redux';
+import { useBotControllerGetBotsQuery } from '@/libs/api';
 
 type DashboardLayoutProps = {
   title: string;
@@ -22,6 +21,12 @@ function DashboardLayout({
   noPadding,
 }: DashboardLayoutProps) {
   const r = useRouter();
+  const { data: bots } = useBotControllerGetBotsQuery();
+
+  if (bots?.length === 0) {
+    r.push('/setup');
+    return null;
+  }
 
   return (
     <>

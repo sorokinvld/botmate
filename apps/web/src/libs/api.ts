@@ -1,5 +1,5 @@
-import { apiSlice as api } from './redux/base-query';
-export const addTagTypes = ['user', 'auth'] as const;
+import { apiSlice as api } from './store/base-query';
+export const addTagTypes = ['user', 'auth', 'bot'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
@@ -35,6 +35,13 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['auth'],
       }),
+      botControllerGetBots: build.query<
+        BotControllerGetBotsApiResponse,
+        BotControllerGetBotsApiArg
+      >({
+        query: () => ({ url: `/api/bots` }),
+        providesTags: ['bot'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -52,14 +59,27 @@ export type AuthControllerRegisterApiResponse =
 export type AuthControllerRegisterApiArg = {
   registerUserDto: RegisterUserDto;
 };
+export type BotControllerGetBotsApiResponse =
+  /** status 200 Get all bots */ GetBotsDto[];
+export type BotControllerGetBotsApiArg = void;
+export type Bot = {
+  id: number;
+  first_name: string;
+  username: string;
+  token: string;
+  avatar?: string;
+  createdAt?: string;
+  user: User;
+};
 export type User = {
   id: number;
   name: string;
   email: string;
   password: string;
   avatar?: string;
-  isAdmin?: boolean;
+  role?: 'admin' | 'user';
   createdAt?: string;
+  bots: Bot[];
 };
 export type LoginApiResponse = {
   accessToken: string;
@@ -78,10 +98,20 @@ export type RegisterUserDto = {
   email: string;
   password: string;
   avatar?: string;
-  isAdmin?: boolean;
+  role?: 'admin' | 'user';
+  bots: Bot[];
+};
+export type GetBotsDto = {
+  id: number;
+  first_name: string;
+  username: string;
+  token: string;
+  avatar?: string;
+  createdAt?: string;
 };
 export const {
   useUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
   useAuthControllerRegisterMutation,
+  useBotControllerGetBotsQuery,
 } = injectedRtkApi;

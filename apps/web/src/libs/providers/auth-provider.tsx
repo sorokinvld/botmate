@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import Head from 'next/head';
 import { useUsersControllerProfileQuery } from '@/libs/api';
 import { useDispatch } from 'react-redux';
-import { setUser } from './auth-slice';
-import { Center, HStack, Spinner, Text } from '@chakra-ui/react';
+import { setUser } from '../store/auth-slice';
 import { useRouter } from 'next/router';
+import { Loader } from '../ui';
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -19,7 +18,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     if (!isLoading) {
       if (!data) {
-        if (!exlude.includes(r.pathname)) r.push('/welcome');
+        if (!exlude.includes(r.pathname)) r.push('/setup');
       }
     }
   }, [isLoading]);
@@ -35,17 +34,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, [data]);
 
   if (isLoading) {
-    return (
-      <Center h="100vh" opacity={0.7}>
-        <Head>
-          <title>Loading...</title>
-        </Head>
-        <HStack spacing={4}>
-          <Spinner />
-          <Text>loading user data...</Text>
-        </HStack>
-      </Center>
-    );
+    return <Loader text="loading user data..." />;
   }
 
   if (data || r.pathname === '/welcome') return <>{children}</>;
