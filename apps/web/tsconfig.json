@@ -1,11 +1,12 @@
 {
-	"extends": "tsconfig/nextjs.json",
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		}
-	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.yaml"],
-	"exclude": ["node_modules"]
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@api": ["src/libs/api.ts"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.yaml"],
+  "exclude": ["node_modules"]
 }

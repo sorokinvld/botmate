@@ -12,7 +12,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { BotMateLogo } from '@/assets/logo';
-import { setUser } from '@/features/auth';
+import { setUser } from '@/libs/store';
 import { RegisterUserDto, useAuthControllerRegisterMutation } from '@/libs/api';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';

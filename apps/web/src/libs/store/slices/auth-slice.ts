@@ -1,6 +1,6 @@
 import { User } from '@/libs/api';
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { RootState } from '..';
 
 const initialState = {
   user: null as User | null,

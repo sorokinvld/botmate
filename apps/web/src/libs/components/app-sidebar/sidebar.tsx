@@ -1,8 +1,10 @@
 import { BotMateLogo } from '@/assets/logo';
 import { useUser } from '@/libs/hooks';
+import { useActiveBot } from '@/libs/store';
 import {
   Avatar,
   Box,
+  Divider,
   Flex,
   Heading,
   HStack,
@@ -21,6 +23,7 @@ import {
   HiPuzzle,
   HiShieldCheck,
   HiOutlineBell,
+  HiRefresh,
 } from 'react-icons/hi';
 import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
@@ -70,23 +73,30 @@ type SidebarProps = {
 };
 function AppSidebar({}: SidebarProps) {
   const r = useRouter();
-  const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
   const user = useUser();
+  const activeBot = useActiveBot();
+  const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
   return (
     <Flex flexDirection="column" p={4} gap={6} h="100vh" overflow="auto">
-      <HStack width="full">
-        <BotMateLogo height="25px" width="25px" />
-        <Spacer />
-        <IconButton
-          size="md"
-          aria-label="notifications"
-          variant="outline"
-          icon={<HiOutlineBell size={14} />}
-        />
-      </HStack>
-
-      <Search />
+      <Box>
+        <HStack width="full">
+          <BotMateLogo height="25px" width="25px" />
+          <Spacer />
+          <IconButton
+            size="md"
+            aria-label="notifications"
+            variant="outline"
+            icon={<HiOutlineBell size={14} />}
+          />
+        </HStack>
+        <Box mt={4}>
+          <Heading size="sm">{activeBot.first_name}</Heading>
+          <Text opacity={0.8} fontSize={12}>
+            {activeBot.id}
+          </Text>
+        </Box>
+      </Box>
 
       <Stack>
         {sidebarItems.map((item) => (

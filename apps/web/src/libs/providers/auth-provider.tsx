@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useUsersControllerProfileQuery } from '@/libs/api';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/auth-slice';
+import { setUser } from '../store';
 import { useRouter } from 'next/router';
 import { Loader } from '../ui';
 
@@ -18,7 +18,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     if (!isLoading) {
       if (!data) {
-        if (!exlude.includes(r.pathname)) r.push('/setup');
+        if (!exlude.includes(r.pathname)) r.push('/welcome');
       }
     }
   }, [isLoading]);

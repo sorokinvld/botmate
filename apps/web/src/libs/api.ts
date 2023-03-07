@@ -42,6 +42,17 @@ const injectedRtkApi = api
         query: () => ({ url: `/api/bots` }),
         providesTags: ['bot'],
       }),
+      botControllerCreateBot: build.mutation<
+        BotControllerCreateBotApiResponse,
+        BotControllerCreateBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots`,
+          method: 'POST',
+          body: queryArg.createBotDto,
+        }),
+        invalidatesTags: ['bot'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -60,14 +71,20 @@ export type AuthControllerRegisterApiArg = {
   registerUserDto: RegisterUserDto;
 };
 export type BotControllerGetBotsApiResponse =
-  /** status 200 Get all bots */ GetBotsDto[];
+  /** status 200 Get all bots */ Bot[];
 export type BotControllerGetBotsApiArg = void;
+export type BotControllerCreateBotApiResponse =
+  /** status 200  */ OmitTypeClass;
+export type BotControllerCreateBotApiArg = {
+  createBotDto: CreateBotDto;
+};
 export type Bot = {
-  id: number;
+  id: string;
   first_name: string;
   username: string;
   token: string;
   avatar?: string;
+  status?: 'active' | 'inactive' | 'error';
   createdAt?: string;
   user: User;
 };
@@ -101,17 +118,22 @@ export type RegisterUserDto = {
   role?: 'admin' | 'user';
   bots: Bot[];
 };
-export type GetBotsDto = {
-  id: number;
+export type OmitTypeClass = {
+  id: string;
   first_name: string;
   username: string;
   token: string;
   avatar?: string;
+  status?: 'active' | 'inactive' | 'error';
   createdAt?: string;
+};
+export type CreateBotDto = {
+  token: string;
 };
 export const {
   useUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
   useAuthControllerRegisterMutation,
   useBotControllerGetBotsQuery,
+  useBotControllerCreateBotMutation,
 } = injectedRtkApi;

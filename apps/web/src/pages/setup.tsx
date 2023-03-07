@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   chakra,
   Box,
@@ -12,8 +12,22 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Head from 'next/head';
+import { useBotControllerCreateBotMutation } from '@/libs/api';
 
 function Setup() {
+  const tokenInputRef = useRef<HTMLInputElement>(null);
+  const [createBot, { isLoading, error }] = useBotControllerCreateBotMutation();
+
+  const submit = async () => {
+    const token = tokenInputRef.current?.value;
+    if (!token) return;
+
+    await createBot({ createBotDto: { token } }).unwrap();
+    window.location.href = '/';
+  };
+
+  const errorMessage = error?.message;
+
   return (
     <Flex h="100vh">
       <Head>
@@ -23,16 +37,24 @@ function Setup() {
         <SimpleGrid columns={10} spacing={8}>
           <GridItem colSpan={6}>
             <Box p={6} bg="secondary.dark" rounded="xl" shadow="dark-lg">
-              <Heading size="md">🚀 Setup your first bot</Heading>
+              <Heading size="md">🚀 Setup your new bot</Heading>
               <Text mt={2} opacity={0.8}>
-                Before you contiue to the dashboard, you need to setup your
-                first bot.
+                Let's start by creating your bot. Enter your bot token and click
+                continue.
               </Text>
 
               <HStack mt={6}>
-                <Input placeholder="Enter bot token" />
-                <Button variant="solid">Contine</Button>
+                <Input ref={tokenInputRef} placeholder="Enter bot token" />
+                <Button variant="solid" isLoading={isLoading} onClick={submit}>
+                  Contine
+                </Button>
               </HStack>
+
+              {errorMessage ? (
+                <Text mt={4} color="red.300">
+                  Error: {errorMessage}
+                </Text>
+              ) : null}
             </Box>
           </GridItem>
           <GridItem colSpan={4}>
