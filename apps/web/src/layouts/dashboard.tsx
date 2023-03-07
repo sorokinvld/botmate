@@ -34,11 +34,11 @@ function DashboardLayout({
         <title>{title + ' | BotMate'}</title>
       </Head>
       <Flex h="100vh" overflow="hidden">
-        <Box w="80" borderRightWidth="1px" overflow="auto">
+        <Box w="60" minW="60" borderRightWidth="1px" overflow="auto">
           <AppSidebar />
         </Box>
 
-        <Flex w="full" flexDirection="column">
+        <Flex flex={1} flexDirection="column">
           <HStack
             p={4}
             w="full"
