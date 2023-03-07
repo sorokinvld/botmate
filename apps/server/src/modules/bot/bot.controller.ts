@@ -15,7 +15,6 @@ import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BotService } from './bot.service';
 import { CreateBotDTO } from './dto/create-bot.dto';
-import { GetBotsDTO } from './dto/get-bots.dto';
 
 @ApiTags('bot')
 @Controller('bots')
@@ -26,7 +25,7 @@ export class BotController {
   @Get()
   @ApiOkResponse({
     description: 'Get all bots',
-    type: [GetBotsDTO],
+    type: [Bot],
   })
   async getBots(@Req() req: Request) {
     const user = req.user as User;
