@@ -1,6 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Bot } from './bot.entity';
 
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
 @Entity({ name: 'users' })
 export class User {
   @ApiProperty()
@@ -23,11 +28,19 @@ export class User {
   @Column()
   avatar: string;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({
+    enum: UserRole,
+  })
   @Column()
-  isAdmin: boolean;
+  role: UserRole;
 
   @ApiPropertyOptional()
   @Column()
   createdAt: string;
+
+  @ApiProperty({
+    type: () => [Bot],
+  })
+  @OneToMany(() => Bot, (bot) => bot.user)
+  bots: Bot[];
 }

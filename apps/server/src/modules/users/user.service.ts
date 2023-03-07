@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '@/entities/user.entity';
+import { User, UserRole } from '@/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UserService {
     const totalUsers = await this.getUsersCount();
     const newUser = this.userRepo.create({
       ...createUserInput,
-      isAdmin: totalUsers === 0,
+      role: totalUsers === 0 ? UserRole.ADMIN : UserRole.USER,
       createdAt: new Date().toString(),
       avatar: 'https://bit.ly/code-beast',
     });

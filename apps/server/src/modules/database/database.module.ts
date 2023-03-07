@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
 import { User } from '@/entities/user.entity';
+import { Bot } from '@/entities/bot.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { User } from '@/entities/user.entity';
         database: configService.get('DB_NAME'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        entities: [User],
+        entities: [User, Bot],
         synchronize: true,
       }),
       inject: [ConfigService],

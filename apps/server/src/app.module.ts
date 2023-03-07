@@ -7,6 +7,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { AuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/users/user.module';
 import { DatabaseModule } from '@modules/database/database.module';
+import { BotModule } from '@/modules/bot/bot.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DatabaseModule } from '@modules/database/database.module';
     DatabaseModule,
     UserModule,
     AuthModule,
+    BotModule,
   ],
   controllers: [],
   providers: [],
