@@ -6,21 +6,36 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiResponse, ApiTags, OmitType } from '@nestjs/swagger';
+import {
+  ApiOkResponse,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+  OmitType,
+} from '@nestjs/swagger';
 import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BotService } from './bot.service';
 import { CreateBotDTO } from './dto/create-bot.dto';
+import { BotProcessService } from './services/bot.process.service';
+
+class BotStartStopResponse {
+  ok: boolean;
+}
 
 @ApiTags('bot')
 @Controller('bots')
 @UseGuards(JwtAuthGuard)
 export class BotController {
-  constructor(private botService: BotService) {}
+  constructor(
+    private botService: BotService,
+    private botProcess: BotProcessService,
+  ) {}
 
   @Get()
   @ApiOkResponse({
@@ -49,6 +64,43 @@ export class BotController {
     try {
       const bot = await this.botService.createBot(body.token, user.id);
       return bot;
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Post(':id/start')
+  @ApiOkResponse({
+    description: 'Start bot',
+    type: BotStartStopResponse,
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Bot ID to start',
+  })
+  async startBot(@Param('id') id: string) {
+    try {
+      await this.botProcess.startBot(id);
+      return { ok: true };
+    } catch (e) {
+      // TODO: log error to database
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Post(':id/stop')
+  @ApiOkResponse({
+    description: 'Stop bot',
+    type: BotStartStopResponse,
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Bot ID to stop',
+  })
+  async stopBot(@Param('id') id: string) {
+    try {
+      await this.botProcess.stopBot(id);
+      return { ok: true };
     } catch (e) {
       throw new BadRequestException(e.message);
     }
