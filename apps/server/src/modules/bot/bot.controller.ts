@@ -31,8 +31,6 @@ export class BotController {
     const user = req.user as User;
     const bots = await this.botService.getBotsByUserId(user.id);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     return bots;
   }
 
