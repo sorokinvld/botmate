@@ -19,6 +19,7 @@ import { UserService } from '@modules/users/user.service';
 import { LoginUserDTO } from './dto/login-user-dto';
 import { User } from '@/entities/user.entity';
 import { RegisterUserDTO } from './dto/register-user.dto';
+import { ErrorResponse } from '@common/error.response';
 
 class LoginApiResponse {
   @ApiProperty()
@@ -26,14 +27,6 @@ class LoginApiResponse {
 
   @ApiProperty()
   user: User;
-}
-
-class ErrorResponse {
-  @ApiProperty()
-  message: string;
-
-  @ApiProperty()
-  statusCode: number;
 }
 
 @ApiTags('auth')
