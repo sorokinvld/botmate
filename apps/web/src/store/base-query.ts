@@ -1,6 +1,6 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ErrorResponse } from '../api';
+import { ErrorResponse } from '@api';
 
 const { NODE_ENV = 'development' } = process.env;
 

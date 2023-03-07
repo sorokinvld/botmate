@@ -1,4 +1,4 @@
-import { User, useUsersControllerProfileQuery } from '../api';
+import { User, useUsersControllerProfileQuery } from '@api';
 
 export const useUser = () => {
   const { data } = useUsersControllerProfileQuery();

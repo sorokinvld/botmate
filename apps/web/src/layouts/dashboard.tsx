@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
 import { HiArrowLeft } from 'react-icons/hi';
-import { AppSidebar } from '@/libs/components';
-import { useBotControllerGetBotsQuery } from '@/libs/api';
+import { AppSidebar } from '@components';
+import { useBotControllerGetBotsQuery } from '@api';
 
 type DashboardLayoutProps = {
   title: string;

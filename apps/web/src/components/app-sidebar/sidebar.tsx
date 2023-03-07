@@ -1,6 +1,5 @@
-import { BotMateLogo } from '@/assets/logo';
-import { useUser } from '@/libs/hooks';
-import { useActiveBot } from '@/libs/store';
+import { BotMateLogo } from '@components';
+import { useUser, useActiveBot } from '@hooks';
 import {
   Avatar,
   Box,

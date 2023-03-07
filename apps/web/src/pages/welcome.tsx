@@ -11,9 +11,9 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react';
-import { BotMateLogo } from '@/assets/logo';
-import { setUser } from '@/libs/store';
-import { CreateUserDto, useAuthControllerRegisterMutation } from '@/libs/api';
+import { BotMateLogo } from '@components';
+import { setUser } from '@store';
+import { CreateUserDto, useAuthControllerRegisterMutation } from '@api';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import { useDispatch } from 'react-redux';

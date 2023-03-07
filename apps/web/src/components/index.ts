@@ -1,2 +1,2 @@
 export * from './app-sidebar';
-export * from './moderation';
+export * from './logo';

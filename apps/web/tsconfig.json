@@ -3,8 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@api": ["src/libs/api.ts"]
+      "@features/*": ["src/features/*"],
+      "@layouts": ["src/layouts/index.ts"],
+      "@providers": ["src/providers/index.ts"],
+      "@atoms": ["src/atoms/index.ts"],
+      "@components": ["src/components/index.ts"],
+      "@hooks": ["src/hooks/index.ts"],
+      "@store": ["src/store/index.ts"],
+      "@api": ["src/api.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.yaml"],

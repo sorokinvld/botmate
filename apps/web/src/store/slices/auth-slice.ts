@@ -1,4 +1,4 @@
-import { User } from '@/libs/api';
+import { User } from '@api';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '..';
 

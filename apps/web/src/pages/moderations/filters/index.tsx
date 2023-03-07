@@ -1,14 +1,14 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
+import { DashboardLayout } from '@layouts';
 import { Box, Divider, Spacer, Stack } from '@chakra-ui/react';
-import { ModerationsLayout } from '@/layouts/moderations';
+import { ModerationsLayout } from '@layouts';
 import {
   ChatSelector,
   FilterMessageTypes,
   FiltersAdvanced,
   FiltersBlacklistWords,
   FilterServiceMessages,
-} from '@/libs/components/moderation';
+} from '@features/moderation';
 
 function Filters() {
   return (

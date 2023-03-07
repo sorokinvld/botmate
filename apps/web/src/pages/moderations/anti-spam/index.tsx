@@ -1,8 +1,8 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
+import { DashboardLayout } from '@layouts';
 import { Spacer } from '@chakra-ui/react';
-import { ModerationsLayout } from '@/layouts/moderations';
-import { ChatSelector } from '@/libs/components/moderation';
+import { ModerationsLayout } from '@layouts';
+import { ChatSelector } from '@features/moderation';
 
 function AntiSpam() {
   return <div>Filters</div>;

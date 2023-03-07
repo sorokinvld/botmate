@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import { RadioButton, Stats } from '@/libs/ui';
+import { RadioButton, Stats } from '@atoms';
 import {
   FcCancel,
   FcDeleteDatabase,
@@ -7,12 +7,12 @@ import {
   FcOk,
   FcSms,
 } from 'react-icons/fc';
-import { DashboardLayout } from '@/layouts/dashboard';
+import { DashboardLayout } from '@layouts';
 import {
   useBotControllerStartBotMutation,
   useBotControllerStopBotMutation,
-} from '@/libs/api';
-import { useActiveBot } from '@/libs/store';
+} from '@api';
+import { useActiveBot } from '@hooks';
 
 function Home() {
   const activeBot = useActiveBot();

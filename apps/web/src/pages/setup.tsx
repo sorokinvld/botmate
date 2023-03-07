@@ -12,7 +12,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Head from 'next/head';
-import { useBotControllerCreateBotMutation } from '@/libs/api';
+import { useBotControllerCreateBotMutation } from '@api';
 
 function Setup() {
   const tokenInputRef = useRef<HTMLInputElement>(null);

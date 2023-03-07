@@ -1,4 +1,4 @@
-import { Card } from '@/libs/ui';
+import { Card } from '@atoms';
 import { HStack, Spacer, Stack, Switch, Text } from '@chakra-ui/react';
 
 type FiltersBlacklistWordsProps = {};

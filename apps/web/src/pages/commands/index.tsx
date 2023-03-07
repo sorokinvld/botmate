@@ -1,5 +1,5 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
+import { DashboardLayout } from '@layouts';
 import { IconButton, Spacer } from '@chakra-ui/react';
 import { HiPlus } from 'react-icons/hi';
 import Link from 'next/link';

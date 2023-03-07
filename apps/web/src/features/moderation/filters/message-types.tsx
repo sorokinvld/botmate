@@ -1,4 +1,4 @@
-import { Card, RadioButton } from '@/libs/ui';
+import { Card, RadioButton } from '@atoms';
 import {
   Stack,
   HStack,

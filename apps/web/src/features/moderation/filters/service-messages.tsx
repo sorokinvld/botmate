@@ -1,4 +1,4 @@
-import { Card } from '@/libs/ui';
+import { Card } from '@atoms';
 import { Stack, HStack, Spacer, Switch, Text } from '@chakra-ui/react';
 
 type FilterServiceMessagesProps = {};

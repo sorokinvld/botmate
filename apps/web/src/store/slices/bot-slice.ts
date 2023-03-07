@@ -24,8 +24,3 @@ const botSlice = createSlice({
 
 export const botReducer = botSlice.reducer;
 export const { setActiveBot } = botSlice.actions;
-
-export const useActiveBot = () => {
-  const bot = useSelector((state: RootState) => state.bot.activeBot);
-  return bot as Bot;
-};

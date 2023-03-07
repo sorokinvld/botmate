@@ -1,4 +1,4 @@
-import { useBotControllerGetBotsQuery } from '../api';
+import { useBotControllerGetBotsQuery } from '@api';
 
 export const useBots = () => {
   const { data: bots } = useBotControllerGetBotsQuery();

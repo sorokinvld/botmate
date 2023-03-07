@@ -1,20 +1,8 @@
-import { SidebarItem } from '@/libs/components/app-sidebar';
-import { Flex, Box, Text, Stack } from '@chakra-ui/react';
-import {
-  HiAdjustments,
-  HiBeaker,
-  HiColorSwatch,
-  HiGlobeAlt,
-  HiLink,
-  HiPlay,
-  HiServer,
-  HiSpeakerphone,
-  HiSwitchVertical,
-  HiUser,
-} from 'react-icons/hi';
+import { SidebarItem } from '@components';
+import { Flex, Box, Stack } from '@chakra-ui/react';
+import { HiGlobeAlt, HiPlay, HiSpeakerphone } from 'react-icons/hi';
 
 import {
-  HiCake,
   HiFilter,
   HiLightningBolt,
   HiShieldCheck,

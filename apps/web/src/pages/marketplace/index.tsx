@@ -1,6 +1,6 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
-import { RadioButton } from '@/libs/ui';
+import { DashboardLayout } from '@layouts';
+import { RadioButton } from '@atoms';
 import {
   InputGroup,
   InputLeftElement,

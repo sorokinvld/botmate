@@ -1,5 +1,5 @@
 import React from 'react';
-import { DashboardLayout } from '@/layouts/dashboard';
+import { DashboardLayout } from '@layouts';
 
 function Analytics() {
   return <div>Analytics</div>;

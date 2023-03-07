@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useBotControllerGetBotsQuery } from '../api';
+import { useBotControllerGetBotsQuery } from '@api';
 import { setActiveBot } from '../store';
-import { Loader } from '../ui';
+import { Loader } from '@atoms';
 
 type BotsProviderProps = {
   children?: React.ReactNode;

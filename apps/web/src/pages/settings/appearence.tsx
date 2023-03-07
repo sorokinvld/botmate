@@ -1,9 +1,9 @@
 import React from 'react';
-import { RadioButton } from '@/libs/ui';
-import { SettingsOption } from '@/libs/ui/settings';
+import { RadioButton } from '@atoms';
+import { SettingsOption } from '@atoms';
 import { Select, Stack, useColorMode } from '@chakra-ui/react';
-import { DashboardLayout } from '@/layouts/dashboard';
-import { SettingsLayout } from '@/layouts/settings';
+import { DashboardLayout } from '@layouts';
+import { SettingsLayout } from '@layouts';
 
 function General() {
   const { colorMode, setColorMode } = useColorMode();
@@ -21,7 +21,20 @@ function General() {
             onChange={(value) => {
               setColorMode(value.toLowerCase());
             }}
-            options={['Light', 'Dark', 'System']}
+            options={[
+              {
+                label: 'Light',
+                value: 'light',
+              },
+              {
+                label: 'Dark',
+                value: 'dark',
+              },
+              {
+                label: 'System',
+                value: 'system',
+              },
+            ]}
           />
         }
       />

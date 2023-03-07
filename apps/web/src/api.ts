@@ -1,4 +1,4 @@
-import { apiSlice as api } from './store/base-query';
+import { apiSlice as api } from '@store';
 export const addTagTypes = ['user', 'auth', 'bot'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({

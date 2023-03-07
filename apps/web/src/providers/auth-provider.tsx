@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useUsersControllerProfileQuery } from '@/libs/api';
+import { useUsersControllerProfileQuery } from '@api';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store';
 import { useRouter } from 'next/router';
-import { Loader } from '../ui';
+import { Loader } from '@atoms';
 
 type AuthProviderProps = {
   children: React.ReactNode;
