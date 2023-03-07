@@ -1,4 +1,5 @@
 import { BotMateLogo } from '@/assets/logo';
+import { useUser } from '@/libs/hooks';
 import {
   Avatar,
   Box,
@@ -70,6 +71,7 @@ type SidebarProps = {
 function AppSidebar({}: SidebarProps) {
   const r = useRouter();
   const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
+  const user = useUser();
 
   return (
     <Flex flexDirection="column" p={4} gap={6} h="100vh" overflow="auto">
@@ -117,13 +119,13 @@ function AppSidebar({}: SidebarProps) {
         transition="all 0.4s ease-in-out"
         onClick={() => r.push('/profile')}
       >
-        <Avatar draggable={false} src="https://bit.ly/code-beast" />
+        <Avatar draggable={false} src={user.avatar} />
         <Box>
           <Heading fontSize={12} noOfLines={1}>
-            Monawwar Abdullah
+            {user.name}
           </Heading>
           <Text fontSize="sm" opacity={0.8}>
-            @xencodes
+            {user.email}
           </Text>
         </Box>
       </HStack>
