@@ -1,12 +1,13 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { RadioButton, Stats } from '@atoms';
 import {
-  FcCancel,
-  FcDeleteDatabase,
-  FcLineChart,
-  FcOk,
-  FcSms,
-} from 'react-icons/fc';
+  HiPlay,
+  HiStop,
+  HiDatabase,
+  HiChartBar,
+  HiCheck,
+  HiChatAlt2,
+} from 'react-icons/hi';
 import { DashboardLayout } from '@layouts';
 import {
   useBotControllerStartBotMutation,
@@ -23,7 +24,7 @@ function Home() {
         <Stats
           title="Bot Status"
           value={activeBot.status === 'active' ? 'Active' : 'Inactive'}
-          icon={activeBot.status === 'active' ? <FcOk /> : <FcCancel />}
+          icon={activeBot.status === 'active' ? <HiCheck /> : <HiStop />}
           label={
             activeBot.status === 'active'
               ? 'Bot is running and functional'
@@ -34,21 +35,21 @@ function Home() {
         <Stats
           title="Messages"
           value={'34,555'}
-          icon={<FcSms />}
+          icon={<HiChatAlt2 />}
           label="Last 24 hours"
           index={2}
         />
         <Stats
           title="Users Activity"
           value={'340'}
-          icon={<FcLineChart />}
+          icon={<HiChartBar />}
           label="Last 30 days"
           index={3}
         />
         <Stats
           title="Errors Reported"
           value={'340'}
-          icon={<FcDeleteDatabase />}
+          icon={<HiDatabase />}
           label="Last 7 days"
           index={4}
         />
