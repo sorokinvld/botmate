@@ -20,7 +20,7 @@ import {
   HiOutlineBell,
 } from 'react-icons/hi';
 import { SidebarItem } from './sidebar-item';
-import { ProfileSidebar } from '../profile-sidebar';
+import { ProfileSidebar } from '@atoms';
 
 // todo: get values from constants
 const sidebarItems = [

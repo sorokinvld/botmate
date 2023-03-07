@@ -1,6 +1,6 @@
 import { SidebarItem } from '@components';
 import { Flex, Box, Stack } from '@chakra-ui/react';
-import { HiGlobeAlt, HiPlay, HiSpeakerphone } from 'react-icons/hi';
+import { HiGlobeAlt, HiPlay, HiSpeakerphone, HiUsers } from 'react-icons/hi';
 
 import {
   HiFilter,
@@ -15,6 +15,12 @@ const ModerationsList = [
     icon: <HiFilter />,
     href: '/moderations/filters',
     match: /\/moderations\/filters/,
+  },
+  {
+    label: 'Roles',
+    icon: <HiUsers />,
+    href: '/moderations/roles',
+    match: /\/moderations\/roles/,
   },
   {
     label: 'Anti Spam',
