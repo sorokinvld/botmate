@@ -4,7 +4,6 @@ import { useActiveBot } from '@/libs/store';
 import {
   Avatar,
   Box,
-  Divider,
   Flex,
   Heading,
   HStack,
@@ -23,9 +22,7 @@ import {
   HiPuzzle,
   HiShieldCheck,
   HiOutlineBell,
-  HiRefresh,
 } from 'react-icons/hi';
-import { Search } from './search';
 import { SidebarItem } from './sidebar-item';
 
 // todo: get values from constants
@@ -90,12 +87,15 @@ function AppSidebar({}: SidebarProps) {
             icon={<HiOutlineBell size={14} />}
           />
         </HStack>
-        <Box mt={4}>
-          <Heading size="sm">{activeBot.first_name}</Heading>
-          <Text opacity={0.8} fontSize={12}>
-            {activeBot.id}
-          </Text>
-        </Box>
+        <HStack>
+          <Box mt={4}>
+            <Heading size="sm">{activeBot.first_name}</Heading>
+            <Text opacity={0.8} fontSize={12}>
+              {activeBot.id}
+            </Text>
+          </Box>
+          <Spacer />
+        </HStack>
       </Box>
 
       <Stack>

@@ -7,8 +7,13 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
+type Option = {
+  label: string;
+  value: string;
+  color?: string;
+};
 type RadioButtonProps = {
-  options: string[];
+  options: Option[];
   onChange?(value: string): void;
   isLoading?: boolean;
   activeIndex?: number;
@@ -22,9 +27,9 @@ function RadioButton({
   const [activeIndex, setActiveIndex] = useState(active ?? 0);
   const bg = useColorModeValue('secondary.light', '#232332');
 
-  useEffect(() => {
-    onChange?.(options[activeIndex]);
-  }, [onChange, activeIndex, options]);
+  // useEffect(() => {
+  //   onChange?.(options[activeIndex].value);
+  // }, [onChange, activeIndex, options]);
 
   return (
     <HStack spacing={0} userSelect="none">
@@ -36,7 +41,7 @@ function RadioButton({
             px={3}
             key={index}
             height="35px"
-            bg={index === activeIndex ? bg : 'transparent'}
+            bg={index === activeIndex ? option.color ?? bg : 'transparent'}
             cursor="pointer"
             borderTopWidth="1px"
             borderBottomWidth="1px"
@@ -46,11 +51,12 @@ function RadioButton({
             borderLeftRadius={index === 0 ? 'md' : 'none'}
             onClick={() => {
               setActiveIndex(index);
+              onChange?.(option.value);
             }}
             transition="all 0.2s ease"
             position="relative"
           >
-            <Text opacity={loading ? 0 : 1}>{option}</Text>
+            <Text opacity={loading ? 0 : 1}>{option.label}</Text>
 
             {loading ? <Spinner position="absolute" size="sm" /> : null}
           </Center>

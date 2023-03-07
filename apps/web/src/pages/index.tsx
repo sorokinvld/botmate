@@ -1,17 +1,34 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { RadioButton, Stats } from '@/libs/ui';
-import { FcDeleteDatabase, FcLineChart, FcOk, FcSms } from 'react-icons/fc';
+import {
+  FcCancel,
+  FcDeleteDatabase,
+  FcLineChart,
+  FcOk,
+  FcSms,
+} from 'react-icons/fc';
 import { DashboardLayout } from '@/layouts/dashboard';
+import {
+  useBotControllerStartBotMutation,
+  useBotControllerStopBotMutation,
+} from '@/libs/api';
+import { useActiveBot } from '@/libs/store';
 
 function Home() {
+  const activeBot = useActiveBot();
+
   return (
     <>
       <SimpleGrid columns={{ base: 1, lg: 4 }} spacing={4}>
         <Stats
           title="Bot Status"
-          value={'OK'}
-          icon={<FcOk />}
-          label="Bot is functional"
+          value={activeBot.status === 'active' ? 'Active' : 'Inactive'}
+          icon={activeBot.status === 'active' ? <FcOk /> : <FcCancel />}
+          label={
+            activeBot.status === 'active'
+              ? 'Bot is running and functional'
+              : 'Bot is not running'
+          }
           index={1}
         />
         <Stats
@@ -40,15 +57,43 @@ function Home() {
   );
 }
 
+const BotStatus = () => {
+  const [startBot, { isLoading: startLoading }] =
+    useBotControllerStartBotMutation();
+  const [stopBot, { isLoading: stopLoading }] =
+    useBotControllerStopBotMutation();
+
+  const { id, status } = useActiveBot();
+
+  return (
+    <Box>
+      <RadioButton
+        isLoading={startLoading || stopLoading}
+        activeIndex={status === 'active' ? 0 : 1}
+        options={[
+          {
+            label: 'Start',
+            value: 'start',
+          },
+          {
+            label: 'Stop',
+            value: 'stop',
+          },
+        ]}
+        onChange={(val) => {
+          if (val === 'start') {
+            startBot({ id });
+          } else {
+            stopBot({ id });
+          }
+        }}
+      />
+    </Box>
+  );
+};
+
 Home.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout
-    title="Dashboard"
-    action={
-      <Box>
-        <RadioButton options={['Start', 'Stop']} />
-      </Box>
-    }
-  >
+  <DashboardLayout title="Dashboard" action={<BotStatus />}>
     {page}
   </DashboardLayout>
 );

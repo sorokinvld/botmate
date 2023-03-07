@@ -53,6 +53,26 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['bot'],
       }),
+      botControllerStartBot: build.mutation<
+        BotControllerStartBotApiResponse,
+        BotControllerStartBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots/${queryArg.id}/start`,
+          method: 'POST',
+        }),
+        invalidatesTags: ['bot'],
+      }),
+      botControllerStopBot: build.mutation<
+        BotControllerStopBotApiResponse,
+        BotControllerStopBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots/${queryArg.id}/stop`,
+          method: 'POST',
+        }),
+        invalidatesTags: ['bot'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -77,6 +97,18 @@ export type BotControllerCreateBotApiResponse =
   /** status 200  */ OmitTypeClass;
 export type BotControllerCreateBotApiArg = {
   createBotDto: CreateBotDto;
+};
+export type BotControllerStartBotApiResponse =
+  /** status 200 Start bot */ BotStartStopResponse;
+export type BotControllerStartBotApiArg = {
+  /** Bot ID to start */
+  id: string;
+};
+export type BotControllerStopBotApiResponse =
+  /** status 200 Stop bot */ BotStartStopResponse;
+export type BotControllerStopBotApiArg = {
+  /** Bot ID to stop */
+  id: string;
 };
 export type Bot = {
   id: string;
@@ -128,10 +160,13 @@ export type OmitTypeClass = {
 export type CreateBotDto = {
   token: string;
 };
+export type BotStartStopResponse = {};
 export const {
   useUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
   useAuthControllerRegisterMutation,
   useBotControllerGetBotsQuery,
   useBotControllerCreateBotMutation,
+  useBotControllerStartBotMutation,
+  useBotControllerStopBotMutation,
 } = injectedRtkApi;
