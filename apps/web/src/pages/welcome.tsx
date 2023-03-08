@@ -75,12 +75,12 @@ function Welcome() {
         <form onSubmit={form.handleSubmit(loginUser)}>
           <Stack mt={6} spacing={6}>
             <FormControl>
-              <FormLabel> Email</FormLabel>
-              <Input {...form.register('name')} placeholder="Email" />
+              <FormLabel>Name</FormLabel>
+              <Input {...form.register('name')} placeholder="Name" />
             </FormControl>
 
             <FormControl>
-              <FormLabel> Email</FormLabel>
+              <FormLabel>Email</FormLabel>
               <Input {...form.register('email')} placeholder="Email" />
             </FormControl>
             <FormControl>
