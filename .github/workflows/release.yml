@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i -g pnpm
+      - run: npm i -g yarn
+      - run: pnpm i
+      - run: pnpm run build
+
+      - name: Create Release
+        run: mkdir build
+
+      - name: Move dist to build folder
+        run: |
+          mv apps/server/dist build
+          mv apps/web/out buidl/client
+      - name: Upload artifant
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-assets
+          path: build
