@@ -24,15 +24,16 @@ jobs:
       - run: pnpm i
       - run: pnpm run build
 
-      - name: Create Release
-        run: mkdir build
+      - name: Setup release
+        run: mkdir release
 
-      - name: Move dist to build folder
+      - name: Move dists to release
         run: |
-          mv apps/server/dist build
-          mv apps/web/out build/client
+          mv apps/server/package.json build
+          mv apps/server/dist build/server
+          mv apps/web/out build/server/client
       - name: Upload artifant
         uses: actions/upload-artifact@v2
         with:
-          name: build-assets
+          name: build
           path: build
