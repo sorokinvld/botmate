@@ -112,7 +112,18 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
           <ModalHeader>{activeMsgType?.label}</ModalHeader>
           <ModalBody>
             <Stack spacing={4}>
-              <RadioButton options={['Allow', 'Block']} />
+              <RadioButton
+                options={[
+                  {
+                    label: 'Allow',
+                    value: 'allow',
+                  },
+                  {
+                    label: 'Block',
+                    value: 'block',
+                  },
+                ]}
+              />
               <FormControl>
                 <Input placeholder="Enter your filter" />
                 {activeMsgType?.example && (

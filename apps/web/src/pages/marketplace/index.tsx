@@ -30,7 +30,22 @@ Marketplace.getLayout = (page: React.ReactElement) => (
           </InputRightElement>
         </InputGroup>
         <Spacer />
-        <RadioButton options={['All', 'Free', 'Paid']} />
+        <RadioButton
+          options={[
+            {
+              label: 'All',
+              value: 'all',
+            },
+            {
+              label: 'Paid',
+              value: 'paid',
+            },
+            {
+              label: 'Free',
+              value: 'free',
+            },
+          ]}
+        />
       </>
     }
   >
