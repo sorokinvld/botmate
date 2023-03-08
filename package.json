@@ -13,11 +13,14 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "codegen": "graphql-codegen --config codegen.yaml",
     "gen": "plop",
-    "release": "release-it"
+    "release": "release-it",
+    "gulp": "gulp"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.1",
     "eslint-config-custom": "workspace:*",
+    "gulp": "^4.0.2",
+    "gulp-run": "^1.7.1",
     "plop": "^3.1.2",
     "prettier": "latest",
     "release-it": "^15.7.0",
