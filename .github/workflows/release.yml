@@ -1,3 +1,5 @@
+name: Create Bbinary Release
+
 on:
   push:
     branches:
@@ -9,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.4.x]
 
     steps:
       - uses: actions/checkout@v2
