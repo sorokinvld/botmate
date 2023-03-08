@@ -24,7 +24,9 @@
     "plop": "^3.1.2",
     "prettier": "latest",
     "release-it": "^15.7.0",
-    "turbo": "latest"
+    "turbo": "latest",
+    "nx": "15.8.5",
+    "@nrwl/nx-cloud": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
