@@ -39,8 +39,8 @@ function Setup() {
             <Box p={6} bg="secondary.dark" rounded="xl" shadow="dark-lg">
               <Heading size="md">🚀 Setup your new bot</Heading>
               <Text mt={2} opacity={0.8}>
-                Let's start by creating your bot. Enter your bot token and click
-                continue.
+                Let&apos;s start by creating your bot. Enter your bot token and
+                click continue.
               </Text>
 
               <HStack mt={6}>
