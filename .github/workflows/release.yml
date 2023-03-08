@@ -25,13 +25,13 @@ jobs:
       - run: pnpm run build
 
       - name: Setup release
-        run: mkdir release
+        run: mkdir -p release/botmate
 
       - name: Move dists to release
         run: |
-          cp apps/server/package.json build
-          cp -r apps/server/dist release/server
-          cp -r apps/web/out release/server/client
+          cp apps/server/package.json release/
+          cp -r apps/server/dist release/botmate/
+          cp -r apps/web/out release/botmate/client
       - name: Upload artifant
         uses: actions/upload-artifact@v2
         with:
