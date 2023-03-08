@@ -1,9 +1,11 @@
 **/node_modules
 **/out
+**/build
 .eslintrc.js
 .prettierrc
 .editorconfig
 .vscode/
+*.sqlite
 **/dist
 **/.next
 README.md

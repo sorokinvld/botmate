@@ -3,6 +3,8 @@ dist/
 node_modules/
 .next/
 out/
+build/
+*.sqlite
 
 # Logs
 logs
