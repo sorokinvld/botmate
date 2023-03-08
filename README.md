@@ -1,5 +1,8 @@
 # BotMate
 
+![image](https://user-images.githubusercontent.com/31907722/223655074-b88cbd34-5958-463c-b710-f0c869b113e7.png)
+
+
 BotMate is a web-based application for building custom chat bots for Telegram. With BotMate, users can create custom commands using JavaScript to satisfy their needs. It also comes with built-in functions to make development easier and a marketplace for exploring community-built bots that can be configured to fit the user's needs.
 
 ## 🎁 Features
