@@ -5,6 +5,7 @@ import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
 import { HiArrowLeft } from 'react-icons/hi';
 import { AppSidebar } from '@components';
 import { useBotControllerGetBotsQuery } from '@api';
+import { BotsProvider } from '@providers';
 
 type DashboardLayoutProps = {
   title: string;
@@ -29,7 +30,7 @@ function DashboardLayout({
   }
 
   return (
-    <>
+    <BotsProvider>
       <Head>
         <title>{title + ' | BotMate'}</title>
       </Head>
@@ -75,7 +76,7 @@ function DashboardLayout({
           </Box>
         </Flex>
       </Flex>
-    </>
+    </BotsProvider>
   );
 }
 

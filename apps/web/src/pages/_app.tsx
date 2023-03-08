@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Provider as ReduxProvider } from 'react-redux';
 import { theme } from '@botmate/theme';
 import { store } from '@store';
-import { AuthProvider, BotsProvider } from '@providers';
+import { AuthProvider } from '@providers';
 
 import '../styles/globals.css';
 import '@fontsource/inter/400.css';
@@ -27,7 +27,7 @@ function BotMate({ Component, pageProps }: AppPropsWithLayout) {
       <ReduxProvider store={store}>
         <AnimatePresence>
           <AuthProvider>
-            <BotsProvider>{layout}</BotsProvider>
+            <>{layout}</>
           </AuthProvider>
         </AnimatePresence>
       </ReduxProvider>

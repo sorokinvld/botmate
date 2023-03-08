@@ -21,7 +21,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         if (!exlude.includes(r.pathname)) r.push('/welcome');
       }
     }
-  }, [isLoading]);
+  }, [data, isLoading]);
 
   useEffect(() => {
     if (data) {
