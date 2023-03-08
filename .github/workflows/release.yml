@@ -30,7 +30,7 @@ jobs:
       - name: Move dist to build folder
         run: |
           mv apps/server/dist build
-          mv apps/web/out buidl/client
+          mv apps/web/out build/client
       - name: Upload artifant
         uses: actions/upload-artifact@v2
         with:
