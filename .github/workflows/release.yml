@@ -29,11 +29,11 @@ jobs:
 
       - name: Move dists to release
         run: |
-          mv apps/server/package.json build
-          mv apps/server/dist build/server
-          mv apps/web/out build/server/client
+          cp apps/server/package.json build
+          cp -r apps/server/dist release/server
+          cp -r apps/web/out release/server/client
       - name: Upload artifant
         uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: build
+          name: release
+          path: release
