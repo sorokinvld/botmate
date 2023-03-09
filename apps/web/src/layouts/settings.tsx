@@ -2,20 +2,13 @@ import { SidebarItem } from '@components';
 import {
   Flex,
   Box,
-  Text,
   Stack,
   Heading,
   HStack,
   IconButton,
   Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import {
   HiAdjustments,
@@ -88,13 +81,10 @@ type SettingsLayoutProps = {
   children: React.ReactNode;
   description?: string;
 };
+// TOOD: Make this layout common, so it can be used in other pages (like, Moderation)
 function SettingsLayout({ children, title, description }: SettingsLayoutProps) {
   const r = useRouter();
   const drawer = useDisclosure();
-  const isDesktopView = useBreakpointValue({
-    base: false,
-    lg: true,
-  });
 
   return (
     <>
@@ -173,7 +163,7 @@ function SettingsLayout({ children, title, description }: SettingsLayoutProps) {
           >
             {/* <DrawerOverlay /> */}
             <DrawerContent p={4} shadow="base">
-              <Heading mb={6} size="lg">
+              <Heading mb={6} size="md">
                 Settings
               </Heading>
               <SettingsSidebar />
