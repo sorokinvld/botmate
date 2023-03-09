@@ -15,7 +15,12 @@ Commands.getLayout = (page: React.ReactElement) => (
       <>
         <Spacer />
         <Link href="/commands/create">
-          <IconButton aria-label="add-command" icon={<HiPlus />}>
+          <IconButton
+            aria-label="add-command"
+            icon={<HiPlus />}
+            variant="ghost"
+            fontSize={20}
+          >
             Create Command
           </IconButton>
         </Link>

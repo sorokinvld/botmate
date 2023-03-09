@@ -1,8 +1,29 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-import { Box, Flex, Heading, HStack, IconButton } from '@chakra-ui/react';
-import { HiArrowLeft } from 'react-icons/hi';
+import {
+  Box,
+  Flex,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Heading,
+  HStack,
+  IconButton,
+  useDisclosure,
+  useBreakpointValue,
+} from '@chakra-ui/react';
+import {
+  HiArrowLeft,
+  HiChevronLeft,
+  HiMenuAlt1,
+  HiMenuAlt2,
+  HiMenuAlt3,
+} from 'react-icons/hi';
 import { AppSidebar } from '@components';
 import { useBotControllerGetBotsQuery } from '@api';
 import { BotsProvider } from '@providers';
@@ -22,7 +43,9 @@ function DashboardLayout({
   noPadding,
 }: DashboardLayoutProps) {
   const r = useRouter();
+  const drawer = useDisclosure();
   const { data: bots } = useBotControllerGetBotsQuery();
+  const isDesktopView = useBreakpointValue({ base: false, md: true });
 
   if (bots?.length === 0) {
     r.push('/setup');
@@ -35,9 +58,17 @@ function DashboardLayout({
         <title>{title + ' | BotMate'}</title>
       </Head>
       <Flex h="100vh" overflow="hidden">
-        <Box w="60" minW="60" borderRightWidth="1px" overflow="auto">
-          <AppSidebar />
-        </Box>
+        {isDesktopView ? (
+          <Box
+            display={{}}
+            w="72"
+            minW="60"
+            borderRightWidth="1px"
+            overflow="auto"
+          >
+            <AppSidebar />
+          </Box>
+        ) : null}
 
         <Flex flex={1} flexDirection="column">
           <HStack
@@ -48,6 +79,15 @@ function DashboardLayout({
             height="60px"
           >
             <HStack spacing={4}>
+              {!isDesktopView ? (
+                <IconButton
+                  variant="ghost"
+                  aria-label="menu"
+                  fontSize={18}
+                  icon={<HiMenuAlt1 />}
+                  onClick={drawer.onOpen}
+                />
+              ) : null}
               {goBack ? (
                 <motion.div
                   initial={{ x: -50, opacity: 0 }}
@@ -60,9 +100,11 @@ function DashboardLayout({
                   }}
                 >
                   <IconButton
+                    variant="ghost"
                     onClick={r.back}
                     aria-label="go-back"
-                    icon={<HiArrowLeft />}
+                    icon={<HiChevronLeft />}
+                    fontSize={20}
                   />
                 </motion.div>
               ) : null}
@@ -76,6 +118,13 @@ function DashboardLayout({
           </Box>
         </Flex>
       </Flex>
+
+      <Drawer isOpen={drawer.isOpen} placement="left" onClose={drawer.onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <AppSidebar />
+        </DrawerContent>
+      </Drawer>
     </BotsProvider>
   );
 }

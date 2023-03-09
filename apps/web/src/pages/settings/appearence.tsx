@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadioButton } from '@atoms';
 import { SettingsOption } from '@atoms';
-import { Select, Stack, useColorMode } from '@chakra-ui/react';
+import { Box, Select, Stack, useColorMode } from '@chakra-ui/react';
 import { DashboardLayout } from '@layouts';
 import { SettingsLayout } from '@layouts';
 
@@ -48,14 +48,21 @@ function General() {
           </Select>
         }
       />
+
+      <Box bg="gray" h="50vh" />
+      <Box bg="gray" h="50vh" />
+      <Box bg="gray" h="50vh" />
     </Stack>
   );
 }
 
 General.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout title="Settings • Appearence" noPadding>
-    <SettingsLayout>{page}</SettingsLayout>
-  </DashboardLayout>
+  <SettingsLayout
+    title="Appearence"
+    description="Change the appearence of the dashboard."
+  >
+    {page}
+  </SettingsLayout>
 );
 
 export default General;
