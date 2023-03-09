@@ -57,12 +57,9 @@ function General() {
 }
 
 General.getLayout = (page: React.ReactElement) => (
-  <SettingsLayout
-    title="Appearence"
-    description="Change the appearence of the dashboard."
-  >
-    {page}
-  </SettingsLayout>
+  <DashboardLayout title="Appearence" noPadding noOverflow>
+    <SettingsLayout>{page}</SettingsLayout>
+  </DashboardLayout>
 );
 
 export default General;

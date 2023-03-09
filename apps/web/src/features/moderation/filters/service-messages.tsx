@@ -4,11 +4,7 @@ import { Stack, HStack, Spacer, Switch, Text } from '@chakra-ui/react';
 type FilterServiceMessagesProps = {};
 function FilterServiceMessages({}: FilterServiceMessagesProps) {
   return (
-    <Card
-      title="Service Messages"
-      description="Filter out Telegram messages"
-      minW="400px"
-    >
+    <Card title="Service Messages" description="Filter out Telegram messages">
       <Stack>
         <HStack>
           <Text size="sm">New members</Text>

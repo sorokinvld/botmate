@@ -20,5 +20,9 @@ export const colors = {
       dark: '#f35050d4',
     },
   },
+
+  brand: {
+    dark: '#4e51a7',
+  },
   text: {},
 };

@@ -71,11 +71,7 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
   );
 
   return (
-    <Card
-      title="Message Type"
-      description="Configure what must be filtered"
-      minW="300px"
-    >
+    <Card title="Message Type" description="Configure what must be filtered">
       <Stack>
         {MessageTypes.map((type) => (
           <HStack key={type.label}>

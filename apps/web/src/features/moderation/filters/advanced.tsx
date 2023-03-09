@@ -7,7 +7,6 @@ function FiltersAdvanced({}: FiltersBlacklistWordsProps) {
     <Card
       title="Advanced Filtering"
       description="Remove duplicates, delete forwards etc."
-      minW="400px"
     >
       <Stack>
         <HStack>

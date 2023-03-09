@@ -7,7 +7,6 @@ function FiltersBlacklistWords({}: FiltersBlacklistWordsProps) {
     <Card
       title="Blacklist Words"
       description="Filter out messages containing specific words"
-      minW="400px"
     >
       <Input placeholder="Add words, comma seperated." />
     </Card>

@@ -34,6 +34,7 @@ type DashboardLayoutProps = {
   children: React.ReactNode;
   goBack?: boolean;
   noPadding?: boolean;
+  noOverflow?: boolean;
 };
 function DashboardLayout({
   title,
@@ -41,6 +42,7 @@ function DashboardLayout({
   action,
   goBack,
   noPadding,
+  noOverflow,
 }: DashboardLayoutProps) {
   const r = useRouter();
   const drawer = useDisclosure();
@@ -113,7 +115,12 @@ function DashboardLayout({
             {action}
           </HStack>
 
-          <Box flexGrow={1} p={noPadding ? 0 : 4} overflow="auto">
+          <Box
+            flexGrow={1}
+            p={noPadding ? 0 : 4}
+            // overflow={noOverflow ? 'hidden' : 'auto'}
+            overflow={'auto'}
+          >
             {children}
           </Box>
         </Flex>
