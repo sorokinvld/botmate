@@ -2,8 +2,8 @@ name: Create Binary Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -20,20 +20,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm i -g pnpm
-      - run: npm i -g yarn
       - run: pnpm i
       - run: pnpm run build
-
-      - name: Setup release
-        run: mkdir -p final
-
-      - name: Move dists to release
+      - run: pnpm run gulp
+      - name: Create Release
         run: |
-          cp apps/server/package.json release/
-          cp -r apps/server/dist release/
-          cp -r apps/web/out release/dist/client
-      - name: Upload artifant
-        uses: actions/upload-artifact@v2
-        with:
-          name: release
-          path: release
+          cd temp
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm publish --access public

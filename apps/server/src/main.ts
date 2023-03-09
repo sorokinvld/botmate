@@ -22,4 +22,5 @@ async function bootstrap() {
 
   await app.listen(PORT || 8080);
 }
-bootstrap();
+
+export { bootstrap as startServer };
