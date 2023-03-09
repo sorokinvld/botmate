@@ -10,9 +10,11 @@ import {
   Input,
   SimpleGrid,
   Text,
+  Center,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useBotControllerCreateBotMutation } from '@api';
+import { BotMateLogo } from '@components';
 
 function Setup() {
   const tokenInputRef = useRef<HTMLInputElement>(null);
@@ -33,11 +35,15 @@ function Setup() {
       <Head>
         <title>Setup BotMate</title>
       </Head>
-      <Box w="4xl" m="auto">
+      <Box w="4xl" m="auto" px={{ base: 4, lg: 0 }}>
         <SimpleGrid columns={10} spacing={8}>
-          <GridItem colSpan={6}>
+          <GridItem colSpan={{ base: 10, lg: 6 }}>
             <Box p={6} bg="secondary.dark" rounded="xl" shadow="dark-lg">
-              <Heading size="md">🚀 Setup your new bot</Heading>
+              <BotMateLogo width="40px" height="40px" />
+
+              <Heading mt={6} size="md">
+                🚀 Setup your new bot
+              </Heading>
               <Text mt={2} opacity={0.8}>
                 Let&apos;s start by creating your bot. Enter your bot token and
                 click continue.
@@ -57,7 +63,7 @@ function Setup() {
               ) : null}
             </Box>
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={{ base: 10, lg: 4 }}>
             <Box p={6} bg="secondary.dark" rounded="xl" shadow="dark-lg">
               <Heading size="md">How to get bot token?</Heading>
               <Text mt={2} opacity={0.8}>
