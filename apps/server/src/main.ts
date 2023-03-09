@@ -23,4 +23,8 @@ async function bootstrap() {
   await app.listen(PORT || 8080);
 }
 
+const NODE_ENV = process.env.NODE_ENV;
+if (NODE_ENV === 'dev') {
+  bootstrap();
+}
 export { bootstrap as startServer };

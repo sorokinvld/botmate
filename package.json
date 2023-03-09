@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "nx run-many --target=build --projects=server,web",
-    "dev": "turbo run dev",
+    "dev": "cross-env NODE_ENV=dev nx run-many --target=dev --projects=server,web",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "codegen": "graphql-codegen --config codegen.yaml",
@@ -17,16 +17,17 @@
     "gulp": "gulp"
   },
   "devDependencies": {
+    "@nrwl/nx-cloud": "latest",
     "@release-it/conventional-changelog": "^5.1.1",
+    "cross-env": "^7.0.3",
     "eslint-config-custom": "workspace:*",
     "gulp": "^4.0.2",
     "gulp-run": "^1.7.1",
+    "nx": "15.8.5",
     "plop": "^3.1.2",
     "prettier": "latest",
     "release-it": "^15.7.0",
-    "turbo": "latest",
-    "nx": "15.8.5",
-    "@nrwl/nx-cloud": "latest"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
