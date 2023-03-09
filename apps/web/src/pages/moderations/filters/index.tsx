@@ -27,7 +27,9 @@ function Filters() {
 }
 
 Filters.getLayout = (page: React.ReactElement) => (
-  <ModerationsLayout title="Filters">{page}</ModerationsLayout>
+  <DashboardLayout title="Filters" noPadding>
+    <ModerationsLayout>{page}</ModerationsLayout>
+  </DashboardLayout>
 );
 
 export default Filters;

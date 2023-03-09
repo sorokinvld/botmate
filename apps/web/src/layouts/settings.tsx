@@ -70,14 +70,10 @@ const SettingsItems = [
 ];
 
 const SettingsSidebar = () => (
-  <Stack spacing={6}>
-    <Stack>
-      <Stack>
-        {SettingsItems.map((item) => (
-          <SidebarItem key={item.href} {...item} />
-        ))}
-      </Stack>
-    </Stack>
+  <Stack>
+    {SettingsItems.map((item) => (
+      <SidebarItem key={item.href} {...item} />
+    ))}
   </Stack>
 );
 

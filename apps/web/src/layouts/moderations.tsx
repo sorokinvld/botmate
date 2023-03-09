@@ -1,23 +1,6 @@
 import { SidebarItem } from '@components';
-import {
-  Flex,
-  Box,
-  Stack,
-  Drawer,
-  useDisclosure,
-  DrawerContent,
-  Heading,
-  HStack,
-  IconButton,
-} from '@chakra-ui/react';
-import {
-  HiChevronLeft,
-  HiGlobeAlt,
-  HiMenuAlt2,
-  HiPlay,
-  HiSpeakerphone,
-  HiUsers,
-} from 'react-icons/hi';
+import { Flex, Box, Stack, HStack, Divider, Text } from '@chakra-ui/react';
+import { HiGlobeAlt, HiPlay, HiSpeakerphone, HiUsers } from 'react-icons/hi';
 
 import {
   HiFilter,
@@ -25,8 +8,8 @@ import {
   HiShieldCheck,
   HiStop,
 } from 'react-icons/hi';
-import { DashboardLayout } from './dashboard';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ModerationsList = [
   {
@@ -82,83 +65,71 @@ const ModerationsList = [
 
 type ModerationsLayoutProps = {
   children: React.ReactNode;
-  title?: string;
 };
-function ModerationsLayout({ children, title }: ModerationsLayoutProps) {
+function ModerationsLayout({ children }: ModerationsLayoutProps) {
   const r = useRouter();
-  const drawer = useDisclosure();
+  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
   return (
-    <>
-      {/* 
-      NOTE: This is a workaround for the Layout issue for the moment. It has performance issues.
-    */}
-      <Box display={{ base: 'none', lg: 'block' }}>
-        <DashboardLayout noPadding title="Settings">
-          <Flex h="full" flexGrow={1} overflow="auto" gap={4}>
-            <Stack w="72" h="full" borderRightWidth="1px" p={4}>
-              {ModerationsList.map((item) => (
-                <SidebarItem key={item.label} {...item} />
-              ))}
-            </Stack>
+    <Flex flex={1} overflow="hidden" h="100%">
+      <Stack
+        w="72"
+        overflow="hidden"
+        p={4}
+        borderRightWidth="1px"
+        spacing={6}
+        display={{ base: 'none', lg: 'block' }}
+      >
+        {ModerationsList.map((item) => (
+          <SidebarItem key={item.href} {...item} />
+        ))}
+      </Stack>
 
-            <Box flexGrow={1} p={4} overflow="auto">
-              {children}
-            </Box>
-          </Flex>
-        </DashboardLayout>
+      <Box
+        flex={1}
+        overflow="auto"
+        maxW="7xl"
+        m="auto"
+        h="full"
+        display={{ base: 'block', lg: 'none' }}
+      >
+        <HStack py={4} px={4} overflowX="auto" w={screenWidth}>
+          {ModerationsList.map((item) => {
+            const isActive = item.match.test(r.pathname);
+            return (
+              <Link href={item.href} key={item.href}>
+                <HStack
+                  p={2}
+                  rounded="lg"
+                  bg={isActive ? 'brand.dark' : 'transparent'}
+                >
+                  <Box>{item.icon}</Box>
+                  <Text whiteSpace="nowrap">{item.label}</Text>
+                </HStack>
+              </Link>
+            );
+          })}
+        </HStack>
+
+        <Divider />
+
+        <Box p={4} overflow="auto">
+          {children}
+        </Box>
       </Box>
 
-      <Box display={{ base: 'block', lg: 'none' }}>
-        <Flex h="full" flex={1} overflow="hidden">
-          <Box h="100vh" flex={1} overflow="auto">
-            <Box borderBottomWidth="1px" px={4}>
-              <HStack height="60px">
-                <IconButton
-                  onClick={drawer.onOpen}
-                  aria-label="back"
-                  variant="ghost"
-                  fontSize={16}
-                  icon={<HiMenuAlt2 />}
-                  display={{ base: 'flex', lg: 'none' }}
-                />
-                <IconButton
-                  onClick={r.back}
-                  aria-label="back"
-                  variant="ghost"
-                  fontSize={14}
-                  icon={<HiChevronLeft />}
-                  display={{ base: 'flex', lg: 'none' }}
-                />
-                <Heading size="md">{title}</Heading>
-              </HStack>
-            </Box>
-            <Box flex={1} maxW="7xl" m="auto" py={6} px={{ base: 6, lg: 0 }}>
-              {children}
-            </Box>
-          </Box>
-
-          <Drawer
-            isOpen={drawer.isOpen}
-            placement="left"
-            onClose={drawer.onClose}
-          >
-            {/* <DrawerOverlay /> */}
-            <DrawerContent p={4} shadow="base">
-              <Heading mb={6} size="md">
-                Moderations
-              </Heading>
-
-              <Stack>
-                {ModerationsList.map((item) => (
-                  <SidebarItem key={item.label} {...item} />
-                ))}
-              </Stack>
-            </DrawerContent>
-          </Drawer>
-        </Flex>
+      <Box
+        flex={1}
+        overflow="auto"
+        maxW="7xl"
+        m="auto"
+        h="full"
+        display={{ base: 'none', lg: 'block' }}
+        p={4}
+      >
+        {children}
       </Box>
-    </>
+    </Flex>
   );
 }
 
