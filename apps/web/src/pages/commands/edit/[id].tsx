@@ -10,7 +10,6 @@ import { GridItem, SimpleGrid, Spacer } from '@chakra-ui/react';
 import { CommandEntry } from '@components';
 import { DashboardLayout } from '@layouts';
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 
 function CommandEdit() {
   const r = useRouter();
@@ -44,9 +43,7 @@ function CommandEdit() {
             updateCommand({
               id: commandId,
               updateCommandDto: x,
-            }).then(() => {
-              toast.success('Command updated');
-            });
+            }).then(() => {});
           }}
         />
       </GridItem>
