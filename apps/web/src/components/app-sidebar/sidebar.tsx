@@ -18,6 +18,7 @@ import {
   HiPuzzle,
   HiShieldCheck,
   HiOutlineBell,
+  HiBookOpen,
 } from 'react-icons/hi';
 import { SidebarItem } from './sidebar-item';
 import { ProfileSidebar } from '@atoms';
@@ -47,6 +48,12 @@ const sidebarItems = [
     icon: <HiShieldCheck />,
     href: '/moderations/filters',
     match: /^\/moderations/,
+  },
+  {
+    label: 'Bot Logs',
+    icon: <HiBookOpen />,
+    href: '/logs',
+    match: /^\/logs/,
   },
   {
     label: 'Marketplace',

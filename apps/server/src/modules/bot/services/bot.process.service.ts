@@ -4,8 +4,8 @@ import { Injectable } from '@nestjs/common';
 import { Bot } from '@/entities/bot.entity';
 import { Repository } from 'typeorm';
 import { BotStatus } from '@/common/bot.types';
-import { NodeVM } from 'vm2';
 import { CommandService } from '@modules/command/command.service';
+import { BotScriptService } from './bot.script.service';
 
 @Injectable()
 export class BotProcessService {
@@ -14,6 +14,7 @@ export class BotProcessService {
   constructor(
     @InjectRepository(Bot) private botRepository: Repository<Bot>,
     private cmdServie: CommandService,
+    private scriptService: BotScriptService,
   ) {}
 
   async startBot(botId: string) {
@@ -31,24 +32,7 @@ export class BotProcessService {
         );
         if (!command) return;
 
-        const vm = new NodeVM({
-          require: {
-            external: true,
-            root: './',
-          },
-          sandbox: {
-            Bot: ctx,
-          },
-        });
-
-        try {
-          vm.run(`
-          async function main() {
-            ${command.script}
-          }
-          main()
-        `);
-        } catch (e) {}
+        this.scriptService.runScript(command.script, ctx);
       });
 
       bot.start();

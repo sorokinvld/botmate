@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Center,
   HStack,
@@ -26,10 +26,6 @@ function RadioButton({
 }: RadioButtonProps) {
   const [activeIndex, setActiveIndex] = useState(active ?? 0);
   const bg = useColorModeValue('secondary.light', '#232332');
-
-  // useEffect(() => {
-  //   onChange?.(options[activeIndex].value);
-  // }, [onChange, activeIndex, options]);
 
   return (
     <HStack spacing={0} userSelect="none">
@@ -59,7 +55,6 @@ function RadioButton({
             position="relative"
           >
             <Text opacity={loading ? 0 : index === activeIndex ? 1 : 0.5}>
-              {' '}
               {option.label}
             </Text>
 
