@@ -1,5 +1,7 @@
 
 
+### [0.0.1-alpha.10](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.9...0.0.1-alpha.10) (2023-03-10)
+
 ### [0.0.1-alpha.9](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.8...0.0.1-alpha.9) (2023-03-10)
 
 
