@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.11](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.10...0.0.1-alpha.11) (2023-03-10)
+
+
+### 🚀 Features
+
+* use new code editor ([2f180c0](https://github.com/botmate/botmate-awesome/commit/2f180c0d02df9b47e8d413e5f87ea5df5f407aa1))
+
 ### [0.0.1-alpha.10](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.9...0.0.1-alpha.10) (2023-03-10)
 
 ### [0.0.1-alpha.9](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.8...0.0.1-alpha.9) (2023-03-10)
