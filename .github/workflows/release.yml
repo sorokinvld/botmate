@@ -1,9 +1,8 @@
-name: Create Binary Release
+name: Create NPM Release
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [prereleased, released]
 
 jobs:
   build:

@@ -1,9 +1,8 @@
 name: Docker Deployment
 
 on:
-  push:
-    branches:
-      - 'mainx'
+  release:
+    types: [prereleased, released]
 
 jobs:
   docker:
@@ -22,4 +21,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: xencodes/botmate:latest
+          tags: xencodes/botmate:${{ github.ref_name }}
