@@ -1,5 +1,13 @@
 
 
+### [0.0.1-alpha.7](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.5...0.0.1-alpha.7) (2023-03-10)
+
+
+### 🚀 Features
+
+* add command support ([f4cb44f](https://github.com/botmate/botmate-awesome/commit/f4cb44f4f907109798bb286ae7948f738493a247))
+* custom script support ([a5936b9](https://github.com/botmate/botmate-awesome/commit/a5936b99d5cf363b37c379a62cf51cf5b2cc5eab))
+
 ### 0.0.1-alpha.4 (2023-03-09)
 
 
