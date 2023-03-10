@@ -58,7 +58,10 @@ function RadioButton({
             transition="all 0.2s ease"
             position="relative"
           >
-            <Text opacity={loading ? 0 : 1}>{option.label}</Text>
+            <Text opacity={loading ? 0 : index === activeIndex ? 1 : 0.5}>
+              {' '}
+              {option.label}
+            </Text>
 
             {loading ? <Spinner position="absolute" size="sm" /> : null}
           </Center>
