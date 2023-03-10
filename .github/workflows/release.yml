@@ -31,7 +31,7 @@ jobs:
       - name: send telegram message
         uses: appleboy/telegram-action@master
         with:
-          to: '5168132730'
+          to: '-1001737476988'
           token: ${{ secrets.BOT_TOKEN }}
           message: |
             🚀 New version: ${{ github.ref_name }} published.
