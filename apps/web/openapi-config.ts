@@ -6,7 +6,11 @@ const config: ConfigFile = {
   apiImport: 'apiSlice',
   outputFile: './src/api.ts',
   exportName: 'userApi',
-  hooks: true,
+  hooks: {
+    queries: true,
+    mutations: true,
+    lazyQueries: true,
+  },
   tag: true,
 };
 

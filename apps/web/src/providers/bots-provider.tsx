@@ -23,7 +23,7 @@ function BotsProvider({ children }: BotsProviderProps) {
       );
       setLoading(false);
     }
-  }, [bots, isLoading]);
+  }, [bots, dispatch, isLoading]);
 
   if (loading) {
     return <Loader text="loading bots data..." />;

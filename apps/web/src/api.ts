@@ -1,5 +1,5 @@
 import { apiSlice as api } from '@store';
-export const addTagTypes = ['user', 'auth', 'bot'] as const;
+export const addTagTypes = ['user', 'auth', 'bot', 'command'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
@@ -73,6 +73,45 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['bot'],
       }),
+      commandControllerGetCommands: build.query<
+        CommandControllerGetCommandsApiResponse,
+        CommandControllerGetCommandsApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/commands`,
+          params: { botId: queryArg.botId },
+        }),
+        providesTags: ['command'],
+      }),
+      commandControllerCreateCommand: build.mutation<
+        CommandControllerCreateCommandApiResponse,
+        CommandControllerCreateCommandApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/commands`,
+          method: 'POST',
+          body: queryArg.createCommandDto,
+        }),
+        invalidatesTags: ['command'],
+      }),
+      commandControllerGetCommandById: build.query<
+        CommandControllerGetCommandByIdApiResponse,
+        CommandControllerGetCommandByIdApiArg
+      >({
+        query: (queryArg) => ({ url: `/api/commands/${queryArg.id}` }),
+        providesTags: ['command'],
+      }),
+      commandControllerUpdateCommand: build.mutation<
+        CommandControllerUpdateCommandApiResponse,
+        CommandControllerUpdateCommandApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/commands/${queryArg.id}`,
+          method: 'PUT',
+          body: queryArg.updateCommandDto,
+        }),
+        invalidatesTags: ['command'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -110,6 +149,36 @@ export type BotControllerStopBotApiArg = {
   /** Bot ID to stop */
   id: string;
 };
+export type CommandControllerGetCommandsApiResponse =
+  /** status 200  */ CommandGetApiResponse[];
+export type CommandControllerGetCommandsApiArg = {
+  botId: string;
+};
+export type CommandControllerCreateCommandApiResponse = unknown;
+export type CommandControllerCreateCommandApiArg = {
+  createCommandDto: CreateCommandDto;
+};
+export type CommandControllerGetCommandByIdApiResponse = unknown;
+export type CommandControllerGetCommandByIdApiArg = {
+  id: number;
+};
+export type CommandControllerUpdateCommandApiResponse = unknown;
+export type CommandControllerUpdateCommandApiArg = {
+  id: number;
+  updateCommandDto: UpdateCommandDto;
+};
+export type CommandProp = {};
+export type Command = {
+  id: number;
+  name: string;
+  command: string;
+  script: string;
+  enabled: boolean;
+  privateCommand: boolean;
+  props: CommandProp[];
+  bot: string;
+  createdAt: string;
+};
 export type Bot = {
   id: string;
   first_name: string;
@@ -119,6 +188,7 @@ export type Bot = {
   status?: 'active' | 'inactive' | 'error';
   createdAt?: string;
   user: User;
+  commands: Command[];
 };
 export type User = {
   id: number;
@@ -156,17 +226,53 @@ export type OmitTypeClass = {
   avatar?: string;
   status?: 'active' | 'inactive' | 'error';
   createdAt?: string;
+  commands: Command[];
 };
 export type CreateBotDto = {
   token: string;
 };
 export type BotStartStopResponse = {};
+export type CommandGetApiResponse = {
+  id: number;
+  name: string;
+  command: string;
+  script: string;
+  enabled: boolean;
+  privateCommand: boolean;
+  props: CommandProp[];
+  createdAt: string;
+};
+export type CreateCommandDto = {
+  name: string;
+  command: string;
+  script: string;
+  enabled: boolean;
+  privateCommand: boolean;
+  props: CommandProp[];
+  bot: string;
+};
+export type UpdateCommandDto = {
+  name: string;
+  command: string;
+  script: string;
+  enabled: boolean;
+  privateCommand: boolean;
+  props: CommandProp[];
+};
 export const {
   useUsersControllerProfileQuery,
+  useLazyUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
   useAuthControllerRegisterMutation,
   useBotControllerGetBotsQuery,
+  useLazyBotControllerGetBotsQuery,
   useBotControllerCreateBotMutation,
   useBotControllerStartBotMutation,
   useBotControllerStopBotMutation,
+  useCommandControllerGetCommandsQuery,
+  useLazyCommandControllerGetCommandsQuery,
+  useCommandControllerCreateCommandMutation,
+  useCommandControllerGetCommandByIdQuery,
+  useLazyCommandControllerGetCommandByIdQuery,
+  useCommandControllerUpdateCommandMutation,
 } = injectedRtkApi;

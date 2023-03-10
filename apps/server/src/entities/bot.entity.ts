@@ -1,6 +1,7 @@
 import { BotStatus } from '@/common/bot.types';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import { Command } from './command.entity';
 import { User } from './user.entity';
 
 @Entity({ name: 'bots' })
@@ -40,4 +41,10 @@ export class Bot {
   })
   @ManyToOne(() => User, (user) => user.bots)
   user: User;
+
+  @ApiProperty({
+    type: () => [Command],
+  })
+  @OneToMany(() => Command, (command) => command.bot)
+  commands: Command[];
 }

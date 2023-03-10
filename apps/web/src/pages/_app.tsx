@@ -8,7 +8,7 @@ import { store } from '@store';
 import { AuthProvider } from '@providers';
 
 import '../styles/globals.css';
-import '@fontsource/inter/400.css';
+import '@fontsource/ubuntu/400.css';
 import '@fontsource/open-sans/700.css';
 
 type NextPageWithLayout = NextPage & {

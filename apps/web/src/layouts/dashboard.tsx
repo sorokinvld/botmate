@@ -5,25 +5,14 @@ import {
   Box,
   Flex,
   Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   Heading,
   HStack,
   IconButton,
   useDisclosure,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import {
-  HiArrowLeft,
-  HiChevronLeft,
-  HiMenuAlt1,
-  HiMenuAlt2,
-  HiMenuAlt3,
-} from 'react-icons/hi';
+import { HiChevronLeft, HiMenuAlt1 } from 'react-icons/hi';
 import { AppSidebar } from '@components';
 import { useBotControllerGetBotsQuery } from '@api';
 import { BotsProvider } from '@providers';
@@ -42,7 +31,6 @@ function DashboardLayout({
   action,
   goBack,
   noPadding,
-  noOverflow,
 }: DashboardLayoutProps) {
   const r = useRouter();
   const drawer = useDisclosure();
@@ -115,19 +103,13 @@ function DashboardLayout({
             {action}
           </HStack>
 
-          <Box
-            flexGrow={1}
-            p={noPadding ? 0 : 4}
-            // overflow={noOverflow ? 'hidden' : 'auto'}
-            overflow={'auto'}
-          >
+          <Box flexGrow={1} p={noPadding ? 0 : 4} overflow={'auto'}>
             {children}
           </Box>
         </Flex>
       </Flex>
 
       <Drawer isOpen={drawer.isOpen} placement="left" onClose={drawer.onClose}>
-        <DrawerOverlay />
         <DrawerContent>
           <AppSidebar />
         </DrawerContent>

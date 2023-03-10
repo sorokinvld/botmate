@@ -5,9 +5,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(alertAnatomy.keys);
 
 const baseStyle = definePartsStyle((props) => {
-  let bg = 'alert.error.dark';
-
-  // todo: add more alert types checks
+  let bg = props.status === 'success' ? '#379381' : 'alert.error.dark';
 
   return {
     title: {
@@ -19,9 +17,7 @@ const baseStyle = definePartsStyle((props) => {
     icon: {
       color: 'white',
     },
-    container: {
-      bg,
-    },
+    bg: 'red',
   };
 });
 

@@ -8,6 +8,7 @@ import { AuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/users/user.module';
 import { DatabaseModule } from '@modules/database/database.module';
 import { BotModule } from '@/modules/bot/bot.module';
+import { CommandModule } from '@/modules/command/command.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BotModule } from '@/modules/bot/bot.module';
     UserModule,
     AuthModule,
     BotModule,
+    CommandModule,
   ],
   controllers: [],
   providers: [],

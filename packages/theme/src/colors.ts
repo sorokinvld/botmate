@@ -24,5 +24,4 @@ export const colors = {
   brand: {
     dark: '#4e51a7',
   },
-  text: {},
 };
