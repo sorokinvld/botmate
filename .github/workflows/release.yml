@@ -27,3 +27,13 @@ jobs:
           cd temp
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           npm publish --access public
+
+      - name: send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: '5168132730'
+          token: ${{ secrets.BOT_TOKEN }}
+          message: |
+            🚀 New version: ${{ github.ref_name }} published.
+
+            Run `npm i -g botmate` to update.
