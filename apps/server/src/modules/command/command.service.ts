@@ -42,4 +42,17 @@ export class CommandService {
 
     return commands;
   }
+
+  async findCommand(botId: string, command: string) {
+    const cmd = await this.cmdRepo.findOne({
+      where: {
+        bot: {
+          id: botId,
+        },
+        command,
+      },
+    });
+
+    return cmd;
+  }
 }

@@ -4,12 +4,17 @@ import { Injectable } from '@nestjs/common';
 import { Bot } from '@/entities/bot.entity';
 import { Repository } from 'typeorm';
 import { BotStatus } from '@/common/bot.types';
+import { NodeVM } from 'vm2';
+import { CommandService } from '@modules/command/command.service';
 
 @Injectable()
 export class BotProcessService {
   processes: Map<string, TelegramBot> = new Map();
 
-  constructor(@InjectRepository(Bot) private botRepository: Repository<Bot>) {}
+  constructor(
+    @InjectRepository(Bot) private botRepository: Repository<Bot>,
+    private cmdServie: CommandService,
+  ) {}
 
   async startBot(botId: string) {
     const botData = await this.botRepository.findOne({ where: { id: botId } });
@@ -19,12 +24,37 @@ export class BotProcessService {
       const bot = new TelegramBot(botData.token);
       await bot.init();
 
-      bot.command('start', (ctx) => ctx.reply("I'm alive!"));
+      bot.on('message', async (ctx) => {
+        const command = await this.cmdServie.findCommand(
+          botId,
+          ctx.message.text,
+        );
+        if (!command) return;
+
+        const vm = new NodeVM({
+          require: {
+            external: true,
+            root: './',
+          },
+          sandbox: {
+            Bot: ctx,
+          },
+        });
+
+        try {
+          vm.run(`
+          async function main() {
+            ${command.script}
+          }
+          main()
+        `);
+        } catch (e) {}
+      });
+
       bot.start();
 
       this.processes.set(botId, bot);
     } catch (e) {
-      console.log('e', e);
       // todo: log error to database
       throw new Error('Unable to start bot');
     }

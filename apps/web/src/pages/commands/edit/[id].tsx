@@ -22,7 +22,6 @@ function CommandEdit() {
 
   useEffect(() => {
     if (commandId) {
-      console.log('fetching command....');
       fetch({ id: commandId });
     }
   }, [fetch, commandId]);

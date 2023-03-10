@@ -18,8 +18,6 @@ export class BotService {
     });
   }
 
-  // async updateBotProfilePic(token: string) {}
-
   async createBot(token: string, userId: number) {
     const bot = new TelegramBot(token);
     await bot.init();
