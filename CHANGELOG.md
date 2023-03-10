@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.9](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.8...0.0.1-alpha.9) (2023-03-10)
+
+
+### 🪲 Bug Fixes
+
+* remove redirects in `next.config.js` ([f1d2d82](https://github.com/botmate/botmate-awesome/commit/f1d2d822b75c38073a7bbb226a4e7fe263e58d82))
+
 ### [0.0.1-alpha.8](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.7...0.0.1-alpha.8) (2023-03-10)
 
 ### [0.0.1-alpha.7](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.5...0.0.1-alpha.7) (2023-03-10)
