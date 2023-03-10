@@ -10,11 +10,12 @@ import {
 import { useForm } from 'react-hook-form';
 import { CreateCommandDto } from '@api';
 import dynamic from 'next/dynamic';
-import '@uiw/react-textarea-code-editor/dist.css';
 import { useEffect } from 'react';
+import { javascript } from '@codemirror/lang-javascript';
+import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 
 const CodeEditor = dynamic(
-  () => import('@uiw/react-textarea-code-editor').then((mod) => mod.default),
+  () => import('@uiw/react-codemirror').then((mod) => mod.default),
   { ssr: false },
 );
 
@@ -65,12 +66,10 @@ function CommandEntry({
 
           <FormControl>
             <FormLabel>Script</FormLabel>
-            <CodeEditor
+            {/* <CodeEditor
               spellCheck="false"
               language="js"
-              value={form.getValues('script')}
               placeholder="Enter your script here..."
-              onChange={(evn) => form.setValue('script', evn.target.value)}
               padding={15}
               style={{
                 fontSize: 12,
@@ -81,6 +80,13 @@ function CommandEntry({
                 fontFamily:
                   'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
               }}
+            /> */}
+            <CodeEditor
+              height="400px"
+              extensions={[javascript({ jsx: true })]}
+              theme={tokyoNight}
+              value={form.getValues('script')}
+              onChange={(val) => form.setValue('script', val)}
             />
           </FormControl>
         </Stack>
