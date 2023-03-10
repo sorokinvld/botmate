@@ -1,14 +1,17 @@
+import { BotMateLogger } from '@/common';
 import { Injectable } from '@nestjs/common';
 import { Context } from 'grammy';
 import { NodeVM } from 'vm2';
 
 @Injectable()
 export class BotScriptService {
+  private readonly logger = new BotMateLogger(BotScriptService.name);
+
   public runScript(script: string, botCtx: Context) {
+    this.logger.debug(`running custom script`);
     const vm = new NodeVM({
       require: {
         external: true,
-        root: './',
       },
       sandbox: {
         Bot: botCtx,
@@ -22,6 +25,9 @@ export class BotScriptService {
       }
       main()
     `);
-    } catch (e) {}
+    } catch (e) {
+      this.logger.log('Error while running script: ');
+      this.logger.error(e);
+    }
   }
 }

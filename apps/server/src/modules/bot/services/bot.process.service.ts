@@ -6,10 +6,12 @@ import { Repository } from 'typeorm';
 import { BotStatus } from '@/common/bot.types';
 import { CommandService } from '@modules/command/command.service';
 import { BotScriptService } from './bot.script.service';
+import { BotMateLogger } from '@/common';
 
 @Injectable()
 export class BotProcessService {
   processes: Map<string, TelegramBot> = new Map();
+  private readonly logger = new BotMateLogger(BotScriptService.name);
 
   constructor(
     @InjectRepository(Bot) private botRepository: Repository<Bot>,
@@ -25,7 +27,8 @@ export class BotProcessService {
       const bot = new TelegramBot(botData.token);
       await bot.init();
 
-      bot.on('message', async (ctx) => {
+      bot.on(':text', async (ctx) => {
+        this.logger.debug(`processing message: "${ctx.message.text}"`);
         const command = await this.cmdServie.findCommand(
           botId,
           ctx.message.text,
@@ -39,7 +42,8 @@ export class BotProcessService {
 
       this.processes.set(botId, bot);
     } catch (e) {
-      // todo: log error to database
+      this.logger.log('Error while starting bot: ' + botId);
+      this.logger.error(e);
       throw new Error('Unable to start bot');
     }
 

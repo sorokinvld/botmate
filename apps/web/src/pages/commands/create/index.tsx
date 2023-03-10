@@ -5,7 +5,6 @@ import {
   CreateCommandDto,
   useCommandControllerCreateCommandMutation,
 } from '@api';
-import '@uiw/react-textarea-code-editor/dist.css';
 import { useActiveBot } from '@hooks';
 import { CommandEntry } from '@components';
 import { useRouter } from 'next/router';
