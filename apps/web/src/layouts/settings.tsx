@@ -21,7 +21,6 @@ import {
   HiUser,
 } from 'react-icons/hi';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import Link from 'next/link';
 
 const SettingsItems = [

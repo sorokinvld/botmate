@@ -1,5 +1,6 @@
+import { Filter, FilterType } from '@/entities/filter.entity';
 import { Body, Controller, Get, Put, Query } from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { SaveFilterDTO } from './dto/save-filter.dto';
 import { FiltersService } from './filters.service';
 
@@ -9,8 +10,27 @@ export class FiltersController {
   constructor(private filterService: FiltersService) {}
 
   @Get()
-  getFilters() {
-    //
+  @ApiQuery({
+    type: 'string',
+    name: 'chatId',
+  })
+  @ApiQuery({
+    type: 'string',
+    name: 'botId',
+  })
+  @ApiQuery({
+    enum: FilterType,
+    name: 'type',
+  })
+  @ApiOkResponse({
+    type: Filter,
+  })
+  getFilters(
+    @Query('chatId') chatId: string,
+    @Query('botId') botId: string,
+    @Query('type') type: FilterType,
+  ) {
+    return this.filterService.getFilter(botId, chatId, type);
   }
 
   @Put()

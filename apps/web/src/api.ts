@@ -143,7 +143,14 @@ const injectedRtkApi = api
         FiltersControllerGetFiltersApiResponse,
         FiltersControllerGetFiltersApiArg
       >({
-        query: () => ({ url: `/api/filters` }),
+        query: (queryArg) => ({
+          url: `/api/filters`,
+          params: {
+            chatId: queryArg.chatId,
+            botId: queryArg.botId,
+            type: queryArg['type'],
+          },
+        }),
         providesTags: ['filters'],
       }),
       filtersControllerSaveFilters: build.mutation<
@@ -225,8 +232,12 @@ export type ChatControllerGetBotChatsApiArg = {
   /** Chat type */
   type: 'private' | 'group' | 'supergroup' | 'channel';
 };
-export type FiltersControllerGetFiltersApiResponse = unknown;
-export type FiltersControllerGetFiltersApiArg = void;
+export type FiltersControllerGetFiltersApiResponse = /** status 200  */ Filter;
+export type FiltersControllerGetFiltersApiArg = {
+  chatId: string;
+  botId: string;
+  type: 'messages' | 'service_messages' | 'words' | 'advanced';
+};
 export type FiltersControllerSaveFiltersApiResponse = unknown;
 export type FiltersControllerSaveFiltersApiArg = {
   chatId: string;
@@ -336,6 +347,12 @@ export type UpdateCommandDto = {
   enabled: boolean;
   privateCommand: boolean;
   props: CommandProp[];
+};
+export type Filter = {
+  chat_id: string;
+  bot_id: string;
+  type: 'messages' | 'service_messages' | 'words' | 'advanced';
+  value: object;
 };
 export type SaveFilterDto = {
   type: 'messages' | 'service_messages' | 'words' | 'advanced';

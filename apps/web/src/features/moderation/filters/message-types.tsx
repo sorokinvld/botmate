@@ -1,4 +1,7 @@
-import { useFiltersControllerSaveFiltersMutation } from '@api';
+import {
+  useFiltersControllerGetFiltersQuery,
+  useFiltersControllerSaveFiltersMutation,
+} from '@api';
 import { Card, RadioButton } from '@atoms';
 import {
   Stack,
@@ -18,12 +21,12 @@ import {
   FormHelperText,
   ModalCloseButton,
   Button,
-  IconButton,
 } from '@chakra-ui/react';
 import { useActiveBot, useActiveChat } from '@hooks';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
-import { FiSave } from 'react-icons/fi';
+import { HiCheck } from 'react-icons/hi';
+import { toast } from 'react-toastify';
 
 // todo: make this a component and reusable
 type MessageTypesOption = {
@@ -132,6 +135,22 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
   );
   const [saveFilter, { isLoading: isSaving }] =
     useFiltersControllerSaveFiltersMutation();
+  const { data } = useFiltersControllerGetFiltersQuery({
+    botId: activeBot?.id,
+    chatId: activeChat?.chat_id,
+    type: 'messages',
+  });
+
+  useEffect(() => {
+    if (data) {
+      form.reset(data.value);
+    }
+  }, [data]);
+
+  const getActiveValue = useCallback(
+    (key: string) => form.getValues(`${activeMsgType?.id}.${key}`),
+    [form, activeMsgType],
+  );
 
   const saveData = () => {
     const data = form.getValues();
@@ -143,6 +162,14 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
         type: 'messages',
         value: data,
       },
+    }).then(() => {
+      toast.success('Filter saved', {
+        icon: <HiCheck />,
+        progressStyle: {
+          backgroundColor: '#49b793',
+        },
+      });
+      d.onClose();
     });
   };
 
@@ -186,6 +213,7 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
             {activeMsgType ? (
               <Stack spacing={4}>
                 <RadioButton
+                  activeIndex={getActiveValue('method') === 'allow' ? 0 : 1}
                   onChange={(v) => {
                     form.setValue(`${activeMsgType?.id}.method`, v);
                   }}
@@ -224,7 +252,7 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="solid" onClick={saveData}>
+            <Button variant="solid" onClick={saveData} isLoading={isSaving}>
               Save
             </Button>
           </ModalFooter>

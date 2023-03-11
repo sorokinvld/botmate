@@ -29,9 +29,7 @@ export class Filter {
   })
   type: string;
 
-  @ApiProperty({
-    type: 'json',
-  })
+  @ApiProperty()
   @Column({ type: 'json' })
   value: any;
 }

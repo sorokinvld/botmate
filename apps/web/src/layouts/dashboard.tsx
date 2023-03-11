@@ -16,6 +16,9 @@ import { HiChevronLeft, HiMenuAlt1 } from 'react-icons/hi';
 import { AppSidebar } from '@components';
 import { useBotControllerGetBotsQuery } from '@api';
 import { BotsProvider } from '@providers';
+import { ToastContainer, ToastPosition } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type DashboardLayoutProps = {
   title: string;
@@ -36,6 +39,10 @@ function DashboardLayout({
   const drawer = useDisclosure();
   const { data: bots } = useBotControllerGetBotsQuery();
   const isDesktopView = useBreakpointValue({ base: false, md: true });
+  const toastPositon = useBreakpointValue({
+    base: 'bottom-center',
+    md: 'top-right',
+  });
 
   if (bots?.length === 0) {
     r.push('/setup');
@@ -47,6 +54,13 @@ function DashboardLayout({
       <Head>
         <title>{title + ' | BotMate'}</title>
       </Head>
+      <ToastContainer
+        theme="dark"
+        toastStyle={{
+          backgroundColor: '#313248',
+        }}
+        position={toastPositon as ToastPosition}
+      />
       <Flex h="100vh" overflow="hidden">
         {isDesktopView ? (
           <Box
