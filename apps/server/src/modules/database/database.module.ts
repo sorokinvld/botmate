@@ -3,8 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
-import { User, Bot } from '@/entities';
+import { User, Bot, Moderation } from '@/entities';
 import { Command } from '@/entities/command.entity';
+import { Chat } from '@/entities/chat.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { Command } from '@/entities/command.entity';
         database: configService.get('DB_NAME'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        entities: [User, Bot, Command],
+        entities: [User, Bot, Command, Moderation, Chat],
         synchronize: true,
       }),
       inject: [ConfigService],
