@@ -1,3 +1,4 @@
+import { useFiltersControllerSaveFiltersMutation } from '@api';
 import { Card, RadioButton } from '@atoms';
 import {
   Stack,
@@ -16,9 +17,13 @@ import {
   FormControl,
   FormHelperText,
   ModalCloseButton,
+  Button,
+  IconButton,
 } from '@chakra-ui/react';
+import { useActiveBot, useActiveChat } from '@hooks';
 import { useState } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { FiSave } from 'react-icons/fi';
 
 // todo: make this a component and reusable
 type MessageTypesOption = {
@@ -89,21 +94,19 @@ const OptionsGenerator = ({
         {option.type === 'checkbox' ? (
           <>
             <Switch
-              {...form.register(
-                `message_type.${message_type}.${option.id}.enabled`,
-              )}
+              {...form.register(`${message_type}.${option.id}.enabled`)}
             />
           </>
         ) : (
           <Input
             w="44"
             placeholder="Enter value"
-            {...form.register(`message_type.${message_type}.${option.id}`)}
+            {...form.register(`${message_type}.${option.id}`)}
           />
         )}
       </HStack>
 
-      {form.getValues(`message_type.${message_type}.${option.id}.enabled`) ? (
+      {form.getValues(`${message_type}.${option.id}.enabled`) ? (
         option.yes ? (
           <OptionsGenerator
             form={form}
@@ -118,14 +121,30 @@ const OptionsGenerator = ({
   );
 };
 
-type FilterMessageTypesProps = {
-  form: UseFormReturn;
-};
-function FilterMessageTypes({ form }: FilterMessageTypesProps) {
+type FilterMessageTypesProps = {};
+function FilterMessageTypes({}: FilterMessageTypesProps) {
+  const form = useForm();
   const d = useDisclosure();
+  const activeBot = useActiveBot();
+  const activeChat = useActiveChat();
   const [activeMsgType, setActiveMsgType] = useState<MessageTypesType | null>(
     null,
   );
+  const [saveFilter, { isLoading: isSaving }] =
+    useFiltersControllerSaveFiltersMutation();
+
+  const saveData = () => {
+    const data = form.getValues();
+
+    saveFilter({
+      botId: activeBot?.id,
+      chatId: activeChat?.chat_id,
+      saveFilterDto: {
+        type: 'messages',
+        value: data,
+      },
+    });
+  };
 
   return (
     <Card title="Message Type" description="Configure what must be filtered">
@@ -168,10 +187,7 @@ function FilterMessageTypes({ form }: FilterMessageTypesProps) {
               <Stack spacing={4}>
                 <RadioButton
                   onChange={(v) => {
-                    form.setValue(
-                      `message_type.${activeMsgType?.id}.method`,
-                      v,
-                    );
+                    form.setValue(`${activeMsgType?.id}.method`, v);
                   }}
                   options={[
                     {
@@ -187,9 +203,7 @@ function FilterMessageTypes({ form }: FilterMessageTypesProps) {
                 <FormControl>
                   <Input
                     placeholder="Enter your filter"
-                    {...form.register(
-                      `message_type.${activeMsgType?.id}.filter`,
-                    )}
+                    {...form.register(`${activeMsgType?.id}.filter`)}
                   />
                   {activeMsgType?.example && (
                     <FormHelperText>
@@ -209,7 +223,11 @@ function FilterMessageTypes({ form }: FilterMessageTypesProps) {
             ) : null}
           </ModalBody>
 
-          <ModalFooter />
+          <ModalFooter>
+            <Button variant="solid" onClick={saveData}>
+              Save
+            </Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Card>

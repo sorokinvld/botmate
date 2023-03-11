@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DashboardLayout } from '@layouts';
 import { Box, Divider, Spacer, Stack } from '@chakra-ui/react';
 import { ModerationsLayout } from '@layouts';
@@ -10,18 +10,32 @@ import {
   FilterServiceMessages,
 } from '@features/moderation';
 import { useForm } from 'react-hook-form';
+import { useActiveBot, useActiveChat } from '@hooks';
 
 function Filters() {
   const form = useForm();
+  const values = form.watch();
+  const activeBot = useActiveBot();
+  const activeChat = useActiveChat();
 
-  console.log(form.watch());
+  useEffect(() => {
+    console.log('updating...');
+    // saveModeration({
+    //   saveModDto: {
+    //     botId: activeBot.id,
+    //     chatId: activeChat.id,
+    //     type: 'filters',
+    //     value: values,
+    //   },
+    // });
+  }, [values]);
 
   return (
     <Box maxW="6xl" m="auto">
       <Stack spacing={6}>
-        <FilterMessageTypes form={form} />
+        <FilterMessageTypes />
         <Divider />
-        <FilterServiceMessages />
+        <FilterServiceMessages form={form} />
         <Divider />
         <FiltersBlacklistWords />
         <Divider />

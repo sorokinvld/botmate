@@ -6,6 +6,7 @@ export const addTagTypes = [
   'bot',
   'command',
   'chats',
+  'filters',
 ] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -138,6 +139,25 @@ const injectedRtkApi = api
         }),
         providesTags: ['chats'],
       }),
+      filtersControllerGetFilters: build.query<
+        FiltersControllerGetFiltersApiResponse,
+        FiltersControllerGetFiltersApiArg
+      >({
+        query: () => ({ url: `/api/filters` }),
+        providesTags: ['filters'],
+      }),
+      filtersControllerSaveFilters: build.mutation<
+        FiltersControllerSaveFiltersApiResponse,
+        FiltersControllerSaveFiltersApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/filters`,
+          method: 'PUT',
+          body: queryArg.saveFilterDto,
+          params: { chatId: queryArg.chatId, botId: queryArg.botId },
+        }),
+        invalidatesTags: ['filters'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -204,6 +224,14 @@ export type ChatControllerGetBotChatsApiArg = {
   botId: string;
   /** Chat type */
   type: 'private' | 'group' | 'supergroup' | 'channel';
+};
+export type FiltersControllerGetFiltersApiResponse = unknown;
+export type FiltersControllerGetFiltersApiArg = void;
+export type FiltersControllerSaveFiltersApiResponse = unknown;
+export type FiltersControllerSaveFiltersApiArg = {
+  chatId: string;
+  botId: string;
+  saveFilterDto: SaveFilterDto;
 };
 export type CommandProp = {};
 export type Command = {
@@ -309,6 +337,10 @@ export type UpdateCommandDto = {
   privateCommand: boolean;
   props: CommandProp[];
 };
+export type SaveFilterDto = {
+  type: 'messages' | 'service_messages' | 'words' | 'advanced';
+  value: any;
+};
 export const {
   useDownloadControllerDownloadQuery,
   useLazyDownloadControllerDownloadQuery,
@@ -329,4 +361,7 @@ export const {
   useCommandControllerUpdateCommandMutation,
   useChatControllerGetBotChatsQuery,
   useLazyChatControllerGetBotChatsQuery,
+  useFiltersControllerGetFiltersQuery,
+  useLazyFiltersControllerGetFiltersQuery,
+  useFiltersControllerSaveFiltersMutation,
 } = injectedRtkApi;

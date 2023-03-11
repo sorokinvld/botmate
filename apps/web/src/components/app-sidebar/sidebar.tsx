@@ -89,7 +89,7 @@ function AppSidebar({}: SidebarProps) {
             icon={<HiOutlineBell size={14} />}
           />
         </HStack>
-        <HStack mt={4}>
+        {/* <HStack mt={4}>
           <Avatar
             src={`http://localhost:8080/api/download/photo/${activeBot.id}.jpg`}
           />
@@ -100,7 +100,7 @@ function AppSidebar({}: SidebarProps) {
             </Text>
           </Box>
           <Spacer />
-        </HStack>
+        </HStack> */}
       </Box>
 
       <Stack>

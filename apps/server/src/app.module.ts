@@ -11,6 +11,7 @@ import { BotModule } from '@/modules/bot/bot.module';
 import { CommandModule } from '@/modules/command/command.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { DownloadController } from './modules/download/download.controller';
+import { FiltersModule } from './modules/filters/filters.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { DownloadController } from './modules/download/download.controller';
     BotModule,
     CommandModule,
     ChatModule,
+    FiltersModule,
   ],
   controllers: [DownloadController],
   providers: [],

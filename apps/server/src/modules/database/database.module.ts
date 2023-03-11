@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User, Bot, Moderation } from '@/entities';
 import { Command } from '@/entities/command.entity';
 import { Chat } from '@/entities/chat.entity';
+import { Filter } from '@/entities/filter.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { Chat } from '@/entities/chat.entity';
         database: configService.get('DB_NAME'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        entities: [User, Bot, Command, Moderation, Chat],
+        entities: [User, Bot, Command, Moderation, Chat, Filter],
         synchronize: true,
       }),
       inject: [ConfigService],

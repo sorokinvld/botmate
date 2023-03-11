@@ -6,13 +6,13 @@ import {
   Heading,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useUser } from '@hooks';
+import { useActiveBot, useUser } from '@hooks';
 import { useRouter } from 'next/router';
 
 type ProfileSidebarProps = {};
 function ProfileSidebar({}: ProfileSidebarProps) {
   const r = useRouter();
-  const user = useUser();
+  const bot = useActiveBot();
   const profileBg = useColorModeValue('secondary.light', 'secondary.dark');
 
   return (
@@ -23,20 +23,18 @@ function ProfileSidebar({}: ProfileSidebarProps) {
       bg={profileBg}
       cursor="pointer"
       userSelect="none"
-      _hover={{
-        transform: 'translateY(-5px)',
-        shadow: 'lg',
-      }}
-      transition="all 0.4s ease-in-out"
-      onClick={() => r.push('/profile')}
+      onClick={() => r.push('/settings/management')}
     >
-      <Avatar draggable={false} src={user.avatar} />
+      <Avatar
+        draggable={false}
+        src={`http://localhost:8080/api/download/photo/${bot.id}.jpg`}
+      />
       <Box>
         <Heading fontSize={12} noOfLines={1}>
-          {user.name}
+          {bot.first_name}
         </Heading>
         <Text fontSize="sm" opacity={0.8}>
-          {user.email}
+          {bot.id}
         </Text>
       </Box>
     </HStack>
