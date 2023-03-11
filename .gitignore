@@ -40,3 +40,5 @@ coverage/
 
 .env
 .env.*
+
+apps/server/data
