@@ -9,6 +9,7 @@ import { UserModule } from '@modules/users/user.module';
 import { DatabaseModule } from '@modules/database/database.module';
 import { BotModule } from '@/modules/bot/bot.module';
 import { CommandModule } from '@/modules/command/command.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CommandModule } from '@/modules/command/command.module';
     AuthModule,
     BotModule,
     CommandModule,
+    ChatModule,
   ],
   controllers: [],
   providers: [],

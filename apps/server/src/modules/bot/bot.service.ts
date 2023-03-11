@@ -2,11 +2,15 @@ import { Bot } from '@/entities/bot.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Bot as TelegramBot } from 'grammy';
+import { Bot as TelegramBot, Context } from 'grammy';
+import { DownloadService } from '../download/download.service';
 
 @Injectable()
 export class BotService {
-  constructor(@InjectRepository(Bot) private botRepository: Repository<Bot>) {}
+  constructor(
+    @InjectRepository(Bot) private botRepository: Repository<Bot>,
+    private readonly downloadService: DownloadService,
+  ) {}
 
   getBotsByUserId(id: number) {
     return this.botRepository.find({
@@ -39,12 +43,36 @@ export class BotService {
       avatar: '',
       username: botData.username,
       first_name: botData.first_name,
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
       user: {
         id: userId,
       },
     });
     await this.botRepository.save(botEntity);
     return botEntity;
+  }
+
+  async downloadChatPhoto(ctx: Context) {
+    // const { photo } = await ctx.getChat();
+    // if (photo) {
+    //   const file = await ctx.api.getFile(photo.small_file_id);
+    //   this.downloadService.download(
+    //     `https://api.telegram.org/file/bot${botData.token}/${file.file_path}`,
+    //     'chat_photo',
+    //     `${ctx.from.id}.jpg`,
+    //   );
+    // }
+  }
+
+  async downloadUserPhoto(ctx: Context) {
+    // const { photo } = await ctx.getChat();
+    // if (photo) {
+    //   const file = await ctx.api.getFile(photo.small_file_id);
+    //   this.downloadService.download(
+    //     `https://api.telegram.org/file/bot${botData.token}/${file.file_path}`,
+    //     'chat_photo',
+    //     `${ctx.from.id}.jpg`,
+    //   );
+    // }
   }
 }

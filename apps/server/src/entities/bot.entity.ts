@@ -1,6 +1,14 @@
 import { BotStatus } from '@/common/bot.types';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import { ApiProperty, ApiPropertyOptional, OmitType } from '@nestjs/swagger';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
+import { Chat } from './chat.entity';
 import { Command } from './command.entity';
 import { User } from './user.entity';
 
@@ -34,7 +42,7 @@ export class Bot {
 
   @ApiPropertyOptional()
   @Column()
-  createdAt: string;
+  created_at: string;
 
   @ApiProperty({
     type: () => User,
@@ -47,4 +55,10 @@ export class Bot {
   })
   @OneToMany(() => Command, (command) => command.bot)
   commands: Command[];
+
+  @ApiProperty({
+    type: () => [Chat],
+  })
+  @OneToMany(() => Chat, (chat) => chat.bot)
+  chats: Chat[];
 }

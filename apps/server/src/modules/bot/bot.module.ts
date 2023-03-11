@@ -1,17 +1,32 @@
 import { Command } from '@/entities';
 import { Bot } from '@/entities/bot.entity';
 import { User } from '@/entities/user.entity';
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommandService } from '../command/command.service';
 import { BotController } from './bot.controller';
 import { BotService } from './bot.service';
 import { BotScriptService } from './services/bot.script.service';
 import { BotProcessService } from './services/bot.process.service';
+import { Chat } from '@/entities/chat.entity';
+import { ChatService } from '../chat/chat.service';
+import { DownloadService } from '../download/download.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Bot, User, Command])],
-  providers: [BotService, BotProcessService, BotScriptService, CommandService],
+  imports: [TypeOrmModule.forFeature([Bot, User, Command, Chat])],
+  providers: [
+    BotService,
+    BotProcessService,
+    BotScriptService,
+    CommandService,
+    ChatService,
+    DownloadService,
+  ],
   controllers: [BotController],
 })
-export class BotModule {}
+export class BotModule implements OnModuleInit {
+  constructor(private readonly botProcessService: BotProcessService) {}
+  onModuleInit() {
+    this.botProcessService.startAllBots();
+  }
+}
