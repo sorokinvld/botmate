@@ -1,5 +1,16 @@
 
 
+### [0.0.1-alpha.12](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.11...0.0.1-alpha.12) (2023-03-11)
+
+
+### 🚀 Features
+
+* add download module ([f665fa0](https://github.com/botmate/botmate-awesome/commit/f665fa0c6bc2a4ef77536d89401441f3e0d1463a))
+* add filter support & setup sentry ([4a48d69](https://github.com/botmate/botmate-awesome/commit/4a48d6940a29faea9efec5364c26ce40eff79b19))
+* display chat and bot images ([2665b6b](https://github.com/botmate/botmate-awesome/commit/2665b6b2b60e1422d244ec50bc28784b3d3aa8dc))
+* latest version notification ([8c65afa](https://github.com/botmate/botmate-awesome/commit/8c65afa8807231a221ecf54f701fdb5e286883fb))
+* setup chat module ([23d6650](https://github.com/botmate/botmate-awesome/commit/23d6650c4e82c8077b35ab46781d477ddc47426b))
+
 ### [0.0.1-alpha.11](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.10...0.0.1-alpha.11) (2023-03-10)
 
 
