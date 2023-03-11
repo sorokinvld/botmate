@@ -9,12 +9,17 @@ import {
   FiltersBlacklistWords,
   FilterServiceMessages,
 } from '@features/moderation';
+import { useForm } from 'react-hook-form';
 
 function Filters() {
+  const form = useForm();
+
+  console.log(form.watch());
+
   return (
     <Box maxW="6xl" m="auto">
       <Stack spacing={6}>
-        <FilterMessageTypes />
+        <FilterMessageTypes form={form} />
         <Divider />
         <FilterServiceMessages />
         <Divider />
@@ -27,7 +32,16 @@ function Filters() {
 }
 
 Filters.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout title="Filters" noPadding>
+  <DashboardLayout
+    title="Filters"
+    noPadding
+    action={
+      <>
+        <Spacer />
+        <ChatSelector />
+      </>
+    }
+  >
     <ModerationsLayout>{page}</ModerationsLayout>
   </DashboardLayout>
 );

@@ -18,53 +18,110 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 // todo: make this a component and reusable
 type MessageTypesOption = {
+  id: string;
   label: string;
   type: 'checkbox' | 'input';
   yes?: MessageTypesOption;
 };
 type MessageTypesType = {
+  id: string;
   label: string;
   example?: string;
-  options?: {
-    [key: string]: MessageTypesOption;
-  };
+  options?: MessageTypesOption[];
 };
 const MessageTypes: MessageTypesType[] = [
   {
+    id: 'links',
     label: 'Links',
     example: 'www.domain.com',
   },
   {
+    id: 'mentions',
     label: 'Mentions',
   },
   {
+    id: 'emojis',
     label: 'Emojis',
   },
   {
+    id: 'files',
     label: 'Files',
     example: 'png',
-    options: {
-      limit_file_size: {
+    options: [
+      {
+        id: 'limit_file_size',
         label: 'Limit file size',
         type: 'checkbox',
         yes: {
+          id: 'file_size',
           label: 'File size',
           type: 'input',
         },
       },
-    },
+    ],
   },
   {
+    id: 'stickers',
     label: 'Stickers',
     example: 't.me/addstickers/...',
   },
 ];
 
-type FilterMessageTypesProps = {};
-function FilterMessageTypes({}: FilterMessageTypesProps) {
+type OptionsGeneratorProps = {
+  form: UseFormReturn;
+  message_type: string;
+  option: MessageTypesOption;
+};
+const OptionsGenerator = ({
+  form,
+  option,
+  message_type,
+}: OptionsGeneratorProps) => {
+  return (
+    <>
+      <HStack key={option.id}>
+        <Text>{option.label}</Text>
+        <Spacer />
+        {option.type === 'checkbox' ? (
+          <>
+            <Switch
+              {...form.register(
+                `message_type.${message_type}.${option.id}.enabled`,
+              )}
+            />
+          </>
+        ) : (
+          <Input
+            w="44"
+            placeholder="Enter value"
+            {...form.register(`message_type.${message_type}.${option.id}`)}
+          />
+        )}
+      </HStack>
+
+      {form.getValues(`message_type.${message_type}.${option.id}.enabled`) ? (
+        option.yes ? (
+          <OptionsGenerator
+            form={form}
+            option={option.yes}
+            message_type={message_type}
+          />
+        ) : null
+      ) : (
+        ''
+      )}
+    </>
+  );
+};
+
+type FilterMessageTypesProps = {
+  form: UseFormReturn;
+};
+function FilterMessageTypes({ form }: FilterMessageTypesProps) {
   const d = useDisclosure();
   const [activeMsgType, setActiveMsgType] = useState<MessageTypesType | null>(
     null,
@@ -107,48 +164,52 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
           <ModalCloseButton />
           <ModalHeader>{activeMsgType?.label}</ModalHeader>
           <ModalBody>
-            <Stack spacing={4}>
-              <RadioButton
-                options={[
-                  {
-                    label: 'Allow',
-                    value: 'allow',
-                  },
-                  {
-                    label: 'Block',
-                    value: 'block',
-                  },
-                ]}
-              />
-              <FormControl>
-                <Input placeholder="Enter your filter" />
-                {activeMsgType?.example && (
-                  <FormHelperText>
-                    Example: <b>{activeMsgType.example}</b>
-                  </FormHelperText>
-                )}
-              </FormControl>
-              {/* todo: make it a reusable component, and support nested values */}
-              {activeMsgType?.options &&
-                Object.entries(activeMsgType.options).map(([key, value]) => (
-                  <HStack key={key}>
-                    <Text>{value.label}</Text>
-                    <Spacer />
-                    {value.type === 'checkbox' ? (
-                      <Switch />
-                    ) : (
-                      <Input placeholder="Enter value" />
+            {activeMsgType ? (
+              <Stack spacing={4}>
+                <RadioButton
+                  onChange={(v) => {
+                    form.setValue(
+                      `message_type.${activeMsgType?.id}.method`,
+                      v,
+                    );
+                  }}
+                  options={[
+                    {
+                      label: 'Allow',
+                      value: 'allow',
+                    },
+                    {
+                      label: 'Block',
+                      value: 'block',
+                    },
+                  ]}
+                />
+                <FormControl>
+                  <Input
+                    placeholder="Enter your filter"
+                    {...form.register(
+                      `message_type.${activeMsgType?.id}.filter`,
                     )}
-                  </HStack>
+                  />
+                  {activeMsgType?.example && (
+                    <FormHelperText>
+                      Example: <b>{activeMsgType.example}</b>
+                    </FormHelperText>
+                  )}
+                </FormControl>
+                {activeMsgType.options?.map((option) => (
+                  <OptionsGenerator
+                    key={option.id}
+                    form={form}
+                    message_type={activeMsgType?.id}
+                    option={option}
+                  />
                 ))}
-            </Stack>
+              </Stack>
+            ) : null}
           </ModalBody>
 
-          <ModalFooter>
-            {/* <ButtonGroup>
-              <Button onClick={d.onClose}>Close</Button>
-            </ButtonGroup> */}
-          </ModalFooter>
+          <ModalFooter />
         </ModalContent>
       </Modal>
     </Card>

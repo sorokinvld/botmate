@@ -1,5 +1,5 @@
 import { SidebarItem } from '@components';
-import { Flex, Box, Stack, HStack, Divider, Text } from '@chakra-ui/react';
+import { Flex, Box, HStack, Divider, Text, VStack } from '@chakra-ui/react';
 import { HiGlobeAlt, HiPlay, HiSpeakerphone, HiUsers } from 'react-icons/hi';
 
 import {
@@ -72,18 +72,19 @@ function ModerationsLayout({ children }: ModerationsLayoutProps) {
 
   return (
     <Flex flex={1} overflow="hidden" h="100%">
-      <Stack
-        w="72"
-        overflow="hidden"
+      <VStack
         p={4}
+        w="72"
+        h="full"
         borderRightWidth="1px"
-        spacing={6}
         display={{ base: 'none', lg: 'block' }}
       >
         {ModerationsList.map((item) => (
-          <SidebarItem key={item.href} {...item} />
+          <div key={item.href}>
+            <SidebarItem {...item} />
+          </div>
         ))}
-      </Stack>
+      </VStack>
 
       <Box
         flex={1}
