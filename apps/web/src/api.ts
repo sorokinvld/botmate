@@ -1,6 +1,7 @@
 import { apiSlice as api } from '@store';
 export const addTagTypes = [
   'download',
+  'botmate',
   'user',
   'auth',
   'bot',
@@ -22,6 +23,20 @@ const injectedRtkApi = api
           url: `/api/download/${queryArg['type']}/${queryArg.fileName}`,
         }),
         providesTags: ['download'],
+      }),
+      botMateControllerGetVersion: build.query<
+        BotMateControllerGetVersionApiResponse,
+        BotMateControllerGetVersionApiArg
+      >({
+        query: () => ({ url: `/api/botmate/version` }),
+        providesTags: ['botmate'],
+      }),
+      botMateControllerUpdate: build.mutation<
+        BotMateControllerUpdateApiResponse,
+        BotMateControllerUpdateApiArg
+      >({
+        query: () => ({ url: `/api/botmate/update`, method: 'POST' }),
+        invalidatesTags: ['botmate'],
       }),
       usersControllerProfile: build.query<
         UsersControllerProfileApiResponse,
@@ -174,6 +189,11 @@ export type DownloadControllerDownloadApiArg = {
   type: string;
   fileName: string;
 };
+export type BotMateControllerGetVersionApiResponse =
+  /** status 200 Returns the version of the BotMate server */ VersionApiResult;
+export type BotMateControllerGetVersionApiArg = void;
+export type BotMateControllerUpdateApiResponse = unknown;
+export type BotMateControllerUpdateApiArg = void;
 export type UsersControllerProfileApiResponse =
   /** status 200 The user profile */ User;
 export type UsersControllerProfileApiArg = void;
@@ -243,6 +263,9 @@ export type FiltersControllerSaveFiltersApiArg = {
   chatId: string;
   botId: string;
   saveFilterDto: SaveFilterDto;
+};
+export type VersionApiResult = {
+  version: string;
 };
 export type CommandProp = {};
 export type Command = {
@@ -361,6 +384,9 @@ export type SaveFilterDto = {
 export const {
   useDownloadControllerDownloadQuery,
   useLazyDownloadControllerDownloadQuery,
+  useBotMateControllerGetVersionQuery,
+  useLazyBotMateControllerGetVersionQuery,
+  useBotMateControllerUpdateMutation,
   useUsersControllerProfileQuery,
   useLazyUsersControllerProfileQuery,
   useAuthControllerLoginMutation,

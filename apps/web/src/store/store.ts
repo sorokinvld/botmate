@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from './base-query';
+import { mainReducer } from './main-slice';
 
 import { authReducer } from './slices/auth-slice';
 import { botReducer } from './slices/bot-slice';
@@ -11,6 +12,7 @@ export const store = configureStore({
     auth: authReducer,
     bot: botReducer,
     chat: chatReducer,
+    main: mainReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(...[apiSlice.middleware]),

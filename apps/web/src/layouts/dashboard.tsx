@@ -14,11 +14,15 @@ import {
 } from '@chakra-ui/react';
 import { HiChevronLeft, HiMenuAlt1 } from 'react-icons/hi';
 import { AppSidebar } from '@components';
-import { useBotControllerGetBotsQuery } from '@api';
+import {
+  useBotControllerGetBotsQuery,
+  useBotMateControllerGetVersionQuery,
+} from '@api';
 import { BotsProvider } from '@providers';
 import { ToastContainer, ToastPosition } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from '@atoms';
 
 type DashboardLayoutProps = {
   title: string;
@@ -43,11 +47,14 @@ function DashboardLayout({
     base: 'bottom-center',
     md: 'top-right',
   });
+  const { isLoading: versionLoading } = useBotMateControllerGetVersionQuery();
 
   if (bots?.length === 0) {
     r.push('/setup');
     return null;
   }
+
+  if (versionLoading) return <Loader text="loading app data..." />;
 
   return (
     <BotsProvider>

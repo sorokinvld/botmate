@@ -15,7 +15,6 @@ import {
   HiAdjustments,
   HiBeaker,
   HiColorSwatch,
-  HiLink,
   HiServer,
   HiSwitchVertical,
   HiUser,
@@ -25,10 +24,10 @@ import Link from 'next/link';
 
 const SettingsItems = [
   {
-    label: 'Appearence',
-    href: '/settings/appearence',
+    label: 'General',
+    href: '/settings/general',
     icon: <HiColorSwatch />,
-    match: /^\/settings\/appearence/,
+    match: /^\/settings\/general/,
   },
   {
     label: 'Accounts',
@@ -41,12 +40,6 @@ const SettingsItems = [
     href: '/settings/management',
     icon: <HiAdjustments />,
     match: /^\/settings\/management/,
-  },
-  {
-    label: 'Integrations',
-    href: '/settings/integrations',
-    icon: <HiLink />,
-    match: /^\/settings\/integrations/,
   },
   {
     label: 'Webhooks',

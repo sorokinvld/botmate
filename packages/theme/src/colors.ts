@@ -11,7 +11,7 @@ export const colors = {
 
   secondary: {
     light: '#eaeaea52',
-    dark: '#1d1e2b6e',
+    dark: '#1f1f2b',
   },
 
   alert: {

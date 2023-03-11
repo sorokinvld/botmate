@@ -1,12 +1,14 @@
 import React from 'react';
 import { RadioButton } from '@atoms';
 import { SettingsOption } from '@atoms';
-import { Box, Select, Stack, useColorMode } from '@chakra-ui/react';
+import { Center, Select, Stack, useColorMode } from '@chakra-ui/react';
 import { DashboardLayout } from '@layouts';
 import { SettingsLayout } from '@layouts';
+import { useBotMateControllerGetVersionQuery } from '@api';
 
 function General() {
   const { colorMode, setColorMode } = useColorMode();
+  const { data: version } = useBotMateControllerGetVersionQuery();
 
   return (
     <Stack spacing={6}>
@@ -49,15 +51,15 @@ function General() {
         }
       />
 
-      <Box bg="gray" h="50vh" />
-      <Box bg="gray" h="50vh" />
-      <Box bg="gray" h="50vh" />
+      <Center mt={4} opacity={0.7}>
+        BotMate v{version?.version}
+      </Center>
     </Stack>
   );
 }
 
 General.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout title="Appearence" noPadding noOverflow>
+  <DashboardLayout title="General" noPadding noOverflow>
     <SettingsLayout>{page}</SettingsLayout>
   </DashboardLayout>
 );

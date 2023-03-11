@@ -12,6 +12,7 @@ import { CommandModule } from '@/modules/command/command.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { DownloadController } from './modules/download/download.controller';
 import { FiltersModule } from './modules/filters/filters.module';
+import { BotMateModule } from './modules/botmate/botmate.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { FiltersModule } from './modules/filters/filters.module';
       rootPath: path.join(__dirname, 'client'),
       exclude: ['/api/(.*)'],
     }),
+    BotMateModule,
     DatabaseModule,
     UserModule,
     AuthModule,

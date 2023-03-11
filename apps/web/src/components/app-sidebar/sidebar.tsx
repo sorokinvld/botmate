@@ -1,16 +1,6 @@
 import { BotMateLogo } from '@components';
 import { useActiveBot } from '@hooks';
-import {
-  Avatar,
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  IconButton,
-  Spacer,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, IconButton, Spacer, Stack } from '@chakra-ui/react';
 import {
   HiHome,
   HiCog,
@@ -19,11 +9,13 @@ import {
   HiPuzzle,
   HiShieldCheck,
   HiOutlineBell,
-  HiBookOpen,
   HiLink,
+  HiBookOpen,
+  HiTable,
 } from 'react-icons/hi';
 import { SidebarItem } from './sidebar-item';
 import { ProfileSidebar } from '@atoms';
+import { UpdateCard } from '../update-card';
 
 // todo: get values from constants
 const sidebarItems = [
@@ -52,16 +44,16 @@ const sidebarItems = [
     match: /^\/moderations/,
   },
   {
+    label: 'Bot Debug',
+    icon: <HiTable />,
+    href: '/moderations/filters',
+    match: /^\/moderations/,
+  },
+  {
     label: 'Integrations',
     icon: <HiLink />,
     href: '/integrations',
     match: /^\/integrations/,
-  },
-  {
-    label: 'Bot Logs',
-    icon: <HiBookOpen />,
-    href: '/logs',
-    match: /^\/logs/,
   },
   {
     label: 'Marketplace',
@@ -72,7 +64,7 @@ const sidebarItems = [
   {
     label: 'Settings',
     icon: <HiCog />,
-    href: '/settings/appearence',
+    href: '/settings/general',
     match: /^\/settings/,
   },
 ];
@@ -124,9 +116,7 @@ function AppSidebar({}: SidebarProps) {
 
       <Spacer />
 
-      {/* 
-					todo: make this a component
-				*/}
+      <UpdateCard />
       <ProfileSidebar />
     </Flex>
   );
