@@ -176,27 +176,35 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
   return (
     <Card title="Message Type" description="Configure what must be filtered">
       <Stack>
-        {MessageTypes.map((type) => (
-          <HStack key={type.label}>
-            <Text size="sm">{type.label}</Text>
-            <Spacer />
-            <Text
-              userSelect="none"
-              cursor="pointer"
-              fontWeight="semibold"
-              _hover={{
-                opacity: 0.8,
-              }}
-              transition="opacity 0.2s"
-              onClick={() => {
-                setActiveMsgType(type);
-                d.onOpen();
-              }}
-            >
-              Allow all
-            </Text>
-          </HStack>
-        ))}
+        {MessageTypes.map((type) => {
+          const method = form.getValues(`${type.id}.method`);
+          const filters = form.getValues(`${type.id}.filter`);
+
+          const filterCount = filters ? filters?.split(',').length : 0;
+
+          return (
+            <HStack key={type.label}>
+              <Text size="sm">{type.label}</Text>
+              <Spacer />
+              <Text
+                userSelect="none"
+                cursor="pointer"
+                fontWeight="semibold"
+                _hover={{
+                  opacity: 0.8,
+                }}
+                transition="opacity 0.2s"
+                onClick={() => {
+                  setActiveMsgType(type);
+                  d.onOpen();
+                }}
+              >
+                {method === 'block' ? 'Block' : 'Allow'}{' '}
+                {filterCount > 0 ? `(${filterCount})` : 'all'}
+              </Text>
+            </HStack>
+          );
+        })}
       </Stack>
 
       <Modal
@@ -213,7 +221,7 @@ function FilterMessageTypes({}: FilterMessageTypesProps) {
             {activeMsgType ? (
               <Stack spacing={4}>
                 <RadioButton
-                  activeIndex={getActiveValue('method') === 'allow' ? 0 : 1}
+                  activeIndex={getActiveValue('method') === 'block' ? 1 : 0}
                   onChange={(v) => {
                     form.setValue(`${activeMsgType?.id}.method`, v);
                   }}

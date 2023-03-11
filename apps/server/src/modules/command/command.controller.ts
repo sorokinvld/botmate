@@ -78,7 +78,6 @@ export class CommandController {
     @Param('id') id: number,
     @Body() commandData: UpdateCommandDTO,
   ) {
-    console.log('commandData', commandData);
     try {
       const updatedCmd = await this.cmdService.updateCommand(id, commandData);
       return updatedCmd;

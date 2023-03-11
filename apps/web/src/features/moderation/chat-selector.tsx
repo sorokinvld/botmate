@@ -6,7 +6,6 @@ type ChatSelectorProps = {
 };
 function ChatSelector(props: ChatSelectorProps) {
   const { activeChat } = useChats();
-  console.log('activeChat', activeChat);
 
   return (
     <>

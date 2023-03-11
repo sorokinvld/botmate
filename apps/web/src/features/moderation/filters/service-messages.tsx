@@ -1,11 +1,10 @@
 import { Card } from '@atoms';
 import { Stack, HStack, Spacer, Switch, Text, Button } from '@chakra-ui/react';
-import { UseFormReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
-type FilterServiceMessagesProps = {
-  form: UseFormReturn;
-};
-function FilterServiceMessages({ form }: FilterServiceMessagesProps) {
+type FilterServiceMessagesProps = {};
+function FilterServiceMessages({}: FilterServiceMessagesProps) {
+  const form = useForm();
   return (
     <Card
       title="Service Messages"

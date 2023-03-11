@@ -9,6 +9,7 @@ import { BotScriptService } from './bot.script.service';
 import { BotMateLogger } from '@/common';
 import { Chat } from '@/entities/chat.entity';
 import { DownloadService } from '@/modules/download/download.service';
+import { BotFilterService } from './bot.filter.service';
 
 @Injectable()
 export class BotProcessService {
@@ -21,6 +22,7 @@ export class BotProcessService {
     private cmdServie: CommandService,
     private scriptService: BotScriptService,
     private downloadService: DownloadService,
+    private filterService: BotFilterService,
   ) {}
 
   async startBot(botId: string) {
@@ -32,6 +34,14 @@ export class BotProcessService {
       await bot.init();
 
       // todo: refactor the function
+
+      /**
+       * Filter Messages
+       */
+
+      bot.on('message', (ctx) => {
+        this.filterService.filterMessage(bot, ctx);
+      });
 
       /**
        * download the profile picture of the chat after joining

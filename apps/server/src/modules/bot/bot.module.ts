@@ -11,9 +11,11 @@ import { BotProcessService } from './services/bot.process.service';
 import { Chat } from '@/entities/chat.entity';
 import { ChatService } from '../chat/chat.service';
 import { DownloadService } from '../download/download.service';
+import { BotFilterService } from './services/bot.filter.service';
+import { Filter } from '@/entities/filter.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Bot, User, Command, Chat])],
+  imports: [TypeOrmModule.forFeature([Bot, User, Command, Chat, Filter])],
   providers: [
     BotService,
     BotProcessService,
@@ -21,6 +23,7 @@ import { DownloadService } from '../download/download.service';
     CommandService,
     ChatService,
     DownloadService,
+    BotFilterService,
   ],
   controllers: [BotController],
 })
