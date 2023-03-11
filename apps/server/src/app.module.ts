@@ -10,6 +10,7 @@ import { DatabaseModule } from '@modules/database/database.module';
 import { BotModule } from '@/modules/bot/bot.module';
 import { CommandModule } from '@/modules/command/command.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { DownloadController } from './modules/download/download.controller';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ChatModule } from './modules/chat/chat.module';
     CommandModule,
     ChatModule,
   ],
-  controllers: [],
+  controllers: [DownloadController],
   providers: [],
 })
 export class AppModule {}

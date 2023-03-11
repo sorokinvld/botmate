@@ -1,13 +1,19 @@
-import { Select } from '@chakra-ui/react';
+import { Avatar } from '@chakra-ui/react';
+import { useChats } from 'src/hooks/use-chats';
 
 type ChatSelectorProps = {
   // children: React.ReactNode;
 };
 function ChatSelector(props: ChatSelectorProps) {
+  const { activeChat } = useChats();
+  console.log('activeChat', activeChat);
+
   return (
-    <Select w="52">
-      <option>BotMate Chat</option>
-    </Select>
+    <>
+      <Avatar
+        src={`http://localhost:8080/api/download/photo/${activeChat?.chat_id}.jpg`}
+      />
+    </>
   );
 }
 

@@ -1,11 +1,27 @@
 import { apiSlice as api } from '@store';
-export const addTagTypes = ['user', 'auth', 'bot', 'command'] as const;
+export const addTagTypes = [
+  'download',
+  'user',
+  'auth',
+  'bot',
+  'command',
+  'chats',
+] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
   .injectEndpoints({
     endpoints: (build) => ({
+      downloadControllerDownload: build.query<
+        DownloadControllerDownloadApiResponse,
+        DownloadControllerDownloadApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/download/${queryArg['type']}/${queryArg.fileName}`,
+        }),
+        providesTags: ['download'],
+      }),
       usersControllerProfile: build.query<
         UsersControllerProfileApiResponse,
         UsersControllerProfileApiArg
@@ -112,10 +128,25 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['command'],
       }),
+      chatControllerGetBotChats: build.query<
+        ChatControllerGetBotChatsApiResponse,
+        ChatControllerGetBotChatsApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api`,
+          params: { botId: queryArg.botId, type: queryArg['type'] },
+        }),
+        providesTags: ['chats'],
+      }),
     }),
     overrideExisting: false,
   });
 export { injectedRtkApi as userApi };
+export type DownloadControllerDownloadApiResponse = unknown;
+export type DownloadControllerDownloadApiArg = {
+  type: string;
+  fileName: string;
+};
 export type UsersControllerProfileApiResponse =
   /** status 200 The user profile */ User;
 export type UsersControllerProfileApiArg = void;
@@ -167,6 +198,13 @@ export type CommandControllerUpdateCommandApiArg = {
   id: number;
   updateCommandDto: UpdateCommandDto;
 };
+export type ChatControllerGetBotChatsApiResponse =
+  /** status 200 Get bot chats */ Chat[];
+export type ChatControllerGetBotChatsApiArg = {
+  botId: string;
+  /** Chat type */
+  type: 'private' | 'group' | 'supergroup' | 'channel';
+};
 export type CommandProp = {};
 export type Command = {
   id: number;
@@ -179,6 +217,16 @@ export type Command = {
   bot: string;
   createdAt: string;
 };
+export type Chat = {
+  id: string;
+  chat_id: string;
+  type: 'private' | 'group' | 'supergroup' | 'channel';
+  username: string;
+  title: string;
+  first_name: string;
+  last_name: string;
+  bot: string;
+};
 export type Bot = {
   id: string;
   first_name: string;
@@ -186,9 +234,10 @@ export type Bot = {
   token: string;
   avatar?: string;
   status?: 'active' | 'inactive' | 'error';
-  createdAt?: string;
+  created_at?: string;
   user: User;
   commands: Command[];
+  chats: Chat[];
 };
 export type User = {
   id: number;
@@ -225,8 +274,9 @@ export type OmitTypeClass = {
   token: string;
   avatar?: string;
   status?: 'active' | 'inactive' | 'error';
-  createdAt?: string;
+  created_at?: string;
   commands: Command[];
+  chats: Chat[];
 };
 export type CreateBotDto = {
   token: string;
@@ -260,6 +310,8 @@ export type UpdateCommandDto = {
   props: CommandProp[];
 };
 export const {
+  useDownloadControllerDownloadQuery,
+  useLazyDownloadControllerDownloadQuery,
   useUsersControllerProfileQuery,
   useLazyUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
@@ -275,4 +327,6 @@ export const {
   useCommandControllerGetCommandByIdQuery,
   useLazyCommandControllerGetCommandByIdQuery,
   useCommandControllerUpdateCommandMutation,
+  useChatControllerGetBotChatsQuery,
+  useLazyChatControllerGetBotChatsQuery,
 } = injectedRtkApi;

@@ -3,12 +3,14 @@ import { apiSlice } from './base-query';
 
 import { authReducer } from './slices/auth-slice';
 import { botReducer } from './slices/bot-slice';
+import { chatReducer } from './slices/chat-slice';
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
     bot: botReducer,
+    chat: chatReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(...[apiSlice.middleware]),

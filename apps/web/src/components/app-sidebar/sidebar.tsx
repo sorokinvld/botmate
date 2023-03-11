@@ -1,6 +1,7 @@
 import { BotMateLogo } from '@components';
 import { useActiveBot } from '@hooks';
 import {
+  Avatar,
   Box,
   Flex,
   Heading,
@@ -88,7 +89,10 @@ function AppSidebar({}: SidebarProps) {
             icon={<HiOutlineBell size={14} />}
           />
         </HStack>
-        <HStack>
+        <HStack mt={4}>
+          <Avatar
+            src={`http://localhost:8080/api/download/photo/${activeBot.id}.jpg`}
+          />
           <Box mt={4}>
             <Heading size="sm">{activeBot.first_name}</Heading>
             <Text opacity={0.8} fontSize={12}>

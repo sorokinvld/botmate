@@ -10,6 +10,9 @@ import {
 } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useActiveBot } from '@hooks';
+import { Loader } from '@atoms';
+import { useChats } from '@hooks';
 
 const ModerationsList = [
   {
@@ -68,7 +71,11 @@ type ModerationsLayoutProps = {
 };
 function ModerationsLayout({ children }: ModerationsLayoutProps) {
   const r = useRouter();
+  const activeBot = useActiveBot();
+  const { isLoading } = useChats();
+
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
+  if (isLoading) return <Loader text="loading chat data..." />;
 
   return (
     <Flex flex={1} overflow="hidden" h="100%">
