@@ -20,7 +20,7 @@ export const useChats = () => {
   }, [chats]);
 
   return {
-    isLoading: isLoading || chats.length === 0,
+    isLoading: isLoading,
     chats,
     activeChat: chats[0],
   } as {

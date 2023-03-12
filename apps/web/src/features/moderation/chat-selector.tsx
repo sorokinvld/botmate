@@ -7,6 +7,8 @@ type ChatSelectorProps = {
 function ChatSelector(props: ChatSelectorProps) {
   const { activeChat } = useChats();
 
+  if (!activeChat) return null;
+
   return (
     <>
       <Avatar

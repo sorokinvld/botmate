@@ -1,6 +1,12 @@
-import { SidebarItem } from '@components';
+import { AlertCard, SidebarItem } from '@components';
 import { Flex, Box, HStack, Divider, Text, VStack } from '@chakra-ui/react';
-import { HiGlobeAlt, HiPlay, HiSpeakerphone, HiUsers } from 'react-icons/hi';
+import {
+  HiChatAlt2,
+  HiGlobeAlt,
+  HiPlay,
+  HiSpeakerphone,
+  HiUsers,
+} from 'react-icons/hi';
 
 import {
   HiFilter,
@@ -10,7 +16,6 @@ import {
 } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useActiveBot } from '@hooks';
 import { Loader } from '@atoms';
 import { useChats } from '@hooks';
 
@@ -71,11 +76,20 @@ type ModerationsLayoutProps = {
 };
 function ModerationsLayout({ children }: ModerationsLayoutProps) {
   const r = useRouter();
-  const activeBot = useActiveBot();
-  const { isLoading } = useChats();
+  const { isLoading, activeChat } = useChats();
 
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
   if (isLoading) return <Loader text="loading chat data..." />;
+
+  if (!activeChat) {
+    return (
+      <AlertCard
+        title="No chats found"
+        description="Try adding your bot to a group and then refresh this page."
+        icon={<HiChatAlt2 />}
+      />
+    );
+  }
 
   return (
     <Flex flex={1} overflow="hidden" h="100%">

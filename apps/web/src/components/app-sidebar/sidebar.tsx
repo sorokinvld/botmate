@@ -46,8 +46,8 @@ const sidebarItems = [
   {
     label: 'Bot Debug',
     icon: <HiTable />,
-    href: '/moderations/filters',
-    match: /^\/moderations/,
+    href: '/moderations/debug',
+    match: /^\/debug/,
   },
   {
     label: 'Integrations',
