@@ -71,10 +71,10 @@ const ModerationsList = [
     match: /\/moderations\/federation/,
   },
   {
-    label: 'Announcement',
+    label: 'Announcements',
     icon: <HiSpeakerphone />,
-    href: '/moderations/announcement',
-    match: /\/moderations\/announcement/,
+    href: '/moderations/announcements',
+    match: /\/moderations\/announcements/,
   },
 ];
 

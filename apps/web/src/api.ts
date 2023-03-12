@@ -8,6 +8,7 @@ export const addTagTypes = [
   'command',
   'chats',
   'filters',
+  'announcements',
 ] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -180,6 +181,18 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['filters'],
       }),
+      announcementsControllerCreate: build.mutation<
+        AnnouncementsControllerCreateApiResponse,
+        AnnouncementsControllerCreateApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/announcements`,
+          method: 'POST',
+          body: queryArg.createAnnouncementDto,
+          params: { botId: queryArg.botId, chatId: queryArg.chatId },
+        }),
+        invalidatesTags: ['announcements'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -263,6 +276,12 @@ export type FiltersControllerSaveFiltersApiArg = {
   chatId: string;
   botId: string;
   saveFilterDto: SaveFilterDto;
+};
+export type AnnouncementsControllerCreateApiResponse = unknown;
+export type AnnouncementsControllerCreateApiArg = {
+  botId: string;
+  chatId: string;
+  createAnnouncementDto: CreateAnnouncementDto;
 };
 export type VersionApiResult = {
   version: string;
@@ -381,6 +400,7 @@ export type SaveFilterDto = {
   type: 'messages' | 'service_messages' | 'words' | 'advanced';
   value: any;
 };
+export type CreateAnnouncementDto = {};
 export const {
   useDownloadControllerDownloadQuery,
   useLazyDownloadControllerDownloadQuery,
@@ -407,4 +427,5 @@ export const {
   useFiltersControllerGetFiltersQuery,
   useLazyFiltersControllerGetFiltersQuery,
   useFiltersControllerSaveFiltersMutation,
+  useAnnouncementsControllerCreateMutation,
 } = injectedRtkApi;

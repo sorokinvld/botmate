@@ -16,6 +16,7 @@ import { ChatModule } from './modules/chat/chat.module';
 import { DownloadController } from './modules/download/download.controller';
 import { FiltersModule } from './modules/filters/filters.module';
 import { BotMateModule } from './modules/botmate/botmate.module';
+import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { BotMateModule } from './modules/botmate/botmate.module';
     CommandModule,
     ChatModule,
     FiltersModule,
+    AnnouncementsModule,
   ],
   controllers: [DownloadController],
   providers: [

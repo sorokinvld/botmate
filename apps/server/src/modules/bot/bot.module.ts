@@ -26,6 +26,7 @@ import { Filter } from '@/entities/filter.entity';
     BotFilterService,
   ],
   controllers: [BotController],
+  exports: [],
 })
 export class BotModule implements OnModuleInit {
   constructor(private readonly botProcessService: BotProcessService) {}
