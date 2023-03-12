@@ -1,7 +1,10 @@
 import * as path from 'path';
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
+
+import { SentryInterceptor } from './interceptors/sentry.interceptor';
 
 // App Modules
 import { AuthModule } from '@modules/auth/auth.module';
@@ -31,6 +34,11 @@ import { BotMateModule } from './modules/botmate/botmate.module';
     FiltersModule,
   ],
   controllers: [DownloadController],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: SentryInterceptor,
+    },
+  ],
 })
 export class AppModule {}
