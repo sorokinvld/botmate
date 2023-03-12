@@ -9,11 +9,8 @@ import {
   FiltersBlacklistWords,
   FilterServiceMessages,
 } from '@features/moderation';
-import { useForm } from 'react-hook-form';
 
 function Filters() {
-  const form = useForm();
-
   return (
     <Box maxW="6xl" m="auto">
       <Stack spacing={6}>
