@@ -47,10 +47,10 @@ const ModerationsList = [
     match: /\/moderations\/admins/,
   },
   {
-    label: 'Actions Runner',
+    label: 'Triggers',
     icon: <HiLightningBolt />,
-    href: '/moderations/actions',
-    match: /\/moderations\/actions/,
+    href: '/moderations/triggers',
+    match: /\/moderations\/triggers/,
   },
   {
     label: 'Warning System',
@@ -80,8 +80,10 @@ const ModerationsList = [
 
 type ModerationsLayoutProps = {
   children: React.ReactNode;
+  noPadding?: boolean;
+  onlyIcons?: boolean;
 };
-function ModerationsLayout({ children }: ModerationsLayoutProps) {
+function ModerationsLayout({ children, noPadding }: ModerationsLayoutProps) {
   const r = useRouter();
   const { isLoading, activeChat } = useChats();
 
@@ -142,7 +144,7 @@ function ModerationsLayout({ children }: ModerationsLayoutProps) {
 
         <Divider />
 
-        <Box p={4} overflow="auto">
+        <Box p={noPadding ? 0 : 4} overflow="auto">
           {children}
         </Box>
       </Box>
@@ -154,7 +156,7 @@ function ModerationsLayout({ children }: ModerationsLayoutProps) {
         m="auto"
         h="full"
         display={{ base: 'none', lg: 'block' }}
-        p={4}
+        p={noPadding ? 0 : 4}
       >
         {children}
       </Box>

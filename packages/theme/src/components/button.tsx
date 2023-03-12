@@ -23,13 +23,7 @@ const Button: StyleConfig = {
       transition: 'all 0.2s ease-in-out',
     }),
   },
-  sizes: {
-    sm: {
-      px: 4,
-      py: 2,
-      height: 9,
-    },
-  },
+  sizes: {},
   defaultProps: {
     size: 'sm',
     variant: 'outline',
