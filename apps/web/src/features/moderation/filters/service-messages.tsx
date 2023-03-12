@@ -1,56 +1,12 @@
-import {
-  useFiltersControllerGetFiltersQuery,
-  useFiltersControllerSaveFiltersMutation,
-} from '@api';
 import { Card } from '@atoms';
 import { Stack, HStack, Spacer, Switch, Text, Button } from '@chakra-ui/react';
-import { useActiveBot, useActiveChat } from '@hooks';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { HiCheck } from 'react-icons/hi';
-import { toast } from 'react-toastify';
+import { useFilters } from './hook';
 
 type FilterServiceMessagesProps = {};
 function FilterServiceMessages({}: FilterServiceMessagesProps) {
-  const form = useForm();
-  const activeBot = useActiveBot();
-  const activeChat = useActiveChat();
-
-  const [saveFilter, { isLoading: isSaving }] =
-    useFiltersControllerSaveFiltersMutation();
-  const { data } = useFiltersControllerGetFiltersQuery({
-    botId: activeBot?.id,
-    chatId: activeChat?.chat_id,
+  const { form, isSaving, saveData } = useFilters({
     type: 'service_messages',
   });
-
-  useEffect(() => {
-    if (data) {
-      form.reset(data.value);
-    }
-  }, [data]);
-
-  const values = form.watch();
-
-  const saveData = () => {
-    const data = form.getValues();
-
-    saveFilter({
-      botId: activeBot?.id,
-      chatId: activeChat?.chat_id,
-      saveFilterDto: {
-        type: 'service_messages',
-        value: data,
-      },
-    }).then(() => {
-      toast.success('Filter saved', {
-        icon: <HiCheck />,
-        progressStyle: {
-          backgroundColor: '#49b793',
-        },
-      });
-    });
-  };
 
   return (
     <Card

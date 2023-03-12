@@ -1,7 +1,3 @@
-import {
-  useFiltersControllerGetFiltersQuery,
-  useFiltersControllerSaveFiltersMutation,
-} from '@api';
 import { Card, RadioButton } from '@atoms';
 import {
   Stack,
@@ -22,11 +18,9 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
-import { useActiveBot, useActiveChat } from '@hooks';
-import { useCallback, useEffect, useState } from 'react';
-import { useForm, UseFormReturn } from 'react-hook-form';
-import { HiCheck } from 'react-icons/hi';
-import { toast } from 'react-toastify';
+import { useCallback, useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
+import { useFilters } from './hook';
 
 // todo: make this a component and reusable
 type MessageTypesOption = {
@@ -126,52 +120,16 @@ const OptionsGenerator = ({
 
 type FilterMessageTypesProps = {};
 function FilterMessageTypes({}: FilterMessageTypesProps) {
-  const form = useForm();
   const d = useDisclosure();
-  const activeBot = useActiveBot();
-  const activeChat = useActiveChat();
   const [activeMsgType, setActiveMsgType] = useState<MessageTypesType | null>(
     null,
   );
-  const [saveFilter, { isLoading: isSaving }] =
-    useFiltersControllerSaveFiltersMutation();
-  const { data } = useFiltersControllerGetFiltersQuery({
-    botId: activeBot?.id,
-    chatId: activeChat?.chat_id,
-    type: 'messages',
-  });
-
-  useEffect(() => {
-    if (data) {
-      form.reset(data.value);
-    }
-  }, [data]);
+  const { form, isSaving, saveData } = useFilters({ type: 'messages' });
 
   const getActiveValue = useCallback(
     (key: string) => form.getValues(`${activeMsgType?.id}.${key}`),
     [form, activeMsgType],
   );
-
-  const saveData = () => {
-    const data = form.getValues();
-
-    saveFilter({
-      botId: activeBot?.id,
-      chatId: activeChat?.chat_id,
-      saveFilterDto: {
-        type: 'messages',
-        value: data,
-      },
-    }).then(() => {
-      toast.success('Filter saved', {
-        icon: <HiCheck />,
-        progressStyle: {
-          backgroundColor: '#49b793',
-        },
-      });
-      d.onClose();
-    });
-  };
 
   return (
     <Card title="Message Type" description="Configure what must be filtered">

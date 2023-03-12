@@ -1,7 +1,3 @@
-import {
-  useFiltersControllerSaveFiltersMutation,
-  useFiltersControllerGetFiltersQuery,
-} from '@api';
 import { Card } from '@atoms';
 import {
   Button,
@@ -12,53 +8,11 @@ import {
   Switch,
   Text,
 } from '@chakra-ui/react';
-import { useActiveBot, useActiveChat } from '@hooks';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { HiCheck } from 'react-icons/hi';
-import { toast } from 'react-toastify';
+import { useFilters } from './hook';
 
 type FiltersBlacklistWordsProps = {};
 function FiltersBlacklistWords({}: FiltersBlacklistWordsProps) {
-  const form = useForm();
-  const activeBot = useActiveBot();
-  const activeChat = useActiveChat();
-
-  const [saveFilter, { isLoading: isSaving }] =
-    useFiltersControllerSaveFiltersMutation();
-  const { data } = useFiltersControllerGetFiltersQuery({
-    botId: activeBot?.id,
-    chatId: activeChat?.chat_id,
-    type: 'words',
-  });
-
-  useEffect(() => {
-    if (data) {
-      form.reset(data.value);
-    }
-  }, [data]);
-
-  const values = form.watch();
-
-  const saveData = () => {
-    const data = form.getValues();
-
-    saveFilter({
-      botId: activeBot?.id,
-      chatId: activeChat?.chat_id,
-      saveFilterDto: {
-        type: 'words',
-        value: data,
-      },
-    }).then(() => {
-      toast.success('Filter saved', {
-        icon: <HiCheck />,
-        progressStyle: {
-          backgroundColor: '#49b793',
-        },
-      });
-    });
-  };
+  const { form, isSaving, saveData } = useFilters({ type: 'words' });
 
   return (
     <Card
