@@ -1,4 +1,5 @@
 import type { StyleConfig } from '@chakra-ui/styled-system';
+import { mode } from '@chakra-ui/theme-tools';
 
 const Button: StyleConfig = {
   baseStyle: {
@@ -9,7 +10,8 @@ const Button: StyleConfig = {
   },
   variants: {
     solid: () => ({
-      backgroundColor: '#5458c5',
+      backgroundColor: mode('#8488fc', '#5458c5'),
+      color: mode('#fff', '#1e2532'),
       borderWidth: '1px',
       _hover: {
         backgroundColor: '#6165cd',

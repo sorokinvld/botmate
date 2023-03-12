@@ -16,7 +16,80 @@ export class BotFilterService {
     @InjectRepository(Filter) private filterRepository: Repository<Filter>,
   ) {}
 
-  async filterMessage(bot: Bot, ctx: Context) {
+  setupFilters(bot: Bot) {
+    bot.use(async (ctx, next) => {
+      next();
+
+      const filterData = await this.filterRepository.find({
+        where: {
+          bot_id: ctx.me.id.toString(),
+          chat_id: ctx.chat.id.toString(),
+        },
+      });
+
+      if (!filterData) return;
+
+      const messagesFilterData = filterData.find(
+        (filter) => filter.type === FilterType.MESSAGES,
+      );
+      const serviceMessagesFilterData = filterData.find(
+        (filter) => filter.type === FilterType.SERVICE_MESSAGES,
+      );
+      const wordsFilterData = filterData.find(
+        (filter) => filter.type === FilterType.WORDS,
+      );
+
+      if (messagesFilterData) {
+        this.filterMessage(ctx);
+      }
+
+      if (serviceMessagesFilterData) {
+        this.filterServiceMessage(ctx, serviceMessagesFilterData.value);
+      }
+
+      if (wordsFilterData) {
+        this.filterWords(ctx, wordsFilterData.value);
+      }
+    });
+  }
+
+  async filterWords(ctx: Context, data: any) {
+    if (ctx.message.text) {
+      const userWords = ctx.message.text.split(' ');
+      const words = data.words.split(',');
+
+      for (let userWord of userWords) {
+        userWord = userWord.toLowerCase();
+
+        if (words.includes(userWord)) {
+          ctx.deleteMessage();
+          break;
+        }
+      }
+    }
+  }
+
+  async filterServiceMessage(ctx: Context, data: any) {
+    if (ctx.message.new_chat_members?.length > 0) {
+      if (data.new_chat_members) {
+        ctx.deleteMessage();
+      }
+    }
+
+    if (ctx.message.left_chat_member) {
+      if (data.left_chat_member) {
+        ctx.deleteMessage();
+      }
+    }
+
+    if (ctx.message.pinned_message) {
+      if (data.pinned_message) {
+        ctx.deleteMessage();
+      }
+    }
+  }
+
+  async filterMessage(ctx: Context) {
     const filterData = await this.filterRepository.findOne({
       where: {
         bot_id: ctx.me.id.toString(),

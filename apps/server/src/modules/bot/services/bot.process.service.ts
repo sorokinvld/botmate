@@ -39,9 +39,7 @@ export class BotProcessService {
        * Filter Messages
        */
 
-      bot.on('message', (ctx) => {
-        this.filterService.filterMessage(bot, ctx);
-      });
+      this.filterService.setupFilters(bot);
 
       /**
        * download the profile picture of the chat after joining

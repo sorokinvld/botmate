@@ -2,6 +2,7 @@ import { AlertCard, SidebarItem } from '@components';
 import { Flex, Box, HStack, Divider, Text, VStack } from '@chakra-ui/react';
 import {
   HiChatAlt2,
+  HiChip,
   HiGlobeAlt,
   HiPlay,
   HiSpeakerphone,
@@ -50,6 +51,12 @@ const ModerationsList = [
     icon: <HiLightningBolt />,
     href: '/moderations/actions',
     match: /\/moderations\/actions/,
+  },
+  {
+    label: 'Warning System',
+    icon: <HiChip />,
+    href: '/moderations/warnings',
+    match: /\/moderations\/warnings/,
   },
   {
     label: 'Entertainment',
