@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.14](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.13...0.0.1-alpha.14) (2023-03-12)
+
+
+### 🪲 Bug Fixes
+
+* link was not filtering ([71cee29](https://github.com/botmate/botmate-awesome/commit/71cee29a2bae023bb7a44c807a1b4c228e457768))
+
 ### [0.0.1-alpha.13](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.12...0.0.1-alpha.13) (2023-03-12)
 
 
