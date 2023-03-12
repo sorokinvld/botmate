@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.15](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.14...0.0.1-alpha.15) (2023-03-12)
+
+
+### 🚀 Features
+
+* add announcement ([58f1e8c](https://github.com/botmate/botmate-awesome/commit/58f1e8cc732927c1f3b02c9be7be6356128c3da0))
+
 ### [0.0.1-alpha.14](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.13...0.0.1-alpha.14) (2023-03-12)
 
 
