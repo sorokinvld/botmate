@@ -12,6 +12,7 @@ type Method = 'allow' | 'block';
 @Injectable()
 export class BotFilterService {
   private readonly logger = new BotMateLogger(BotFilterService.name);
+
   constructor(
     @InjectRepository(Filter) private filterRepository: Repository<Filter>,
   ) {}
@@ -40,7 +41,7 @@ export class BotFilterService {
       );
 
       if (messagesFilterData) {
-        this.filterMessage(ctx);
+        this.filterMessage(ctx, messagesFilterData.value);
       }
 
       if (serviceMessagesFilterData) {
@@ -89,25 +90,16 @@ export class BotFilterService {
     }
   }
 
-  async filterMessage(ctx: Context) {
-    const filterData = await this.filterRepository.findOne({
-      where: {
-        bot_id: ctx.me.id.toString(),
-        chat_id: ctx.chat.id.toString(),
-        type: FilterType.MESSAGES,
-      },
-    });
-
-    if (!filterData) return;
-
-    const messageTypes = Object.keys(filterData.value);
+  async filterMessage(ctx: Context, data: any) {
+    const messageTypes = Object.keys(data);
+    const logger = this.logger;
 
     /**
      * Link Filters
      */
     function filterLinks() {
-      const method: Method = filterData.value.links.method;
-      const filteredUrls: string[] = filterData.value.links.filter.split(',');
+      const method: Method = data.links.method;
+      const filteredUrls: string[] = data.links.filter.split(',');
 
       const text = ctx.message.text || '';
 
@@ -128,38 +120,49 @@ export class BotFilterService {
             }
           }
         });
-      } else
-        ctx.message.entities?.forEach((entity) => {
-          if (entity.type === 'url') {
-            if (messageTypes.includes('links')) {
-              const url = ctx.message.text.substring(
-                entity.offset,
-                entity.offset + entity.length,
-              );
+      } else {
+        const entities = ctx.message.entities;
+        if (entities) {
+          for (const entity of entities) {
+            if (data.links.filter === '') {
+              ctx.deleteMessage();
+              break;
+            }
 
-              try {
-                if (filteredUrls.includes(url)) {
-                  if (method === 'block') {
-                    ctx.deleteMessage();
+            if (entity.type === 'url') {
+              if (messageTypes.includes('links')) {
+                const url = ctx.message.text.substring(
+                  entity.offset,
+                  entity.offset + entity.length,
+                );
+
+                try {
+                  if (filteredUrls.includes(url)) {
+                    if (method === 'block') {
+                      ctx.deleteMessage();
+                      break;
+                    }
+                  } else {
+                    if (method === 'allow') {
+                      ctx.deleteMessage();
+                      break;
+                    }
                   }
-                } else {
-                  if (method === 'allow') {
-                    ctx.deleteMessage();
-                  }
+                } catch (e) {
+                  logger.error(e);
                 }
-              } catch (e) {
-                console.log('e', e);
               }
             }
           }
-        });
+        }
+      }
     }
 
     /**
      * Sticker Filter
      */
     function filterSticker() {
-      const stickers = filterData.value.stickers;
+      const stickers = data.stickers;
 
       if (!ctx.message.sticker) return;
       if (!stickers) return;
@@ -197,7 +200,7 @@ export class BotFilterService {
      * Mentions Filter
      */
     function filterMentions() {
-      const mentions = filterData.value.mentions;
+      const mentions = data.mentions;
 
       if (!mentions) return;
 
