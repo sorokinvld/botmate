@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.13](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.12...0.0.1-alpha.13) (2023-03-12)
+
+
+### 🚀 Features
+
+* add more filtering ([3225042](https://github.com/botmate/botmate-awesome/commit/3225042d1e46611440afbf6293982bd2df7a0ac6))
+
 ### [0.0.1-alpha.12](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.11...0.0.1-alpha.12) (2023-03-11)
 
 
