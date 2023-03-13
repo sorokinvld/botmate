@@ -40,16 +40,21 @@ export class BotFilterService {
         (filter) => filter.type === FilterType.WORDS,
       );
 
-      if (messagesFilterData) {
-        this.filterMessage(ctx, messagesFilterData.value);
-      }
+      try {
+        if (messagesFilterData) {
+          this.filterMessage(ctx, messagesFilterData.value);
+        }
 
-      if (serviceMessagesFilterData) {
-        this.filterServiceMessage(ctx, serviceMessagesFilterData.value);
-      }
+        if (serviceMessagesFilterData) {
+          this.filterServiceMessage(ctx, serviceMessagesFilterData.value);
+        }
 
-      if (wordsFilterData) {
-        this.filterWords(ctx, wordsFilterData.value);
+        if (wordsFilterData) {
+          this.filterWords(ctx, wordsFilterData.value);
+        }
+      } catch (e) {
+        this.logger.error("Can't filter message");
+        this.logger.error(e);
       }
     });
   }
