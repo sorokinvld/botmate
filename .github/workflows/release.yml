@@ -33,9 +33,6 @@ jobs:
         with:
           to: '-1001737476988'
           token: ${{ secrets.BOT_TOKEN }}
+          format: markdown
           message: |
-            🚀 New version: ${{ github.ref_name }} published.
-
-            *Release notes:*
-
-            ${{ github.event.release.body }}
+            📦 New version: *${{ github.ref_name }}* published. Run `npm i -g botmate` to update.
