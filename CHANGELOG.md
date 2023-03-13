@@ -1,5 +1,18 @@
 
 
+### [0.0.1-alpha.16](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.15...0.0.1-alpha.16) (2023-03-13)
+
+
+### 🪲 Bug Fixes
+
+* add error handling to filter ([6068f76](https://github.com/botmate/botmate-awesome/commit/6068f76a1f888c2a3633b315b97426fa4c3740c9))
+* invalid link deletion ([2b45714](https://github.com/botmate/botmate-awesome/commit/2b457144af0ec45279d4c8724924c65a763d5951))
+
+
+### 🚀 Features
+
+* bot restart, configurations ([16ee1da](https://github.com/botmate/botmate-awesome/commit/16ee1da8ec99a2e775730e87b1ab75e003b78e46))
+
 ### [0.0.1-alpha.15](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.14...0.0.1-alpha.15) (2023-03-12)
 
 
