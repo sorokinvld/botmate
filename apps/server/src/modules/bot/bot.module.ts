@@ -1,4 +1,4 @@
-import { Command, Settings } from '@/entities';
+import { Command, Settings, Storage } from '@/entities';
 import { Bot } from '@/entities/bot.entity';
 import { User } from '@/entities/user.entity';
 import { Module, OnModuleInit } from '@nestjs/common';
@@ -14,10 +14,19 @@ import { DownloadService } from '../download/download.service';
 import { BotFilterService } from './services/bot.filter.service';
 import { Filter } from '@/entities/filter.entity';
 import { SettingsService } from '../settings/settings.service';
+import { StorageService } from '../storage/storage.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Bot, User, Command, Chat, Filter, Settings]),
+    TypeOrmModule.forFeature([
+      Bot,
+      User,
+      Command,
+      Chat,
+      Filter,
+      Settings,
+      Storage,
+    ]),
   ],
   providers: [
     BotService,
@@ -28,6 +37,7 @@ import { SettingsService } from '../settings/settings.service';
     DownloadService,
     BotFilterService,
     SettingsService,
+    StorageService,
   ],
   controllers: [BotController],
   exports: [],

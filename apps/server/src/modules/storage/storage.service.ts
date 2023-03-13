@@ -9,10 +9,10 @@ export class StorageService {
     @InjectRepository(Storage) private storageRepository: Repository<Storage>,
   ) {}
 
-  async get<T>(key: string): Promise<T> {
+  async get<T>(key: string, defaultValue?: T): Promise<T> {
     return this.storageRepository
       .findOne({ where: { key } })
-      .then((s) => s?.value);
+      .then((s) => s?.value ?? defaultValue);
   }
 
   async set<T>(key: string, value: T): Promise<void> {
