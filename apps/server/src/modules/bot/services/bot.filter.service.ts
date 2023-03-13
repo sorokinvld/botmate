@@ -129,12 +129,12 @@ export class BotFilterService {
         const entities = ctx.message.entities;
         if (entities) {
           for (const entity of entities) {
-            if (data.links.filter === '') {
-              ctx.deleteMessage();
-              break;
-            }
-
             if (entity.type === 'url') {
+              if (data.links.filter === '') {
+                ctx.deleteMessage();
+                break;
+              }
+
               if (messageTypes.includes('links')) {
                 const url = ctx.message.text.substring(
                   entity.offset,
