@@ -42,4 +42,8 @@ export class Command {
   @ApiProperty()
   @Column()
   createdAt: string;
+
+  @ApiProperty()
+  @Column()
+  updatedAt: string;
 }

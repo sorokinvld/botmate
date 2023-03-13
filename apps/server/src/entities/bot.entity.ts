@@ -1,13 +1,6 @@
 import { BotStatus } from '@/common/bot.types';
-import { ApiProperty, ApiPropertyOptional, OmitType } from '@nestjs/swagger';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToOne,
-  OneToMany,
-  PrimaryColumn,
-} from 'typeorm';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 import { Chat } from './chat.entity';
 import { Command } from './command.entity';
 import { User } from './user.entity';

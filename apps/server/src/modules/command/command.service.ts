@@ -43,7 +43,10 @@ export class CommandService {
       new BotRestartEvent(commandData.bot.id),
     );
 
-    return this.cmdRepo.update({ id }, { ...command });
+    return this.cmdRepo.update(
+      { id },
+      { ...command, updatedAt: new Date().toISOString() },
+    );
   }
 
   async getCommandsByBotId(botId: string) {
