@@ -11,7 +11,7 @@ import { BotMateLogger } from '@/common';
 import { Chat } from '@/entities/chat.entity';
 import { DownloadService } from '@/modules/download/download.service';
 import { BotFilterService } from './bot.filter.service';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { OnEvent } from '@nestjs/event-emitter';
 import { BotRestartEvent } from '../events/bot-restart.event';
 
 @Injectable()

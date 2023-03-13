@@ -7,6 +7,8 @@ import { NodeVM } from 'vm2';
 export class BotScriptService {
   private readonly logger = new BotMateLogger(BotScriptService.name);
 
+  // constructor() {}
+
   public runScript(script: string, botCtx: Context) {
     this.logger.debug(`running custom script`);
     const vm = new NodeVM({
