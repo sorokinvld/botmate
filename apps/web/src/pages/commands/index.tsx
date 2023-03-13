@@ -16,6 +16,7 @@ import { HiPlus, HiTrash } from 'react-icons/hi';
 import Link from 'next/link';
 import { useCommandControllerGetCommandsQuery } from '@api';
 import { useActiveBot } from '@hooks';
+import moment from 'moment';
 
 function Commands() {
   const activeBot = useActiveBot();
@@ -25,7 +26,7 @@ function Commands() {
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={6}>
-      {data?.map(({ id, name, command, createdAt }) => (
+      {data?.map(({ id, name, command, createdAt, updatedAt }) => (
         <Box key={id} p={4} borderWidth="1px" rounded="lg">
           <HStack>
             <Heading size="md">{name}</Heading>
@@ -35,7 +36,7 @@ function Commands() {
             </Kbd>
           </HStack>
           <Text fontSize={12} opacity={0.8} mt={2}>
-            Last updated 4 minutes ago
+            Last updated {moment(updatedAt).fromNow()}
           </Text>
 
           <ButtonGroup mt={4} size="sm">

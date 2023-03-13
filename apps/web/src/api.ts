@@ -39,17 +39,6 @@ const injectedRtkApi = api
         query: () => ({ url: `/api/botmate/update`, method: 'POST' }),
         invalidatesTags: ['botmate'],
       }),
-      botMateControllerSetBotAutoRestart: build.mutation<
-        BotMateControllerSetBotAutoRestartApiResponse,
-        BotMateControllerSetBotAutoRestartApiArg
-      >({
-        query: (queryArg) => ({
-          url: `/api/botmate/bot-auto-restart`,
-          method: 'PUT',
-          body: queryArg.botAutoRestartDto,
-        }),
-        invalidatesTags: ['botmate'],
-      }),
       usersControllerProfile: build.query<
         UsersControllerProfileApiResponse,
         UsersControllerProfileApiArg
@@ -228,10 +217,6 @@ export type BotMateControllerGetVersionApiResponse =
 export type BotMateControllerGetVersionApiArg = void;
 export type BotMateControllerUpdateApiResponse = unknown;
 export type BotMateControllerUpdateApiArg = void;
-export type BotMateControllerSetBotAutoRestartApiResponse = unknown;
-export type BotMateControllerSetBotAutoRestartApiArg = {
-  botAutoRestartDto: BotAutoRestartDto;
-};
 export type UsersControllerProfileApiResponse =
   /** status 200 The user profile */ User;
 export type UsersControllerProfileApiArg = void;
@@ -317,7 +302,6 @@ export type AnnouncementsControllerCreateApiArg = {
 export type VersionApiResult = {
   version: string;
 };
-export type BotAutoRestartDto = {};
 export type CommandProp = {};
 export type Command = {
   id: number;
@@ -329,6 +313,7 @@ export type Command = {
   props: CommandProp[];
   bot: string;
   createdAt: string;
+  updatedAt: string;
 };
 export type Chat = {
   id: string;
@@ -404,6 +389,7 @@ export type CommandGetApiResponse = {
   privateCommand: boolean;
   props: CommandProp[];
   createdAt: string;
+  updatedAt: string;
 };
 export type CreateCommandDto = {
   name: string;
@@ -413,6 +399,7 @@ export type CreateCommandDto = {
   privateCommand: boolean;
   props: CommandProp[];
   bot: string;
+  updatedAt: string;
 };
 export type UpdateCommandDto = {
   name: string;
@@ -421,6 +408,7 @@ export type UpdateCommandDto = {
   enabled: boolean;
   privateCommand: boolean;
   props: CommandProp[];
+  updatedAt: string;
 };
 export type Filter = {
   chat_id: string;
@@ -439,7 +427,6 @@ export const {
   useBotMateControllerGetVersionQuery,
   useLazyBotMateControllerGetVersionQuery,
   useBotMateControllerUpdateMutation,
-  useBotMateControllerSetBotAutoRestartMutation,
   useUsersControllerProfileQuery,
   useLazyUsersControllerProfileQuery,
   useAuthControllerLoginMutation,

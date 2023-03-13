@@ -44,6 +44,6 @@ export class Command {
   createdAt: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ default: new Date().toISOString() })
   updatedAt: string;
 }
