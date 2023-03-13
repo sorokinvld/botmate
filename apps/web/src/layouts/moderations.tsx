@@ -132,7 +132,9 @@ function ModerationsLayout({ children, noPadding }: ModerationsLayoutProps) {
                 <HStack
                   p={2}
                   rounded="lg"
-                  bg={isActive ? 'brand.dark' : 'transparent'}
+                  bg={isActive ? '#8488fc' : 'transparent'}
+                  opacity={isActive ? 1 : 0.5}
+                  fontWeight="bold"
                 >
                   <Box>{item.icon}</Box>
                   <Text whiteSpace="nowrap">{item.label}</Text>

@@ -6,11 +6,7 @@ import React from 'react';
 function TriggerCreate() {
   return (
     <Box h="full">
-      <SimpleGrid columns={10} h="full">
-        <GridItem colSpan={{ base: 10, lg: 7 }} borderRightWidth="1px" p={4}>
-          <CreateTrigger />
-        </GridItem>
-      </SimpleGrid>
+      <CreateTrigger />
     </Box>
   );
 }
