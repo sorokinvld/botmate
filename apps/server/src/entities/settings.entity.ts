@@ -1,21 +1,28 @@
 import { ApiProperty, ApiResponseProperty } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-// this entity stores data in a key-value stucture
+export enum SettingsScope {
+  GLOBAL = 'global',
+  BOT = 'bot',
+  CHAT = 'chat',
+  USER = 'user',
+}
 
-@Entity()
-export class Moderation {
+@Entity({ name: 'settings' })
+export class Settings {
   @ApiResponseProperty()
   @PrimaryGeneratedColumn()
   id: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ unique: true })
   key: string;
 
-  @ApiProperty()
-  @Column()
-  chatId: string;
+  @ApiProperty({
+    enum: SettingsScope,
+  })
+  @Column({ default: SettingsScope.GLOBAL })
+  scope: string;
 
   @ApiProperty({
     type: 'any',

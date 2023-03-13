@@ -6,10 +6,21 @@ import {
   useLazyCommandControllerGetCommandByIdQuery,
 } from '@api';
 import { Loader } from '@atoms';
-import { GridItem, SimpleGrid, Spacer } from '@chakra-ui/react';
+import {
+  Divider,
+  GridItem,
+  Heading,
+  HStack,
+  IconButton,
+  SimpleGrid,
+  Spacer,
+  Stack,
+} from '@chakra-ui/react';
 import { CommandEntry } from '@components';
 import { DashboardLayout } from '@layouts';
 import { useRouter } from 'next/router';
+import { HiPlus } from 'react-icons/hi';
+import { useActiveBot } from '@hooks';
 
 function CommandEdit() {
   const r = useRouter();
@@ -31,7 +42,11 @@ function CommandEdit() {
   }
 
   return (
-    <SimpleGrid columns={10} h="full">
+    <SimpleGrid
+      columns={10}
+      h="full"
+      overflow={{ base: 'scroll', lg: 'hidden' }}
+    >
       <GridItem colSpan={{ base: 10, lg: 7 }} borderRightWidth="1px" p={4}>
         <CommandEntry
           isLoading={isUpdating}
@@ -45,6 +60,25 @@ function CommandEdit() {
             }).then(() => {});
           }}
         />
+      </GridItem>
+
+      <GridItem
+        colSpan={{ base: 10, lg: 3 }}
+        overflow={{ base: 'visible', lg: 'auto' }}
+      >
+        <HStack p={4}>
+          <Heading size="md">Variables</Heading>
+          <Spacer />
+          <IconButton
+            aria-label="add variable"
+            variant="ghost"
+            fontSize={16}
+            icon={<HiPlus />}
+          />
+        </HStack>
+        <Divider />
+
+        <Stack p={4}></Stack>
       </GridItem>
     </SimpleGrid>
   );

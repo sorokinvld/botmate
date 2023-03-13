@@ -17,14 +17,19 @@ import { DownloadController } from './modules/download/download.controller';
 import { FiltersModule } from './modules/filters/filters.module';
 import { BotMateModule } from './modules/botmate/botmate.module';
 import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Settings } from './entities';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, 'client'),
       exclude: ['/api/(.*)'],
     }),
+    TypeOrmModule.forFeature([Settings]),
     BotMateModule,
     DatabaseModule,
     UserModule,

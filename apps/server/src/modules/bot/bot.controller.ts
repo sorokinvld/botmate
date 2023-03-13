@@ -23,6 +23,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BotService } from './bot.service';
 import { CreateBotDTO } from './dto/create-bot.dto';
 import { BotProcessService } from './services/bot.process.service';
+import { BotRestartEvent } from './events/bot-restart.event';
 
 class BotStartStopResponse {
   ok: boolean;
@@ -100,6 +101,24 @@ export class BotController {
   async stopBot(@Param('id') id: string) {
     try {
       await this.botProcess.stopBot(id);
+      return { ok: true };
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Post(':id/restart')
+  @ApiOkResponse({
+    description: 'Restart bot',
+    type: BotStartStopResponse,
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Bot ID to restart',
+  })
+  async restartBot(@Param('id') id: string) {
+    try {
+      await this.botProcess.restartBot(new BotRestartEvent(id));
       return { ok: true };
     } catch (e) {
       throw new BadRequestException(e.message);

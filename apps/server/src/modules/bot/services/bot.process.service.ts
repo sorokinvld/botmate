@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Bot } from '@/entities/bot.entity';
 import { Repository } from 'typeorm';
+import { FilterQuery } from 'grammy/out/filter';
 import { BotStatus } from '@/common/bot.types';
 import { CommandService } from '@modules/command/command.service';
 import { BotScriptService } from './bot.script.service';
@@ -10,6 +11,8 @@ import { BotMateLogger } from '@/common';
 import { Chat } from '@/entities/chat.entity';
 import { DownloadService } from '@/modules/download/download.service';
 import { BotFilterService } from './bot.filter.service';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { BotRestartEvent } from '../events/bot-restart.event';
 
 @Injectable()
 export class BotProcessService {
@@ -19,7 +22,7 @@ export class BotProcessService {
   constructor(
     @InjectRepository(Bot) private botRepository: Repository<Bot>,
     @InjectRepository(Chat) private chatRepository: Repository<Chat>,
-    private cmdServie: CommandService,
+    private cmdService: CommandService,
     private scriptService: BotScriptService,
     private downloadService: DownloadService,
     private filterService: BotFilterService,
@@ -122,16 +125,27 @@ export class BotProcessService {
         }
       });
 
-      bot.on(':text', async (ctx) => {
-        this.logger.debug(`processing message: "${ctx.message.text}"`);
-        const command = await this.cmdServie.findCommand(
-          botId,
-          ctx.message.text,
-        );
-        if (!command) return;
+      const botCommands = await this.cmdService.findAllCommands(botId);
 
-        this.scriptService.runScript(command.script, ctx);
-      });
+      for (const botCommand of botCommands) {
+        const { command, script } = botCommand;
+
+        if (command.startsWith('/')) {
+          bot.hears(command, async (ctx) => {
+            this.scriptService.runScript(script, ctx);
+          });
+        } else {
+          try {
+            bot.on(command as FilterQuery, async (ctx) => {
+              this.scriptService.runScript(script, ctx);
+            });
+          } catch (e) {
+            bot.hears(command, async (ctx) => {
+              this.scriptService.runScript(script, ctx);
+            });
+          }
+        }
+      }
 
       bot.start();
 
@@ -182,5 +196,13 @@ export class BotProcessService {
     );
 
     return true;
+  }
+
+  @OnEvent('bot.restart')
+  async restartBot(data: BotRestartEvent) {
+    this.logger.debug('Restarting bot: ' + data.botId);
+    const { botId } = data;
+    await this.stopBot(botId);
+    await this.startBot(botId);
   }
 }

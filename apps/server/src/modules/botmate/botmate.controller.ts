@@ -1,5 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { SettingsService } from '../settings/settings.service';
 import { BotMateService } from './botmate.service';
 
 class VersionApiResult {
@@ -10,7 +11,10 @@ class VersionApiResult {
 @ApiTags('botmate')
 @Controller('botmate')
 export class BotMateController {
-  constructor(private bmService: BotMateService) {}
+  constructor(
+    private bmService: BotMateService,
+    private readonly confService: SettingsService,
+  ) {}
 
   @ApiOkResponse({
     description: 'Returns the version of the BotMate server',

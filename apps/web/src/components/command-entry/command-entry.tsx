@@ -59,28 +59,13 @@ function CommandEntry({
               <FormLabel>Command</FormLabel>
               <Input
                 {...form.register('command')}
-                placeholder="Enter command (/start)"
+                placeholder="Enter command"
               />
             </FormControl>
           </SimpleGrid>
 
           <FormControl>
             <FormLabel>Script</FormLabel>
-            {/* <CodeEditor
-              spellCheck="false"
-              language="js"
-              placeholder="Enter your script here..."
-              padding={15}
-              style={{
-                fontSize: 12,
-                borderWidth: 1,
-                borderRadius: 6,
-                minHeight: 400,
-                backgroundColor: '#191a23',
-                fontFamily:
-                  'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-              }}
-            /> */}
             <CodeEditor
               height="400px"
               extensions={[javascript({ jsx: true })]}

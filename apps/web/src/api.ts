@@ -39,6 +39,17 @@ const injectedRtkApi = api
         query: () => ({ url: `/api/botmate/update`, method: 'POST' }),
         invalidatesTags: ['botmate'],
       }),
+      botMateControllerSetBotAutoRestart: build.mutation<
+        BotMateControllerSetBotAutoRestartApiResponse,
+        BotMateControllerSetBotAutoRestartApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/botmate/bot-auto-restart`,
+          method: 'PUT',
+          body: queryArg.botAutoRestartDto,
+        }),
+        invalidatesTags: ['botmate'],
+      }),
       usersControllerProfile: build.query<
         UsersControllerProfileApiResponse,
         UsersControllerProfileApiArg
@@ -102,6 +113,16 @@ const injectedRtkApi = api
       >({
         query: (queryArg) => ({
           url: `/api/bots/${queryArg.id}/stop`,
+          method: 'POST',
+        }),
+        invalidatesTags: ['bot'],
+      }),
+      botControllerRestartBot: build.mutation<
+        BotControllerRestartBotApiResponse,
+        BotControllerRestartBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots/${queryArg.id}/restart`,
           method: 'POST',
         }),
         invalidatesTags: ['bot'],
@@ -207,6 +228,10 @@ export type BotMateControllerGetVersionApiResponse =
 export type BotMateControllerGetVersionApiArg = void;
 export type BotMateControllerUpdateApiResponse = unknown;
 export type BotMateControllerUpdateApiArg = void;
+export type BotMateControllerSetBotAutoRestartApiResponse = unknown;
+export type BotMateControllerSetBotAutoRestartApiArg = {
+  botAutoRestartDto: BotAutoRestartDto;
+};
 export type UsersControllerProfileApiResponse =
   /** status 200 The user profile */ User;
 export type UsersControllerProfileApiArg = void;
@@ -238,6 +263,12 @@ export type BotControllerStopBotApiResponse =
   /** status 200 Stop bot */ BotStartStopResponse;
 export type BotControllerStopBotApiArg = {
   /** Bot ID to stop */
+  id: string;
+};
+export type BotControllerRestartBotApiResponse =
+  /** status 200 Restart bot */ BotStartStopResponse;
+export type BotControllerRestartBotApiArg = {
+  /** Bot ID to restart */
   id: string;
 };
 export type CommandControllerGetCommandsApiResponse =
@@ -286,6 +317,7 @@ export type AnnouncementsControllerCreateApiArg = {
 export type VersionApiResult = {
   version: string;
 };
+export type BotAutoRestartDto = {};
 export type CommandProp = {};
 export type Command = {
   id: number;
@@ -407,6 +439,7 @@ export const {
   useBotMateControllerGetVersionQuery,
   useLazyBotMateControllerGetVersionQuery,
   useBotMateControllerUpdateMutation,
+  useBotMateControllerSetBotAutoRestartMutation,
   useUsersControllerProfileQuery,
   useLazyUsersControllerProfileQuery,
   useAuthControllerLoginMutation,
@@ -416,6 +449,7 @@ export const {
   useBotControllerCreateBotMutation,
   useBotControllerStartBotMutation,
   useBotControllerStopBotMutation,
+  useBotControllerRestartBotMutation,
   useCommandControllerGetCommandsQuery,
   useLazyCommandControllerGetCommandsQuery,
   useCommandControllerCreateCommandMutation,

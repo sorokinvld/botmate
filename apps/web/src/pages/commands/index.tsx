@@ -12,7 +12,7 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react';
-import { HiDocumentRemove, HiPlus } from 'react-icons/hi';
+import { HiPlus, HiTrash } from 'react-icons/hi';
 import Link from 'next/link';
 import { useCommandControllerGetCommandsQuery } from '@api';
 import { useActiveBot } from '@hooks';
@@ -42,7 +42,7 @@ function Commands() {
             <Link href={`/commands/edit/${id}`}>
               <Button variant="solid">edit</Button>
             </Link>
-            <Button leftIcon={<HiDocumentRemove />}>delete</Button>
+            <Button leftIcon={<HiTrash />}>delete</Button>
           </ButtonGroup>
         </Box>
       ))}
