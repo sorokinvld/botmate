@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.17](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.16...0.0.1-alpha.17) (2023-03-13)
+
+
+### 🚀 Features
+
+* add storage api ([49d91f1](https://github.com/botmate/botmate-awesome/commit/49d91f14e35424b9bfde8d547aea40bf1428e07a))
+
 ### [0.0.1-alpha.16](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.15...0.0.1-alpha.16) (2023-03-13)
 
 
