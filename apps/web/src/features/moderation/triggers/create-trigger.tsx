@@ -50,7 +50,7 @@ function CreateTrigger({}: CreateTriggerProps) {
         <Heading size="md">{name || 'Unnamed Trigger'}</Heading>
         <Spacer />
         <Button variant="solid" leftIcon={<FiSave />}>
-          save
+          Save
         </Button>
       </HStack>
 

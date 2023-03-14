@@ -15,10 +15,13 @@ function BotsProvider({ children }: BotsProviderProps) {
   useEffect(() => {
     if (isLoading || !bots) return;
 
+    const localActiveBot = localStorage.getItem('activeBot');
+    const activeBot = bots.find((bot) => bot.id === localActiveBot);
+
     if (bots?.length > 0) {
       dispatch(
         setActiveBot({
-          bot: bots[0],
+          bot: activeBot || bots[0],
         }),
       );
       setLoading(false);

@@ -157,12 +157,11 @@ function TriggerActions({ onChange }: TriggerActionsProps) {
 
       <Button
         mt={6}
-        variant="solid"
         onClick={() => {
           setActions([...actions, { type: 'send-message', value: '' }]);
         }}
       >
-        add action
+        Add Action
       </Button>
     </>
   );

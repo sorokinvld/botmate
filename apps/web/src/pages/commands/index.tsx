@@ -41,9 +41,9 @@ function Commands() {
 
           <ButtonGroup mt={4} size="sm">
             <Link href={`/commands/edit/${id}`}>
-              <Button variant="solid">edit</Button>
+              <Button variant="solid">Edit</Button>
             </Link>
-            <Button leftIcon={<HiTrash />}>delete</Button>
+            <Button leftIcon={<HiTrash />}>Delete</Button>
           </ButtonGroup>
         </Box>
       ))}

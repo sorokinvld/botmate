@@ -9,9 +9,22 @@ const Button: StyleConfig = {
     },
   },
   variants: {
+    secondary: () => ({
+      backgroundColor: mode('#292a35', '#292a35'),
+      textTransform: 'none',
+      _hover: {
+        opacity: 0.8,
+      },
+      _active: {
+        transform: 'scale(0.98)',
+        opacity: 1,
+      },
+      transition: 'all 0.2s ease-in-out',
+    }),
     solid: () => ({
       backgroundColor: mode('#8488fc', '#5458c5'),
       color: mode('#fff', '#1e2532'),
+      textTransform: 'none',
       borderWidth: '0px',
       _hover: {
         backgroundColor: '#6165cd',
@@ -24,6 +37,7 @@ const Button: StyleConfig = {
     }),
     danger: () => ({
       backgroundColor: mode('#e36f6f', '#e36f6f'),
+      textTransform: 'none',
       borderWidth: '0px',
       _hover: {
         backgroundColor: '#e36f6fc7',
@@ -37,8 +51,7 @@ const Button: StyleConfig = {
   },
   sizes: {},
   defaultProps: {
-    size: 'sm',
-    variant: 'outline',
+    variant: 'secondary',
   },
 };
 

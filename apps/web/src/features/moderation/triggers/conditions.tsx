@@ -137,7 +137,6 @@ function TriggerConditions({ onChange }: TriggerConditionsProps) {
 
       <ButtonGroup mt={6}>
         <Button
-          variant="solid"
           onClick={() => {
             setConditions([
               ...conditions,
@@ -145,7 +144,7 @@ function TriggerConditions({ onChange }: TriggerConditionsProps) {
             ]);
           }}
         >
-          Add condition
+          Add Condition
         </Button>
       </ButtonGroup>
     </Box>
