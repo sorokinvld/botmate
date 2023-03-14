@@ -44,6 +44,8 @@ export class Chat {
   @ApiProperty({
     type: String,
   })
-  @ManyToOne(() => Bot, (bot) => bot.chats)
+  @ManyToOne(() => Bot, (bot) => bot.chats, {
+    onDelete: 'CASCADE',
+  })
   bot: Bot;
 }

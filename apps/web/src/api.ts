@@ -117,6 +117,27 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['bot'],
       }),
+      botControllerUpdateBot: build.mutation<
+        BotControllerUpdateBotApiResponse,
+        BotControllerUpdateBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots/${queryArg.id}`,
+          method: 'PUT',
+          body: queryArg.updateBotDto,
+        }),
+        invalidatesTags: ['bot'],
+      }),
+      botControllerDeleteBot: build.mutation<
+        BotControllerDeleteBotApiResponse,
+        BotControllerDeleteBotApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/bots/${queryArg.id}`,
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['bot'],
+      }),
       commandControllerGetCommands: build.query<
         CommandControllerGetCommandsApiResponse,
         CommandControllerGetCommandsApiArg
@@ -268,6 +289,18 @@ export type BotControllerRestartBotApiArg = {
   /** Bot ID to restart */
   id: string;
 };
+export type BotControllerUpdateBotApiResponse =
+  /** status 200 Update bot */ OmitTypeClass;
+export type BotControllerUpdateBotApiArg = {
+  /** Bot ID to update */
+  id: string;
+  updateBotDto: UpdateBotDto;
+};
+export type BotControllerDeleteBotApiResponse = unknown;
+export type BotControllerDeleteBotApiArg = {
+  /** Bot ID to delete */
+  id: string;
+};
 export type CommandControllerGetCommandsApiResponse =
   /** status 200  */ CommandGetApiResponse[];
 export type CommandControllerGetCommandsApiArg = {
@@ -396,6 +429,7 @@ export type CreateBotDto = {
   token: string;
 };
 export type BotStartStopResponse = {};
+export type UpdateBotDto = {};
 export type CommandGetApiResponse = {
   id: number;
   name: string;
@@ -437,10 +471,25 @@ export type SaveFilterDto = {
   value: any;
 };
 export type CreateAnnouncementDto = {};
+export type TriggerAction = {
+  type:
+    | 'send-message'
+    | 'ban'
+    | 'kick'
+    | 'mute'
+    | 'unrestrict'
+    | 'delete'
+    | 'warn'
+    | 'script';
+  value: string;
+  mute_duration: string;
+  ban_duration: string;
+  warn_count: number;
+};
 export type CreateTriggerDto = {
   name: string;
   mode: 'all' | 'replies' | 'replies-to-bot';
-  actions: any[];
+  actions: TriggerAction[];
   conditions: any[];
 };
 export const {
@@ -459,6 +508,8 @@ export const {
   useBotControllerStartBotMutation,
   useBotControllerStopBotMutation,
   useBotControllerRestartBotMutation,
+  useBotControllerUpdateBotMutation,
+  useBotControllerDeleteBotMutation,
   useCommandControllerGetCommandsQuery,
   useLazyCommandControllerGetCommandsQuery,
   useCommandControllerCreateCommandMutation,

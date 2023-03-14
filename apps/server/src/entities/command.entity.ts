@@ -36,7 +36,9 @@ export class Command {
   @ApiProperty({
     type: String,
   })
-  @ManyToOne(() => Bot, (bot) => bot.commands)
+  @ManyToOne(() => Bot, (bot) => bot.commands, {
+    onDelete: 'CASCADE',
+  })
   bot: Bot;
 
   @ApiProperty()

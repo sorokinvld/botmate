@@ -62,4 +62,19 @@ export class BotService {
 
     return botEntity;
   }
+
+  updateBot(id: string, data: Partial<Bot>) {
+    return this.botRepository.update(
+      { id },
+      {
+        ...data,
+      },
+    );
+  }
+
+  async deleteBot(id: string) {
+    return this.botRepository.delete({
+      id,
+    });
+  }
 }

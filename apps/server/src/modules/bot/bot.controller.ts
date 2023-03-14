@@ -5,9 +5,11 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -24,6 +26,7 @@ import { BotService } from './bot.service';
 import { CreateBotDTO } from './dto/create-bot.dto';
 import { BotProcessService } from './services/bot.process.service';
 import { BotRestartEvent } from './events/bot-restart.event';
+import { UpdateBotDTO } from './dto/update-bot.dto';
 
 class BotStartStopResponse {
   ok: boolean;
@@ -119,6 +122,38 @@ export class BotController {
   async restartBot(@Param('id') id: string) {
     try {
       await this.botProcess.restartBot(new BotRestartEvent(id));
+      return { ok: true };
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Put(':id')
+  @ApiOkResponse({
+    description: 'Update bot',
+    type: OmitType(Bot, ['user']),
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Bot ID to update',
+  })
+  async updateBot(@Param('id') id: string, @Body() body: UpdateBotDTO) {
+    try {
+      const bot = await this.botService.updateBot(id, body);
+      return bot;
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    description: 'Bot ID to delete',
+  })
+  async deleteBot(@Param('id') id: string) {
+    try {
+      await this.botService.deleteBot(id);
       return { ok: true };
     } catch (e) {
       throw new BadRequestException(e.message);

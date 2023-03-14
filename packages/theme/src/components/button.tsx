@@ -12,13 +12,25 @@ const Button: StyleConfig = {
     solid: () => ({
       backgroundColor: mode('#8488fc', '#5458c5'),
       color: mode('#fff', '#1e2532'),
-      borderWidth: '1px',
+      borderWidth: '0px',
       _hover: {
         backgroundColor: '#6165cd',
       },
       _active: {
         transform: 'scale(0.98)',
         backgroundColor: '#5458c5',
+      },
+      transition: 'all 0.2s ease-in-out',
+    }),
+    danger: () => ({
+      backgroundColor: mode('#e36f6f', '#e36f6f'),
+      borderWidth: '0px',
+      _hover: {
+        backgroundColor: '#e36f6fc7',
+      },
+      _active: {
+        transform: 'scale(0.98)',
+        backgroundColor: '#e36f6f',
       },
       transition: 'all 0.2s ease-in-out',
     }),
