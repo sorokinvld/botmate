@@ -3,12 +3,17 @@ import { StorageService } from '@/modules/storage/storage.service';
 import { Injectable } from '@nestjs/common';
 import { Context } from 'grammy';
 import { NodeVM } from 'vm2';
+import axios from 'axios';
+import { CommandService } from '@/modules/command/command.service';
 
 @Injectable()
 export class BotScriptService {
   private readonly logger = new BotMateLogger(BotScriptService.name);
 
-  constructor(private readonly storageService: StorageService) {}
+  constructor(
+    private readonly storageService: StorageService,
+    private cmdService: CommandService,
+  ) {}
 
   public runScript(script: string, botCtx: Context) {
     this.logger.debug(`running custom script`);
@@ -17,6 +22,7 @@ export class BotScriptService {
         external: true,
       },
       sandbox: {
+        axios,
         Bot: botCtx,
         Storage: {
           get: async (key: string, defaultValue?: any) => {
@@ -27,6 +33,13 @@ export class BotScriptService {
             this.logger.debug(`setting storage key: ${key}`);
             return this.storageService.set(key, value);
           },
+        },
+        runCommand: async (commandName: string) => {
+          const command = await this.cmdService.findCommand(
+            botCtx.me.id.toString(),
+            commandName,
+          );
+          if (command) this.runScript(command.script, botCtx);
         },
       },
     });
