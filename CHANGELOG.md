@@ -1,5 +1,19 @@
 
 
+### [0.0.1-alpha.20](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.19...0.0.1-alpha.20) (2023-03-14)
+
+
+### 🪲 Bug Fixes
+
+* storage api in db ([f8d5b7d](https://github.com/botmate/botmate-awesome/commit/f8d5b7d58ef97b017d1fc1602f9145c196285ef5))
+
+
+### 🚀 Features
+
+* add `Bot.runCommand` ([c61e14d](https://github.com/botmate/botmate-awesome/commit/c61e14db37a2d2c3ebca611cbdf07733a93012d1))
+* bot switcher ([bf50716](https://github.com/botmate/botmate-awesome/commit/bf50716b6701a45b5ce5b94c4825eb2e8bf48629))
+* update bot token & bot deletion ([351bff5](https://github.com/botmate/botmate-awesome/commit/351bff5b9e2cd11bd5243c21cdae60a01b2e2017))
+
 ### [0.0.1-alpha.19](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.18...0.0.1-alpha.19) (2023-03-14)
 
 ### [0.0.1-alpha.18](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.17...0.0.1-alpha.18) (2023-03-14)
