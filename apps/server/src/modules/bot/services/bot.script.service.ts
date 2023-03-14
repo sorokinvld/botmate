@@ -20,6 +20,7 @@ export class BotScriptService {
     const vm = new NodeVM({
       require: {
         external: true,
+        builtin: ['fs'],
       },
       sandbox: {
         axios,
