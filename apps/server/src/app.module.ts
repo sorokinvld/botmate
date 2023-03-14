@@ -3,7 +3,9 @@ import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
-
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Settings } from './entities';
 import { SentryInterceptor } from './interceptors/sentry.interceptor';
 
 // App Modules
@@ -17,9 +19,7 @@ import { DownloadController } from './modules/download/download.controller';
 import { FiltersModule } from './modules/filters/filters.module';
 import { BotMateModule } from './modules/botmate/botmate.module';
 import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Settings } from './entities';
+import { TriggersModule } from './modules/triggers/triggers.module';
 
 @Module({
   imports: [
@@ -39,6 +39,7 @@ import { Settings } from './entities';
     ChatModule,
     FiltersModule,
     AnnouncementsModule,
+    TriggersModule,
   ],
   controllers: [DownloadController],
   providers: [

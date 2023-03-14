@@ -22,7 +22,7 @@ import { HiTrash } from 'react-icons/hi';
 const ConditionTypes = ['text', 'photo', 'sticker', 'regex'] as const;
 const MatchTypes = ['full-match', 'partial', 'starts-with', 'regex'] as const;
 
-type Condition = {
+export type Condition = {
   type: (typeof ConditionTypes)[number];
   matchType: (typeof MatchTypes)[number];
   value: string;
@@ -32,9 +32,17 @@ type ConditionEntryProps = {
   index: number;
   onDelete?: () => void;
   onChange?: (condition: Condition) => void;
+  defaultValues?: Condition;
 };
-const ConditionEntry = ({ index, onDelete, onChange }: ConditionEntryProps) => {
-  const form = useForm<Condition>();
+const ConditionEntry = ({
+  index,
+  defaultValues,
+  onDelete,
+  onChange,
+}: ConditionEntryProps) => {
+  const form = useForm<Condition>({
+    defaultValues,
+  });
   const d = useDisclosure();
 
   useEffect(() => {
@@ -94,9 +102,15 @@ const ConditionEntry = ({ index, onDelete, onChange }: ConditionEntryProps) => {
   );
 };
 
-function TriggerConditions() {
+type TriggerConditionsProps = {
+  onChange?: (conditions: Condition[]) => void;
+};
+function TriggerConditions({ onChange }: TriggerConditionsProps) {
   const [conditions, setConditions] = useState<Condition[]>([]);
-  const [entry, setEntry] = useState(false);
+
+  useEffect(() => {
+    onChange?.(conditions);
+  }, [conditions]);
 
   return (
     <Box>
@@ -106,14 +120,17 @@ function TriggerConditions() {
             <ConditionEntry
               key={index}
               index={index + 1}
+              defaultValues={condition}
               onDelete={() => {
                 setConditions(conditions.filter((_, i) => i !== index));
               }}
               onChange={(val) => {
-                console.log('val', val);
+                setConditions(
+                  conditions.map((c, i) => (i === index ? val : c)),
+                );
               }}
             />
-            {conditions.length - 1 !== index && <Divider />}
+            {conditions.length - 1 !== index && <Divider key={index} />}
           </>
         ))}
       </Stack>

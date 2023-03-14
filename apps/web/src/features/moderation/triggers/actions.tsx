@@ -5,14 +5,16 @@ import {
   Heading,
   HStack,
   IconButton,
+  Input,
   Select,
   SimpleGrid,
   Spacer,
   Stack,
   Text,
+  Textarea,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiTrash } from 'react-icons/hi';
 
@@ -26,23 +28,40 @@ const ActionTypes = [
   'warn',
 ] as const;
 
-type Action = {
+export type Action = {
   type: (typeof ActionTypes)[number];
   value: string;
+  mute_duration?: string;
+  ban_duration?: string;
+  warn_count?: number;
 };
 
 type ActionEntryProps = {
   index: number;
   onDelete?: () => void;
+  onChange?: (action: Action) => void;
+  defaultValues?: Action;
 };
-const ActionEntry = ({ index, onDelete }: ActionEntryProps) => {
-  const form = useForm<Action>();
+const ActionEntry = ({
+  index,
+  onDelete,
+  onChange,
+  defaultValues,
+}: ActionEntryProps) => {
+  const form = useForm<Action>({
+    defaultValues,
+  });
   const d = useDisclosure();
+  const actionType = form.watch('type');
+
+  useEffect(() => {
+    onChange?.(form.getValues() as Action);
+  }, [form.watch()]);
 
   return (
     <Box borderWidth="1px" rounded="lg">
       <HStack p={4} bg="#32323c5e" roundedTop="lg" userSelect="none">
-        <Heading size="sm">Action #{index}</Heading>
+        <Heading size="sm">Action #{index + 1}</Heading>
         <Text opacity={0.5} cursor="pointer" onClick={d.onToggle}>
           {d.isOpen ? 'Hide' : 'Show'} action details
         </Text>
@@ -63,14 +82,57 @@ const ActionEntry = ({ index, onDelete }: ActionEntryProps) => {
             ))}
           </Select>
         </SimpleGrid>
+
+        {actionType === 'send-message' ? (
+          <Textarea
+            {...form.register('value')}
+            placeholder="Message"
+            rows={6}
+            resize="none"
+            variant="brand"
+          />
+        ) : actionType === 'mute' ? (
+          <SimpleGrid columns={2}>
+            <Text>Mute for</Text>
+            <Input
+              autoFocus
+              placeholder="Enter time (eg: 1 day)"
+              {...form.register('mute_duration')}
+            />
+          </SimpleGrid>
+        ) : actionType === 'warn' ? (
+          <SimpleGrid columns={2}>
+            <Text>Warn count</Text>
+            <Input
+              autoFocus
+              placeholder="Enter warnings count"
+              {...form.register('warn_count')}
+            />
+          </SimpleGrid>
+        ) : actionType === 'ban' ? (
+          <SimpleGrid columns={2}>
+            <Text>Ban for</Text>
+            <Input
+              autoFocus
+              placeholder="Enter time (eg: 1 day)"
+              {...form.register('ban_duration')}
+            />
+          </SimpleGrid>
+        ) : null}
       </Stack>
     </Box>
   );
 };
 
-type TriggerActionsProps = {};
-function TriggerActions({}: TriggerActionsProps) {
+type TriggerActionsProps = {
+  onChange?: (actions: Action[]) => void;
+};
+function TriggerActions({ onChange }: TriggerActionsProps) {
   const [actions, setActions] = useState<Action[]>([]);
+
+  useEffect(() => {
+    onChange?.(actions);
+  }, [actions]);
 
   return (
     <>
@@ -78,12 +140,17 @@ function TriggerActions({}: TriggerActionsProps) {
         {actions.map((action, index) => (
           <>
             <ActionEntry
-              index={index + 1}
+              key={index}
+              index={index}
+              defaultValues={action}
               onDelete={() => {
                 setActions(actions.filter((_, i) => i !== index));
               }}
+              onChange={(action) => {
+                setActions(actions.map((a, i) => (i === index ? action : a)));
+              }}
             />
-            {actions.length - 1 !== index && <Divider />}
+            {actions.length - 1 !== index && <Divider key={index} />}
           </>
         ))}
       </Stack>

@@ -9,6 +9,7 @@ export const addTagTypes = [
   'chats',
   'filters',
   'announcements',
+  'triggers',
 ] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -203,6 +204,17 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['announcements'],
       }),
+      triggersControllerCreate: build.mutation<
+        TriggersControllerCreateApiResponse,
+        TriggersControllerCreateApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/triggers`,
+          method: 'POST',
+          body: queryArg.createTriggerDto,
+        }),
+        invalidatesTags: ['triggers'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -298,6 +310,10 @@ export type AnnouncementsControllerCreateApiArg = {
   botId: string;
   chatId: string;
   createAnnouncementDto: CreateAnnouncementDto;
+};
+export type TriggersControllerCreateApiResponse = unknown;
+export type TriggersControllerCreateApiArg = {
+  createTriggerDto: CreateTriggerDto;
 };
 export type VersionApiResult = {
   version: string;
@@ -421,6 +437,12 @@ export type SaveFilterDto = {
   value: any;
 };
 export type CreateAnnouncementDto = {};
+export type CreateTriggerDto = {
+  name: string;
+  mode: 'all' | 'replies' | 'replies-to-bot';
+  actions: any[];
+  conditions: any[];
+};
 export const {
   useDownloadControllerDownloadQuery,
   useLazyDownloadControllerDownloadQuery,
@@ -449,4 +471,5 @@ export const {
   useLazyFiltersControllerGetFiltersQuery,
   useFiltersControllerSaveFiltersMutation,
   useAnnouncementsControllerCreateMutation,
+  useTriggersControllerCreateMutation,
 } = injectedRtkApi;
