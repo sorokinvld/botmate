@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.21](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.20...0.0.1-alpha.21) (2023-03-14)
+
+
+### 🚀 Features
+
+* add fs module support ([b6d9c36](https://github.com/botmate/botmate-awesome/commit/b6d9c36f6753f020520dc365ff228841a31cb687))
+
 ### [0.0.1-alpha.20](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.19...0.0.1-alpha.20) (2023-03-14)
 
 
