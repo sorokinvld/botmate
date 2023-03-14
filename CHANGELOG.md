@@ -1,5 +1,19 @@
 
 
+### [0.0.1-alpha.18](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.17...0.0.1-alpha.18) (2023-03-14)
+
+
+### 🪲 Bug Fixes
+
+* incorrect botmate version ([8ba52d2](https://github.com/botmate/botmate-awesome/commit/8ba52d286e541e30317bc0f3243a1485ac56f8b5))
+* service message initial checks ([376fb56](https://github.com/botmate/botmate-awesome/commit/376fb56163ea968f3f804a0ee254645e0d2890ee))
+
+
+### 🚀 Features
+
+* add trigger ui and model ([69fcd72](https://github.com/botmate/botmate-awesome/commit/69fcd7270b83208ffe0b396a7d761ffd863c0e0b))
+* save updatedAt in command ([e176d6f](https://github.com/botmate/botmate-awesome/commit/e176d6ff7faee87cc0d9589364def38d10272b1d))
+
 ### [0.0.1-alpha.17](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.16...0.0.1-alpha.17) (2023-03-13)
 
 
