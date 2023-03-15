@@ -59,7 +59,7 @@ export class BotProcessService {
 
       const vm = new NodeVM({
         sandbox: {
-          bot,
+          Bot: bot,
           createConversation,
           ...this.botSandbox.getSandbox(botData.id),
         },
@@ -71,7 +71,7 @@ export class BotProcessService {
             async function cnv_${cnv.id}(conversation, Ctx) {
               ${cnv.script}
             }
-            bot.use(createConversation(cnv_${cnv.id}, '${cnv.name}'));
+            Bot.use(createConversation(cnv_${cnv.id}, '${cnv.name}'));
         `);
       }
 
@@ -83,18 +83,18 @@ export class BotProcessService {
         if (command.startsWith('/')) {
           const cmd = command.replace('/', '');
           vm.run(
-            `bot.command('${cmd}', async (Ctx) => {
+            `Bot.command('${cmd}', async (Ctx) => {
                 ${script}
               });
             `,
           );
         } else {
           try {
-            vm.run(`bot.on('${command}', async (Ctx) => {
+            vm.run(`Bot.on('${command}', async (Ctx) => {
               ${script}
             });`);
           } catch (e) {
-            vm.run(`bot.hears('${command}', async (Ctx) => {
+            vm.run(`Bot.hears('${command}', async (Ctx) => {
               ${script}
             });`);
           }
