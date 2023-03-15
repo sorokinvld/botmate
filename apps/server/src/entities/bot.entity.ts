@@ -3,6 +3,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 import { Chat } from './chat.entity';
 import { Command } from './command.entity';
+import { Conversation } from './conversation.entity';
 import { User } from './user.entity';
 
 @Entity({ name: 'bots' })
@@ -54,4 +55,8 @@ export class Bot {
   })
   @OneToMany(() => Chat, (chat) => chat.bot)
   chats: Chat[];
+
+  @ApiProperty()
+  @OneToMany(() => Conversation, (conversation) => conversation.bot)
+  conversations: Conversation[];
 }

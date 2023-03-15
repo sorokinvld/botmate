@@ -10,6 +10,7 @@ export const addTagTypes = [
   'filters',
   'announcements',
   'triggers',
+  'conversations',
 ] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -236,6 +237,46 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ['triggers'],
       }),
+      conversationsControllerFindConversations: build.query<
+        ConversationsControllerFindConversationsApiResponse,
+        ConversationsControllerFindConversationsApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/conversations`,
+          params: { botId: queryArg.botId },
+        }),
+        providesTags: ['conversations'],
+      }),
+      conversationsControllerCreateConversation: build.mutation<
+        ConversationsControllerCreateConversationApiResponse,
+        ConversationsControllerCreateConversationApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/conversations`,
+          method: 'POST',
+          body: queryArg.createConversationDto,
+          params: { botId: queryArg.botId },
+        }),
+        invalidatesTags: ['conversations'],
+      }),
+      conversationsControllerFindConversation: build.query<
+        ConversationsControllerFindConversationApiResponse,
+        ConversationsControllerFindConversationApiArg
+      >({
+        query: (queryArg) => ({ url: `/api/conversations/${queryArg.id}` }),
+        providesTags: ['conversations'],
+      }),
+      conversationsControllerUpdateConversation: build.mutation<
+        ConversationsControllerUpdateConversationApiResponse,
+        ConversationsControllerUpdateConversationApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/api/conversations/${queryArg.id}`,
+          method: 'PUT',
+          body: queryArg.updateConversationDto,
+        }),
+        invalidatesTags: ['conversations'],
+      }),
     }),
     overrideExisting: false,
   });
@@ -348,6 +389,27 @@ export type TriggersControllerCreateApiResponse = unknown;
 export type TriggersControllerCreateApiArg = {
   createTriggerDto: CreateTriggerDto;
 };
+export type ConversationsControllerFindConversationsApiResponse =
+  /** status 200  */ Conversation[];
+export type ConversationsControllerFindConversationsApiArg = {
+  botId: string;
+};
+export type ConversationsControllerCreateConversationApiResponse =
+  /** status 200  */ Conversation;
+export type ConversationsControllerCreateConversationApiArg = {
+  botId: string;
+  createConversationDto: CreateConversationDto;
+};
+export type ConversationsControllerFindConversationApiResponse =
+  /** status 200  */ Conversation;
+export type ConversationsControllerFindConversationApiArg = {
+  id: number;
+};
+export type ConversationsControllerUpdateConversationApiResponse = unknown;
+export type ConversationsControllerUpdateConversationApiArg = {
+  id: number;
+  updateConversationDto: UpdateConversationDto;
+};
 export type VersionApiResult = {
   version: string;
 };
@@ -385,6 +447,7 @@ export type Bot = {
   user: User;
   commands: Command[];
   chats: Chat[];
+  conversations: string[];
 };
 export type User = {
   id: number;
@@ -424,6 +487,7 @@ export type OmitTypeClass = {
   created_at?: string;
   commands: Command[];
   chats: Chat[];
+  conversations: string[];
 };
 export type CreateBotDto = {
   token: string;
@@ -492,6 +556,21 @@ export type CreateTriggerDto = {
   actions: TriggerAction[];
   conditions: any[];
 };
+export type Conversation = {
+  id: number;
+  name: string;
+  script: string;
+  bot: Bot;
+  updatedAt: string;
+};
+export type CreateConversationDto = {
+  name: string;
+  script: string;
+};
+export type UpdateConversationDto = {
+  name: string;
+  script: string;
+};
 export const {
   useDownloadControllerDownloadQuery,
   useLazyDownloadControllerDownloadQuery,
@@ -523,4 +602,10 @@ export const {
   useFiltersControllerSaveFiltersMutation,
   useAnnouncementsControllerCreateMutation,
   useTriggersControllerCreateMutation,
+  useConversationsControllerFindConversationsQuery,
+  useLazyConversationsControllerFindConversationsQuery,
+  useConversationsControllerCreateConversationMutation,
+  useConversationsControllerFindConversationQuery,
+  useLazyConversationsControllerFindConversationQuery,
+  useConversationsControllerUpdateConversationMutation,
 } = injectedRtkApi;

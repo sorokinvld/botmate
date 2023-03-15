@@ -20,6 +20,7 @@ import { FiltersModule } from './modules/filters/filters.module';
 import { BotMateModule } from './modules/botmate/botmate.module';
 import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
 import { TriggersModule } from './modules/triggers/triggers.module';
+import { ConversationsModule } from './modules/conversations/conversations.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { TriggersModule } from './modules/triggers/triggers.module';
     FiltersModule,
     AnnouncementsModule,
     TriggersModule,
+    ConversationsModule,
   ],
   controllers: [DownloadController],
   providers: [

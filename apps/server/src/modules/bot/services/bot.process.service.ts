@@ -1,18 +1,20 @@
-import { Bot as TelegramBot } from 'grammy';
+import { Bot as TelegramBot, session } from 'grammy';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Bot } from '@/entities/bot.entity';
 import { Repository } from 'typeorm';
-import { FilterQuery } from 'grammy/out/filter';
 import { BotStatus } from '@/common/bot.types';
 import { CommandService } from '@modules/command/command.service';
-import { BotScriptService } from './bot.script.service';
 import { BotMateLogger } from '@/common';
 import { Chat } from '@/entities/chat.entity';
 import { DownloadService } from '@/modules/download/download.service';
 import { BotFilterService } from './bot.filter.service';
 import { OnEvent } from '@nestjs/event-emitter';
 import { BotRestartEvent } from '../events/bot-restart.event';
+import { conversations, createConversation } from '@grammyjs/conversations';
+import { Conversation } from '@/entities';
+import { NodeVM } from 'vm2';
+import { BotSandbox } from './bot.sandbox';
 
 @Injectable()
 export class BotProcessService {
@@ -22,10 +24,12 @@ export class BotProcessService {
   constructor(
     @InjectRepository(Bot) private botRepository: Repository<Bot>,
     @InjectRepository(Chat) private chatRepository: Repository<Chat>,
+    @InjectRepository(Conversation)
+    private cnvRepository: Repository<Conversation>,
     private cmdService: CommandService,
-    private scriptService: BotScriptService,
     private downloadService: DownloadService,
     private filterService: BotFilterService,
+    private botSandbox: BotSandbox,
   ) {}
 
   async startBot(botId: string) {
@@ -34,9 +38,68 @@ export class BotProcessService {
 
     try {
       const bot = new TelegramBot(botData.token);
-      await bot.init();
 
-      // todo: refactor the function
+      bot.use(
+        session({
+          initial() {
+            return {};
+          },
+        }),
+      );
+
+      bot.use(conversations());
+
+      const botConversations = await this.cnvRepository.find({
+        where: {
+          bot: {
+            id: botId,
+          },
+        },
+      });
+
+      const vm = new NodeVM({
+        sandbox: {
+          bot,
+          createConversation,
+          ...this.botSandbox.getSandbox(botData.id),
+        },
+        console: 'inherit',
+      });
+
+      for (const cnv of botConversations) {
+        vm.run(`
+            async function cnv_${cnv.id}(conversation, Ctx) {
+              ${cnv.script}
+            }
+            bot.use(createConversation(cnv_${cnv.id}, '${cnv.name}'));
+        `);
+      }
+
+      const botCommands = await this.cmdService.findAllCommands(botId);
+
+      for (const botCommand of botCommands) {
+        const { command, script } = botCommand;
+
+        if (command.startsWith('/')) {
+          const cmd = command.replace('/', '');
+          vm.run(
+            `bot.command('${cmd}', async (Ctx) => {
+                ${script}
+              });
+            `,
+          );
+        } else {
+          try {
+            vm.run(`bot.on('${command}', async (Ctx) => {
+              ${script}
+            });`);
+          } catch (e) {
+            vm.run(`bot.hears('${command}', async (Ctx) => {
+              ${script}
+            });`);
+          }
+        }
+      }
 
       /**
        * Filter Messages
@@ -124,28 +187,6 @@ export class BotProcessService {
           this.logger.error(e);
         }
       });
-
-      const botCommands = await this.cmdService.findAllCommands(botId);
-
-      for (const botCommand of botCommands) {
-        const { command, script } = botCommand;
-
-        if (command.startsWith('/')) {
-          bot.hears(command, async (ctx) => {
-            this.scriptService.runScript(script, ctx);
-          });
-        } else {
-          try {
-            bot.on(command as FilterQuery, async (ctx) => {
-              this.scriptService.runScript(script, ctx);
-            });
-          } catch (e) {
-            bot.hears(command, async (ctx) => {
-              this.scriptService.runScript(script, ctx);
-            });
-          }
-        }
-      }
 
       bot.start();
 

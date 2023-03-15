@@ -1,4 +1,4 @@
-import { Command, Settings, Storage } from '@/entities';
+import { Command, Conversation, Settings, Storage } from '@/entities';
 import { Bot } from '@/entities/bot.entity';
 import { User } from '@/entities/user.entity';
 import { Module, OnModuleInit } from '@nestjs/common';
@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommandService } from '../command/command.service';
 import { BotController } from './bot.controller';
 import { BotService } from './bot.service';
-import { BotScriptService } from './services/bot.script.service';
 import { BotProcessService } from './services/bot.process.service';
 import { Chat } from '@/entities/chat.entity';
 import { ChatService } from '../chat/chat.service';
@@ -15,6 +14,7 @@ import { BotFilterService } from './services/bot.filter.service';
 import { Filter } from '@/entities/filter.entity';
 import { SettingsService } from '../settings/settings.service';
 import { StorageService } from '../storage/storage.service';
+import { BotSandbox } from './services/bot.sandbox';
 
 @Module({
   imports: [
@@ -26,17 +26,18 @@ import { StorageService } from '../storage/storage.service';
       Filter,
       Settings,
       Storage,
+      Conversation,
     ]),
   ],
   providers: [
     BotService,
     BotProcessService,
-    BotScriptService,
     CommandService,
     ChatService,
     DownloadService,
     BotFilterService,
     SettingsService,
+    BotSandbox,
     StorageService,
   ],
   controllers: [BotController],

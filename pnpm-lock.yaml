@@ -30,6 +30,7 @@ importers:
 
   apps/server:
     specifiers:
+      '@grammyjs/conversations': ^1.1.1
       '@grammyjs/types': ^3.0.1
       '@nestjs/cli': ^9.0.0
       '@nestjs/common': ^9.0.0
@@ -82,6 +83,7 @@ importers:
       typescript: ^4.7.4
       vm2: ^3.9.14
     dependencies:
+      '@grammyjs/conversations': 1.1.1_grammy@1.14.1
       '@nestjs/common': 9.3.9_ca43gjgfb2qovizjnmxfs634zy
       '@nestjs/config': 2.3.1_jrq2rdgfp2sx67wmylmrqliwxe
       '@nestjs/core': 9.3.9_q6agyr4hwia55oswpsa7zjxcpm
@@ -2757,6 +2759,17 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  /@deno/shim-deno-test/0.4.0:
+    resolution: {integrity: sha512-oYWcD7CpERZy/TXMTM9Tgh1HD/POHlbY9WpzmAk+5H8DohcxG415Qws8yLGlim3EaKBT2v3lJv01x4G0BosnaQ==}
+    dev: false
+
+  /@deno/shim-deno/0.11.0:
+    resolution: {integrity: sha512-z5FRYleehfz1Z0Wp9jilB98cJRGV2HYiLN0FZu1/xwLrQk+hk5VaNKp1nEoyGrUM4MLruTlnhEbqHJwxfnbPLw==}
+    dependencies:
+      '@deno/shim-deno-test': 0.4.0
+      which: 2.0.2
+    dev: false
+
   /@emotion/babel-plugin/11.10.6:
     resolution: {integrity: sha512-p2dAqtVrkhSa7xz1u/m9eHYdLi+en8NowrmXeF/dKtJpU8lCWli8RUAati7NcSl0afsBott48pdnANuD0wh9QQ==}
     dependencies:
@@ -2948,6 +2961,20 @@ packages:
 
   /@fontsource/ubuntu/4.5.11:
     resolution: {integrity: sha512-c+B8A8r31hJLk8Ek7Svoz4GwjtInhc60LFM6XTr5TKtZbcct8TPNxJuKX4+hnqoWgcvy8s0Gj4mde4TcK/SgDQ==}
+    dev: false
+
+  /@grammyjs/conversations/1.1.1_grammy@1.14.1:
+    resolution: {integrity: sha512-cgNvxIXaZT1eVw1ygdjCMvOY9m2Hk5iAwVjpjKSYpBSOyTBUV30/c0SEvCl+wVgTQpmd5m5E8WLfGMT4k4bdug==}
+    engines: {node: ^12.20.0 || >=14.13.1}
+    peerDependencies:
+      grammy: ^1.10.0
+    dependencies:
+      '@grammyjs/types': 2.12.1
+      debug: 4.3.4
+      grammy: 1.14.1
+      o-son: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@grammyjs/types/2.12.1:
@@ -11034,6 +11061,12 @@ packages:
     transitivePeerDependencies:
       - debug
     dev: true
+
+  /o-son/1.0.1:
+    resolution: {integrity: sha512-u3X+gVI4BalcHsFe75miy3UxG3pNcJzXDCS8N5eJLlYY1EdiUC8amUsbXMWlAqJUKJgGTM9OBqAuxvTUACKs2g==}
+    dependencies:
+      '@deno/shim-deno': 0.11.0
+    dev: false
 
   /oas-kit-common/1.0.8:
     resolution: {integrity: sha512-pJTS2+T0oGIwgjGpw7sIRU8RQMcUoKCDWFLdBqKB2BNmGpbBMH2sdqAaOXUg8OzonZHU0L7vfJu1mJFEiYDWOQ==}

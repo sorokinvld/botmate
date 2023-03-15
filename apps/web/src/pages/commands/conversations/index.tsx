@@ -1,46 +1,42 @@
-import React from 'react';
-import { DashboardLayout } from '@layouts';
+import { useConversationsControllerFindConversationsQuery } from '@api';
 import {
+  Spacer,
+  IconButton,
   Box,
   Button,
   ButtonGroup,
   Heading,
   HStack,
-  IconButton,
-  Kbd,
   SimpleGrid,
-  Spacer,
   Text,
 } from '@chakra-ui/react';
-import { HiChatAlt2, HiPlus, HiTrash } from 'react-icons/hi';
-import Link from 'next/link';
-import { useCommandControllerGetCommandsQuery } from '@api';
 import { useActiveBot } from '@hooks';
+import { DashboardLayout } from '@layouts';
 import moment from 'moment';
+import Link from 'next/link';
+import React from 'react';
+import { HiPlus, HiTrash } from 'react-icons/hi';
 
-function Commands() {
+function Conversations() {
   const activeBot = useActiveBot();
-  const { data } = useCommandControllerGetCommandsQuery({
+  const { data } = useConversationsControllerFindConversationsQuery({
     botId: activeBot.id,
   });
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={6}>
-      {data?.map(({ id, name, command, createdAt, updatedAt }) => (
+      {data?.map(({ id, name, updatedAt }) => (
         <Box key={id} p={4} borderWidth="1px" rounded="lg">
           <HStack>
             <Heading size="md">{name}</Heading>
             <Spacer />
-            <Kbd opacity={0.8} mt={2}>
-              {command}
-            </Kbd>
           </HStack>
           <Text fontSize={12} opacity={0.8} mt={2}>
             Last updated {moment(updatedAt).fromNow()}
           </Text>
 
           <ButtonGroup mt={4} size="sm">
-            <Link href={`/commands/edit/${id}`}>
+            <Link href={`/commands/conversations/edit/${id}`}>
               <Button variant="solid">Edit</Button>
             </Link>
             <Button leftIcon={<HiTrash />}>Delete</Button>
@@ -51,24 +47,17 @@ function Commands() {
   );
 }
 
-Commands.getLayout = (page: React.ReactElement) => (
+Conversations.getLayout = (page: React.ReactElement) => (
   <DashboardLayout
-    title="Commands"
+    title="Conversations"
+    goBack
     action={
       <>
         <Spacer />
-        <Link href="/commands/create">
+        <Link href="/commands/conversations/create">
           <IconButton
-            aria-label="add-command"
+            aria-label="add-conversation"
             icon={<HiPlus />}
-            variant="ghost"
-            fontSize={20}
-          />
-        </Link>
-        <Link href="/commands/conversations">
-          <IconButton
-            aria-label="conversations"
-            icon={<HiChatAlt2 />}
             variant="ghost"
             fontSize={20}
           />
@@ -80,4 +69,4 @@ Commands.getLayout = (page: React.ReactElement) => (
   </DashboardLayout>
 );
 
-export default Commands;
+export default Conversations;

@@ -24,6 +24,7 @@
     "pkg": "pkg -t node18-macos-arm64 -o botmate ."
   },
   "dependencies": {
+    "@grammyjs/conversations": "^1.1.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
