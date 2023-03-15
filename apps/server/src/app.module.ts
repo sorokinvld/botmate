@@ -21,14 +21,17 @@ import { BotMateModule } from './modules/botmate/botmate.module';
 import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
 import { TriggersModule } from './modules/triggers/triggers.module';
 import { ConversationsModule } from './modules/conversations/conversations.module';
+import { SocketModule } from './gateways/socket.module';
+import { SocketGateway } from './gateways/socket.gateway';
 
 @Module({
   imports: [
+    SocketModule,
     EventEmitterModule.forRoot(),
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, 'client'),
-      exclude: ['/api/(.*)'],
+      exclude: ['/api/(.*)', '/socket.io/(.*)'],
     }),
     TypeOrmModule.forFeature([Settings]),
     BotMateModule,

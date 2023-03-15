@@ -15,6 +15,7 @@ import { conversations, createConversation } from '@grammyjs/conversations';
 import { Conversation } from '@/entities';
 import { NodeVM } from 'vm2';
 import { BotSandbox } from './bot.sandbox';
+import { SocketService } from '@/gateways/socket.service';
 
 @Injectable()
 export class BotProcessService {
@@ -30,6 +31,7 @@ export class BotProcessService {
     private downloadService: DownloadService,
     private filterService: BotFilterService,
     private botSandbox: BotSandbox,
+    private socketService: SocketService,
   ) {}
 
   async startBot(botId: string) {
@@ -127,6 +129,8 @@ export class BotProcessService {
        * update user and chat information in the db when a message is received
        */
       bot.use(async (ctx, next) => {
+        this.socketService.socket.emit('bot:message', ctx.message);
+
         next();
         try {
           let chat: Chat;

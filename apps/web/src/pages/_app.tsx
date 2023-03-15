@@ -12,6 +12,7 @@ import { AuthProvider } from '@providers';
 import '../styles/globals.css';
 import '@fontsource/ubuntu/400.css';
 import '@fontsource/open-sans/700.css';
+import { SocketProvider } from 'src/providers/socket-provider';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -34,9 +35,11 @@ function BotMate({ Component, pageProps }: AppPropsWithLayout) {
     <ChakraProvider theme={theme}>
       <ReduxProvider store={store}>
         <AnimatePresence>
-          <AuthProvider>
-            <>{layout}</>
-          </AuthProvider>
+          <SocketProvider>
+            <AuthProvider>
+              <>{layout}</>
+            </AuthProvider>
+          </SocketProvider>
         </AnimatePresence>
       </ReduxProvider>
     </ChakraProvider>
