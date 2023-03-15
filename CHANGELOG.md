@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.22](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.21...0.0.1-alpha.22) (2023-03-15)
+
+
+### 🚀 Features
+
+* add conversation support ([3214d63](https://github.com/botmate/botmate-awesome/commit/3214d63a7a37ad20b7e93cbaeb96367ca5f6a4fe))
+
 ### [0.0.1-alpha.21](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.20...0.0.1-alpha.21) (2023-03-14)
 
 
