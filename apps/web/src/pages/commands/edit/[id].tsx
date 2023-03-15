@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Command,
   UpdateCommandDto,
@@ -21,9 +21,18 @@ import { DashboardLayout } from '@layouts';
 import { useRouter } from 'next/router';
 import { HiPlus } from 'react-icons/hi';
 import { useActiveBot } from '@hooks';
+import { useSocketIO } from '@providers';
+
+type LogMessage = {
+  message: string;
+  timestamp: string;
+  type: 'error' | 'info';
+};
 
 function CommandEdit() {
   const r = useRouter();
+  const { socket } = useSocketIO();
+  const [logs, setLogs] = useState<LogMessage[]>([]);
   const commandId = Number(r.query.id);
   const [fetch, { data, isLoading }] =
     useLazyCommandControllerGetCommandByIdQuery();
@@ -36,6 +45,23 @@ function CommandEdit() {
       fetch({ id: commandId });
     }
   }, [fetch, commandId]);
+
+  useEffect(() => {
+    socket.on('bot:error', (err) => {
+      setLogs((x) => [
+        ...x,
+        {
+          message: err,
+          timestamp: new Date().toISOString(),
+          type: 'info',
+        },
+      ]);
+    });
+
+    return () => {
+      socket.off('bot:error');
+    };
+  }, [socket]);
 
   if (isLoading) {
     return <Loader text="loading command data..." />;
@@ -67,7 +93,7 @@ function CommandEdit() {
         overflow={{ base: 'visible', lg: 'auto' }}
       >
         <HStack p={4}>
-          <Heading size="md">Variables</Heading>
+          <Heading size="md">Bot Logs</Heading>
           <Spacer />
           <IconButton
             aria-label="add variable"
@@ -78,7 +104,20 @@ function CommandEdit() {
         </HStack>
         <Divider />
 
-        <Stack p={4}></Stack>
+        <Stack p={4}>
+          <>
+            {logs.map((x, i) => (
+              <code
+                key={i}
+                style={{
+                  color: x.type === 'error' ? '#fe5959' : '#d6d6d6',
+                }}
+              >
+                {x.message}
+              </code>
+            ))}
+          </>
+        </Stack>
       </GridItem>
     </SimpleGrid>
   );

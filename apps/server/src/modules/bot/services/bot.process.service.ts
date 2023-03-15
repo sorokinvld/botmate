@@ -65,7 +65,6 @@ export class BotProcessService {
           createConversation,
           ...this.botSandbox.getSandbox(botData.id),
         },
-        console: 'inherit',
       });
 
       for (const cnv of botConversations) {
@@ -103,6 +102,13 @@ export class BotProcessService {
         }
       }
 
+      bot.catch((err) => {
+        this.logger.error(err);
+        this.socketService.socket
+          .to(botData.id)
+          .emit('bot:error', err.toString());
+      });
+
       /**
        * Filter Messages
        */
@@ -129,6 +135,7 @@ export class BotProcessService {
        * update user and chat information in the db when a message is received
        */
       bot.use(async (ctx, next) => {
+        //
         this.socketService.socket
           .to(botData.id)
           .emit('bot:message', ctx.message);
