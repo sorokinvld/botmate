@@ -3,6 +3,13 @@ import { io, Socket } from 'socket.io-client';
 
 const socket = io('http://localhost:8080');
 
+socket.on('connect', () => {
+  const botId = localStorage.getItem('activeBot');
+  if (botId) {
+    socket.emit('join', botId);
+  }
+});
+
 const socketContext = createContext<{ socket: Socket }>({ socket });
 
 type SocketProviderProps = {

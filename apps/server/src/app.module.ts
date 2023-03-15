@@ -22,7 +22,6 @@ import { AnnouncementsModule } from './modules/ancmt/ancmt.module';
 import { TriggersModule } from './modules/triggers/triggers.module';
 import { ConversationsModule } from './modules/conversations/conversations.module';
 import { SocketModule } from './gateways/socket.module';
-import { SocketGateway } from './gateways/socket.gateway';
 
 @Module({
   imports: [

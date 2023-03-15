@@ -23,6 +23,11 @@ export class SocketGateway
 
   afterInit(server: Server) {
     this.socketService.socket = server;
+    this.socketService.socket.on('connection', (socket) => {
+      socket.on('join', (botId) => {
+        socket.join(botId);
+      });
+    });
   }
 
   handleDisconnect(client: Socket) {

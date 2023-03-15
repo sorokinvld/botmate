@@ -129,7 +129,9 @@ export class BotProcessService {
        * update user and chat information in the db when a message is received
        */
       bot.use(async (ctx, next) => {
-        this.socketService.socket.emit('bot:message', ctx.message);
+        this.socketService.socket
+          .to(botData.id)
+          .emit('bot:message', ctx.message);
 
         next();
         try {
