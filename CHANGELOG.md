@@ -1,5 +1,14 @@
 
 
+### [0.0.1-alpha.23](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.22...0.0.1-alpha.23) (2023-03-15)
+
+
+### 🚀 Features
+
+* add bot debug ([d37d3c3](https://github.com/botmate/botmate-awesome/commit/d37d3c34c68e2b00faef0aba3e325961edbb6902))
+* add json viewer theme picker ([bfc1b28](https://github.com/botmate/botmate-awesome/commit/bfc1b28a8ce44505909e9725250d76d64acea0ed))
+* bot log viewer ([4c2f5e9](https://github.com/botmate/botmate-awesome/commit/4c2f5e954818a06948b15c8ddd223e82d4b9f65f))
+
 ### [0.0.1-alpha.22](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.21...0.0.1-alpha.22) (2023-03-15)
 
 
