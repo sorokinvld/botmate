@@ -2,7 +2,7 @@ import { BotMateLogger } from '@/common';
 import { StorageService } from '@/modules/storage/storage.service';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Context } from 'grammy';
+import { Context, Keyboard, InlineKeyboard } from 'grammy';
 
 @Injectable()
 export class BotSandbox {
@@ -13,6 +13,8 @@ export class BotSandbox {
   getSandbox(botId: string, Ctx?: Context) {
     return {
       Ctx,
+      Keyboard,
+      InlineKeyboard,
       Axios: axios,
       Storage: {
         get: async (key: string, defaultValue?: any) => {
