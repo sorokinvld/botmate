@@ -1,5 +1,12 @@
 
 
+### [0.0.1-alpha.24](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.23...0.0.1-alpha.24) (2023-03-16)
+
+
+### 🚀 Features
+
+* add keyboards in sandbox ([ae179f5](https://github.com/botmate/botmate-awesome/commit/ae179f5bafe00b46b26194611a931b35edae641f))
+
 ### [0.0.1-alpha.23](https://github.com/botmate/botmate-awesome/compare/0.0.1-alpha.22...0.0.1-alpha.23) (2023-03-15)
 
 
