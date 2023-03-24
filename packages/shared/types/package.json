@@ -1,0 +1,6 @@
+{
+	"name": "@botmate/types",
+	"dependencies": {
+		"@types/react": "^18.0.28"
+	}
+}

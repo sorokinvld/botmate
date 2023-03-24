@@ -1,0 +1,13 @@
+{
+	"name": "get-started",
+	"scripts": {
+		"dev": "botmate develop",
+		"watch": "botmate watch-admin"
+	},
+	"dependencies": {
+		"@botmate/core": "workspace:*",
+		"@botmate/plugin.discord": "workspace:^1.0.0",
+		"@botmate/plugin.telegram": "workspace:*",
+		"react": "^18.2.0"
+	}
+}

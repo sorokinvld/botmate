@@ -1,0 +1,11 @@
+{
+	"name": "botmate-plugin-my-plugin",
+	"version": "0.0.0",
+	"description": "This is the description of my plugin.",
+	"private": true,
+	"botmate": {
+		"name": "my-plugin",
+		"description": "Description of my plugin.",
+		"kind": "plugin"
+	}
+}

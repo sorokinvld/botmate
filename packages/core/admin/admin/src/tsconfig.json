@@ -1,0 +1,6 @@
+{
+	"extends": "@botmate/typescript-utils/tsconfigs/admin",
+
+	"include": ["./", "../../../**/admin/src/**/*"],
+	"exclude": ["node_modules", "**/*.test.js", "*.js"]
+}

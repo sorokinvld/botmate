@@ -1,0 +1,9 @@
+{
+	"name": "@botmate/utils",
+	"main": "lib/index.js",
+	"dependencies": {
+		"@sindresorhus/slugify": "1.1.0",
+		"lodash": "^4.17.21",
+		"yup": "1.0.2"
+	}
+}
