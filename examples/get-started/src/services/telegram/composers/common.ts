@@ -1,6 +1,6 @@
 /**
  *
- * @param {import('@botmate/plugin.telegram')} telegram
+ * @param {import('@botmate/platform.telegram')} telegram
  */
 const composer = ({ telegram }) => {
   console.log(telegram);
