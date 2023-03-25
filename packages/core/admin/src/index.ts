@@ -2,8 +2,8 @@ import path from 'path';
 import fs from 'fs-extra';
 import webpack from 'webpack';
 import chalk from 'chalk';
-import WebpackDevServer from 'webpack-dev-server';
 import { isUsingTypeScript } from '@botmate/typescript-utils';
+import WebpackDevServer from 'webpack-dev-server';
 
 import { shouldBuildAdmin, createCacheDir, getCustomWebpackConfig, watchAdminFiles } from './utils';
 
