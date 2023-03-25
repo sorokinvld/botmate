@@ -1,7 +1,8 @@
 import React from 'react';
+import { IBotMateApp } from '@botmate/types/admin';
 
 export default {
-  register(app) {
+  register(app: IBotMateApp) {
     app.addMenuLink({
       to: '/telegram',
       label: 'Teglegram',

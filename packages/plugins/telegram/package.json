@@ -1,5 +1,5 @@
 {
-  "name": "@botmate/platform.telegram",
+  "name": "@botmate/plugin.telegram",
   "version": "1.0.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -14,11 +14,12 @@
     "kind": "plugin"
   },
   "dependencies": {
-    "@botmate/typescript-utils": "workspace:^1.0.0",
-    "@types/react": "^18.0.28",
     "grammy": "^1.15.3"
   },
   "devDependencies": {
+    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@types/react": "^18.0.28",
+    "@botmate/types": "workspace:*",
     "typescript": "^5.0.2"
   }
 }

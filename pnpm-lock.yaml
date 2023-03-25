@@ -17,14 +17,14 @@ importers:
   examples/get-started:
     specifiers:
       '@botmate/core': workspace:*
-      '@botmate/platform.telegram': workspace:*
+      '@botmate/plugin.telegram': workspace:*
       '@botmate/typescript-utils': workspace:^1.0.0
       '@types/node': ^18.15.7
       '@types/react': ^18.0.28
       react: ^18.2.0
     dependencies:
       '@botmate/core': link:../../packages/core/botmate
-      '@botmate/platform.telegram': link:../../packages/platforms/telegram
+      '@botmate/plugin.telegram': link:../../packages/plugins/telegram
       react: 18.2.0
     devDependencies:
       '@botmate/typescript-utils': link:../../packages/shared/typescript
@@ -129,7 +129,7 @@ importers:
   packages/core/botmate:
     specifiers:
       '@botmate/admin': workspace:*
-      '@botmate/platform.telegram': workspace:^1.0.0
+      '@botmate/plugin.telegram': workspace:^1.0.0
       '@botmate/typescript-utils': workspace:^1.0.0
       '@botmate/utils': workspace:*
       '@types/dotenv': ^8.2.0
@@ -157,7 +157,7 @@ importers:
       yup: 0.32.9
     dependencies:
       '@botmate/admin': link:../admin
-      '@botmate/platform.telegram': link:../../platforms/telegram
+      '@botmate/plugin.telegram': link:../../plugins/telegram
       '@botmate/typescript-utils': link:../../shared/typescript
       '@botmate/utils': link:../../shared/utils
       chalk: 4.1.2
@@ -198,17 +198,19 @@ importers:
       tsup: 6.7.0_typescript@5.0.2
       typescript: 5.0.2
 
-  packages/platforms/telegram:
+  packages/plugins/telegram:
     specifiers:
+      '@botmate/types': workspace:*
       '@botmate/typescript-utils': workspace:^1.0.0
       '@types/react': ^18.0.28
       grammy: ^1.15.3
       typescript: ^5.0.2
     dependencies:
-      '@botmate/typescript-utils': link:../../shared/typescript
-      '@types/react': 18.0.28
       grammy: 1.15.3
     devDependencies:
+      '@botmate/types': link:../../shared/types
+      '@botmate/typescript-utils': link:../../shared/typescript
+      '@types/react': 18.0.28
       typescript: 5.0.2
 
   packages/shared/eslint-config-custom:

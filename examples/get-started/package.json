@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@botmate/core": "workspace:*",
-    "@botmate/platform.telegram": "workspace:*",
+    "@botmate/plugin.telegram": "workspace:*",
     "react": "^18.2.0"
   },
   "devDependencies": {

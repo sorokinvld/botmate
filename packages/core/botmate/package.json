@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@botmate/admin": "workspace:*",
-    "@botmate/platform.telegram": "workspace:^1.0.0",
+    "@botmate/plugin.telegram": "workspace:^1.0.0",
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@botmate/utils": "workspace:*",
     "chalk": "4.1.2",
