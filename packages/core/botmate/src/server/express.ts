@@ -8,9 +8,10 @@ const createExpressApp = () => {
   const app = express();
 
   app.use(logger);
-  app.use(express.static('build'));
+  app.use(express.static('public'));
+  app.use(express.static('dist/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'build', 'index.html'));
+    res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
   });
 
   return app;

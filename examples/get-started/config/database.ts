@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   connection: {
     client: 'postgres',
     connection: {

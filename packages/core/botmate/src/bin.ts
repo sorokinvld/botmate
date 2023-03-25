@@ -57,7 +57,11 @@ const getLocalScript =
       });
   };
 
-// program.version(packageJSON.version);
+// `$ botmate start`
+program
+  .command('start')
+  .description('Start your Strapi application')
+  .action(getLocalScript('start'));
 
 // `$ botmate develop`
 program
@@ -69,6 +73,12 @@ program
   .option('--browser <name>', 'Open the browser', true)
   .description('Start your BotMate application in development mode')
   .action(getLocalScript('develop'));
+
+program
+  .command('build')
+  .option('--no-optimization', 'Build the admin app without optimizing assets')
+  .description('Build the botmate admin app')
+  .action(getLocalScript('build'));
 
 //   `$ botmate watch-admin`
 program

@@ -26,11 +26,13 @@ const applyUserExtension = async (plugins) => {
   }
 
   const botmateServers = await loadFiles(extensionsDir, '**/botmate-server.js');
+  console.log('botmateServers', botmateServers);
 
   for (const pluginName of Object.keys(plugins)) {
     const plugin = plugins[pluginName];
     // execute botmate-server extension
     const botmateServer = get([pluginName, 'botmate-server'], botmateServers);
+    console.log('botmateServer', botmateServer);
     if (botmateServer) {
       plugins[pluginName] = await botmateServer(plugin);
     }

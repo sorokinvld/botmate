@@ -16,7 +16,7 @@ const { version: botmateVersion } = require(path.join(__dirname, '../../../packa
 const defaultConfig = {
   server: {
     host: process.env.HOST || os.hostname() || 'localhost',
-    port: process.env.PORT || 4356,
+    port: process.env.PORT || 9732,
     proxy: false,
     cron: { enabled: false },
     admin: { autoOpen: false },

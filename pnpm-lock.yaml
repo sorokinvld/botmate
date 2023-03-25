@@ -19,6 +19,8 @@ importers:
       '@botmate/core': workspace:*
       '@botmate/plugin.discord': workspace:^1.0.0
       '@botmate/plugin.telegram': workspace:*
+      '@botmate/typescript-utils': workspace:^1.0.0
+      '@types/node': ^18.15.7
       '@types/react': ^18.0.28
       react: ^18.2.0
     dependencies:
@@ -27,7 +29,17 @@ importers:
       '@botmate/plugin.telegram': link:../../packages/plugins/telegram
       react: 18.2.0
     devDependencies:
+      '@botmate/typescript-utils': link:../../packages/shared/typescript
+      '@types/node': 18.15.7
       '@types/react': 18.0.28
+
+  examples/get-started/src/plugins/my-plugin:
+    specifiers:
+      '@types/react': ^18.0.28
+      typescript: ^5.0.2
+    devDependencies:
+      '@types/react': 18.0.28
+      typescript: 5.0.2
 
   packages/core/admin:
     specifiers:

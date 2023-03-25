@@ -1,11 +1,18 @@
 {
-	"name": "botmate-plugin-my-plugin",
-	"version": "0.0.0",
-	"description": "This is the description of my plugin.",
-	"private": true,
-	"botmate": {
-		"name": "my-plugin",
-		"description": "Description of my plugin.",
-		"kind": "plugin"
-	}
+  "name": "botmate-plugin-my-plugin",
+  "version": "0.0.0",
+  "description": "This is the description of my plugin.",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "botmate": {
+    "name": "my-plugin",
+    "description": "Description of my plugin.",
+    "kind": "plugin"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "typescript": "^5.0.2"
+  }
 }

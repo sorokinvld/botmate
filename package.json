@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "watch": "nx watch ---all -- nx run $NX_PROJECT_NAME:build",
     "format:code": "yarn prettier:code --write",
     "prettier:code": "prettier --cache --cache-strategy content \"**/*.{js,ts}\""
   },
