@@ -1,12 +1,16 @@
 {
-	"name": "botmate",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [],
-	"author": "xencodes",
-	"license": "ISC"
+  "name": "botmate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "xencodes",
+  "license": "ISC",
+  "devDependencies": {
+    "nx": "15.8.9",
+    "@nrwl/nx-cloud": "latest"
+  }
 }
