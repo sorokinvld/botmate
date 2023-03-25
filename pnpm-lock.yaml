@@ -192,9 +192,16 @@ importers:
 
   packages/plugins/telegram:
     specifiers:
+      '@botmate/typescript-utils': workspace:^1.0.0
+      '@types/react': ^18.0.28
       grammy: ^1.15.3
+      typescript: ^5.0.2
     dependencies:
+      '@botmate/typescript-utils': link:../../shared/typescript
+      '@types/react': 18.0.28
       grammy: 1.15.3
+    devDependencies:
+      typescript: 5.0.2
 
   packages/shared/types:
     specifiers:
