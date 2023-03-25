@@ -1,5 +1,3 @@
-function register() {
-  console.log('registering myplugin');
-}
+function register() {}
 
 export default register;

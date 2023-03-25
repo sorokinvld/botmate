@@ -20,6 +20,7 @@
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@types/react": "^18.0.28",
     "@botmate/types": "workspace:*",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "@grammyjs/types": "3.0.3"
   }
 }

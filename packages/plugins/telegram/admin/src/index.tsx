@@ -1,12 +1,18 @@
-import React from 'react';
 import { IBotMateApp } from '@botmate/types/admin';
 
 export default {
   register(app: IBotMateApp) {
-    app.addMenuLink({
-      to: '/telegram',
-      label: 'Teglegram',
-      Component: () => <div>Wow!! Telegram Plugin X</div>,
+    app.addPlatform({
+      id: 'telegram',
+      bot: {
+        fields: [
+          {
+            name: 'token',
+            label: 'Token',
+            type: 'text',
+          },
+        ],
+      },
     });
   },
 };

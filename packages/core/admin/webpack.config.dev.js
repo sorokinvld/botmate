@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-disable import/no-extraneous-dependencies */
-
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { DuplicateReporterPlugin } = require('duplicate-dependencies-webpack-plugin');
@@ -11,7 +9,8 @@ const webpackConfig = require('./webpack.config');
 module.exports = () => {
   const analyzeBundle = process.env.ANALYZE_BUNDLE;
   const analyzeDuplicateDependencies = process.env.ANALYZE_DEPS;
-  const entry = path.join(__dirname, 'admin', 'src');
+  const adminPath = path.join(__dirname, 'admin', 'src');
+
   const dest = path.join(__dirname, 'build');
 
   // When running the analyze:bundle command, it needs a production build
@@ -21,10 +20,10 @@ module.exports = () => {
     backend: 'http://localhost:9732',
     adminPath: '/',
   };
-  const pluginsPath = getPluginsPath();
+  const pluginsPath = getPluginsPath.default();
 
   const args = {
-    entry,
+    entry: [adminPath],
     cacheDir: __dirname,
     pluginsPath,
     dest,
@@ -49,7 +48,7 @@ module.exports = () => {
     devServer: {
       port: 4000,
       client: {
-        logging: 'none',
+        logging: 'info',
         overlay: {
           errors: true,
           warnings: false,

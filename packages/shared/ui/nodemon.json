@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": "tsx",
+  "exec": "npm run build"
+}

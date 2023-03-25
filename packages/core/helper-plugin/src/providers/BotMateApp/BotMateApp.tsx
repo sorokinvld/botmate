@@ -1,22 +1,25 @@
 import React from 'react';
 import { botMateAppContext } from '../../contexts/BotMateApp';
+import { MenuLink, Platform } from '@botmate/types/admin';
 
-type BotMateAppProps = {
-	children?: React.ReactNode;
-	plugins: any[];
-	menu: any[];
+export type BotMateAppProviderProps = {
+  children?: React.ReactNode;
+  plugins: any[];
+  menu: MenuLink[];
+  platforms: Map<string, Platform>;
 };
-function BotMateAppProvider({ children, plugins, menu }: BotMateAppProps) {
-	return (
-		<botMateAppContext.Provider
-			value={{
-				plugins,
-				menu,
-			}}
-		>
-			{children}
-		</botMateAppContext.Provider>
-	);
+function BotMateAppProvider({ children, plugins, menu, platforms }: BotMateAppProviderProps) {
+  return (
+    <botMateAppContext.Provider
+      value={{
+        plugins,
+        menu,
+        platforms,
+      }}
+    >
+      {children}
+    </botMateAppContext.Provider>
+  );
 }
 
 export { BotMateAppProvider };

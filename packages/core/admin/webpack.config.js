@@ -4,7 +4,7 @@ const path = require('path');
 const fse = require('fs-extra');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -54,7 +54,7 @@ module.exports = ({
     experiments: {
       topLevelAwait: true,
     },
-    entry: [entry],
+    entry: entry,
     output: {
       path: dest,
       publicPath: options.adminPath,
@@ -181,11 +181,11 @@ module.exports = ({
       }),
       new webpack.DefinePlugin(envVariables),
 
-      // new ForkTsCheckerPlugin({
-      // 	typescript: {
-      // 		configFile: tsConfigFilePath,
-      // 	},
-      // }),
+      new ForkTsCheckerPlugin({
+        typescript: {
+          configFile: tsConfigFilePath,
+        },
+      }),
 
       !isProduction && process.env.REACT_REFRESH !== 'false' && new ReactRefreshWebpackPlugin(),
 

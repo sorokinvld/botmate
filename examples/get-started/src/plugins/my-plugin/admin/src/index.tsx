@@ -1,12 +1,12 @@
 import React from 'react';
+import { IBotMateApp } from '@botmate/types/admin';
 
 export default {
-  register(app) {
-    console.log('registering my plugin');
+  register(app: IBotMateApp) {
     app.addMenuLink({
-      name: 'My Plugin',
+      label: 'My Plugin',
       to: '/my-plugin',
-      Component: () => <div>My Plugin using TSX</div>,
+      Component: () => <div>My Plugin using X</div>,
     });
   },
 };

@@ -1,9 +1,8 @@
 'use strict';
 
 const { join, resolve, relative } = require('path');
-const { promisify } = require('util');
 
-const glob = promisify(require('glob').glob);
+const fastGlob = require('fast-glob');
 const fs = require('fs-extra');
 const { getCorePluginsPath, createPluginsFile } = require('./create-plugins-file');
 
@@ -13,11 +12,11 @@ const { getCorePluginsPath, createPluginsFile } = require('./create-plugins-file
  */
 const getPluginsPackages = async () => {
   const pathToPackages = resolve(__dirname, '..', '..', '..', 'plugins', '*');
-  const pluginsPackageDirs = await glob(pathToPackages);
+  const pluginsPackageDirs = await fastGlob(pathToPackages);
 
   return pluginsPackageDirs
     .filter((pluginDir) => {
-      return fs.existsSync(join(pluginDir, 'admin', 'src', 'index.js'));
+      return fs.existsSync(join(pluginDir, 'admin', 'src', 'index.ts'));
     })
     .reduce((acc, current) => {
       const depName = current.replace(/\\/g, '/').split('/').slice(-1)[0];
@@ -39,8 +38,8 @@ const getPluginsPackages = async () => {
  * Write the plugins.js file or copy the plugins-dev.js file if it exists
  */
 const createFile = async () => {
-  const customPluginFile = join(__dirname, '..', 'admin', 'src', 'plugins-dev.js');
-  const pluginFileDest = join(__dirname, '..', 'admin', 'src', 'plugins.js');
+  const customPluginFile = join(__dirname, '..', 'admin', 'src', 'plugins-dev.ts');
+  const pluginFileDest = join(__dirname, '..', 'admin', 'src', 'plugins.ts');
 
   if (fs.existsSync(customPluginFile)) {
     await fs.copy(customPluginFile, pluginFileDest);
@@ -57,7 +56,7 @@ const createFile = async () => {
 
 createFile()
   .then(() => {
-    console.log('plugins.js file created');
+    console.log('plugins.ts file created');
     process.exit();
   })
   .catch((err) => {

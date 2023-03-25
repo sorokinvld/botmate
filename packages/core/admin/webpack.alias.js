@@ -3,7 +3,13 @@
 const path = require('path');
 const findRoot = require('find-root');
 
-const aliasExactMatch = ['react', 'react-dom', 'react-router-dom', '@xstyled/styled-components'];
+const aliasExactMatch = [
+  'react',
+  'react-dom',
+  'react-router-dom',
+  '@botmate/ui',
+  '@chakra-ui/react',
+];
 
 module.exports = {
   ...aliasExactMatch.reduce((acc, moduleName) => {
