@@ -20,12 +20,4 @@ const Template: ComponentStory<typeof AppMenu> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {
-  items: [
-    {
-      label: 'Home',
-      icon: <HiHome />,
-      path: '/',
-    },
-  ],
-};
+Primary.args = {};

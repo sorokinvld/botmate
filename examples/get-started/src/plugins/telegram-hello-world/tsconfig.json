@@ -1,0 +1,18 @@
+{
+  "extends": "@botmate/typescript-utils/tsconfigs/server",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "."
+  },
+  "include": ["server/**/*.ts"],
+  "exclude": [
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".cache/",
+    ".tmp/",
+    "server/admin",
+    "**/*.test.ts",
+    "server/plugins/**"
+  ]
+}

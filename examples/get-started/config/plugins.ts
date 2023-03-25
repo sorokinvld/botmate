@@ -9,5 +9,10 @@ export default () => {
         testConf: 3,
       },
     },
+    tghelloworld: {
+      enabled: true,
+      resolve: `./src/plugins/telegram-hello-world`,
+      config: {},
+    },
   };
 };

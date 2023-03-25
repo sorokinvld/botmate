@@ -1,5 +1,5 @@
 function register() {
-  console.log('Hello from my plugin!');
+  console.log('telegram hello world');
 }
 
 export default register;

@@ -1,0 +1,19 @@
+{
+  "name": "botmate-telegram-hello-world",
+  "version": "0.0.0",
+  "description": "This is the description of my plugin.",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "botmate": {
+    "name": "telegram-hello-world",
+    "description": "Example plugin for Telegram",
+    "kind": "plugin"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.7",
+    "@types/react": "^18.0.28",
+    "typescript": "^5.0.2"
+  }
+}

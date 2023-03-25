@@ -181,11 +181,12 @@ module.exports = ({
       }),
       new webpack.DefinePlugin(envVariables),
 
-      new ForkTsCheckerPlugin({
-        typescript: {
-          configFile: tsConfigFilePath,
-        },
-      }),
+      tsConfigFilePath &&
+        new ForkTsCheckerPlugin({
+          typescript: {
+            configFile: tsConfigFilePath,
+          },
+        }),
 
       !isProduction && process.env.REACT_REFRESH !== 'false' && new ReactRefreshWebpackPlugin(),
 
