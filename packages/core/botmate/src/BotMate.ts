@@ -11,6 +11,7 @@ import * as utils from './utils';
 import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
+import { findBots } from './core/bots';
 
 const resolveWorkingDirectories = (opts) => {
   const cwd = process.cwd();
@@ -29,6 +30,7 @@ class BotMate {
   isLoaded: boolean;
   app: any;
   admin: any;
+  bots: any[];
 
   constructor(opts = {}) {
     const rootDirs = resolveWorkingDirectories(opts);
@@ -47,6 +49,7 @@ class BotMate {
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
 
+    this.bots = [];
     this.server = createServer(this);
     this.reload = this.reloadBotMate();
     this.isLoaded = false;
@@ -67,8 +70,20 @@ class BotMate {
     return this.container.get('config');
   }
 
+  async loadBots() {
+    this.bots = await findBots();
+  }
+
   async register() {
-    await Promise.all([this.loadApp(), this.loadAmin(), this.loadPlugins()]);
+    await Promise.all([
+      //
+      this.loadApp(),
+      this.loadAmin(),
+      this.loadPlugins(),
+      this.loadBots(),
+    ]);
+
+    console.log('loaded all');
 
     await this.runLifecyclesFunctions(LIFECYCLES.REGISTER);
     return this;

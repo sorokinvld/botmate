@@ -1,5 +1,5 @@
 {
-  "name": "@botmate/plugin.telegram",
+  "name": "@botmate/plugin.discord",
   "version": "1.0.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -7,19 +7,18 @@
     "build": "tsc -p tsconfig.json"
   },
   "botmate": {
-    "displayName": "Telegram",
-    "name": "telegram",
-    "description": "Telegram platform plugin for Botmate",
+    "displayName": "Discord",
+    "name": "discord",
+    "description": "Discord platform plugin for Botmate",
     "required": true,
     "kind": "plugin"
   },
   "dependencies": {
-    "grammy": "^1.15.3"
+    "discord.js": "14.8.0"
   },
   "devDependencies": {
     "@botmate/types": "workspace:*",
     "@botmate/typescript-utils": "workspace:^1.0.0",
-    "@grammyjs/types": "3.0.3",
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.28",
     "typescript": "^5.0.2"

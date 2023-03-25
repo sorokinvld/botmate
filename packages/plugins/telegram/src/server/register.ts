@@ -1,3 +1,3 @@
 export default () => {
-  console.log('Hello from TELEGRAM PLATFORM! TSX');
+  console.log('setting up telegram platform');
 };

@@ -18,6 +18,9 @@ export default (botmate) => {
     get(id) {
       return _.find(bots, (bot) => bot.id === id);
     },
+    getAll() {
+      return bots;
+    },
     start(path, val) {},
     stop(id) {},
   };
