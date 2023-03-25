@@ -10,78 +10,78 @@ import inquirer from 'inquirer';
 const program = new Command();
 
 const checkCwdIsBotMateApp = (name: string) => {
-	const logErrorAndExit = () => {
-		console.log(
-			`You need to run ${yellow(
-				`botmate ${name}`
-			)} in a BotMate project. Make sure you are in the right directory.`
-		);
-		process.exit(1);
-	};
+  const logErrorAndExit = () => {
+    console.log(
+      `You need to run ${yellow(
+        `botmate ${name}`
+      )} in a BotMate project. Make sure you are in the right directory.`
+    );
+    process.exit(1);
+  };
 
-	try {
-		const pkgJSON = require(`${process.cwd()}/package.json`);
-		if (!_.has(pkgJSON, 'dependencies.@botmate/core')) {
-			logErrorAndExit();
-		}
-	} catch (err) {
-		logErrorAndExit();
-	}
+  try {
+    const pkgJSON = require(`${process.cwd()}/package.json`);
+    if (!_.has(pkgJSON, 'dependencies.@botmate/core')) {
+      logErrorAndExit();
+    }
+  } catch (err) {
+    logErrorAndExit();
+  }
 };
 
 const getLocalScript =
-	(name: string) =>
-	async (...args) => {
-		checkCwdIsBotMateApp(name);
+  (name: string) =>
+  async (...args) => {
+    checkCwdIsBotMateApp(name);
 
-		const cmdPath = resolveCwd.silent(`@botmate/core/lib/commands/${name}`);
+    const cmdPath = resolveCwd.silent(`@botmate/core/lib/commands/${name}`);
 
-		if (!cmdPath) {
-			console.log(
-				`Error loading the local ${yellow(
-					name
-				)} command. BotMate might not be installed in your "node_modules". You may need to run "pnpm install".`
-			);
-			process.exit(1);
-		}
+    if (!cmdPath) {
+      console.log(
+        `Error loading the local ${yellow(
+          name
+        )} command. BotMate might not be installed in your "node_modules". You may need to run "pnpm install".`
+      );
+      process.exit(1);
+    }
 
-		const script = await import(cmdPath);
+    const script = await import(cmdPath);
 
-		Promise.resolve()
-			.then(() => {
-				return script.default(...args);
-			})
-			.catch((error) => {
-				console.error(error);
-				process.exit(1);
-			});
-	};
+    Promise.resolve()
+      .then(() => {
+        return script.default(...args);
+      })
+      .catch((error) => {
+        console.error(error);
+        process.exit(1);
+      });
+  };
 
 // program.version(packageJSON.version);
 
 // `$ botmate develop`
 program
-	.command('develop')
-	.alias('dev')
-	.option('--no-build', 'Disable build')
-	.option('--watch-admin', 'Enable watch', false)
-	.option('--polling', 'Watch for file changes in network directories', false)
-	.option('--browser <name>', 'Open the browser', true)
-	.description('Start your BotMate application in development mode')
-	.action(getLocalScript('develop'));
+  .command('develop')
+  .alias('dev')
+  .option('--no-build', 'Disable build')
+  .option('--watch-admin', 'Enable watch', false)
+  .option('--polling', 'Watch for file changes in network directories', false)
+  .option('--browser <name>', 'Open the browser', true)
+  .description('Start your BotMate application in development mode')
+  .action(getLocalScript('develop'));
 
 //   `$ botmate watch-admin`
 program
-	.command('watch-admin')
-	.option('--browser <name>', 'Open the browser', true)
-	.description('Start the admin development server')
-	.action(getLocalScript('watchAdmin'));
+  .command('watch-admin')
+  .option('--browser <name>', 'Open the browser', true)
+  .description('Start the admin development server')
+  .action(getLocalScript('watchAdmin'));
 
 function loadVersion() {
-	try {
-		const pkgJSON = require(path.resolve(__dirname, '../package.json'));
-		program.version(pkgJSON.version);
-	} catch {}
+  try {
+    const pkgJSON = require(path.resolve(__dirname, '../package.json'));
+    program.version(pkgJSON.version);
+  } catch {}
 }
 
 loadVersion();

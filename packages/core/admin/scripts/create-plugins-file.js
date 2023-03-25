@@ -11,20 +11,18 @@ const CORE_PLUGINS = ['telegram'];
  * @returns {Object}
  */
 const getCorePluginsPath = () => {
-	const corePlugins = {};
+  const corePlugins = {};
 
-	for (const dep of CORE_PLUGINS) {
-		const packageAdminPath = join(__dirname, '..', '..', dep, 'admin', 'src');
+  for (const dep of CORE_PLUGINS) {
+    const packageAdminPath = join(__dirname, '..', '..', dep, 'admin', 'src');
 
-		const adminEntryPoint = resolve(join(__dirname, '..', 'admin', 'src'));
-		const pathToPlugin = join(
-			relative(adminEntryPoint, packageAdminPath)
-		).replace(/\\/g, '/');
+    const adminEntryPoint = resolve(join(__dirname, '..', 'admin', 'src'));
+    const pathToPlugin = join(relative(adminEntryPoint, packageAdminPath)).replace(/\\/g, '/');
 
-		corePlugins[dep] = pathToPlugin;
-	}
+    corePlugins[dep] = pathToPlugin;
+  }
 
-	return corePlugins;
+  return corePlugins;
 };
 
 /**
@@ -33,29 +31,18 @@ const getCorePluginsPath = () => {
  * @returns Object of plugin's paths
  */
 const getPluginToInstallPath = (pluginsToInstall) => {
-	const plugins = {};
+  const plugins = {};
 
-	for (const dep of pluginsToInstall) {
-		const packageAdminPath = join(
-			__dirname,
-			'..',
-			'..',
-			'..',
-			'plugins',
-			dep,
-			'admin',
-			'src'
-		);
+  for (const dep of pluginsToInstall) {
+    const packageAdminPath = join(__dirname, '..', '..', '..', 'plugins', dep, 'admin', 'src');
 
-		const adminEntryPoint = resolve(join(__dirname, '..', 'admin', 'src'));
-		const pathToPlugin = join(
-			relative(adminEntryPoint, packageAdminPath)
-		).replace(/\\/g, '/');
+    const adminEntryPoint = resolve(join(__dirname, '..', 'admin', 'src'));
+    const pathToPlugin = join(relative(adminEntryPoint, packageAdminPath)).replace(/\\/g, '/');
 
-		plugins[dep] = pathToPlugin;
-	}
+    plugins[dep] = pathToPlugin;
+  }
 
-	return plugins;
+  return plugins;
 };
 
 /**
@@ -63,45 +50,43 @@ const getPluginToInstallPath = (pluginsToInstall) => {
  * @param {Object} plugins
  */
 const createPluginsFile = async (plugins) => {
-	const pluginFileDest = resolve(__dirname, '..', 'admin', 'src', 'plugins.js');
+  const pluginFileDest = resolve(__dirname, '..', 'admin', 'src', 'plugins.js');
 
-	const allPluginsArray = Object.entries(plugins).map(
-		([plugin, pluginPath]) => {
-			return {
-				shortName: camelCase(plugin),
-				name: plugin,
-				pluginPath,
-			};
-		}
-	);
+  const allPluginsArray = Object.entries(plugins).map(([plugin, pluginPath]) => {
+    return {
+      shortName: camelCase(plugin),
+      name: plugin,
+      pluginPath,
+    };
+  });
 
-	const content = `
+  const content = `
 // To override this file create a plugins-dev.js one and copy the content of the plugin.js one.
 // When starting the app the script will copy the plugins-dev.js into this one instead.
 ${allPluginsArray
-	.map(({ shortName, pluginPath }) => {
-		const req = `'${pluginPath}'`;
+  .map(({ shortName, pluginPath }) => {
+    const req = `'${pluginPath}'`;
 
-		return `import ${shortName} from ${req};`;
-	})
-	.join('\n')}
+    return `import ${shortName} from ${req};`;
+  })
+  .join('\n')}
 
 const plugins = {
 ${[...allPluginsArray]
-	.map(({ name, shortName }) => {
-		return `  '${name}': ${shortName},`;
-	})
-	.join('\n')}
+  .map(({ name, shortName }) => {
+    return `  '${name}': ${shortName},`;
+  })
+  .join('\n')}
 };
   
 export default plugins;
 `;
 
-	return fs.writeFile(pluginFileDest, content);
+  return fs.writeFile(pluginFileDest, content);
 };
 
 module.exports = {
-	createPluginsFile,
-	getCorePluginsPath,
-	getPluginToInstallPath,
+  createPluginsFile,
+  getCorePluginsPath,
+  getPluginToInstallPath,
 };

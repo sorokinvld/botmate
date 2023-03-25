@@ -7,39 +7,32 @@ import webpack from 'webpack';
 import fs from 'fs-extra';
 
 const getCustomWebpackConfig = (dir: string, config: any) => {
-	const adminConfigPath = path.join(dir, 'src', 'admin', 'webpack.config.js');
-	const getWebpackConfig = require(path.resolve(
-		__dirname,
-		'..',
-		'..',
-		'webpack.config.js'
-	));
+  const adminConfigPath = path.join(dir, 'src', 'admin', 'webpack.config.js');
+  const getWebpackConfig = require(path.resolve(__dirname, '..', '..', 'webpack.config.js'));
 
-	let webpackConfig = getWebpackConfig(config);
+  let webpackConfig = getWebpackConfig(config);
 
-	if (fs.existsSync(adminConfigPath)) {
-		const webpackAdminConfig = require(path.resolve(adminConfigPath));
+  if (fs.existsSync(adminConfigPath)) {
+    const webpackAdminConfig = require(path.resolve(adminConfigPath));
 
-		if (_.isFunction(webpackAdminConfig)) {
-			// Expose the devServer configuration
-			if (config.devServer) {
-				webpackConfig.devServer = config.devServer;
-			}
+    if (_.isFunction(webpackAdminConfig)) {
+      // Expose the devServer configuration
+      if (config.devServer) {
+        webpackConfig.devServer = config.devServer;
+      }
 
-			webpackConfig = webpackAdminConfig(webpackConfig, webpack);
+      webpackConfig = webpackAdminConfig(webpackConfig, webpack);
 
-			if (!webpackConfig) {
-				console.error(
-					`${chalk.red(
-						'Error:'
-					)} Nothing was returned from your custom webpack configuration`
-				);
-				process.exit(1);
-			}
-		}
-	}
+      if (!webpackConfig) {
+        console.error(
+          `${chalk.red('Error:')} Nothing was returned from your custom webpack configuration`
+        );
+        process.exit(1);
+      }
+    }
+  }
 
-	return webpackConfig;
+  return webpackConfig;
 };
 
 export default getCustomWebpackConfig;

@@ -5,9 +5,9 @@ const config = require('./config');
 const yup = require('./yup');
 
 module.exports = {
-	yup,
-	env,
-	importDefault,
-	templateConfiguration,
-	...config,
+  yup,
+  env,
+  importDefault,
+  templateConfiguration,
+  ...config,
 };

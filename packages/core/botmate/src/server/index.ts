@@ -1,9 +1,9 @@
 import { createExpressApp } from './express';
 
 const createServer = (botmate) => {
-	const app = createExpressApp();
+  const app = createExpressApp();
 
-	return app;
+  return app;
 };
 
 export { createServer };

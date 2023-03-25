@@ -3,22 +3,22 @@
 const _ = require('lodash');
 
 export default (botmate) => {
-	const bots = [];
+  const bots = [];
 
-	return {
-		add(bot) {
-			// todo: validate bot {id, instance etc ...}
+  return {
+    add(bot) {
+      // todo: validate bot {id, instance etc ...}
 
-			if (!bot) {
-				throw new Error('Bot is required');
-			}
+      if (!bot) {
+        throw new Error('Bot is required');
+      }
 
-			bots.push(bot);
-		},
-		get(id) {
-			return _.find(bots, (bot) => bot.id === id);
-		},
-		start(path, val) {},
-		stop(id) {},
-	};
+      bots.push(bot);
+    },
+    get(id) {
+      return _.find(bots, (bot) => bot.id === id);
+    },
+    start(path, val) {},
+    stop(id) {},
+  };
 };

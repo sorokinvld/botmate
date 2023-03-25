@@ -7,24 +7,24 @@ import fse from 'fs-extra';
  * @returns String
  */
 const getCustomAppConfigFile = async (dir: string) => {
-	const adminSrcPath = join(dir, 'src', 'admin');
+  const adminSrcPath = join(dir, 'src', 'admin');
 
-	if (!fse.pathExistsSync(adminSrcPath)) {
-		return undefined;
-	}
+  if (!fse.pathExistsSync(adminSrcPath)) {
+    return undefined;
+  }
 
-	const useTypeScript = false; // await isUsingTypeScript(adminSrcPath, 'tsconfig.json');
+  const useTypeScript = false; // await isUsingTypeScript(adminSrcPath, 'tsconfig.json');
 
-	const files = await fse.readdir(adminSrcPath);
+  const files = await fse.readdir(adminSrcPath);
 
-	const appJsx = files.find((file) => /^app.jsx?$/.test(file));
-	const appTsx = files.find((file) => /^app.tsx?$/.test(file));
+  const appJsx = files.find((file) => /^app.jsx?$/.test(file));
+  const appTsx = files.find((file) => /^app.tsx?$/.test(file));
 
-	if (useTypeScript) {
-		return appTsx || appJsx;
-	}
+  if (useTypeScript) {
+    return appTsx || appJsx;
+  }
 
-	return appJsx;
+  return appJsx;
 };
 
 export default getCustomAppConfigFile;

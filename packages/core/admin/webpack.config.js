@@ -61,9 +61,7 @@ module.exports = ({
       // Utilize long-term caching by adding content hashes (not compilation hashes)
       // to compiled assets for production
       filename: isProduction ? '[name].[contenthash:8].js' : '[name].bundle.js',
-      chunkFilename: isProduction
-        ? '[name].[contenthash:8].chunk.js'
-        : '[name].chunk.js',
+      chunkFilename: isProduction ? '[name].[contenthash:8].chunk.js' : '[name].chunk.js',
     },
     optimization: {
       minimize: optimize,
@@ -189,9 +187,7 @@ module.exports = ({
       // 	},
       // }),
 
-      !isProduction &&
-        process.env.REACT_REFRESH !== 'false' &&
-        new ReactRefreshWebpackPlugin(),
+      !isProduction && process.env.REACT_REFRESH !== 'false' && new ReactRefreshWebpackPlugin(),
 
       ...webpackPlugins,
     ].filter(Boolean),

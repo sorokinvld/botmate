@@ -10,97 +10,90 @@ import getEnabledPlugins from './get-enabled-plugins';
 import getUserPluginsConfig from './get-user-plugins-config';
 
 const defaultPlugin = {
-	bootstrap() {},
-	destroy() {},
-	register() {},
-	config: {
-		default: {},
-		validator() {},
-	},
+  bootstrap() {},
+  destroy() {},
+  register() {},
+  config: {
+    default: {},
+    validator() {},
+  },
 };
 
 const applyUserExtension = async (plugins) => {
-	const extensionsDir = botmate.dirs.dist.extensions;
-	if (!(await fse.pathExists(extensionsDir))) {
-		return;
-	}
+  const extensionsDir = botmate.dirs.dist.extensions;
+  if (!(await fse.pathExists(extensionsDir))) {
+    return;
+  }
 
-	const botmateServers = await loadFiles(extensionsDir, '**/botmate-server.js');
+  const botmateServers = await loadFiles(extensionsDir, '**/botmate-server.js');
 
-	for (const pluginName of Object.keys(plugins)) {
-		const plugin = plugins[pluginName];
-		// execute botmate-server extension
-		const botmateServer = get([pluginName, 'botmate-server'], botmateServers);
-		if (botmateServer) {
-			plugins[pluginName] = await botmateServer(plugin);
-		}
-	}
+  for (const pluginName of Object.keys(plugins)) {
+    const plugin = plugins[pluginName];
+    // execute botmate-server extension
+    const botmateServer = get([pluginName, 'botmate-server'], botmateServers);
+    if (botmateServer) {
+      plugins[pluginName] = await botmateServer(plugin);
+    }
+  }
 };
 
 const applyUserConfig = async (plugins) => {
-	const userPluginsConfig = await getUserPluginsConfig();
+  const userPluginsConfig = await getUserPluginsConfig();
 
-	for (const pluginName of Object.keys(plugins)) {
-		const plugin = plugins[pluginName];
-		const userPluginConfig = getOr(
-			{},
-			`${pluginName}.config`,
-			userPluginsConfig
-		);
-		const defaultConfig =
-			typeof plugin.config.default === 'function'
-				? plugin.config.default({ env })
-				: plugin.config.default;
+  for (const pluginName of Object.keys(plugins)) {
+    const plugin = plugins[pluginName];
+    const userPluginConfig = getOr({}, `${pluginName}.config`, userPluginsConfig);
+    const defaultConfig =
+      typeof plugin.config.default === 'function'
+        ? plugin.config.default({ env })
+        : plugin.config.default;
 
-		const config = defaultsDeep(defaultConfig, userPluginConfig);
-		try {
-			plugin.config.validator(config);
-		} catch (e) {
-			throw new Error(`Error regarding ${pluginName} config: ${e.message}`);
-		}
-		plugin.config = config;
-	}
+    const config = defaultsDeep(defaultConfig, userPluginConfig);
+    try {
+      plugin.config.validator(config);
+    } catch (e) {
+      throw new Error(`Error regarding ${pluginName} config: ${e.message}`);
+    }
+    plugin.config = config;
+  }
 };
 
 const loadPlugins = async (botmate: BotMate.BotMateInstance) => {
-	const plugins = {};
+  const plugins = {};
 
-	const enabledPlugins = await getEnabledPlugins(botmate);
+  const enabledPlugins = await getEnabledPlugins(botmate);
 
-	botmate.config.set('enabledPlugins', enabledPlugins);
+  botmate.config.set('enabledPlugins', enabledPlugins);
 
-	for (const pluginName of Object.keys(enabledPlugins)) {
-		const enabledPlugin = enabledPlugins[pluginName];
+  for (const pluginName of Object.keys(enabledPlugins)) {
+    const enabledPlugin = enabledPlugins[pluginName];
 
-		let serverEntrypointPath;
+    let serverEntrypointPath;
 
-		try {
-			serverEntrypointPath = join(
-				enabledPlugin.pathToPlugin,
-				'botmate-server.js'
-			);
-		} catch (e) {
-			throw new Error(
-				`Error loading the plugin ${pluginName} because ${pluginName} is not installed. Please either install the plugin or remove it's configuration.`
-			);
-		}
+    try {
+      serverEntrypointPath = join(enabledPlugin.pathToPlugin, 'botmate-server.js');
+    } catch (e) {
+      throw new Error(
+        `Error loading the plugin ${pluginName} because ${pluginName} is not installed. Please either install the plugin or remove it's configuration.`
+      );
+    }
 
-		// only load plugins with a server entrypoint
-		if (!(await fse.pathExists(serverEntrypointPath))) {
-			continue;
-		}
+    // only load plugins with a server entrypoint
+    if (!(await fse.pathExists(serverEntrypointPath))) {
+      continue;
+    }
 
-		const pluginServer = loadConfigFile(serverEntrypointPath);
-		plugins[pluginName] = defaultsDeep(defaultPlugin, pluginServer);
-	}
+    const pluginServer = loadConfigFile(serverEntrypointPath);
+    plugins[pluginName] = defaultsDeep(defaultPlugin, pluginServer);
+  }
 
-	// TODO: validate plugin format
-	await applyUserConfig(plugins);
-	await applyUserExtension(plugins);
+  // TODO: validate plugin format
+  await applyUserConfig(plugins);
+  await applyUserExtension(plugins);
 
-	for (const pluginName of Object.keys(plugins)) {
-		botmate.container.get('plugins').add(pluginName, plugins[pluginName]);
-	}
+  for (const pluginName of Object.keys(plugins)) {
+    botmate.container.get('plugins').add(pluginName, plugins[pluginName]);
+  }
 };
 
 export default loadPlugins;

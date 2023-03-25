@@ -1,3 +1,3 @@
 export default (botmate) => {
-	botmate.admin = require('@botmate/admin/botmate-server');
+  botmate.admin = require('@botmate/admin/botmate-server');
 };

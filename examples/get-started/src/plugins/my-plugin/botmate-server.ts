@@ -1,6 +1,6 @@
 module.exports = () => {
-	return {
-		register() {},
-		bootstrap() {},
-	};
+  return {
+    register() {},
+    bootstrap() {},
+  };
 };

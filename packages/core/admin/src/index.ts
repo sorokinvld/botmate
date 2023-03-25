@@ -5,12 +5,7 @@ import chalk from 'chalk';
 import WebpackDevServer from 'webpack-dev-server';
 import { isUsingTypeScript } from '@botmate/typescript-utils';
 
-import {
-  shouldBuildAdmin,
-  createCacheDir,
-  getCustomWebpackConfig,
-  watchAdminFiles,
-} from './utils';
+import { shouldBuildAdmin, createCacheDir, getCustomWebpackConfig, watchAdminFiles } from './utils';
 
 const clean = ({ appDir, buildDestDir }) => {
   // FIXME rename admin build dir and path to build dir
@@ -22,20 +17,9 @@ const clean = ({ appDir, buildDestDir }) => {
   fs.removeSync(cacheDir);
 };
 
-const build = async ({
-  appDir,
-  buildDestDir,
-  env,
-  forceBuild,
-  optimize,
-  options,
-  plugins,
-}) => {
+const build = async ({ appDir, buildDestDir, env, forceBuild, optimize, options, plugins }) => {
   const buildAdmin = await shouldBuildAdmin({ appDir, plugins });
-  const useTypeScript = isUsingTypeScript(
-    path.join(appDir, 'src', 'admin'),
-    'tsconfig.json',
-  );
+  const useTypeScript = isUsingTypeScript(path.join(appDir, 'src', 'admin'), 'tsconfig.json');
 
   if (!buildAdmin && !forceBuild) {
     return;
@@ -53,9 +37,7 @@ const build = async ({
     ceRoot: path.resolve(cacheDir, 'admin', 'src'),
   };
 
-  const pluginsPath = Object.keys(plugins).map(
-    (pluginName) => plugins[pluginName].pathToPlugin,
-  );
+  const pluginsPath = Object.keys(plugins).map((pluginName) => plugins[pluginName].pathToPlugin);
 
   // Either use the tsconfig file from the generated app or the one inside the .cache folder
   // so we can develop plugins in TS while being in a JS app
@@ -105,19 +87,8 @@ const build = async ({
   });
 };
 
-async function watchAdmin({
-  appDir,
-  browser,
-  buildDestDir,
-  host,
-  options,
-  plugins,
-  port,
-}) {
-  const useTypeScript = await isUsingTypeScript(
-    path.join(appDir, 'src', 'admin'),
-    'tsconfig.json',
-  );
+async function watchAdmin({ appDir, browser, buildDestDir, host, options, plugins, port }) {
+  const useTypeScript = await isUsingTypeScript(path.join(appDir, 'src', 'admin'), 'tsconfig.json');
   // Create the cache dir containing the front-end files.
   const cacheDir = path.join(appDir, '.cache');
   await createCacheDir({ appDir, plugins });
@@ -131,9 +102,7 @@ async function watchAdmin({
     ceRoot: path.resolve(cacheDir, 'admin', 'src'),
   };
 
-  const pluginsPath = Object.keys(plugins).map(
-    (pluginName) => plugins[pluginName].pathToPlugin,
-  );
+  const pluginsPath = Object.keys(plugins).map((pluginName) => plugins[pluginName].pathToPlugin);
 
   // Either use the tsconfig file from the generated app or the one inside the .cache folder
   // so we can develop plugins in TS while being in a JS app
@@ -185,11 +154,7 @@ async function watchAdmin({
   const runServer = async () => {
     console.log(chalk.green('Starting the development server...'));
     console.log();
-    console.log(
-      chalk.green(
-        `Admin development at http://${host}:${port}${options.adminPath}`,
-      ),
-    );
+    console.log(chalk.green(`Admin development at http://${host}:${port}${options.adminPath}`));
 
     await server.start();
   };

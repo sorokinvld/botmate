@@ -1,3 +1,3 @@
 module.exports = () => ({
-	bootstrap({ botmate }) {},
+  bootstrap({ botmate }) {},
 });

@@ -5,37 +5,37 @@ const { statSync, existsSync } = require('fs');
 const { importDefault, yup } = require('@botmate/utils');
 
 const srcSchema = yup
-	.object()
-	.shape({
-		bootstrap: yup.mixed().isFunction(),
-		register: yup.mixed().isFunction(),
-		destroy: yup.mixed().isFunction(),
-	})
-	.noUnknown();
+  .object()
+  .shape({
+    bootstrap: yup.mixed().isFunction(),
+    register: yup.mixed().isFunction(),
+    destroy: yup.mixed().isFunction(),
+  })
+  .noUnknown();
 
 const validateSrcIndex = (srcIndex) => {
-	return srcSchema.validateSync(srcIndex, { strict: true, abortEarly: false });
+  return srcSchema.validateSync(srcIndex, { strict: true, abortEarly: false });
 };
 
-export default (strapi) => {
-	if (!existsSync(strapi.dirs.dist.src)) {
-		return;
-	}
+export default (botmate) => {
+  if (!existsSync(botmate.dirs.dist.src)) {
+    return;
+  }
 
-	const pathToSrcIndex = resolve(strapi.dirs.dist.src, 'index.js');
-	if (!existsSync(pathToSrcIndex) || statSync(pathToSrcIndex).isDirectory()) {
-		return {};
-	}
+  const pathToSrcIndex = resolve(botmate.dirs.dist.src, 'index.js');
+  if (!existsSync(pathToSrcIndex) || statSync(pathToSrcIndex).isDirectory()) {
+    return {};
+  }
 
-	const srcIndex = importDefault(pathToSrcIndex);
+  const srcIndex = importDefault(pathToSrcIndex);
 
-	try {
-		validateSrcIndex(srcIndex);
-	} catch (e) {
-		strapi.stopWithError({
-			message: `Invalid file \`./src/index.js\`: ${e.message}`,
-		});
-	}
+  try {
+    validateSrcIndex(srcIndex);
+  } catch (e) {
+    botmate.stopWithError({
+      message: `Invalid file \`./src/index.js\`: ${e.message}`,
+    });
+  }
 
-	return srcIndex;
+  return srcIndex;
 };

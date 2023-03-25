@@ -19,152 +19,132 @@ import { buildTypeScript, buildAdmin } from './builders';
  */
 
 export default async ({ build, watchAdmin, polling, browser }) => {
-	const appDir = process.cwd();
+  const appDir = process.cwd();
 
-	const isTSProject = await tsUtils.isUsingTypeScript(appDir);
-	const outDir = await tsUtils.resolveOutDir(appDir);
-	const distDir = isTSProject ? outDir : appDir;
+  const isTSProject = await tsUtils.isUsingTypeScript(appDir);
+  const outDir = await tsUtils.resolveOutDir(appDir);
+  const distDir = isTSProject ? outDir : appDir;
 
-	try {
-		if (cluster.isMaster || cluster.isPrimary) {
-			return primaryProcess({
-				distDir,
-				appDir,
-				build,
-				browser,
-				isTSProject,
-				watchAdmin,
-			});
-		}
+  try {
+    if (cluster.isMaster || cluster.isPrimary) {
+      return primaryProcess({
+        distDir,
+        appDir,
+        build,
+        browser,
+        isTSProject,
+        watchAdmin,
+      });
+    }
 
-		if (cluster.isWorker) {
-			return workerProcess({
-				appDir,
-				distDir,
-				watchAdmin,
-				polling,
-				isTSProject,
-			});
-		}
-	} catch (e) {
-		console.error(e);
-		process.exit(1);
-	}
+    if (cluster.isWorker) {
+      return workerProcess({
+        appDir,
+        distDir,
+        watchAdmin,
+        polling,
+        isTSProject,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
 };
 
-const primaryProcess = async ({
-	distDir,
-	appDir,
-	build,
-	isTSProject,
-	watchAdmin,
-	browser,
-}) => {
-	if (isTSProject) {
-		await buildTypeScript({ srcDir: appDir, distDir, watch: false });
-	}
+const primaryProcess = async ({ distDir, appDir, build, isTSProject, watchAdmin, browser }) => {
+  if (isTSProject) {
+    await buildTypeScript({ srcDir: appDir, distDir, watch: false });
+  }
 
-	const config = loadConfiguration({ appDir, distDir });
-	const serveAdminPanel = getOr(true, 'admin.serveAdminPanel') as Function;
-	serveAdminPanel(config);
+  const config = loadConfiguration({ appDir, distDir });
+  const serveAdminPanel = getOr(true, 'admin.serveAdminPanel') as Function;
+  serveAdminPanel(config);
 
-	const buildExists = fs.existsSync(path.join(distDir, 'build'));
+  const buildExists = fs.existsSync(path.join(distDir, 'build'));
 
-	// Don't run the build process if the admin is in watch mode
-	if (build && !watchAdmin && serveAdminPanel && !buildExists) {
-		try {
-			await buildAdmin({
-				buildDestDir: distDir,
-				forceBuild: false,
-				optimization: false,
-				srcDir: appDir,
-			});
-		} catch (err) {
-			console.log('err', err);
-			process.exit(1);
-		}
-	}
+  // Don't run the build process if the admin is in watch mode
+  if (build && !watchAdmin && serveAdminPanel && !buildExists) {
+    try {
+      await buildAdmin({
+        buildDestDir: distDir,
+        forceBuild: false,
+        optimization: false,
+        srcDir: appDir,
+      });
+    } catch (err) {
+      console.log('err', err);
+      process.exit(1);
+    }
+  }
 
-	if (watchAdmin) {
-		try {
-			execa(
-				'npm',
-				['run', '-s', 'botmate', 'watch-admin', '--', '--browser', browser],
-				{
-					stdio: 'inherit',
-				}
-			);
-		} catch (err) {
-			process.exit(1);
-		}
-	}
+  if (watchAdmin) {
+    try {
+      execa('npm', ['run', '-s', 'botmate', 'watch-admin', '--', '--browser', browser], {
+        stdio: 'inherit',
+      });
+    } catch (err) {
+      process.exit(1);
+    }
+  }
 
-	cluster.on('message', async (worker, message) => {
-		switch (message) {
-			case 'reload':
-				if (isTSProject) {
-					await buildTypeScript({ srcDir: appDir, distDir, watch: false });
-				}
+  cluster.on('message', async (worker, message) => {
+    switch (message) {
+      case 'reload':
+        if (isTSProject) {
+          await buildTypeScript({ srcDir: appDir, distDir, watch: false });
+        }
 
-				console.info('The server is restarting\n');
+        console.info('The server is restarting\n');
 
-				worker.send('kill');
-				break;
-			case 'killed':
-				cluster.fork();
-				break;
-			case 'stop':
-				process.exit(1);
-				break;
-			default: {
-				break;
-			}
-		}
-	});
+        worker.send('kill');
+        break;
+      case 'killed':
+        cluster.fork();
+        break;
+      case 'stop':
+        process.exit(1);
+        break;
+      default: {
+        break;
+      }
+    }
+  });
 
-	cluster.fork();
+  cluster.fork();
 };
 
-const workerProcess = ({
-	appDir,
-	distDir,
-	watchAdmin,
-	polling,
-	isTSProject,
-}) => {
-	const botmateInstance = botmate({
-		distDir,
-		autoReload: true,
-		serveAdminPanel: !watchAdmin,
-	});
+const workerProcess = ({ appDir, distDir, watchAdmin, polling, isTSProject }) => {
+  const botmateInstance = botmate({
+    distDir,
+    autoReload: true,
+    serveAdminPanel: !watchAdmin,
+  });
 
-	const adminWatchIgnoreFiles = botmateInstance.config.get(
-		'admin.watchIgnoreFiles',
-		[]
-	);
-	watchFileChanges({
-		appDir,
-		botmateInstance,
-		watchIgnoreFiles: adminWatchIgnoreFiles,
-		polling,
-	});
+  const adminWatchIgnoreFiles = botmateInstance.config.get('admin.watchIgnoreFiles', []);
+  watchFileChanges({
+    appDir,
+    botmateInstance,
+    watchIgnoreFiles: adminWatchIgnoreFiles,
+    polling,
+  });
 
-	process.on('message', async (message) => {
-		switch (message) {
-			case 'kill': {
-				await botmateInstance.destroy();
-				process.send('killed');
-				process.exit();
-				break;
-			}
-			default: {
-				break;
-			}
-			// Do nothing.
-		}
-	});
+  process.on('message', async (message) => {
+    switch (message) {
+      case 'kill': {
+        await botmateInstance.destroy();
+        process.send('killed');
+        process.exit();
+        break;
+      }
+      default: {
+        break;
+      }
+      // Do nothing.
+    }
+  });
 
-	return botmateInstance.start();
+  return botmateInstance.start();
 };
 
 /**
@@ -174,64 +154,56 @@ const workerProcess = ({
  * @param {botmate} options.botmate - botmate instance
  * @param {array} options.watchIgnoreFiles - Array of custom file paths that should not be watched
  */
-function watchFileChanges({
-	appDir,
-	botmateInstance,
-	watchIgnoreFiles,
-	polling,
-}) {
-	const restart = async () => {
-		if (
-			botmateInstance.reload.isWatching &&
-			!botmateInstance.reload.isReloading
-		) {
-			botmateInstance.reload.isReloading = true;
-			botmateInstance.reload();
-		}
-	};
+function watchFileChanges({ appDir, botmateInstance, watchIgnoreFiles, polling }) {
+  const restart = async () => {
+    if (botmateInstance.reload.isWatching && !botmateInstance.reload.isReloading) {
+      botmateInstance.reload.isReloading = true;
+      botmateInstance.reload();
+    }
+  };
 
-	const watcher = chokidar.watch(appDir, {
-		ignoreInitial: true,
-		usePolling: polling,
-		ignored: [
-			/(^|[/\\])\../, // dot files
-			/tmp/,
-			'**/src/admin/**',
-			'**/src/plugins/**/admin/**',
-			'**/dist/src/plugins/test/admin/**',
-			'**/documentation',
-			'**/documentation/**',
-			'**/node_modules',
-			'**/node_modules/**',
-			'**/plugins.json',
-			'**/build',
-			'**/build/**',
-			'**/index.html',
-			'**/public',
-			'**/public/**',
-			botmateInstance.dirs.static.public,
-			joinBy('/', botmateInstance.dirs.static.public, '**'),
-			'**/*.db*',
-			'**/exports/**',
-			'**/dist/**',
-			...watchIgnoreFiles,
-		],
-	});
+  const watcher = chokidar.watch(appDir, {
+    ignoreInitial: true,
+    usePolling: polling,
+    ignored: [
+      /(^|[/\\])\../, // dot files
+      /tmp/,
+      '**/src/admin/**',
+      '**/src/plugins/**/admin/**',
+      '**/dist/src/plugins/test/admin/**',
+      '**/documentation',
+      '**/documentation/**',
+      '**/node_modules',
+      '**/node_modules/**',
+      '**/plugins.json',
+      '**/build',
+      '**/build/**',
+      '**/index.html',
+      '**/public',
+      '**/public/**',
+      botmateInstance.dirs.static.public,
+      joinBy('/', botmateInstance.dirs.static.public, '**'),
+      '**/*.db*',
+      '**/exports/**',
+      '**/dist/**',
+      ...watchIgnoreFiles,
+    ],
+  });
 
-	watcher
-		.on('add', (path) => {
-			// botmateInstance.log.info(`File created: ${path}`);
-			console.log(`File created: ${path}`);
-			restart();
-		})
-		.on('change', (path) => {
-			// botmateInstance.log.info(`File changed: ${path}`);
-			console.log(`File changed: ${path}`);
-			restart();
-		})
-		.on('unlink', (path) => {
-			// botmateInstance.log.info(`File deleted: ${path}`);
-			console.log(`File deleted: ${path}`);
-			restart();
-		});
+  watcher
+    .on('add', (path) => {
+      // botmateInstance.log.info(`File created: ${path}`);
+      console.log(`File created: ${path}`);
+      restart();
+    })
+    .on('change', (path) => {
+      // botmateInstance.log.info(`File changed: ${path}`);
+      console.log(`File changed: ${path}`);
+      restart();
+    })
+    .on('unlink', (path) => {
+      // botmateInstance.log.info(`File deleted: ${path}`);
+      console.log(`File deleted: ${path}`);
+      restart();
+    });
 }

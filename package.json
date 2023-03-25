@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format:code": "yarn prettier:code --write",
+    "prettier:code": "prettier --cache --cache-strategy content \"**/*.{js,ts}\""
   },
   "keywords": [],
   "author": "xencodes",
   "license": "ISC",
   "devDependencies": {
+    "@botmate/eslint-config": "workspace:^0.0.1",
+    "@nrwl/nx-cloud": "latest",
     "nx": "15.8.9",
-    "@nrwl/nx-cloud": "latest"
+    "prettier": "2.8.4"
   }
 }

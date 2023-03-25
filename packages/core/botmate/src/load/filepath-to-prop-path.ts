@@ -8,15 +8,15 @@ const _ = require('lodash');
  * @param {boolean} useFileNameAsKey - wethear to skip the last path key
  */
 export default (filePath, useFileNameAsKey = true) => {
-	const cleanPath = filePath.startsWith('./') ? filePath.slice(2) : filePath;
+  const cleanPath = filePath.startsWith('./') ? filePath.slice(2) : filePath;
 
-	const prop = cleanPath
-		.replace(/(\.settings|\.json|\.js)/g, '')
-		.toLowerCase()
-		.split('/')
-		.map((p) => _.trimStart(p, '.'))
-		.join('.')
-		.split('.');
+  const prop = cleanPath
+    .replace(/(\.settings|\.json|\.js)/g, '')
+    .toLowerCase()
+    .split('/')
+    .map((p) => _.trimStart(p, '.'))
+    .join('.')
+    .split('.');
 
-	return useFileNameAsKey === true ? prop : prop.slice(0, -1);
+  return useFileNameAsKey === true ? prop : prop.slice(0, -1);
 };
