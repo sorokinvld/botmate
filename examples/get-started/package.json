@@ -9,5 +9,8 @@
 		"@botmate/plugin.discord": "workspace:^1.0.0",
 		"@botmate/plugin.telegram": "workspace:*",
 		"react": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.28"
 	}
 }

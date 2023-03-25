@@ -19,12 +19,15 @@ importers:
       '@botmate/core': workspace:*
       '@botmate/plugin.discord': workspace:^1.0.0
       '@botmate/plugin.telegram': workspace:*
+      '@types/react': ^18.0.28
       react: ^18.2.0
     dependencies:
       '@botmate/core': link:../../packages/core/botmate
       '@botmate/plugin.discord': link:../../packages/plugins/discord
       '@botmate/plugin.telegram': link:../../packages/plugins/telegram
       react: 18.2.0
+    devDependencies:
+      '@types/react': 18.0.28
 
   packages/core/admin:
     specifiers:

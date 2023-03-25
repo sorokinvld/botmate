@@ -6,7 +6,7 @@ export default {
     app.addMenuLink({
       name: 'My Plugin',
       to: '/my-plugin',
-      Component: () => <div>My Plugin</div>,
+      Component: () => <div>My Plugin using TSX</div>,
     });
   },
 };
