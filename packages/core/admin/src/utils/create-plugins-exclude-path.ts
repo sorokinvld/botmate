@@ -37,4 +37,4 @@ const createPluginsExcludePath = (pluginsPath: any[] = []): RegExp => {
   return new RegExp(`${NODE_MODULES}/(?!(${tsxPlugins.join('|')}))`);
 };
 
-module.exports = createPluginsExcludePath;
+export default createPluginsExcludePath;

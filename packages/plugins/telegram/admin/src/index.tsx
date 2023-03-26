@@ -5,19 +5,10 @@ import { FaTelegramPlane } from 'react-icons/fa';
 
 export default {
   register(app: IBotMateApp) {
-    app.addMenuLink({
-      to: '/telegram',
-      label: 'Telegram',
-      icon: <FaTelegramPlane />,
-      match: /^\/telegram/,
-      Component: () => (
-        <>
-          <AppHeader title="Telegram" />
-        </>
-      ),
-    });
     app.addPlatform({
       id: 'telegram',
+      label: 'Telegram',
+      icon: <FaTelegramPlane />,
       bot: {
         fields: [
           {

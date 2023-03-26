@@ -1,14 +1,17 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { IBotMateApp, MenuLink, Platform } from '@botmate/types/admin';
 
 import App from './components/App';
 import Providers from './components/Providers';
+import { SetupPage } from './pages/Setup';
 
 class BotMateApp implements IBotMateApp {
   appPlugins: any;
   plugins: any;
-  platforms = new Map();
+  platforms: {
+    [key: string]: Platform;
+  } = {};
   menu: MenuLink[];
 
   constructor({ appPlugins = {} }) {
@@ -34,14 +37,17 @@ class BotMateApp implements IBotMateApp {
   }
 
   addPlatform(platform: Platform) {
-    this.platforms.set(platform.id, platform);
+    this.platforms[platform.id] = platform;
   }
 
   render() {
     return (
       <Providers menu={this.menu} platforms={this.platforms} plugins={[]}>
         <BrowserRouter>
-          <App />
+          <Routes>
+            <Route path="/setup" element={<SetupPage />} />
+            <Route path="*" element={<App />} />
+          </Routes>
         </BrowserRouter>
       </Providers>
     );

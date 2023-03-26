@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, HStack, Text, Tooltip, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  IconButton,
+  Spacer,
+  Text,
+  Tooltip,
+  useBreakpointValue,
+  useColorMode,
+} from '@chakra-ui/react';
+import { RiMoonLine, RiSunFill, RiSunLine } from 'react-icons/ri';
 import { MenuLink } from '@botmate/types/admin';
 import { Link, useLocation } from 'react-router-dom';
 import { BotMateLogo } from '../Logo';
@@ -14,14 +24,23 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
     base: true,
     md: false,
   });
+  const { toggleColorMode, colorMode } = useColorMode();
   const location = useLocation();
-
   const TooltipWrapper = iconsOnly ? Tooltip : Box;
 
   return (
     <>
       <HStack px={4} pb={2}>
-        <BotMateLogo color="logo" height="30px" width="30px" />
+        <Box bg="brand.400" p={2} rounded="md">
+          <BotMateLogo color="white" height="25px" width="25px" />
+        </Box>
+        <Spacer />
+        <IconButton
+          variant="outline"
+          aria-label="toggle-mode"
+          icon={colorMode === 'light' ? <RiMoonLine /> : <RiSunFill />}
+          onClick={toggleColorMode}
+        />
       </HStack>
 
       {items.map((item, index) => {

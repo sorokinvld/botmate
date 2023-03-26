@@ -2,6 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { BotMateUIProvider } from '../Provider';
 
 import { BmCard } from '../Card';
+import { Box } from '@chakra-ui/react';
 
 export default {
   title: 'Card',
@@ -11,12 +12,31 @@ export default {
 
 const Template: ComponentStory<typeof BmCard> = (args) => (
   <BotMateUIProvider>
-    <BmCard {...args} />
+    <Box bg="background" p={4}>
+      <BmCard {...args} />
+    </Box>
   </BotMateUIProvider>
 );
 
 export const Primary = Template.bind({});
-Primary.parameters = {};
 Primary.args = {
-  children: <>My Card commponent</>,
+  title: 'Awesome BotMate',
+  subtitle: 'This is a subtitle',
+  children: (
+    <>
+      <p>My card content</p>
+    </>
+  ),
+};
+
+export const WithShadow = Template.bind({});
+WithShadow.args = {
+  title: 'Awesome BotMate',
+  subtitle: 'This is a subtitle',
+  shadow: true,
+  children: (
+    <>
+      <p>My card content</p>
+    </>
+  ),
 };

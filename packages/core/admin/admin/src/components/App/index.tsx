@@ -3,7 +3,7 @@ import { useBotMateApp } from '@botmate/helper-plugin';
 import { Route, Routes } from 'react-router-dom';
 import { HomePage, SettingsPage } from '../../pages';
 import { AppShell, Box } from '@botmate/ui';
-import { HomeMenuLink, SettingsMenuLink } from './menu-items';
+import { BottomMenuLinks, TopMenuLinks } from './menu-items';
 
 const LazyCompo = ({ loadComponent }) => {
   const [Compo, setCompo] = useState(null);
@@ -50,7 +50,7 @@ function App() {
   }, [menu]);
 
   return (
-    <AppShell menuItems={[HomeMenuLink, ...menuItems, SettingsMenuLink]}>
+    <AppShell menuItems={[...TopMenuLinks, ...menuItems, ...BottomMenuLinks]}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/settings" element={<SettingsPage />} />

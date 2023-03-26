@@ -1,17 +1,20 @@
 import React from 'react';
-import { Box, Heading, HStack, Stack, Text } from '@chakra-ui/react';
+import { Box, Heading, HStack, Spacer, Stack, Text } from '@chakra-ui/react';
 
 type AppHeaderProps = {
   title: string;
   description?: string;
+  actions?: React.ReactNode;
 };
 
-export const AppHeader = ({ title, description }: AppHeaderProps) => (
-  <Stack flex={1}>
-    <HStack py={6} px={4} bg="surface">
+export const AppHeader = ({ actions, title, description }: AppHeaderProps) => (
+  <Stack flex={1} borderBottomWidth="1px">
+    <HStack h="70px" px={4} bg="surface">
       <Box>
         <Heading size="md">{title}</Heading>
       </Box>
+      <Spacer />
+      {actions}
     </HStack>
 
     {description ? (

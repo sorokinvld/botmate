@@ -51,11 +51,15 @@ module.exports = () => {
     devServer: {
       port: 4000,
       client: {
-        logging: 'info',
+        logging: 'log',
         overlay: {
           errors: true,
           warnings: false,
         },
+      },
+      static: {
+        directory: path.join(__dirname, './'),
+        serveIndex: true,
       },
       historyApiFallback: {
         index: '/',

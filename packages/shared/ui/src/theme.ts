@@ -1,4 +1,6 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { Input } from './theme/Input';
+import { Button } from './theme/Button';
 
 const config: ThemeConfig = {
   initialColorMode: 'light',
@@ -7,6 +9,10 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
+  components: {
+    Input,
+    Button,
+  },
   fonts: {
     heading: 'Ubuntu',
     body: 'Ubuntu',
@@ -27,8 +33,6 @@ const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
-      error: 'red.300',
-      success: 'green.300',
       background: {
         default: 'gray.100',
         _dark: '#1c1d2a',
@@ -38,8 +42,8 @@ const theme = extendTheme({
         _dark: '#191A23',
       },
       primary: {
-        default: 'red.500',
-        _dark: 'red.400',
+        default: 'brand.500',
+        _dark: 'brand.400',
       },
       secondary: {
         default: 'brand.50',
@@ -47,11 +51,11 @@ const theme = extendTheme({
       },
       text: {
         default: 'gray.500',
-        _dark: 'gray.100',
+        _dark: 'gray.300',
       },
-      logo: {
-        default: 'brand.400',
-        _dark: 'gray.400',
+      input: {
+        default: 'gray.100',
+        _dark: '#1c1d2a',
       },
     },
   },

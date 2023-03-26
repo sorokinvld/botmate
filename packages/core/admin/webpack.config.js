@@ -44,17 +44,9 @@ module.exports = ({
       ]
     : [];
 
-  const excludeRegex = createPluginsExcludePath(pluginsPath);
-
-  const buildTarget = browserslistToEsbuild();
-
   return {
     mode: isProduction ? 'production' : 'development',
-    bail: !!isProduction,
     devtool: isProduction ? false : 'eval-source-map',
-    experiments: {
-      topLevelAwait: true,
-    },
     entry: entry,
     output: {
       path: dest,
@@ -75,21 +67,17 @@ module.exports = ({
         {
           test: /\.[jt]sx?$/,
           exclude: /node_modules/,
-          use: [
-            {
-              loader: require.resolve('swc-loader'),
-              options: {
-                jsc: {
-                  transform: {
-                    react: {
-                      development: !isProduction,
-                      refresh: !isProduction,
-                    },
-                  },
-                },
-              },
-            },
-          ],
+          use: {
+            loader: require.resolve('swc-loader'),
+          },
+        },
+
+        {
+          test: /\.[jt]sx?$/,
+          include: pluginsPath,
+          use: {
+            loader: require.resolve('swc-loader'),
+          },
         },
 
         /**
@@ -99,12 +87,12 @@ module.exports = ({
          * e. g. a module with javascript mimetype, a '.mjs' file,
          * or a '.js' file where the package.json contains '"type": "module"'
          */
-        {
-          test: /\.m?jsx?$/,
-          resolve: {
-            fullySpecified: false,
-          },
-        },
+        // {
+        //   test: /\.m?jsx?$/,
+        //   resolve: {
+        //     fullySpecified: false,
+        //   },
+        // },
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],

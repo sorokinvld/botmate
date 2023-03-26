@@ -15,11 +15,4 @@ type MenuLink = {
   match: RegExp;
 };
 
-export type Platform = {
-  id: string;
-  bot: {
-    fields: Field[];
-  };
-} & Record<string, any>;
-
 export { MenuLink, AddMenuLink };

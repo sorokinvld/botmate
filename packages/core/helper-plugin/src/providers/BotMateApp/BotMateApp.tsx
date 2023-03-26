@@ -6,7 +6,9 @@ export type BotMateAppProviderProps = {
   children?: React.ReactNode;
   plugins: any[];
   menu: MenuLink[];
-  platforms: Map<string, Platform>;
+  platforms: {
+    [key: string]: Platform;
+  };
 };
 function BotMateAppProvider({ children, plugins, menu, platforms }: BotMateAppProviderProps) {
   return (

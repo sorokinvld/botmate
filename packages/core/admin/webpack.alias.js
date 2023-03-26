@@ -7,6 +7,7 @@ const aliasExactMatch = [
   'react',
   'react-dom',
   'react-router-dom',
+  'react-apexcharts',
   '@botmate/ui',
   '@chakra-ui/react',
 ];
