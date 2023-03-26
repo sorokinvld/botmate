@@ -8,7 +8,6 @@ const Button = {
   variants: {
     solid: () => ({
       backgroundColor: 'primary',
-      color: 'text',
       textTransform: 'none',
       borderWidth: '0px',
       _hover: {

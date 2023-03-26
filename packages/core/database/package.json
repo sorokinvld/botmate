@@ -2,26 +2,22 @@
   "name": "@botmate/database",
   "version": "0.0.1",
   "description": "BotMate's database layer",
-  "main": "./lib/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "directories": {
-    "lib": "./lib"
+    "dist": "./dist"
   },
   "scripts": {
-    "test:unit": "jest",
-    "test:unit:watch": "jest --watch",
-    "lint": "eslint ."
+    "build": "tsc -p ."
   },
   "dependencies": {
-    "date-fns": "2.29.3",
-    "debug": "4.3.4",
-    "fs-extra": "10.0.0",
-    "knex": "2.4.0",
-    "lodash": "4.17.21",
-    "semver": "7.3.8",
-    "umzug": "3.1.1"
+    "mongoose": "^7.0.3"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "@botmate/typescript-utils": "workspace:^1.0.0"
   }
 }

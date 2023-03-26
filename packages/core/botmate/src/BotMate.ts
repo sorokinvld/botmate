@@ -12,9 +12,9 @@ import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
 import { findBots } from './core/bots';
-import { coreStoreModel, createCoreStore } from './core/store';
 import { createLogger } from '@botmate/logger';
-import { Database } from '@botmate/database';
+import { initDb } from '@botmate/database';
+import mongoose from 'mongoose';
 
 const resolveWorkingDirectories = (opts) => {
   const cwd = process.cwd();
@@ -33,9 +33,8 @@ class BotMate {
   app: any;
   admin: any;
   bots: any[];
-  db: Database;
+  db: typeof mongoose;
   log: ReturnType<typeof createLogger>;
-  store: ReturnType<typeof createCoreStore>;
 
   constructor(opts = {}) {
     const rootDirs = resolveWorkingDirectories(opts);
@@ -61,17 +60,8 @@ class BotMate {
   }
 
   async bootstrap() {
-    const contentTypes = [coreStoreModel];
-
-    this.db = await Database.init({
-      ...this.config.get('database'),
-      models: Database.transformContentTypes(contentTypes),
-    });
-
-    this.store = createCoreStore({ db: this.db });
-
-    await this.db.schema.sync();
-    await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
+    const config = this.config.get('database');
+    this.db = await initDb(config.url);
   }
 
   async load() {
