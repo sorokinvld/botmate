@@ -4,7 +4,7 @@ const { join, resolve, relative } = require('path');
 const { camelCase } = require('lodash');
 const fs = require('fs-extra');
 
-const CORE_PLUGINS = ['telegram'];
+const CORE_PLUGINS = [];
 
 /**
  * Retrieve the core plugins path
@@ -50,7 +50,7 @@ const getPluginToInstallPath = (pluginsToInstall) => {
  * @param {Object} plugins
  */
 const createPluginsFile = async (plugins) => {
-  const pluginFileDest = resolve(__dirname, '..', 'admin', 'src', 'plugins.js');
+  const pluginFileDest = resolve(__dirname, '..', 'admin', 'src', 'plugins.ts');
 
   const allPluginsArray = Object.entries(plugins).map(([plugin, pluginPath]) => {
     return {
@@ -60,9 +60,8 @@ const createPluginsFile = async (plugins) => {
     };
   });
 
-  const content = `
-// To override this file create a plugins-dev.js one and copy the content of the plugin.js one.
-// When starting the app the script will copy the plugins-dev.js into this one instead.
+  const content = `// To override this file create a plugins-dev.js one and copy the content of the plugin.js one.
+// When starting the app the script will copy the plugins-dev.js into this one instead.\n
 ${allPluginsArray
   .map(({ shortName, pluginPath }) => {
     const req = `'${pluginPath}'`;

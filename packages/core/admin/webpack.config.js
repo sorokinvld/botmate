@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const browserslistToEsbuild = require('browserslist-to-esbuild');
+const findRoot = require('find-root');
 
 const alias = require('./webpack.alias');
 const getClientEnvironment = require('./env');
@@ -72,55 +73,25 @@ module.exports = ({
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
-          loader: require.resolve('esbuild-loader'),
-          include: [cacheDir, ...pluginsPath],
-          exclude: excludeRegex,
-          options: {
-            loader: 'tsx',
-            target: buildTarget,
-          },
-        },
-        {
-          test: /\.m?jsx?$/,
-          include: cacheDir,
-          oneOf: [
+          test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
+          use: [
             {
-              use: {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  cacheDirectory: true,
-                  cacheCompression: isProduction,
-                  compact: isProduction,
-                  presets: [
-                    require.resolve('@babel/preset-env'),
-                    require.resolve('@babel/preset-react'),
-                  ],
-                },
-              },
-            },
-            {
-              use: {
-                loader: require.resolve('esbuild-loader'),
-                options: {
-                  loader: 'jsx',
-                  target: buildTarget,
+              loader: require.resolve('swc-loader'),
+              options: {
+                jsc: {
+                  transform: {
+                    react: {
+                      development: !isProduction,
+                      refresh: !isProduction,
+                    },
+                  },
                 },
               },
             },
           ],
         },
-        {
-          test: /\.m?jsx?$/,
-          include: pluginsPath,
-          use: {
-            loader: require.resolve('esbuild-loader'),
-            options: {
-              loader: 'jsx',
-              target: buildTarget,
-            },
-          },
-        },
+
         /**
          * This is used to avoid webpack import errors where
          * the origin is strict EcmaScript Module.
@@ -168,7 +139,15 @@ module.exports = ({
       ],
     },
     resolve: {
-      alias,
+      alias: {
+        ...alias,
+        ...(!isProduction
+          ? {
+              // load the source code of the shared ui package in dev mode
+              '@botmate/ui$': path.resolve(__dirname, '..', '..', 'shared', 'ui', 'src'),
+            }
+          : {}),
+      },
       symlinks: false,
       extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
       mainFields: ['browser', 'jsnext:main', 'main'],
@@ -181,12 +160,13 @@ module.exports = ({
       }),
       new webpack.DefinePlugin(envVariables),
 
-      tsConfigFilePath &&
-        new ForkTsCheckerPlugin({
-          typescript: {
-            configFile: tsConfigFilePath,
-          },
-        }),
+      tsConfigFilePath
+        ? new ForkTsCheckerPlugin({
+            typescript: {
+              configFile: tsConfigFilePath,
+            },
+          })
+        : false,
 
       !isProduction && process.env.REACT_REFRESH !== 'false' && new ReactRefreshWebpackPlugin(),
 

@@ -1,14 +1,10 @@
-import { Box, Flex, HStack, Stack, Text, Tooltip, useBreakpointValue } from '@chakra-ui/react';
+import React from 'react';
+import { Box, HStack, Text, Tooltip, useBreakpointValue } from '@chakra-ui/react';
+import { MenuLink } from '@botmate/types/admin';
 import { Link, useLocation } from 'react-router-dom';
 import { BotMateLogo } from '../Logo';
 
-export type AppMenuItem = {
-  to: string;
-  label: string;
-  icon: React.ReactNode;
-  match: RegExp;
-  onClick?: () => void;
-};
+export type AppMenuItem = MenuLink;
 type AppMenuProps = {
   items: AppMenuItem[];
   iconsOnly?: boolean;
@@ -16,7 +12,7 @@ type AppMenuProps = {
 function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
   const isMobile = useBreakpointValue({
     base: true,
-    lg: false,
+    md: false,
   });
   const location = useLocation();
 
@@ -25,7 +21,7 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
   return (
     <>
       <HStack px={4} pb={2}>
-        <BotMateLogo color="gray.200" height="30px" width="30px" />
+        <BotMateLogo color="logo" height="30px" width="30px" />
       </HStack>
 
       {items.map((item, index) => {
@@ -43,9 +39,9 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
               <HStack
                 py={2}
                 px={2}
-                onClick={item.onClick}
                 color={isActive ? 'brand.400' : 'gray.400'}
                 bg={isActive ? 'secondary' : 'transparent'}
+                fontWeight={'bold'}
               >
                 <Box fontSize={isMobile ? '2xl' : 'xl'}>{item.icon}</Box>
                 {!iconsOnly && <Text fontSize="sm">{item.label}</Text>}

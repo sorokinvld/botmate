@@ -1,8 +1,9 @@
+import React from 'react';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { theme } from '../../theme';
 
-import '@fontsource/roboto/400.css';
 import '@fontsource/ubuntu/700.css';
+import '@fontsource/ubuntu/400.css';
 
 type BotMateUIProviderProps = {
   children: React.ReactNode;

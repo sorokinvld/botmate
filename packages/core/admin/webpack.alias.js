@@ -11,11 +11,11 @@ const aliasExactMatch = [
   '@chakra-ui/react',
 ];
 
-module.exports = {
+const alias = {
   ...aliasExactMatch.reduce((acc, moduleName) => {
     acc[`${moduleName}$`] = findRoot(require.resolve(moduleName));
     return acc;
   }, {}),
-
-  ee_else_ce: path.resolve(__dirname),
 };
+
+module.exports = alias;

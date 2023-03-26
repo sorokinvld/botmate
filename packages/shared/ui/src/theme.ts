@@ -9,7 +9,7 @@ const theme = extendTheme({
   config,
   fonts: {
     heading: 'Ubuntu',
-    body: 'Roboto',
+    body: 'Ubuntu',
   },
   colors: {
     brand: {
@@ -42,8 +42,16 @@ const theme = extendTheme({
         _dark: 'red.400',
       },
       secondary: {
-        default: 'red.800',
+        default: 'brand.50',
         _dark: '#272832',
+      },
+      text: {
+        default: 'gray.500',
+        _dark: 'gray.100',
+      },
+      logo: {
+        default: 'brand.400',
+        _dark: 'gray.400',
       },
     },
   },

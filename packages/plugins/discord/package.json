@@ -21,6 +21,6 @@
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.28",
-    "typescript": "^5.0.2"
+    "typescript": "4.9.5"
   }
 }

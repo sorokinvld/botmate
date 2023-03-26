@@ -2,7 +2,7 @@
 
 const { join, resolve, relative } = require('path');
 
-const fastGlob = require('fast-glob');
+const { glob } = require('glob');
 const fs = require('fs-extra');
 const { getCorePluginsPath, createPluginsFile } = require('./create-plugins-file');
 
@@ -12,11 +12,11 @@ const { getCorePluginsPath, createPluginsFile } = require('./create-plugins-file
  */
 const getPluginsPackages = async () => {
   const pathToPackages = resolve(__dirname, '..', '..', '..', 'plugins', '*');
-  const pluginsPackageDirs = await fastGlob(pathToPackages);
+  const pluginsPackageDirs = await glob(pathToPackages);
 
   return pluginsPackageDirs
     .filter((pluginDir) => {
-      return fs.existsSync(join(pluginDir, 'admin', 'src', 'index.ts'));
+      return fs.existsSync(join(pluginDir, 'admin', 'src', 'index.tsx'));
     })
     .reduce((acc, current) => {
       const depName = current.replace(/\\/g, '/').split('/').slice(-1)[0];

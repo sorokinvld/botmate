@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { HiChartBar, HiHome } from 'react-icons/hi';
+import { HiChartBar, HiCog, HiHome } from 'react-icons/hi';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AppHeader } from '../AppHeader';
 import { BotMateUIProvider } from '../Provider';
@@ -25,10 +25,21 @@ export default {
 
 const Template: ComponentStory<typeof AppShell> = (args) => (
   <BotMateUIProvider>
-    <Routes>
-      <Route path="/" element={<AppShell {...args} />} />
-      <Route path="/bots" element={<AppShell {...args} />} />
-    </Routes>
+    <AppShell menuItems={args.menuItems}>
+      <Routes>
+        <Route path="/" element={<AppHeader title="Home" description="Lorem " />} />
+        <Route
+          path="/analytics"
+          element={<AppHeader title="Analytics" description="View analytics for your bots." />}
+        />
+        <Route
+          path="/settings"
+          element={
+            <AppHeader title="Settings" description="Configure your bot and account's settings." />
+          }
+        />
+      </Routes>
+    </AppShell>
   </BotMateUIProvider>
 );
 
@@ -37,11 +48,6 @@ Primary.parameters = {
   layout: 'fullscreen',
 };
 Primary.args = {
-  children: (
-    <>
-      <AppHeader title="Analytics" />
-    </>
-  ),
   menuItems: [
     {
       label: 'Home',
@@ -52,8 +58,14 @@ Primary.args = {
     {
       label: 'Analytics',
       icon: <HiChartBar />,
-      to: '/bots',
-      match: /^\/bots$/,
+      to: '/analytics',
+      match: /^\/analytics$/,
+    },
+    {
+      label: 'Settings',
+      icon: <HiCog />,
+      to: '/settings',
+      match: /^\/settings$/,
     },
   ],
 };

@@ -10,8 +10,9 @@ type AddMenuLink = (link: MenuLink) => void;
 type MenuLink = {
   to: string;
   label: string;
-  icon?: React.ComponentType;
-  Component: React.FC;
+  icon: React.ReactNode;
+  Component?: React.FC;
+  match: RegExp;
 };
 
 export type Platform = {

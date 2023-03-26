@@ -14,6 +14,7 @@
     "kind": "plugin"
   },
   "dependencies": {
+    "@botmate/ui": "workspace:^1.0.0",
     "grammy": "^1.15.3"
   },
   "devDependencies": {
@@ -22,6 +23,10 @@
     "@grammyjs/types": "3.0.3",
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.28",
-    "typescript": "^5.0.2"
+    "react-icons": "^4.8.0",
+    "typescript": "4.9.5"
+  },
+  "peerDependencies": {
+    "react-icons": "^4.8.0"
   }
 }

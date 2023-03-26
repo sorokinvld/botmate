@@ -42,7 +42,10 @@ module.exports = () => {
     config.plugins.push(new DuplicateReporterPlugin());
   }
 
-  return {
+  /**
+   * @type {import('webpack').Configuration}
+   */
+  const cnf = {
     ...config,
 
     devServer: {
@@ -60,4 +63,6 @@ module.exports = () => {
       },
     },
   };
+
+  return cnf;
 };

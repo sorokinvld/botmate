@@ -1,17 +1,17 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { BotMateUIProvider } from '../Provider';
 
-import { Card } from '../Card';
+import { BmCard } from '../Card';
 
 export default {
   title: 'Card',
-  component: Card,
+  component: BmCard,
   parameters: {},
-} as ComponentMeta<typeof Card>;
+} as ComponentMeta<typeof BmCard>;
 
-const Template: ComponentStory<typeof Card> = (args) => (
+const Template: ComponentStory<typeof BmCard> = (args) => (
   <BotMateUIProvider>
-    <Card {...args} />
+    <BmCard {...args} />
   </BotMateUIProvider>
 );
 
