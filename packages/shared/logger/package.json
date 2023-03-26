@@ -1,0 +1,31 @@
+{
+  "name": "@botmate/logger",
+  "version": "4.8.2",
+  "description": "BotMate's logger",
+  "homepage": "https://botmate.app",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:ts": "tsc",
+    "watch": "tsc -w --preserveWatchOutput",
+    "clean": "rimraf ./dist",
+    "prepublishOnly": "yarn clean && yarn build",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "lodash": "4.17.21",
+    "winston": "3.3.3"
+  },
+  "devDependencies": {
+    "rimraf": "3.0.2",
+    "tsconfig": "workspace:^0.0.0"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  }
+}
