@@ -12,6 +12,9 @@ import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
 import { findBots } from './core/bots';
+import { coreStoreModel, createCoreStore } from './core/store';
+import { createLogger } from '@botmate/logger';
+import { Database } from '@botmate/database';
 
 const resolveWorkingDirectories = (opts) => {
   const cwd = process.cwd();
@@ -26,11 +29,13 @@ class BotMate {
   container: any;
   dirs: any;
   server: Express;
-  reload: any;
   isLoaded: boolean;
   app: any;
   admin: any;
   bots: any[];
+  db: Database;
+  log: ReturnType<typeof createLogger>;
+  store: ReturnType<typeof createCoreStore>;
 
   constructor(opts = {}) {
     const rootDirs = resolveWorkingDirectories(opts);
@@ -45,17 +50,27 @@ class BotMate {
     this.container.register('config', createConfigProvider(appConfig));
     this.container.register('modules', modulesRegistry(this));
     this.container.register('plugins', pluginsRegistry(this));
-    this.container.register('bots', botsRegistry(this));
+    this.container.register('bots', botsRegistry());
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
 
     this.bots = [];
     this.server = createServer(this);
-    this.reload = this.reloadBotMate();
     this.isLoaded = false;
+    this.log = createLogger({});
   }
 
   async bootstrap() {
+    const contentTypes = [coreStoreModel];
+
+    this.db = await Database.init({
+      ...this.config.get('database'),
+      models: Database.transformContentTypes(contentTypes),
+    });
+
+    this.store = createCoreStore({ db: this.db });
+
+    await this.db.schema.sync();
     await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
   }
 
@@ -82,8 +97,6 @@ class BotMate {
       this.loadPlugins(),
       this.loadBots(),
     ]);
-
-    console.log('loaded all');
 
     await this.runLifecyclesFunctions(LIFECYCLES.REGISTER);
     return this;
@@ -134,17 +147,26 @@ class BotMate {
     return this;
   }
 
-  destroy() {
+  async stop() {}
+
+  async destroy() {
     console.log(`Destroying BotMate instance...`);
   }
 
-  async reloadBotMate() {
+  reload(): {
+    (): void;
+    isReloading: boolean;
+    isWatching: boolean;
+  } {
     const state = {
       shouldReload: 0,
       isWatching: false,
     };
 
+    const self = this;
     const reload = function () {
+      console.log("this.config.get('autoReload')", self.config.get('autoReload'));
+
       const state = {
         shouldReload: 0,
       };
@@ -156,7 +178,7 @@ class BotMate {
         return;
       }
 
-      if (this.config.get('autoReload')) {
+      if (self.config.get('autoReload')) {
         process.send('reload');
       }
     };
@@ -179,7 +201,18 @@ class BotMate {
     reload.isReloading = false;
     reload.isWatching = true;
 
+    reload();
     return reload;
+  }
+
+  stopWithError(err: any, customMessage?: string) {
+    this.log.debug(`⛔️ Server wasn't able to start properly.`);
+    if (customMessage) {
+      this.log.error(customMessage);
+    }
+
+    this.log.error(err);
+    return this.stop();
   }
 }
 

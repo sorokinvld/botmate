@@ -1,27 +1,25 @@
 'use strict';
 
-const _ = require('lodash');
+import _ from 'lodash';
 
-export default (botmate) => {
+function botsRegistry() {
   const bots = [];
 
   return {
-    add(bot) {
-      // todo: validate bot {id, instance etc ...}
-
+    add(bot: any) {
       if (!bot) {
         throw new Error('Bot is required');
       }
 
       bots.push(bot);
     },
-    get(id) {
+    get(id: string | number) {
       return _.find(bots, (bot) => bot.id === id);
     },
-    getAll() {
+    getAll(): any[] {
       return bots;
     },
-    start(path, val) {},
-    stop(id) {},
   };
-};
+}
+
+export default botsRegistry;

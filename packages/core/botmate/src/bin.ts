@@ -60,7 +60,7 @@ const getLocalScript =
 // `$ botmate start`
 program
   .command('start')
-  .description('Start your Strapi application')
+  .description('Start your botmate application')
   .action(getLocalScript('start'));
 
 // `$ botmate develop`

@@ -4,7 +4,7 @@ module.exports = {
     ecmaVersion: 2021,
   },
   globals: {
-    strapi: false,
+    botmate: false,
   },
   rules: {
     'prettier/prettier': 'off',

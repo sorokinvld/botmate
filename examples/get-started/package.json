@@ -8,6 +8,7 @@
   "dependencies": {
     "@botmate/core": "workspace:*",
     "@botmate/plugin.telegram": "workspace:*",
+    "pg": "^8.10.0",
     "react": "^18.2.0"
   },
   "devDependencies": {

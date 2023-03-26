@@ -154,11 +154,21 @@ const workerProcess = ({ appDir, distDir, watchAdmin, polling, isTSProject }) =>
  * @param {botmate} options.botmate - botmate instance
  * @param {array} options.watchIgnoreFiles - Array of custom file paths that should not be watched
  */
-function watchFileChanges({ appDir, botmateInstance, watchIgnoreFiles, polling }) {
+function watchFileChanges({
+  appDir,
+  botmateInstance,
+  watchIgnoreFiles,
+  polling,
+}: {
+  appDir: string;
+  botmateInstance: BotMate.BotMateInstance;
+  watchIgnoreFiles: string[];
+  polling: boolean;
+}) {
   const restart = async () => {
-    if (botmateInstance.reload.isWatching && !botmateInstance.reload.isReloading) {
-      botmateInstance.reload.isReloading = true;
-      botmateInstance.reload();
+    const r = botmateInstance.reload();
+    if (r.isWatching && !r.isReloading) {
+      r.isReloading = true;
     }
   };
 
@@ -192,18 +202,15 @@ function watchFileChanges({ appDir, botmateInstance, watchIgnoreFiles, polling }
 
   watcher
     .on('add', (path) => {
-      // botmateInstance.log.info(`File created: ${path}`);
-      console.log(`File created: ${path}`);
+      botmateInstance.log.info(`File created: ${path}`);
       restart();
     })
     .on('change', (path) => {
-      // botmateInstance.log.info(`File changed: ${path}`);
-      console.log(`File changed: ${path}`);
+      botmateInstance.log.info(`File changed: ${path}`);
       restart();
     })
     .on('unlink', (path) => {
-      // botmateInstance.log.info(`File deleted: ${path}`);
-      console.log(`File deleted: ${path}`);
+      botmateInstance.log.info(`File deleted: ${path}`);
       restart();
     });
 }

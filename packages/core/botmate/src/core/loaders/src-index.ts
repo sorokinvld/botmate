@@ -1,8 +1,8 @@
 'use strict';
 
-const { resolve } = require('path');
-const { statSync, existsSync } = require('fs');
-const { importDefault, yup } = require('@botmate/utils');
+import { resolve } from 'path';
+import { statSync, existsSync } from 'fs';
+import { importDefault, yup } from '@botmate/utils';
 
 const srcSchema = yup
   .object()
@@ -13,11 +13,11 @@ const srcSchema = yup
   })
   .noUnknown();
 
-const validateSrcIndex = (srcIndex) => {
+const validateSrcIndex = (srcIndex: string) => {
   return srcSchema.validateSync(srcIndex, { strict: true, abortEarly: false });
 };
 
-export default (botmate) => {
+export default (botmate: BotMate.BotMateInstance) => {
   if (!existsSync(botmate.dirs.dist.src)) {
     return;
   }

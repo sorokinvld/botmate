@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@botmate/admin": "workspace:*",
+    "@botmate/database": "workspace:^0.0.1",
     "@botmate/plugin.telegram": "workspace:^1.0.0",
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@botmate/utils": "workspace:*",
@@ -31,6 +32,7 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
+    "@botmate/logger": "workspace:^4.8.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
     "@types/express-serve-static-core": "^4.17.33",
