@@ -6,6 +6,7 @@
   "scripts": {
     "watch": "nx watch ---all -- nx run $NX_PROJECT_NAME:build",
     "format:code": "yarn prettier:code --write",
+    "generate": "plop --plopfile ./packages/generators/admin/plopfile.js",
     "prettier:code": "prettier --cache --cache-strategy content \"**/*.{js,ts}\""
   },
   "keywords": [],
@@ -14,7 +15,10 @@
   "devDependencies": {
     "@botmate/eslint-config": "workspace:^0.0.1",
     "@nrwl/nx-cloud": "latest",
+    "@types/eslint": "^8.21.3",
+    "eslint": "8.27.0",
     "nx": "15.8.9",
+    "plop": "^3.1.2",
     "prettier": "2.8.4",
     "typescript": "^5.0.2"
   }

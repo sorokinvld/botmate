@@ -1,0 +1,24 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { BotMateUIProvider } from '../Provider';
+
+import { {{pascalCase name}} } from '../{{pascalCase name}}';
+
+export default {
+  title: '{{pascalCase name}}',
+  component: {{pascalCase name}},
+  parameters: {},
+} as ComponentMeta<typeof {{pascalCase name}}>;
+
+const Template: ComponentStory<typeof {{pascalCase name}}> = (args) => (
+  <BotMateUIProvider>
+    <{{pascalCase name}} {...args} />
+  </BotMateUIProvider>
+);
+
+export const Primary = Template.bind({});
+Primary.parameters = {};
+Primary.args = {
+  children: (
+    <>My {{name}} commponent</>
+  ),
+};
