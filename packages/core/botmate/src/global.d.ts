@@ -1,4 +1,4 @@
-import { BotMate } from './BotMate';
+import { BotMate } from '../BotMate';
 
 declare global {
   namespace BotMate {

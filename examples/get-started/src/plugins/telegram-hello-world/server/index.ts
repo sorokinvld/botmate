@@ -1,7 +1,7 @@
 import register from './register';
-import setup from './setup';
+import bootstrap from './bootstrap';
 
 export default () => ({
   register,
-  bootstrap: setup,
+  bootstrap,
 });

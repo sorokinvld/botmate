@@ -6,7 +6,9 @@ export default {
     app.addMenuLink({
       label: 'My Plugin',
       to: '/my-plugin',
+      icon: <>M</>,
       Component: () => <div>My Plugin using X</div>,
+      match: /^\/my-plugin/,
     });
   },
 };

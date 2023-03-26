@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@botmate/core': workspace:^1.0.0
       '@botmate/eslint-config': workspace:^0.0.1
       '@nrwl/nx-cloud': latest
       '@types/eslint': ^8.21.3
@@ -13,6 +14,7 @@ importers:
       prettier: 2.8.4
       typescript: 4.9.5
     devDependencies:
+      '@botmate/core': link:packages/core/botmate
       '@botmate/eslint-config': link:packages/shared/eslint-config-custom
       '@nrwl/nx-cloud': 15.3.2
       '@types/eslint': 8.21.3
@@ -46,6 +48,17 @@ importers:
       '@types/react': 18.0.28
       css-loader: 6.7.3
       style-loader: 3.3.2
+
+  examples/get-started/src/plugins/telegram-hello-world:
+    specifiers:
+      '@types/node': ^18.15.7
+      '@types/react': ^18.0.28
+      grammy: ^1.15.3
+    dependencies:
+      grammy: 1.15.3
+    devDependencies:
+      '@types/node': 18.15.7
+      '@types/react': 18.0.28
 
   packages/core/admin:
     specifiers:
@@ -175,6 +188,7 @@ importers:
       '@botmate/database': workspace:^0.0.1
       '@botmate/logger': workspace:^4.8.2
       '@botmate/plugin.telegram': workspace:^1.0.0
+      '@botmate/schemas': workspace:^1.0.0
       '@botmate/typescript-utils': workspace:^1.0.0
       '@botmate/utils': workspace:*
       '@types/dotenv': ^8.2.0
@@ -205,6 +219,7 @@ importers:
       '@botmate/admin': link:../admin
       '@botmate/database': link:../database
       '@botmate/plugin.telegram': link:../../plugins/telegram
+      '@botmate/schemas': link:../../shared/schemas
       '@botmate/typescript-utils': link:../../shared/typescript
       '@botmate/utils': link:../../shared/utils
       chalk: 4.1.2
@@ -286,11 +301,13 @@ importers:
       '@types/node': ^18.15.7
       '@types/react': ^18.0.28
       grammy: ^1.15.3
+      mongoose: ^7.0.3
       react-icons: ^4.8.0
       typescript: 4.9.5
     dependencies:
       '@botmate/ui': link:../../shared/ui
       grammy: 1.15.3
+      mongoose: 7.0.3
     devDependencies:
       '@botmate/types': link:../../shared/types
       '@botmate/typescript-utils': link:../../shared/typescript
@@ -350,6 +367,15 @@ importers:
       rimraf: 3.0.2
       tsconfig: link:../tsconfig
 
+  packages/shared/schemas:
+    specifiers:
+      '@botmate/typescript-utils': workspace:^1.0.0
+      mongoose: ^7.0.3
+    dependencies:
+      mongoose: 7.0.3
+    devDependencies:
+      '@botmate/typescript-utils': link:../typescript
+
   packages/shared/tsconfig:
     specifiers:
       '@tsconfig/node16': ^1.0.3
@@ -358,9 +384,12 @@ importers:
 
   packages/shared/types:
     specifiers:
+      '@botmate/schemas': workspace:^1.0.0
       '@types/react': ^18.0.28
     dependencies:
       '@types/react': 18.0.28
+    devDependencies:
+      '@botmate/schemas': link:../schemas
 
   packages/shared/typescript:
     specifiers:

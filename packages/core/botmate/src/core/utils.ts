@@ -1,3 +1,23 @@
+'use strict';
+
+const hasNamespace = (name, namespace) => {
+  if (!namespace) {
+    return true;
+  }
+
+  if (namespace.endsWith('::')) {
+    return name.startsWith(namespace);
+  }
+  return name.startsWith(`${namespace}.`);
+};
+
+const addNamespace = (name, namespace) => {
+  if (namespace.endsWith('::')) {
+    return `${namespace}${name}`;
+  }
+  return `${namespace}.${name}`;
+};
+
 const removeNamespace = (name, namespace) => {
   if (namespace.endsWith('::')) {
     return name.replace(namespace, '');
@@ -5,4 +25,4 @@ const removeNamespace = (name, namespace) => {
   return name.replace(`${namespace}.`, '');
 };
 
-export default { removeNamespace };
+export { addNamespace, removeNamespace, hasNamespace };

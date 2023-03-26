@@ -2,5 +2,8 @@
 	"name": "@botmate/types",
 	"dependencies": {
 		"@types/react": "^18.0.28"
+	},
+	"devDependencies": {
+		"@botmate/schemas": "workspace:^1.0.0"
 	}
 }

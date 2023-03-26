@@ -9,11 +9,14 @@
   "botmate": {
     "name": "telegram-hello-world",
     "description": "Example plugin for Telegram",
-    "kind": "plugin"
+    "kind": "plugin",
+    "platform": "telegram"
   },
   "devDependencies": {
     "@types/node": "^18.15.7",
-    "@types/react": "^18.0.28",
-    "typescript": "4.9.5"
+    "@types/react": "^18.0.28"
+  },
+  "dependencies": {
+    "grammy": "^1.15.3"
   }
 }

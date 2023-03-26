@@ -6,7 +6,6 @@ import loadConfiguration from './core/app-configuration';
 import createConfigProvider from './core/registeries/config';
 import pluginsRegistry from './core/registeries/plugins';
 import modulesRegistry from './core/registeries/modules';
-import botsRegistry from './core/registeries/bots';
 import * as utils from './utils';
 import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
@@ -15,6 +14,7 @@ import { findBots } from './core/bots';
 import { createLogger } from '@botmate/logger';
 import { initDb } from '@botmate/database';
 import mongoose from 'mongoose';
+import hooksRegistry from './core/registeries/hooks';
 
 const resolveWorkingDirectories = (opts) => {
   const cwd = process.cwd();
@@ -48,8 +48,8 @@ class BotMate {
     // Register every botmate registry in the container
     this.container.register('config', createConfigProvider(appConfig));
     this.container.register('modules', modulesRegistry(this));
+    this.container.register('hooks', hooksRegistry());
     this.container.register('plugins', pluginsRegistry(this));
-    this.container.register('bots', botsRegistry());
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
 
@@ -59,9 +59,18 @@ class BotMate {
     this.log = createLogger({});
   }
 
+  async setupAdminDist() {
+    this.server.get('*', (req, res) => {
+      res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
+    });
+  }
+
   async bootstrap() {
     const config = this.config.get('database');
     this.db = await initDb(config.url);
+
+    this.setupAdminDist();
+    await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
   }
 
   async load() {
@@ -75,6 +84,14 @@ class BotMate {
     return this.container.get('config');
   }
 
+  get hooks() {
+    return this.container.get('hooks').getAll();
+  }
+
+  hook(name: string) {
+    return this.container.get('hooks').get(name);
+  }
+
   async loadBots() {
     this.bots = await findBots();
   }
@@ -85,7 +102,6 @@ class BotMate {
       this.loadApp(),
       this.loadAmin(),
       this.loadPlugins(),
-      this.loadBots(),
     ]);
 
     await this.runLifecyclesFunctions(LIFECYCLES.REGISTER);
@@ -155,8 +171,6 @@ class BotMate {
 
     const self = this;
     const reload = function () {
-      console.log("this.config.get('autoReload')", self.config.get('autoReload'));
-
       const state = {
         shouldReload: 0,
       };

@@ -4,8 +4,8 @@
   "bin": {
     "botmate": "./lib/bin.js"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc -p ."
@@ -14,6 +14,7 @@
     "@botmate/admin": "workspace:*",
     "@botmate/database": "workspace:^0.0.1",
     "@botmate/plugin.telegram": "workspace:^1.0.0",
+    "@botmate/schemas": "workspace:^1.0.0",
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@botmate/utils": "workspace:*",
     "chalk": "4.1.2",
