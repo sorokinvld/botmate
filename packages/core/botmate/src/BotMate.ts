@@ -1,20 +1,23 @@
 import path from 'path';
 import { Express } from 'express';
 import { isFunction } from 'lodash';
-import { createContainer } from './container';
+import { createLogger } from '@botmate/logger';
+import { initDb } from '@botmate/database';
+import mongoose from 'mongoose';
+
 import loadConfiguration from './core/app-configuration';
 import createConfigProvider from './core/registeries/config';
 import pluginsRegistry from './core/registeries/plugins';
 import modulesRegistry from './core/registeries/modules';
+import hooksRegistry from './core/registeries/hooks';
+import servicesRegistry from './core/registeries/services';
+
+import { createContainer } from './container';
 import * as utils from './utils';
 import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
 import { findBots } from './core/bots';
-import { createLogger } from '@botmate/logger';
-import { initDb } from '@botmate/database';
-import mongoose from 'mongoose';
-import hooksRegistry from './core/registeries/hooks';
 
 const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
   const cwd = process.cwd();
@@ -49,6 +52,7 @@ class BotMate {
     this.container.register('config', createConfigProvider(appConfig));
     this.container.register('modules', modulesRegistry(this));
     this.container.register('hooks', hooksRegistry());
+    this.container.register('services', servicesRegistry(this));
     this.container.register('plugins', pluginsRegistry(this));
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
@@ -90,6 +94,22 @@ class BotMate {
 
   hook(name: string) {
     return this.container.get('hooks').get(name);
+  }
+
+  get services() {
+    return this.container.get('services').getAll();
+  }
+
+  service(uid: string) {
+    return this.container.get('services').get(uid);
+  }
+
+  get plugins() {
+    return this.container.get('plugins').getAll();
+  }
+
+  plugin(name: string) {
+    return this.container.get('plugins').get(name);
   }
 
   async loadBots() {

@@ -8,6 +8,7 @@ const botmateServerSchema = yup
     bootstrap: yup.mixed().isFunction(),
     destroy: yup.mixed().isFunction(),
     register: yup.mixed().isFunction(),
+    services: yup.object(),
     config: yup.object(),
   })
   .noUnknown();

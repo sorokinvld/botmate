@@ -2,7 +2,6 @@ import { BotMate } from '@botmate/core/lib/BotMate';
 import grammy from '@botmate/plugin.telegram';
 
 function bootstrap({ botmate }: { botmate: BotMate }) {
-  console.log('botmate', botmate.hooks());
   // const botsRegistry = botmate.container.get('bots');
   // const bots = botsRegistry.getAll();
   // bots.forEach(({ instance }) => {
