@@ -3,6 +3,7 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { theme } from '../../theme';
 
 import '@fontsource/ubuntu/700.css';
+import '@fontsource/ubuntu/500.css';
 import '@fontsource/ubuntu/400.css';
 
 type BotMateUIProviderProps = {

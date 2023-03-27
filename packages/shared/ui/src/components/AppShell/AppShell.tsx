@@ -1,32 +1,32 @@
 import React from 'react';
-import { Box, Flex, Stack, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, Stack, useBreakpointValue } from '@chakra-ui/react';
 import { AppMenuItem, AppMenu } from '../AppMenu';
 
 type AppShellProps = {
   children?: React.ReactNode;
   menuItems: AppMenuItem[];
+  iconsOnly?: boolean;
+  menuHeader?: React.ReactNode;
 };
-function AppShell({ children, menuItems }: AppShellProps) {
+function AppShell({ children, menuItems, iconsOnly = false, menuHeader }: AppShellProps) {
   const menuWidth = useBreakpointValue({
     base: '50px',
-    md: '270px',
+    md: '250px',
   });
   return (
     <Flex h="100vh" overflow="hidden" bg="background">
       <Stack
-        p={4}
         flex={1}
         w={menuWidth}
         maxW={menuWidth}
         flexDirection="column"
         overflowY="auto"
         overflow="auto"
-        rounded="lg"
       >
-        <AppMenu items={menuItems} />
+        <AppMenu iconsOnly={iconsOnly} header={menuHeader} items={menuItems} />
       </Stack>
 
-      <Flex alignItems="flex-start" flex={1} overflow="auto" py={4}>
+      <Flex alignItems="flex-start" flex={1} overflow="auto">
         {children}
       </Flex>
     </Flex>

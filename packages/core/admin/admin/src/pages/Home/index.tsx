@@ -1,22 +1,19 @@
-import { AppHeader, Box, Button, Container, SimpleGrid, StatsCard } from '@botmate/ui';
-import { useBotMateApp, useBots } from '@botmate/helper-plugin';
 import Chart from 'react-apexcharts';
 import { TbMessageDots, TbPlus } from 'react-icons/tb';
+import { AppHeader, Box, Button, ButtonGroup, Container, SimpleGrid, StatsCard } from '@botmate/ui';
 
 function HomePage() {
-  const { platforms } = useBotMateApp();
-  const { currentBot } = useBots();
-  console.log('currentBot', currentBot);
-
   return (
     <Box flex={1}>
       <AppHeader
         title="Dashboard"
         subtitle="Welcome back, Monawwar!"
         actions={
-          <Button variant="outline" leftIcon={<TbPlus />}>
-            Add new bot
-          </Button>
+          <ButtonGroup>
+            <Button variant="brand" leftIcon={<TbPlus />}>
+              Create Bot
+            </Button>
+          </ButtonGroup>
         }
       />
 

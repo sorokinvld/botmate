@@ -1,55 +1,40 @@
-import React from 'react';
-import {
-  Box,
-  Divider,
-  Heading,
-  HStack,
-  IconButton,
-  Spacer,
-  Text,
-  Tooltip,
-  useBreakpointValue,
-  useColorMode,
-} from '@chakra-ui/react';
-import { RiMoonLine, RiSunFill, RiSunLine } from 'react-icons/ri';
+import { Box, Heading, HStack, Text, Tooltip, useBreakpointValue } from '@chakra-ui/react';
 import { MenuLink } from '@botmate/types/admin';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { BotMateLogo } from '../Logo';
 
 export type AppMenuItem = MenuLink;
 type AppMenuProps = {
+  header: React.ReactNode;
   items: AppMenuItem[];
   iconsOnly?: boolean;
 };
-function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
+function AppMenu({ header, items, iconsOnly = false }: AppMenuProps) {
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
-  const { toggleColorMode, colorMode } = useColorMode();
+  const params = useParams();
   const location = useLocation();
+
   const TooltipWrapper = iconsOnly ? Tooltip : Box;
 
   return (
-    <Box bg="surface" py={4} flex={1} borderWidth="1px" rounded="lg">
-      <HStack px={4} pb={4}>
-        <Box bg="brand.400" p={2} rounded="md">
-          <BotMateLogo color="white" height="25px" width="25px" />
-        </Box>
-
-        <Box>
-          <Heading size="sm">BotMate</Heading>
-          <Text color="GrayText">v0.0.1-prerelease.24</Text>
-        </Box>
-      </HStack>
+    <Box bg="surface" flex={1} borderRightWidth="1px">
+      {header}
 
       {items.map((item, index) => {
-        const isActive = location.pathname === item.to;
+        let path = item.to;
+        const isActive = item.match.test(location.pathname);
+
+        for (const key in params) {
+          path = path.replace(`:${key}`, params[key] as string);
+        }
 
         return (
           <Link
             key={index}
-            to={item.to}
+            to={path}
             style={{
               cursor: 'default',
             }}
@@ -60,11 +45,11 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
                 px={2}
                 color={isActive ? 'brand.400' : 'gray.400'}
                 bg={isActive ? 'secondary' : 'transparent'}
-                fontWeight={'bold'}
+                fontWeight={'500'}
                 rounded="md"
               >
                 <Box fontSize={isMobile ? '2xl' : 'xl'}>{item.icon}</Box>
-                {!iconsOnly && <Text fontSize="sm">{item.label}</Text>}
+                {!iconsOnly && <Text>{item.label}</Text>}
               </HStack>
             </TooltipWrapper>
           </Link>

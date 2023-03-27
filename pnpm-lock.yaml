@@ -426,6 +426,7 @@ importers:
       '@emotion/styled': ^11.10.6
       '@fontsource/roboto': ^4.5.8
       '@fontsource/ubuntu': ^4.5.11
+      '@monaco-editor/react': ^4.4.6
       '@rollup/plugin-typescript': ^11.0.0
       '@storybook/addon-actions': ^6.5.16
       '@storybook/addon-essentials': ^6.5.16
@@ -455,6 +456,7 @@ importers:
       '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
       '@fontsource/roboto': 4.5.8
       '@fontsource/ubuntu': 4.5.11
+      '@monaco-editor/react': 4.4.6_react@18.2.0
       framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
       react-icons: 4.8.0_react@18.2.0
@@ -1912,7 +1914,7 @@ packages:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba
       '@chakra-ui/transition': 2.0.15_wywy2dwvdcpavuavs2dw5xsumm
-      framer-motion: 10.9.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
 
   /@chakra-ui/alert/2.0.18_thyk6nyf37hg4lwwpztb4hw6uu:
@@ -2223,7 +2225,7 @@ packages:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba
       '@chakra-ui/transition': 2.0.15_wywy2dwvdcpavuavs2dw5xsumm
-      framer-motion: 10.9.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
 
   /@chakra-ui/modal/2.2.10_7gnpgtlak5n2tmuuefwc7h5wre:
@@ -2337,7 +2339,7 @@ packages:
       '@chakra-ui/react-use-merge-refs': 2.0.7_react@18.2.0
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba
-      framer-motion: 10.9.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
 
   /@chakra-ui/popper/3.0.13_react@18.2.0:
@@ -2845,7 +2847,7 @@ packages:
       '@chakra-ui/checkbox': 2.2.12_thyk6nyf37hg4lwwpztb4hw6uu
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba
-      framer-motion: 10.9.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
 
   /@chakra-ui/system/2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba:
@@ -3036,7 +3038,7 @@ packages:
       react: '>=18'
     dependencies:
       '@chakra-ui/shared-utils': 2.0.5
-      framer-motion: 10.9.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.9.1_react@18.2.0
       react: 18.2.0
 
   /@chakra-ui/utils/2.0.15:
@@ -3733,6 +3735,26 @@ packages:
       got: 11.8.6
       os-filter-obj: 2.0.0
     dev: true
+
+  /@monaco-editor/loader/1.3.2:
+    resolution: {integrity: sha512-BTDbpHl3e47r3AAtpfVFTlAi7WXv4UQ/xZmz8atKl4q7epQV5e7+JbigFDViWF71VBi4IIBdcWP57Hj+OWuc9g==}
+    peerDependencies:
+      monaco-editor: '>= 0.21.0 < 1'
+    dependencies:
+      state-local: 1.0.7
+    dev: false
+
+  /@monaco-editor/react/4.4.6_react@18.2.0:
+    resolution: {integrity: sha512-Gr3uz3LYf33wlFE3eRnta4RxP5FSNxiIV9ENn2D2/rN8KgGAD8ecvcITRtsbbyuOuNkwbuHYxfeaz2Vr+CtyFA==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@monaco-editor/loader': 1.3.2
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
 
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -6105,7 +6127,7 @@ packages:
       vite: ^4
     dependencies:
       '@swc/core': 1.3.42
-      vite: 4.2.1_@types+node@18.15.7
+      vite: 4.2.1
     dev: true
 
   /@vitejs/plugin-react/3.1.0_vite@4.2.1:
@@ -6119,7 +6141,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.21.3
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.2.1_@types+node@18.15.7
+      vite: 4.2.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10174,6 +10196,7 @@ packages:
       tslib: 2.5.0
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
+    dev: false
 
   /framer-motion/10.9.1_react@18.2.0:
     resolution: {integrity: sha512-fuCDRGKOu5n9gN2/R7O22mE+BHMGK5D57S3Oq8n2ITd4aYR7D22QM5I4VPD3CWahNt/lyDUs20u9Aw+6ah9oAQ==}
@@ -14173,6 +14196,7 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
 
   /react-element-to-jsx-string/14.3.4_react@18.2.0:
     resolution: {integrity: sha512-t4ZwvV6vwNxzujDQ+37bspnLwA4JlgUPWhLjBJWsNIDceAf6ZKUTCjdm08cN6WeZ5pTMKiCJkmAYnpmR4Bm+dg==}
@@ -14842,6 +14866,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /schema-utils/1.0.0:
     resolution: {integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==}
@@ -15380,6 +15405,10 @@ packages:
 
   /stackframe/1.3.4:
     resolution: {integrity: sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==}
+
+  /state-local/1.0.7:
+    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
+    dev: false
 
   /state-toggle/1.0.3:
     resolution: {integrity: sha512-d/5Z4/2iiCnHw6Xzghyhb+GcmF89bxwgXG60wjIiZaxnymbyOmI8Hk4VqHXiVVp6u2ysaskFfXg3ekCj4WNftQ==}

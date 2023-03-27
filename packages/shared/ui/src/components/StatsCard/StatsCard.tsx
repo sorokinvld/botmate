@@ -6,11 +6,12 @@ interface StatsCardProps {
   desc: string;
   icon: React.ReactNode;
   color: string;
+  bg?: string;
 }
 
-function StatsCard({ title, value, desc, icon, color }: StatsCardProps) {
+function StatsCard({ bg, title, value, desc, icon, color }: StatsCardProps) {
   return (
-    <Box p={4} bg="surface" borderWidth="1px">
+    <Box p={4} bg={bg || 'surface'} borderWidth="1px" rounded="xl">
       <HStack>
         <Box>
           <Heading size="xs" textTransform="uppercase" color="text">

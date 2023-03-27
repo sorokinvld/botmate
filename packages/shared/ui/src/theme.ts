@@ -2,6 +2,8 @@ import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { Input } from './theme/Input';
 import { Button } from './theme/Button';
 
+// TODO: Refactor
+
 const config: ThemeConfig = {
   initialColorMode: 'light',
   useSystemColorMode: false,
@@ -30,6 +32,18 @@ const theme = extendTheme({
       '800': '#4c51c7',
       '900': '#413db0',
     },
+    red: {
+      '50': '#ffeaed',
+      '100': '#ffccd0',
+      '200': '#f69796',
+      '300': '#ee6e6d',
+      '400': '#f94a47',
+      '500': '#fd3528',
+      '600': '#ef2929',
+      '700': '#dd1b23',
+      '800': '#d00e1b',
+      '900': '#c2000b',
+    },
   },
   semanticTokens: {
     colors: {
@@ -56,6 +70,13 @@ const theme = extendTheme({
       input: {
         default: 'gray.100',
         _dark: '#1c1d2a',
+      },
+    },
+  },
+  styles: {
+    global: {
+      body: {
+        bg: 'background',
       },
     },
   },

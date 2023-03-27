@@ -34,9 +34,6 @@ const getPluginsPackages = async () => {
     }, {});
 };
 
-/**
- * Write the plugins.js file or copy the plugins-dev.js file if it exists
- */
 const createFile = async () => {
   const customPluginFile = join(__dirname, '..', 'admin', 'src', 'plugins-dev.ts');
   const pluginFileDest = join(__dirname, '..', 'admin', 'src', 'plugins.ts');
