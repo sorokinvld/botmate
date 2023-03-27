@@ -1,47 +1,29 @@
-import React from 'react';
-import {
-  RiChat2Line,
-  RiCodeLine,
-  RiCodeSLine,
-  RiHome3Line,
-  RiLineChartLine,
-  RiSettingsLine,
-  RiShoppingBag3Line,
-} from 'react-icons/ri';
+import { TbHome2, TbAxe, TbShoppingCart, TbSettings2 } from 'react-icons/tb';
 import { MenuLink } from '@botmate/types/admin';
 
-export const TopMenuLinks: MenuLink[] = [
+export const AppMenuLinks: MenuLink[] = [
   {
     to: '/',
-    label: 'Home',
-    icon: <RiHome3Line />,
+    label: 'Dashboard',
+    icon: <TbHome2 />,
     match: /^\/$/,
   },
   {
-    to: '/commands',
-    label: 'Commands',
-    icon: <RiCodeLine />,
-    match: /^\/commands$/,
+    to: '/plugins',
+    label: 'Plugins',
+    icon: <TbAxe />,
+    match: /^\/plugins$/,
   },
-  {
-    to: '/analytics',
-    label: 'Analytics',
-    icon: <RiLineChartLine />,
-    match: /^\/analytics$/,
-  },
-];
-
-export const BottomMenuLinks: MenuLink[] = [
   {
     to: '/marketplace',
     label: 'Marketplace',
-    icon: <RiShoppingBag3Line />,
+    icon: <TbShoppingCart />,
     match: /^\/marketplace/,
   },
   {
     to: '/settings',
     label: 'Settings',
-    icon: <RiSettingsLine />,
+    icon: <TbSettings2 />,
     match: /^\/settings/,
   },
 ];
