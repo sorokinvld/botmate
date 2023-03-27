@@ -31,8 +31,8 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
   const TooltipWrapper = iconsOnly ? Tooltip : Box;
 
   return (
-    <>
-      <HStack px={4} pb={2}>
+    <Box bg="surface" py={4} flex={1} borderWidth="1px" rounded="lg">
+      <HStack px={4} pb={4}>
         <Box bg="brand.400" p={2} rounded="md">
           <BotMateLogo color="white" height="25px" width="25px" />
         </Box>
@@ -61,6 +61,7 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
                 color={isActive ? 'brand.400' : 'gray.400'}
                 bg={isActive ? 'secondary' : 'transparent'}
                 fontWeight={'bold'}
+                rounded="md"
               >
                 <Box fontSize={isMobile ? '2xl' : 'xl'}>{item.icon}</Box>
                 {!iconsOnly && <Text fontSize="sm">{item.label}</Text>}
@@ -69,7 +70,7 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
           </Link>
         );
       })}
-    </>
+    </Box>
   );
 }
 

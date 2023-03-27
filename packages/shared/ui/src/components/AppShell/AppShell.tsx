@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Stack, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, Stack, useBreakpointValue } from '@chakra-ui/react';
 import { AppMenuItem, AppMenu } from '../AppMenu';
 
 type AppShellProps = {
@@ -9,23 +9,24 @@ type AppShellProps = {
 function AppShell({ children, menuItems }: AppShellProps) {
   const menuWidth = useBreakpointValue({
     base: '50px',
-    md: '230px',
+    md: '270px',
   });
   return (
-    <Flex h="100vh" overflow="hidden">
+    <Flex h="100vh" overflow="hidden" bg="background">
       <Stack
-        flexDirection="column"
+        p={4}
+        flex={1}
         w={menuWidth}
-        bg="surface"
+        maxW={menuWidth}
+        flexDirection="column"
         overflowY="auto"
         overflow="auto"
-        py={4}
-        borderRightWidth="1px"
+        rounded="lg"
       >
         <AppMenu items={menuItems} />
       </Stack>
 
-      <Flex alignItems="flex-start" flex={1} bg="background" overflow="auto">
+      <Flex alignItems="flex-start" flex={1} overflow="auto" py={4}>
         {children}
       </Flex>
     </Flex>

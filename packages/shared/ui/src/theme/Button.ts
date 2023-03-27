@@ -21,9 +21,7 @@ const Button = {
     }),
   },
   sizes: {},
-  defaultProps: {
-    size: 'sm',
-  },
+  defaultProps: {},
 };
 
 export { Button };
