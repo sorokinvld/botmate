@@ -1,8 +1,6 @@
-import React from 'react';
 import { AppHeader } from '@botmate/ui';
 
-type SettingsPageProps = {};
-function SettingsPage({}: SettingsPageProps) {
+function SettingsPage() {
   return (
     <>
       <AppHeader title="Settings" />
@@ -10,4 +8,4 @@ function SettingsPage({}: SettingsPageProps) {
   );
 }
 
-export { SettingsPage };
+export default SettingsPage;

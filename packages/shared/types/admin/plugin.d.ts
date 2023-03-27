@@ -1,4 +1,5 @@
 import React from 'react';
+import { LoadableComponent } from '@loadable/component';
 
 type Field = {
   name: string;
@@ -11,7 +12,7 @@ type MenuLink = {
   to: string;
   label: string;
   icon: React.ReactNode;
-  Component?: React.FC;
+  Component?: LoadableComponent;
   match: RegExp;
 };
 

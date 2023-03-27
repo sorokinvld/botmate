@@ -16,7 +16,7 @@ import { initDb } from '@botmate/database';
 import mongoose from 'mongoose';
 import hooksRegistry from './core/registeries/hooks';
 
-const resolveWorkingDirectories = (opts) => {
+const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
   const cwd = process.cwd();
 
   const appDir = opts.appDir ? path.resolve(cwd, opts.appDir) : cwd;

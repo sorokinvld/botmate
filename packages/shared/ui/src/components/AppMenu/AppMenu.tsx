@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   Box,
+  Divider,
+  Heading,
   HStack,
   IconButton,
   Spacer,
@@ -34,13 +36,11 @@ function AppMenu({ items, iconsOnly = false }: AppMenuProps) {
         <Box bg="brand.400" p={2} rounded="md">
           <BotMateLogo color="white" height="25px" width="25px" />
         </Box>
-        <Spacer />
-        <IconButton
-          variant="outline"
-          aria-label="toggle-mode"
-          icon={colorMode === 'light' ? <RiMoonLine /> : <RiSunFill />}
-          onClick={toggleColorMode}
-        />
+
+        <Box>
+          <Heading size="sm">BotMate</Heading>
+          <Text color="GrayText">v0.0.1-prerelease.24</Text>
+        </Box>
       </HStack>
 
       {items.map((item, index) => {

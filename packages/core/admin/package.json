@@ -3,10 +3,11 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "dev": "pnpm create:plugin-file && pnpm dev:webpack",
+    "dev": "pnpm create:plugin-file && pnpm dev:vite",
+    "dev:vite": "vite",
     "dev:webpack": "cross-env NODE_ENV=development webpack serve --config webpack.config.dev.js --progress profile",
     "create:plugin-file": "node ./scripts/create-dev-plugins-file.js",
-    "build": "tsc -p ."
+    "build": "tsc"
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
@@ -68,5 +69,11 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "4.0.0",
     "webpackbar": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/loadable__component": "^5.13.4",
+    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "vite": "^4.2.0"
   }
 }

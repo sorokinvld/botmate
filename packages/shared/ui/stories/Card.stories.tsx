@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BotMateUIProvider } from '../Provider';
+import { BotMateUIProvider } from '../src/components/Provider';
 
-import { BmCard } from '../Card';
+import { BmCard } from '../src/components/Card';
 import { Box } from '@chakra-ui/react';
 
 export default {

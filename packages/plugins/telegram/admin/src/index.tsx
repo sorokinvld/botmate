@@ -1,4 +1,3 @@
-import React from 'react';
 import { IBotMateApp } from '@botmate/types/admin';
 import { FaTelegramPlane } from 'react-icons/fa';
 

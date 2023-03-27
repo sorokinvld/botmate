@@ -16,7 +16,7 @@ const PLUGINS_TO_INSTALL = [];
 const buildAdmin = async () => {
   const entry = path.join(__dirname, '..', 'admin', 'src');
   const dest = path.join(__dirname, '..', 'build');
-  const tsConfigFilePath = path.join(__dirname, '..', 'admin', 'src', 'tsconfig.json');
+  // const tsConfigFilePath = path.join(__dirname, '..', 'admin', 'src', 'tsconfig.json');
 
   const corePlugins = getCorePluginsPath();
   const plugins = getPluginToInstallPath(PLUGINS_TO_INSTALL);
@@ -25,67 +25,69 @@ const buildAdmin = async () => {
 
   await createPluginsFile(allPlugins);
 
-  const args = {
-    entry,
-    dest,
-    cacheDir: path.join(__dirname, '..'),
-    pluginsPath,
-    env: 'production',
-    optimize: true,
-    options: {
-      backend: 'http://localhost:9732',
-      adminPath: '',
-    },
-    tsConfigFilePath,
-  };
+  console.log('allPlugins', allPlugins);
 
-  const config = webpackConfig(args);
+  // const args = {
+  //   entry,
+  //   dest,
+  //   cacheDir: path.join(__dirname, '..'),
+  //   pluginsPath,
+  //   env: 'production',
+  //   optimize: true,
+  //   options: {
+  //     backend: 'http://localhost:9732',
+  //     adminPath: '',
+  //   },
+  //   tsConfigFilePath,
+  // };
 
-  const compiler = webpack(config);
+  // const config = webpackConfig(args);
 
-  console.log('Building the admin panel');
+  // const compiler = webpack(config);
 
-  return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
-      let messages;
-      if (err) {
-        if (!err.message) {
-          return reject(err);
-        }
-        messages = {
-          errors: [err.message],
-          warnings: [],
-        };
-      } else {
-        messages = stats.toJson({ all: false, warnings: true, errors: true });
-      }
+  // console.log('Building the admin panel');
 
-      if (messages.errors.length) {
-        // Only keep the first error. Others are often indicative
-        // of the same problem, but confuse the reader with noise.
-        if (messages.errors.length > 1) {
-          messages.errors.length = 1;
-        }
+  // return new Promise((resolve, reject) => {
+  //   compiler.run((err, stats) => {
+  //     let messages;
+  //     if (err) {
+  //       if (!err.message) {
+  //         return reject(err);
+  //       }
+  //       messages = {
+  //         errors: [err.message],
+  //         warnings: [],
+  //       };
+  //     } else {
+  //       messages = stats.toJson({ all: false, warnings: true, errors: true });
+  //     }
 
-        return reject(
-          new Error(
-            messages.errors.reduce((acc, error) => {
-              if (isObject(error)) {
-                return acc + error.message;
-              }
+  //     if (messages.errors.length) {
+  //       // Only keep the first error. Others are often indicative
+  //       // of the same problem, but confuse the reader with noise.
+  //       if (messages.errors.length > 1) {
+  //         messages.errors.length = 1;
+  //       }
 
-              return acc + error.join('\n\n');
-            }, '')
-          )
-        );
-      }
+  //       return reject(
+  //         new Error(
+  //           messages.errors.reduce((acc, error) => {
+  //             if (isObject(error)) {
+  //               return acc + error.message;
+  //             }
 
-      return resolve({
-        stats,
-        warnings: messages.warnings,
-      });
-    });
-  });
+  //             return acc + error.join('\n\n');
+  //           }, '')
+  //         )
+  //       );
+  //     }
+
+  //     return resolve({
+  //       stats,
+  //       warnings: messages.warnings,
+  //     });
+  //   });
+  // });
 };
 
 buildAdmin()

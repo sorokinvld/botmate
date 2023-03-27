@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform } from '@botmate/types/admin';
 import { BotMateAppProvider, BotsProvider } from '@botmate/helper-plugin';
+
 import { BotMateUIProvider } from '@botmate/ui';
 
 type Props = {
@@ -17,11 +18,13 @@ function Providers({ menu, plugins, children, platforms }: Props) {
       <BotsProvider
         bots={[
           {
-            id: '1',
+            _id: '1',
             name: 'Bot 1',
-            platform: 'telegram',
-            secret: {},
+            platform: 'facebook',
+            secrets: {},
+            config: {},
             status: 'active',
+            updatedAt: new Date().toString(),
             createdAt: new Date().toString(),
           },
         ]}

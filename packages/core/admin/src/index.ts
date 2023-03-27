@@ -2,8 +2,11 @@ import path from 'path';
 import fs from 'fs-extra';
 import webpack from 'webpack';
 import chalk from 'chalk';
+import { build as viteBuild } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 import { isUsingTypeScript } from '@botmate/typescript-utils';
 import WebpackDevServer from 'webpack-dev-server';
+import { getAlias } from './alias';
 
 import { shouldBuildAdmin, createCacheDir, getCustomWebpackConfig, watchAdminFiles } from './utils';
 
@@ -18,73 +21,75 @@ const clean = ({ appDir, buildDestDir }) => {
 };
 
 const build = async ({ appDir, buildDestDir, env, forceBuild, optimize, options, plugins }) => {
-  const buildAdmin = await shouldBuildAdmin({ appDir, plugins });
-  const useTypeScript = isUsingTypeScript(path.join(appDir, 'src', 'admin'), 'tsconfig.json');
+  // const buildAdmin = await shouldBuildAdmin({ appDir, plugins });
 
-  if (!buildAdmin && !forceBuild) {
-    return;
-  }
-
-  // Create the cache dir containing the front-end files.
   await createCacheDir({ appDir, plugins });
-
   const cacheDir = path.resolve(appDir, '.cache');
   const entry = path.resolve(cacheDir, 'admin', 'src');
-  const dest = path.resolve(buildDestDir, 'build');
+  const alias = getAlias();
 
-  const roots = {
-    eeRoot: path.resolve(cacheDir, 'ee', 'admin'),
-    ceRoot: path.resolve(cacheDir, 'admin', 'src'),
-  };
-
-  const pluginsPath = Object.keys(plugins).map((pluginName) => plugins[pluginName].pathToPlugin);
-
-  // Either use the tsconfig file from the generated app or the one inside the .cache folder
-  // so we can develop plugins in TS while being in a JS app
-  const tsConfigFilePath = false;
-  // useTypeScript
-  // 	? path.join(appDir, 'src', 'admin', 'tsconfig.json')
-  // 	: path.resolve(entry, 'tsconfig.json');
-
-  const config = getCustomWebpackConfig(appDir, {
-    appDir,
-    cacheDir,
-    dest,
-    entry,
-    env,
-    optimize,
-    options,
-    pluginsPath,
-    roots,
-    tsConfigFilePath,
+  viteBuild({
+    root: entry,
+    build: {
+      outDir: path.resolve(buildDestDir, 'build'),
+    },
+    plugins: [react()],
+    resolve: {
+      alias,
+    },
+  }).then(() => {
+    console.log('Vite build finished');
   });
 
-  const compiler = webpack(config);
+  // const useTypeScript = isUsingTypeScript(path.join(appDir, 'src', 'admin'), 'tsconfig.json');
+  // if (!buildAdmin && !forceBuild) {
+  //   return;
+  // }
+  // Create the cache dir containing the front-end files.
 
-  return new Promise((resolve, reject) => {
-    compiler.run((err: any, stats) => {
-      if (err) {
-        console.error(err.stack || err);
-
-        if (err.details) {
-          console.error(err.details);
-        }
-        return reject(err);
-      }
-
-      const info = stats.toJson();
-
-      if (stats.hasErrors()) {
-        console.error(info.errors);
-      }
-
-      return resolve({
-        stats,
-
-        warnings: info.warnings,
-      });
-    });
-  });
+  // const roots = {
+  //   eeRoot: path.resolve(cacheDir, 'ee', 'admin'),
+  //   ceRoot: path.resolve(cacheDir, 'admin', 'src'),
+  // };
+  // const pluginsPath = Object.keys(plugins).map((pluginName) => plugins[pluginName].pathToPlugin);
+  // // Either use the tsconfig file from the generated app or the one inside the .cache folder
+  // // so we can develop plugins in TS while being in a JS app
+  // const tsConfigFilePath = false;
+  // // useTypeScript
+  // // 	? path.join(appDir, 'src', 'admin', 'tsconfig.json')
+  // // 	: path.resolve(entry, 'tsconfig.json');
+  // const config = getCustomWebpackConfig(appDir, {
+  //   appDir,
+  //   cacheDir,
+  //   dest,
+  //   entry,
+  //   env,
+  //   optimize,
+  //   options,
+  //   pluginsPath,
+  //   roots,
+  //   tsConfigFilePath,
+  // });
+  // const compiler = webpack(config);
+  // return new Promise((resolve, reject) => {
+  //   compiler.run((err: any, stats) => {
+  //     if (err) {
+  //       console.error(err.stack || err);
+  //       if (err.details) {
+  //         console.error(err.details);
+  //       }
+  //       return reject(err);
+  //     }
+  //     const info = stats.toJson();
+  //     if (stats.hasErrors()) {
+  //       console.error(info.errors);
+  //     }
+  //     return resolve({
+  //       stats,
+  //       warnings: info.warnings,
+  //     });
+  //   });
+  // });
 };
 
 async function watchAdmin({ appDir, browser, buildDestDir, host, options, plugins, port }) {

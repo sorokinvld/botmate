@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { HiChartBar, HiCog, HiHome } from 'react-icons/hi';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { AppHeader } from '../AppHeader';
-import { BotMateUIProvider } from '../Provider';
+import { AppHeader } from '../src/components/AppHeader';
+import { BotMateUIProvider } from '../src/components/Provider';
 
-import { AppShell } from './AppShell';
+import { AppShell } from '../src/components/AppShell/AppShell';
 
 export default {
   title: 'AppShell',

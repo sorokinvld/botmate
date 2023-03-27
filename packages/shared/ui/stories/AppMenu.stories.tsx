@@ -1,9 +1,9 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ChakraProvider } from '../..';
-import { theme } from '../../theme';
+import { ChakraProvider } from '../src';
+import { theme } from '../src/theme';
 import { HiHome } from 'react-icons/hi';
 
-import { AppMenu } from './AppMenu';
+import { AppMenu } from '../src/components/AppMenu/AppMenu';
 import { BrowserRouter } from 'react-router-dom';
 
 export default {

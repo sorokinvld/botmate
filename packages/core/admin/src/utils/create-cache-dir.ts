@@ -11,7 +11,7 @@ async function createPluginsJs(plugins, dest: string) {
     const shortName = _.camelCase(name);
 
     const realPath = path
-      .join(path.relative(path.resolve(dest, 'admin', 'src'), pathToPlugin), 'botmate-admin.js')
+      .join(path.relative(path.resolve(dest, 'admin', 'src'), pathToPlugin), 'admin', 'src')
       .replace(/\\/g, '/');
 
     return {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Bot } from '@botmate/types/server';
+import { IBot } from '@botmate/types/server';
 import { botsContext } from '../../contexts/bots';
 
 export type BotProviderProps = {
-  bots: Bot[];
+  bots: IBot[];
   children?: React.ReactNode;
 };
 const BotsProvider = (props: BotProviderProps) => {

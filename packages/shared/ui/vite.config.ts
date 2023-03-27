@@ -35,6 +35,7 @@ export default defineConfig(async () => {
         },
         plugins: [typescript()],
       },
+      sourcemap: true,
     },
     plugins: [react()],
   };

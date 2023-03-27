@@ -1,10 +1,11 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { IBotMateApp, MenuLink, Platform } from '@botmate/types/admin';
+import { lazy } from '@loadable/component';
 
-import App from './components/App';
 import Providers from './components/Providers';
-import { SetupPage } from './pages/Setup';
+
+const App = lazy(() => import('./components/App'));
+const SetupPage = lazy(() => import('./pages/Setup'));
 
 class BotMateApp implements IBotMateApp {
   appPlugins: any;
@@ -54,4 +55,4 @@ class BotMateApp implements IBotMateApp {
   }
 }
 
-export { BotMateApp };
+export default BotMateApp;

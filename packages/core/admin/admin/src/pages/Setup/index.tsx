@@ -68,4 +68,4 @@ function SetupPage() {
   );
 }
 
-export { SetupPage };
+export default SetupPage;

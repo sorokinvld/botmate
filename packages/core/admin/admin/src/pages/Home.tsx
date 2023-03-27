@@ -1,20 +1,10 @@
-import React from 'react';
-import { FaCog, FaTelegram } from 'react-icons/fa';
-import {
-  AppHeader,
-  Box,
-  Container,
-  BmCard,
-  Text,
-  SimpleGrid,
-  Button,
-  ButtonGroup,
-} from '@botmate/ui';
+import { AppHeader, Box, Container, Text, SimpleGrid } from '@botmate/ui';
 import { useBotMateApp, useBots } from '@botmate/helper-plugin';
-import Chart from 'react-apexcharts';
-
+import loadable from '@loadable/component';
 import { Heading, HStack, Spacer } from '@chakra-ui/react';
-import { RiChat2Line, RiCheckLine, RiPlayLine } from 'react-icons/ri';
+import { RiCheckLine } from 'react-icons/ri';
+
+const Chart = loadable(() => import('react-apexcharts'));
 
 function HomePage() {
   const { platforms } = useBotMateApp();
@@ -92,4 +82,4 @@ function HomePage() {
   );
 }
 
-export { HomePage };
+export default HomePage;
