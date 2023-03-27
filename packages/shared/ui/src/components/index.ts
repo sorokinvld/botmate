@@ -4,3 +4,4 @@ export * from './Provider';
 export * from './Logo';
 export * from './BotCard';
 export * from './StatsCard';
+export * from './CodeEditor';
