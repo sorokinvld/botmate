@@ -1,5 +1,4 @@
 import path from 'path';
-import { Express } from 'express';
 import { isFunction } from 'lodash';
 import { createLogger } from '@botmate/logger';
 import { initDb } from '@botmate/database';
@@ -17,7 +16,7 @@ import * as utils from './utils';
 import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
-import { findBots } from './core/bots';
+import botsRegistry from './core/registeries/bots';
 
 const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
   const cwd = process.cwd();
@@ -31,11 +30,10 @@ const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
 class BotMate {
   container: any;
   dirs: any;
-  server: Express;
+  server: any;
   isLoaded: boolean;
   app: any;
   admin: any;
-  bots: any[];
   db: typeof mongoose;
   log: ReturnType<typeof createLogger>;
 
@@ -52,27 +50,24 @@ class BotMate {
     this.container.register('config', createConfigProvider(appConfig));
     this.container.register('modules', modulesRegistry(this));
     this.container.register('hooks', hooksRegistry());
+    this.container.register('bots', botsRegistry(this));
     this.container.register('services', servicesRegistry(this));
     this.container.register('plugins', pluginsRegistry(this));
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
 
-    this.bots = [];
     this.server = createServer(this);
     this.isLoaded = false;
     this.log = createLogger({});
   }
 
   async setupAdminDist() {
-    this.server.get('*', (req, res) => {
+    this.server.app.get('*', (req, res) => {
       res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
     });
   }
 
   async bootstrap() {
-    const config = this.config.get('database');
-    this.db = await initDb(config.url);
-
     this.setupAdminDist();
     await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
   }
@@ -104,6 +99,14 @@ class BotMate {
     return this.container.get('services').get(uid);
   }
 
+  get controllers() {
+    return this.container.get('controllers').getAll();
+  }
+
+  controller(uid) {
+    return this.container.get('controllers').get(uid);
+  }
+
   get plugins() {
     return this.container.get('plugins').getAll();
   }
@@ -112,14 +115,26 @@ class BotMate {
     return this.container.get('plugins').get(name);
   }
 
+  get bots() {
+    return this.container.get('bots').getAll();
+  }
+
+  bot(id: string) {
+    return this.container.get('bots').get(id);
+  }
+
   async loadBots() {
-    this.bots = await findBots();
+    await loaders.loadBots(this);
   }
 
   async register() {
+    const config = this.config.get('database');
+    this.db = await initDb(config.url);
+
     await Promise.all([
       //
       this.loadApp(),
+      this.loadBots(),
       this.loadAmin(),
       this.loadPlugins(),
     ]);
@@ -143,7 +158,7 @@ class BotMate {
   async listen() {
     const { host, port } = this.config.get('server');
 
-    this.server.listen(port, host, () => {
+    this.server.app.listen(port, host, () => {
       console.log(`BotMate is listening on http://${host}:${port}`);
     });
   }

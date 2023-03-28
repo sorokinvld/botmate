@@ -1,12 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useMutation } from 'react-query';
 import {
   BotMateLogo,
   Box,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   Container,
   Flex,
   Heading,
@@ -17,16 +13,27 @@ import {
   Button,
 } from '@botmate/ui';
 import { useBotMateApp } from '@botmate/helper-plugin';
+import { useCreateBot } from '../../hooks/bots';
 
 function SetupPage() {
   const { platforms } = useBotMateApp();
   const keys = useMemo(() => Object.keys(platforms), [platforms]);
   const [activePlatform, setActivePlatform] = useState(keys[0]);
+  const { mutate } = useCreateBot();
+
+  const submit = () => {
+    mutate({
+      name: 'Bot 1',
+      platform: activePlatform,
+      config: {},
+      secrets: {},
+    });
+  };
 
   return (
     <Flex h="100vh" overflow="hidden" bg="background" alignItems="center">
-      <Container maxW="xl">
-        <Box p={6} bg="surface" borderWidth="1px">
+      <Container maxW="lg">
+        <Box p={6} bg="surface" borderWidth="1px" rounded="xl">
           <BotMateLogo height="45px" width="45px" color="white" />
 
           <HStack mt={4}>
@@ -40,7 +47,8 @@ function SetupPage() {
               return (
                 <HStack
                   p={2}
-                  rounded="md"
+                  key={platform}
+                  rounded="lg"
                   bg={isActive ? 'secondary' : 'surface'}
                   color={isActive ? 'brand.400' : 'text'}
                   fontWeight={isActive ? 'bold' : 'normal'}
@@ -61,7 +69,9 @@ function SetupPage() {
             })}
           </Stack>
 
-          <Button mt={4}>Continue</Button>
+          <Button variant="brand" mt={4} onClick={submit}>
+            Continue
+          </Button>
         </Box>
       </Container>
     </Flex>

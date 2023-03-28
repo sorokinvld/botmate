@@ -5,11 +5,11 @@ import { yup } from '@botmate/utils';
 const botmateServerSchema = yup
   .object()
   .shape({
+    config: yup.object(),
+    register: yup.mixed().isFunction(),
     bootstrap: yup.mixed().isFunction(),
     destroy: yup.mixed().isFunction(),
-    register: yup.mixed().isFunction(),
     services: yup.object(),
-    config: yup.object(),
   })
   .noUnknown();
 

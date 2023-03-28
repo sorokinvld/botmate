@@ -1,20 +1,20 @@
 'use strict';
 
-const _ = require('lodash');
+import _ from 'lodash';
 
 export default (initialConfig = {}) => {
   const _config = { ...initialConfig }; // not deep clone because it would break some config
 
   return {
-    ..._config, // TODO: to remove
-    get(path, defaultValue) {
+    ..._config,
+    get(path: string, defaultValue: any) {
       return _.get(_config, path, defaultValue);
     },
-    set(path, val) {
+    set(path: string, val: any) {
       _.set(_config, path, val);
       return this;
     },
-    has(path) {
+    has(path: string) {
       return _.has(_config, path);
     },
   };

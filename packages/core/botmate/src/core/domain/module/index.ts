@@ -54,6 +54,13 @@ const createModule = (namespace: string, rawModule: any, botmate: BotMate.BotMat
       called.destroy = true;
       await (rawModule.destroy && rawModule.destroy({ botmate }));
     },
+    controller(controllerName) {
+      return botmate.container.get('controllers').get(`${namespace}.${controllerName}`);
+    },
+    get controllers() {
+      const controllers = botmate.container.get('controllers').getAll(namespace);
+      return removeNamespacedKeys(controllers, namespace);
+    },
 
     load() {
       botmate.container.get('config').set(uidToPath(namespace), rawModule.config);

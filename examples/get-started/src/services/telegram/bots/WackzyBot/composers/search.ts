@@ -1,4 +1,4 @@
 import bot from '@botmate/plugin.telegram';
-const composer = new bot.Composer();
+// const composer = new bot.Composer();
 
-export default composer;
+// export default composer;
