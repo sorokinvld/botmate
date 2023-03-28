@@ -1,14 +1,5 @@
-import {
-  TbHome2,
-  TbAxe,
-  TbShoppingCart,
-  TbSettings2,
-  TbBox,
-  TbMessage2Code,
-  TbNotification,
-  TbBellPlus,
-} from 'react-icons/tb';
 import { MenuLink } from '@botmate/types/admin';
+import { TbHome2, TbShoppingCart, TbSettings2, TbCode, TbHammer } from 'react-icons/tb';
 
 export const AppMenuLinks: MenuLink[] = [
   {
@@ -18,16 +9,16 @@ export const AppMenuLinks: MenuLink[] = [
     match: /^\/$/,
   },
   {
-    to: '/bots',
-    label: 'My Bots',
-    icon: <TbMessage2Code />,
-    match: /^\/bots/,
+    to: '/scripts',
+    label: 'Scripts',
+    icon: <TbCode />,
+    match: /^\/scripts/,
   },
   {
-    to: '/notifications',
-    label: 'Notifications',
-    icon: <TbBellPlus />,
-    match: /^\/notifications/,
+    to: '/plugins',
+    label: 'Plugins',
+    icon: <TbHammer />,
+    match: /^\/plugins/,
   },
   {
     to: '/marketplace',

@@ -11,7 +11,7 @@ type AppShellProps = {
 function AppShell({ children, menuItems, iconsOnly = false, menuHeader }: AppShellProps) {
   const menuWidth = useBreakpointValue({
     base: '50px',
-    md: '250px',
+    md: '230px',
   });
   return (
     <Flex h="100vh" overflow="hidden" bg="background">
@@ -26,7 +26,7 @@ function AppShell({ children, menuItems, iconsOnly = false, menuHeader }: AppShe
         <AppMenu iconsOnly={iconsOnly} header={menuHeader} items={menuItems} />
       </Stack>
 
-      <Flex alignItems="flex-start" flex={1} overflow="auto">
+      <Flex flexDirection="column" flex={1} overflow="auto">
         {children}
       </Flex>
     </Flex>

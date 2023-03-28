@@ -1,6 +1,15 @@
 import Chart from 'react-apexcharts';
-import { TbMessageDots, TbPlus } from 'react-icons/tb';
-import { AppHeader, Box, Button, ButtonGroup, Container, SimpleGrid, StatsCard } from '@botmate/ui';
+import { TbCheck, TbPlayerPlay } from 'react-icons/tb';
+import {
+  AppHeader,
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  SimpleGrid,
+  Spacer,
+  StatsCard,
+} from '@botmate/ui';
 
 function HomePage() {
   return (
@@ -9,22 +18,25 @@ function HomePage() {
         title="Dashboard"
         subtitle="Welcome back, Monawwar!"
         actions={
-          <ButtonGroup>
-            <Button variant="brand" leftIcon={<TbPlus />}>
-              Create Bot
-            </Button>
-          </ButtonGroup>
+          <>
+            <Spacer />
+            <ButtonGroup>
+              <Button variant="success" leftIcon={<TbPlayerPlay />}>
+                Start
+              </Button>
+            </ButtonGroup>
+          </>
         }
       />
 
       <Container maxW="full" py={4}>
         <SimpleGrid spacing={4} columns={{ base: 1, lg: 2, xl: 3 }} mt={2}>
           <StatsCard
-            title="Total Bots"
-            value={'03'}
+            title="Status"
+            value={'OK'}
             color="brand"
-            desc="Your total bots"
-            icon={<TbMessageDots size={66} />}
+            desc="Up since 2 days"
+            icon={<TbCheck size={66} />}
           />
 
           <StatsCard
