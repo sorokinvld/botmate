@@ -12,6 +12,7 @@ const aliasExactMatch = [
   '@botmate/helper-plugin',
   'react-icons',
   '@loadable/component',
+  'react-hook-form',
 ];
 
 const alias = {
