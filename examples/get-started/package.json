@@ -9,7 +9,8 @@
     "@botmate/core": "workspace:*",
     "@botmate/plugin.telegram": "workspace:*",
     "pg": "^8.10.0",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-hook-form": "^7.43.8"
   },
   "devDependencies": {
     "@botmate/types": "workspace:*",
