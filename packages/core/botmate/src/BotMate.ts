@@ -63,14 +63,7 @@ class BotMate {
     this.log = createLogger({});
   }
 
-  async setupAdminDist() {
-    // this.server.app.get('*', (req, res) => {
-    //   res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
-    // });
-  }
-
   async bootstrap() {
-    this.setupAdminDist();
     await this.server.initRouting();
     await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
   }

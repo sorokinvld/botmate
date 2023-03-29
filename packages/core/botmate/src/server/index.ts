@@ -39,7 +39,7 @@ const createServer = (botmate: BotMate.BotMateInstance) => {
         apis[api].mount(router);
       });
 
-      app.use(router);
+      app.use('/api', router);
 
       return app.listen(...args);
     },
