@@ -13,6 +13,7 @@ const defaultPlugin = {
   bootstrap() {},
   destroy() {},
   register() {},
+  services: {},
   config: {
     default: {},
     validator() {},

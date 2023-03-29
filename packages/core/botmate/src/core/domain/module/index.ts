@@ -6,12 +6,14 @@ import { removeNamespace } from '../../utils';
 
 const uidToPath = (uid: string) => uid.replace('::', '.');
 
-const removeNamespacedKeys = (map, namespace) => {
-  return _.mapKeys(map, (value, key) => removeNamespace(key, namespace));
+const removeNamespacedKeys = (map: Object, namespace: string) => {
+  return _.mapKeys(map, (_, key) => removeNamespace(key, namespace));
 };
 
 const defaultModule = {
   config: {},
+  controllers: {},
+  services: {},
 };
 
 const createModule = (namespace: string, rawModule: any, botmate: BotMate.BotMateInstance) => {
@@ -54,7 +56,10 @@ const createModule = (namespace: string, rawModule: any, botmate: BotMate.BotMat
       called.destroy = true;
       await (rawModule.destroy && rawModule.destroy({ botmate }));
     },
-    controller(controllerName) {
+    get routes() {
+      return rawModule.routes;
+    },
+    controller(controllerName: string) {
       return botmate.container.get('controllers').get(`${namespace}.${controllerName}`);
     },
     get controllers() {
@@ -65,7 +70,7 @@ const createModule = (namespace: string, rawModule: any, botmate: BotMate.BotMat
     load() {
       botmate.container.get('config').set(uidToPath(namespace), rawModule.config);
       botmate.container.get('services').add(namespace, rawModule.services);
-      botmate.container.get('config').set(uidToPath(namespace), rawModule.config);
+      botmate.container.get('controllers').add(namespace, rawModule.controllers);
     },
     config(path, defaultValue) {
       return botmate.container.get('config').get(`${uidToPath(namespace)}.${path}`, defaultValue);

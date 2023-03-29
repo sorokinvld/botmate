@@ -17,6 +17,7 @@ import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
 import botsRegistry from './core/registeries/bots';
+import controllersRegistry from './core/registeries/controllers';
 
 const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
   const cwd = process.cwd();
@@ -53,6 +54,7 @@ class BotMate {
     this.container.register('bots', botsRegistry(this));
     this.container.register('services', servicesRegistry(this));
     this.container.register('plugins', pluginsRegistry(this));
+    this.container.register('controllers', controllersRegistry());
 
     this.dirs = utils.getDirs(rootDirs, { botmate: this });
 
@@ -62,13 +64,14 @@ class BotMate {
   }
 
   async setupAdminDist() {
-    this.server.app.get('*', (req, res) => {
-      res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
-    });
+    // this.server.app.get('*', (req, res) => {
+    //   res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
+    // });
   }
 
   async bootstrap() {
     this.setupAdminDist();
+    await this.server.initRouting();
     await this.runLifecyclesFunctions(LIFECYCLES.BOOTSTRAP);
   }
 
@@ -158,7 +161,7 @@ class BotMate {
   async listen() {
     const { host, port } = this.config.get('server');
 
-    this.server.app.listen(port, host, () => {
+    this.server.listen(port, host, () => {
       console.log(`BotMate is listening on http://${host}:${port}`);
     });
   }

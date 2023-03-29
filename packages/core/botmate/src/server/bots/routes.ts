@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { botsControllers } from './controllers';
+import { controllers } from './controllers';
 
 const botsRoutes = Router();
 
-botsRoutes.get('/', botsControllers.find);
+botsRoutes.get('/', controllers.find);
 
 export { botsRoutes };

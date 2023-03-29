@@ -1,6 +1,4 @@
-'use strict';
-
-const hasNamespace = (name, namespace) => {
+const hasNamespace = (name: string, namespace: string | undefined) => {
   if (!namespace) {
     return true;
   }
@@ -11,14 +9,14 @@ const hasNamespace = (name, namespace) => {
   return name.startsWith(`${namespace}.`);
 };
 
-const addNamespace = (name, namespace) => {
+const addNamespace = (name: string, namespace: string) => {
   if (namespace.endsWith('::')) {
     return `${namespace}${name}`;
   }
   return `${namespace}.${name}`;
 };
 
-const removeNamespace = (name, namespace) => {
+const removeNamespace = (name: string, namespace: string) => {
   if (namespace.endsWith('::')) {
     return name.replace(namespace, '');
   }

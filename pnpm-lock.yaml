@@ -189,6 +189,7 @@ importers:
   packages/core/botmate:
     specifiers:
       '@botmate/admin': workspace:*
+      '@botmate/bots': workspace:^0.0.1
       '@botmate/database': workspace:^0.0.1
       '@botmate/logger': workspace:^4.8.2
       '@botmate/plugin.telegram': workspace:^1.0.0
@@ -227,6 +228,7 @@ importers:
       yup: 0.32.9
     dependencies:
       '@botmate/admin': link:../admin
+      '@botmate/bots': link:../bots
       '@botmate/database': link:../database
       '@botmate/plugin.telegram': link:../../plugins/telegram
       '@botmate/schemas': link:../../shared/schemas
@@ -268,8 +270,10 @@ importers:
   packages/core/bots:
     specifiers:
       '@botmate/typescript-utils': workspace:^1.0.0
+      '@types/node': ^18.15.7
     devDependencies:
       '@botmate/typescript-utils': link:../../shared/typescript
+      '@types/node': 18.15.7
 
   packages/core/database:
     specifiers:

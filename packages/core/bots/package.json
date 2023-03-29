@@ -1,0 +1,23 @@
+{
+  "name": "@botmate/bots",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "xencodes",
+  "license": "ISC",
+  "devDependencies": {
+    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@types/node": "^18.15.7"
+  },
+  "botmate": {
+    "displayName": "Bot APIs",
+    "name": "bots",
+    "description": "Bot APIs for BotMate ",
+    "required": true,
+    "kind": "plugin"
+  }
+}

@@ -10,6 +10,13 @@ const botmateServerSchema = yup
     bootstrap: yup.mixed().isFunction(),
     destroy: yup.mixed().isFunction(),
     services: yup.object(),
+    controllers: yup.object(),
+    routes: yup.lazy((value) => {
+      if (Array.isArray(value)) {
+        return yup.array();
+      }
+      return yup.object();
+    }),
   })
   .noUnknown();
 
