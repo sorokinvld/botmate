@@ -56,7 +56,6 @@ async function copyAdmin(dest: string) {
 
   await fs.ensureDir(path.resolve(dest, 'config'));
   await fs.copy(path.resolve(adminPath, 'admin'), path.resolve(dest, 'admin'));
-  console.log('here.');
   // Copy package.json
   await fs.copy(path.resolve(adminPath, 'package.json'), path.resolve(dest, 'package.json'));
 }

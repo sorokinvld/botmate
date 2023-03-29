@@ -25,8 +25,6 @@ const buildAdmin = async () => {
 
   await createPluginsFile(allPlugins);
 
-  console.log('allPlugins', allPlugins);
-
   // const args = {
   //   entry,
   //   dest,
