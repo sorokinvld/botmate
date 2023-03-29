@@ -17,7 +17,7 @@ import {
   PlacementWithLogical,
 } from '@botmate/ui';
 import { IBot } from '@botmate/types/server';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import { useBots } from '@botmate/helper-plugin';
 import { Loader } from '@botmate/ui';
 import { AppMenuLinks } from './constants/menu';
@@ -28,6 +28,7 @@ import ScriptsPage from '../../pages/Scripts';
 import MarketplacePage from '../../pages/Marketplace';
 import SettingsPage from '../../pages/Settings';
 import { TbMenu2 } from 'react-icons/tb';
+import CreateScriptPage from '../../pages/Scripts/CreateScript';
 
 type MenuHeaderProps = {
   bots: IBot[];
@@ -93,12 +94,22 @@ const MenuHeader = ({ bots }: MenuHeaderProps) => {
 };
 
 function App() {
-  const { isLoading, bots } = useBots();
+  const { activeBot, isLoading, bots } = useBots();
 
   if (isLoading) {
     return (
       <Center h="100vh">
         <Loader text="loading bot data..." />
+      </Center>
+    );
+  }
+
+  if (!activeBot) {
+    return (
+      <Center h="100vh">
+        <a href="/setup">
+          <Button variant="brand">Add new bot</Button>
+        </a>
       </Center>
     );
   }
@@ -109,6 +120,7 @@ function App() {
         <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/scripts" Component={ScriptsPage} />
+          <Route path="/scripts/create" Component={CreateScriptPage} />
           <Route path="/plugins" Component={PluginsPage} />
           <Route path="/marketplace" Component={MarketplacePage} />
           <Route path="/settings" Component={SettingsPage} />

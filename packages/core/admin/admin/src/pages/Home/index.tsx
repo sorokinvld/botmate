@@ -10,8 +10,12 @@ import {
   Spacer,
   StatsCard,
 } from '@botmate/ui';
+import { useBots, useService } from '@botmate/helper-plugin';
 
 function HomePage() {
+  const botsService = useService('bots');
+  const { activeBot } = useBots();
+
   return (
     <Box flex={1}>
       <AppHeader
@@ -21,7 +25,13 @@ function HomePage() {
           <>
             <Spacer />
             <ButtonGroup>
-              <Button variant="success" leftIcon={<TbPlayerPlay />}>
+              <Button
+                variant="success"
+                leftIcon={<TbPlayerPlay />}
+                onClick={() => {
+                  botsService.runService('bot.start', { botId: activeBot._id });
+                }}
+              >
                 Start
               </Button>
             </ButtonGroup>
@@ -29,8 +39,8 @@ function HomePage() {
         }
       />
 
-      <Container maxW="full" py={4}>
-        <SimpleGrid spacing={4} columns={{ base: 1, lg: 2, xl: 3 }} mt={2}>
+      <Container maxW="full" p={4}>
+        <SimpleGrid spacing={4} columns={{ base: 1, lg: 2, xl: 3 }}>
           <StatsCard
             title="Status"
             value={'OK'}

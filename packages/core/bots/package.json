@@ -18,7 +18,8 @@
     "name": "bots",
     "description": "Bot APIs for BotMate ",
     "required": true,
-    "kind": "plugin"
+    "kind": "plugin",
+    "core": true
   },
   "dependencies": {
     "@botmate/schemas": "workspace:^1.0.0",

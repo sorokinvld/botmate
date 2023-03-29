@@ -14,7 +14,7 @@ function SettingsGeneralPage() {
   const { colorMode, setColorMode } = useColorMode();
 
   return (
-    <Container maxW="3xl" py={6}>
+    <Container maxW="4xl" py={6}>
       <HStack>
         <Box>
           <Heading size="sm">Theme Prefrence</Heading>

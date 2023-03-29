@@ -29,6 +29,14 @@ const services = {
         throw new Error(e.message);
       }
     },
+    start: async ({ botId }) => {
+      const bot = await Bot.findOne({
+        _id: botId,
+      });
+      if (!bot) return;
+
+      await botmate.service(`plugin::${bot.platform}.bot`).start({ bot });
+    },
   }),
 };
 

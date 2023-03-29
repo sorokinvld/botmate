@@ -2,6 +2,13 @@ import { Bot } from 'grammy';
 
 const services = {
   bot: ({ botmate }: { botmate }) => ({
+    start: ({ bot: botData }) => {
+      const bot = new Bot(botData.secrets.token);
+      bot.command('start', (ctx) => {
+        ctx.reply('I am working!!');
+      });
+      bot.start();
+    },
     create: async ({ token }) => {
       try {
         const bot = new Bot(token);

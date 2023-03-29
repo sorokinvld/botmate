@@ -1,0 +1,14 @@
+{
+  "name": "@botmate/scripts",
+  "botmate": {
+    "displayName": "Scripts APIs",
+    "name": "scripts",
+    "description": "Scripts APIs for BotMate ",
+    "required": true,
+    "kind": "plugin",
+    "core": true
+  },
+  "dependencies": {
+    "mongoose": "^7.0.3"
+  }
+}

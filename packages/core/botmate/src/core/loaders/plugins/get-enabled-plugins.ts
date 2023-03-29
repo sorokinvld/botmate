@@ -8,7 +8,7 @@ import { isKebabCase } from '@botmate/utils/lib/string-formatting';
 import getUserPluginsConfig from './get-user-plugins-config';
 
 const isBotMatePlugin = (info: string) => get('botmate.kind', info) === 'plugin';
-const INTERNAL_PLUGINS = ['@botmate/bots'];
+const INTERNAL_PLUGINS = ['@botmate/bots', '@botmate/scripts'];
 
 const validatePluginName = (pluginName: string) => {
   if (!isKebabCase(pluginName)) {
