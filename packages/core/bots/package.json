@@ -19,5 +19,9 @@
     "description": "Bot APIs for BotMate ",
     "required": true,
     "kind": "plugin"
+  },
+  "dependencies": {
+    "@botmate/schemas": "workspace:^1.0.0",
+    "mongoose": "^7.0.3"
   }
 }

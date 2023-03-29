@@ -1,6 +1,3 @@
-import { BotMate } from '@botmate/core/lib/BotMate';
-import { createComposers } from './composers';
+import '@botmate/core';
 
-export default ({ botmate }: { botmate: BotMate }) => {
-  botmate.container.get('hooks').set('telegram::composers', createComposers());
-};
+export default ({ botmate }) => {};

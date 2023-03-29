@@ -60,7 +60,6 @@
     "react-hook-form": "^7.43.8",
     "react-hot-loader": "^4.13.1",
     "react-icons": "^4.8.0",
-    "react-query": "^3.39.3",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.9.0",
     "speed-measure-webpack-plugin": "^1.5.0",

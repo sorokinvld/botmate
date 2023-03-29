@@ -55,6 +55,10 @@ const theme = extendTheme({
         default: 'white',
         _dark: '#191A23',
       },
+      logo: {
+        default: 'brand.400',
+        _dark: 'brand.300',
+      },
       primary: {
         default: 'brand.500',
         _dark: 'brand.400',

@@ -1,5 +1,6 @@
-export * from './hooks/useBotMateApp';
 export * from './providers/BotMateApp';
-
-export * from './hooks/useBots';
 export * from './providers/bots';
+
+export * from './hooks/useBotMateApp';
+export * from './hooks/useService';
+export * from './hooks/useBots';

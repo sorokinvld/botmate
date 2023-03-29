@@ -2,6 +2,11 @@ import { Schema } from 'mongoose';
 
 export const BotSchema = new Schema(
   {
+    id: {
+      type: String,
+      require: true,
+      unique: true,
+    },
     name: {
       type: String,
       require: true,

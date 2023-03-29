@@ -25,11 +25,13 @@ const servicesRegistry = (botmate: BotMate.BotMateInstance) => {
      * Returns the instance of a service. Instantiate the service if not already done
      */
     get(uid: string): Service {
+      console.log('uid', uid);
       if (instantiatedServices[uid]) {
         return instantiatedServices[uid];
       }
 
       const service = services[uid];
+      console.log('service', service);
       if (service) {
         instantiatedServices[uid] = typeof service === 'function' ? service({ botmate }) : service;
         return instantiatedServices[uid];
