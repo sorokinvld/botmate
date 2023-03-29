@@ -12,15 +12,15 @@ type AppHeaderProps = {
 
 export const AppHeader = ({ actions, title }: AppHeaderProps) => {
   const menu = useMenu();
-  const isPhone = useBreakpointValue({
-    base: true,
-    md: false,
+  const isDesktop = useBreakpointValue({
+    base: false,
+    md: true,
   });
 
   return (
     <Stack px={4} bg="surface" borderBottomWidth="1px" position="sticky">
       <HStack h="70px" spacing={4}>
-        {isPhone && (
+        {!isDesktop && (
           <Box
             cursor="pointer"
             onClick={() => {
