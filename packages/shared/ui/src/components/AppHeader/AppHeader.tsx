@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Heading, HStack, Stack, useBreakpointValue } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Flex, Heading, Stack } from '@chakra-ui/react';
 import { TbMenu2 } from 'react-icons/tb';
 import { useMenu } from '../../hooks/useMenu';
 
@@ -12,27 +11,25 @@ type AppHeaderProps = {
 
 export const AppHeader = ({ actions, title }: AppHeaderProps) => {
   const menu = useMenu();
-  const isDesktop = useBreakpointValue({
-    base: false,
-    md: true,
-  });
 
   return (
     <Stack px={4} bg="surface" borderBottomWidth="1px" position="sticky">
-      <HStack h="70px" spacing={4}>
-        {!isDesktop && (
-          <Box
-            cursor="pointer"
-            onClick={() => {
-              menu.setOpen(true);
-            }}
-          >
-            <TbMenu2 size={26} />
-          </Box>
-        )}
+      <Flex h="70px" gap={4} alignItems="center">
+        <Box
+          cursor="pointer"
+          onClick={() => {
+            menu.setOpen(true);
+          }}
+          display={{
+            base: 'block',
+            md: 'none',
+          }}
+        >
+          <TbMenu2 size={26} />
+        </Box>
         <Heading size="md">{title}</Heading>
         {actions}
-      </HStack>
+      </Flex>
     </Stack>
   );
 };
