@@ -52,7 +52,7 @@ function CreateScriptPage() {
       <Container maxW="7xl" py={4}>
         <SimpleGrid columns={10}>
           <GridItem colSpan={{ base: 10 }}>
-            <Box bg="surface" rounded="lg">
+            <Box bg="surface" rounded="lg" borderWidth="1px">
               <HStack p={4}>
                 <Input
                   autoFocus
