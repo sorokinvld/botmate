@@ -1,6 +1,7 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { Input } from './theme/Input';
 import { Button } from './theme/Button';
+import { Menu } from './theme/Menu';
 
 // TODO: Refactor
 
@@ -14,6 +15,7 @@ const theme = extendTheme({
   components: {
     Input,
     Button,
+    Menu,
   },
   fonts: {
     heading: 'Ubuntu',

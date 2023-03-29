@@ -16,20 +16,7 @@ type Props = {
 function Providers({ menu, plugins, children, platforms }: Props) {
   return (
     <BotMateAppProvider apiBaseUrl={BASE_URL} menu={menu} plugins={plugins} platforms={platforms}>
-      <BotsProvider
-        bots={[
-          {
-            _id: '1',
-            name: 'Bot 1',
-            platform: 'facebook',
-            secrets: {},
-            config: {},
-            status: 'active',
-            updatedAt: new Date().toString(),
-            createdAt: new Date().toString(),
-          },
-        ]}
-      >
+      <BotsProvider>
         <BotMateUIProvider>{children}</BotMateUIProvider>
       </BotsProvider>
     </BotMateAppProvider>

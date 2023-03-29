@@ -16,7 +16,7 @@ import { useBotMateApp, useService } from '@botmate/helper-plugin';
 
 function SetupPage() {
   const form = useForm();
-  const service = useService();
+  const service = useService('bots');
   const { platforms } = useBotMateApp();
   const keys = useMemo(() => Object.keys(platforms), [platforms]);
   const [activePlatform, setActivePlatform] = useState(keys[0]);
@@ -28,8 +28,11 @@ function SetupPage() {
       secrets[field.name] = data[field.name];
     });
 
-    service.runService('bots', `bot.create`, { platform: activePlatform, secrets }).then((data) => {
-      console.log('data', data);
+    service.runService(`bot.create`, { platform: activePlatform, secrets }).then((data) => {
+      // TODO: Better error handling
+      if (data.error) {
+        alert(data.error);
+      } else window.location.href = '/';
     });
   };
 
@@ -79,7 +82,7 @@ function SetupPage() {
               })}
             </Stack>
 
-            <Button type="submit" variant="brand" mt={4}>
+            <Button isLoading={service.loading} type="submit" variant="brand" mt={4}>
               Continue
             </Button>
           </Box>

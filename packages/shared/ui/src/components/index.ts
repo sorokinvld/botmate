@@ -8,3 +8,4 @@ export * from './CodeEditor';
 export * from './AppMenuItem';
 
 export * from './RadioButton';
+export * from './Loader';

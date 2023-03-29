@@ -1,5 +1,6 @@
 export interface IBot {
   _id: string;
+  id: string;
   name: string;
   secrets: object;
   config: object;

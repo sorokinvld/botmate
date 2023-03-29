@@ -8,7 +8,7 @@ const services = {
         await bot.init();
 
         return {
-          id: bot.botInfo.id,
+          id: bot.botInfo.id.toString(),
           name: bot.botInfo.first_name,
           platform: 'telegram',
           secrets: {

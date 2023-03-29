@@ -1,5 +1,5 @@
 import React from 'react';
-import { botMateAppContext } from '../../contexts/BotMateApp';
+import { botMateAppContext } from '../../contexts/botMateApp';
 import { MenuLink, Platform } from '@botmate/types/admin';
 
 export type BotMateAppProviderProps = {
