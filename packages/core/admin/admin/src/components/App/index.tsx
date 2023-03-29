@@ -13,6 +13,8 @@ import {
   Box,
   Stack,
   BotMateLogo,
+  useBreakpointValue,
+  PlacementWithLogical,
 } from '@botmate/ui';
 import { IBot } from '@botmate/types/server';
 import { Route, Routes } from 'react-router-dom';
@@ -32,6 +34,10 @@ type MenuHeaderProps = {
 };
 const MenuHeader = ({ bots }: MenuHeaderProps) => {
   const { activeBot, setActiveBot } = useBots();
+  const position = useBreakpointValue({
+    base: 'bottom',
+    md: 'right',
+  });
 
   return (
     <HStack py={6} px={4}>
@@ -40,7 +46,7 @@ const MenuHeader = ({ bots }: MenuHeaderProps) => {
       </Box>
 
       <Spacer />
-      <Menu placement="right">
+      <Menu placement={position as PlacementWithLogical}>
         <MenuButton as={IconButton} aria-label="Options" icon={<TbMenu2 />} variant="outline" />
         <MenuList userSelect="none">
           <Stack spacing={2}>
