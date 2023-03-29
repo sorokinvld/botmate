@@ -40,7 +40,7 @@ const MenuHeader = ({ bots }: MenuHeaderProps) => {
   });
 
   return (
-    <HStack py={6} px={4}>
+    <HStack py={4} px={4}>
       <Box bg="brand.400" p={2} rounded="md">
         <BotMateLogo color="white" height="25px" width="25px" />
       </Box>
@@ -48,7 +48,13 @@ const MenuHeader = ({ bots }: MenuHeaderProps) => {
       <Spacer />
       <Menu placement={position as PlacementWithLogical}>
         <MenuButton as={IconButton} aria-label="Options" icon={<TbMenu2 />} variant="outline" />
-        <MenuList userSelect="none">
+        <MenuList
+          userSelect="none"
+          shadow="lg"
+          _dark={{
+            shadow: 'dark-lg',
+          }}
+        >
           <Stack spacing={2}>
             {bots.map((bot) => {
               const isActive = activeBot?.id === bot.id;
@@ -72,7 +78,7 @@ const MenuHeader = ({ bots }: MenuHeaderProps) => {
               );
             })}
           </Stack>
-          <MenuDivider opacity={0.2} />
+          <MenuDivider opacity={0.1} />
           <Box px={2}>
             <a href="/setup">
               <Button variant="brand" size="xs">
