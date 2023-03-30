@@ -1,5 +1,12 @@
 # @botmate/core
 
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies
+  - @botmate/admin@0.0.9
+
 ## 0.0.15
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @botmate/admin
 
+## 0.0.9
+
+### Patch Changes
+
+- include botmate-server.js file
+
 ## 0.0.8
 
 ### Patch Changes
