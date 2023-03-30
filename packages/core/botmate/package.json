@@ -1,6 +1,9 @@
 {
   "name": "@botmate/core",
   "version": "0.0.1-prerelease.24",
+  "files": [
+    "lib"
+  ],
   "bin": {
     "botmate": "./lib/bin.js"
   },

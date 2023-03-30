@@ -2,6 +2,9 @@
   "name": "@botmate/admin",
   "version": "0.0.1-prerelease.24",
   "files": [
+    "lib"
+  ],
+  "files": [
     "lib",
     "admin"
   ],

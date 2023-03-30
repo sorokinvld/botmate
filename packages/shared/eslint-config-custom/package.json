@@ -1,6 +1,9 @@
 {
   "name": "@botmate/eslint-config",
   "version": "0.0.1-prerelease.24",
+  "files": [
+    "lib"
+  ],
   "main": "index.js",
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",

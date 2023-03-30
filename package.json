@@ -1,6 +1,9 @@
 {
   "name": "botmate",
   "version": "0.0.1-prerelease.24",
+  "files": [
+    "lib"
+  ],
   "description": "",
   "main": "index.js",
   "scripts": {

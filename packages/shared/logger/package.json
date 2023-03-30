@@ -1,13 +1,13 @@
 {
   "name": "@botmate/logger",
   "version": "0.0.1-prerelease.24",
+  "files": [
+    "lib"
+  ],
   "description": "BotMate's logger",
   "homepage": "https://botmate.app",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "./dist"
-  ],
   "scripts": {
     "build": "tsc",
     "build:ts": "tsc",
