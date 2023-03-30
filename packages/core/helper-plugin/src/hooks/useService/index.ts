@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { useBotMateApp } from '../useBotMateApp';
 
 export const useService = (pluginName: string) => {
   const [loading, setLoading] = useState(false);
-  const { apiBaseUrl } = useBotMateApp();
 
   return {
     loading,
     runService: async (service, payload?) => {
       setLoading(true);
-      const data = await fetch(apiBaseUrl + '/plugins/run-service', {
+      const apiBaseUrl = process.env.BACKEND;
+      const data = await fetch(apiBaseUrl + '/api/plugins/run-service', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

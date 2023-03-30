@@ -1,6 +1,10 @@
 {
   "name": "@botmate/admin",
   "version": "0.0.1-prerelease.24",
+  "files": [
+    "lib",
+    "admin"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

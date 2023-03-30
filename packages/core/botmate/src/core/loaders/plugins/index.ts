@@ -72,7 +72,7 @@ const loadPlugins = async (botmate: BotMate.BotMateInstance) => {
     let serverEntrypointPath;
 
     try {
-      serverEntrypointPath = join(enabledPlugin.pathToPlugin, 'botmate-server.js');
+      serverEntrypointPath = join(enabledPlugin.pathToPlugin, 'lib/index.js');
     } catch (e) {
       throw new Error(
         `Error loading the plugin ${pluginName} because ${pluginName} is not installed. Please either install the plugin or remove it's configuration.`
@@ -89,7 +89,6 @@ const loadPlugins = async (botmate: BotMate.BotMateInstance) => {
   }
 
   // TODO: validate plugin format
-  await applyUserConfig(plugins);
   await applyUserExtension(plugins);
 
   for (const pluginName of Object.keys(plugins)) {
