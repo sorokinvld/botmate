@@ -1,8 +1,9 @@
 {
   "name": "@botmate/typescript-utils",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "files": [
-    "lib"
+    "lib",
+    "tsconfigs"
   ],
   "description": "Typescript support for BotMate",
   "keywords": [],

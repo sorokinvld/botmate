@@ -71,7 +71,7 @@ async function createCacheDir({ appDir, plugins }) {
   const pluginsWithFront = Object.keys(plugins)
     .filter((pluginName) => {
       const pluginInfo = plugins[pluginName];
-      return fs.existsSync(path.resolve(pluginInfo.pathToPlugin, 'botmate-admin.js'));
+      return fs.existsSync(path.resolve(pluginInfo.pathToPlugin, 'admin', 'src'));
     })
     .map((name) => ({ name, ...plugins[name] }));
 

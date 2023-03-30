@@ -1,15 +1,12 @@
 {
   "name": "@botmate/database",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "files": [
     "lib"
   ],
   "description": "BotMate's database layer",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "directories": {
-    "dist": "./dist"
-  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "build": "tsc -p ."
   },

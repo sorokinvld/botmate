@@ -13,3 +13,4 @@ admin/src/plugins-dev.ts
 admin/src/plugins.ts
 
 lib/
+plugins.ts

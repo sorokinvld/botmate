@@ -1,21 +1,21 @@
 {
-	"compilerOptions": {
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"lib": ["ES2016", "DOM"],
-		"target": "ES2016",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ES2016", "DOM"],
+    "target": "ES2016",
 
-		"jsx": "react",
-		"sourceMap": true,
-		"declaration": true,
-		"declarationDir": "dist",
+    "jsx": "react",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "lib",
 
-		"allowJs": true,
-		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
 
-		"outDir": "lib"
-	},
-	"include": ["src"]
+    "outDir": "lib"
+  },
+  "include": ["src"]
 }

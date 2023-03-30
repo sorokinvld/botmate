@@ -1,8 +1,9 @@
 {
   "name": "@botmate/plugin.telegram",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "files": [
-    "lib"
+    "lib",
+    "admin"
   ],
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

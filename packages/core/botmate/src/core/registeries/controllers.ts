@@ -69,6 +69,8 @@ const controllersRegistry = () => {
      * Registers a map of controllers for a specific namespace
      */
     add(namespace: string, newControllers: { [key: string]: Controller | ControllerFactory }) {
+      if (!newControllers) return;
+
       for (const controllerName of Object.keys(newControllers)) {
         const controller = newControllers[controllerName];
         const uid = addNamespace(controllerName, namespace);
