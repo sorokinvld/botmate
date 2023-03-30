@@ -1,0 +1,13 @@
+{
+  "name": "botmate",
+  "private": true,
+  "scripts": {
+    "dev": "botmate develop",
+    "build": "botmate build",
+    "start": "botmate start"
+  },
+  "dependencies": {
+    "@botmate/core": "latest",
+    "@botmate/plugin.telegram": "latest"
+  }
+}
