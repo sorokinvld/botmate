@@ -1,6 +1,8 @@
 # BotMate
 > Streamline your bot development with BotMate. Highly extendible with plugin system. Multiple platform support including Telegram and Discord.
 
+[Telegram Group](https://t.me/chatbotmate)
+
 ⚠️ **Note**: This project is still under active development. Feel free to contribute to it.
 
 
