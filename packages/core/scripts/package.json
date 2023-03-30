@@ -1,5 +1,6 @@
 {
   "name": "@botmate/scripts",
+  "version": "0.0.1-prerelease.24",
   "botmate": {
     "displayName": "Scripts APIs",
     "name": "scripts",

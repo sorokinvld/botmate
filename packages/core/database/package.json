@@ -1,6 +1,6 @@
 {
   "name": "@botmate/database",
-  "version": "0.0.1",
+  "version": "0.0.1-prerelease.24",
   "description": "BotMate's database layer",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

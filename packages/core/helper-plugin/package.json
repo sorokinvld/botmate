@@ -1,5 +1,6 @@
 {
   "name": "@botmate/helper-plugin",
+  "version": "0.0.1-prerelease.24",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
