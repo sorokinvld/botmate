@@ -1,7 +1,11 @@
 import React from 'react';
 import { Platform } from '@botmate/types/admin';
-import { BotMateAppProvider, BotsProvider } from '@botmate/helper-plugin';
-import { BotMateUIProvider } from '@botmate/ui';
+import { BotMateAppProvider, BotsProvider, useAuth } from '@botmate/helper-plugin';
+import { Route, Routes } from 'react-router-dom';
+import loadable from '@loadable/component';
+
+const LoginPage = loadable(() => import('../../pages/Login'));
+const RegisterPage = loadable(() => import('../../pages/Register'));
 
 const BASE_URL = import.meta.env.VITE_APP_API_URL;
 
@@ -14,11 +18,25 @@ type Props = {
   children: React.ReactNode;
 };
 function Providers({ menu, plugins, children, platforms }: Props) {
+  const { isLoading, user } = useAuth();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return (
+      <Routes>
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<LoginPage />} />
+      </Routes>
+    );
+  }
+
   return (
     <BotMateAppProvider apiBaseUrl={BASE_URL} menu={menu} plugins={plugins} platforms={platforms}>
-      <BotsProvider>
-        <BotMateUIProvider>{children}</BotMateUIProvider>
-      </BotsProvider>
+      <BotsProvider>{children}</BotsProvider>
     </BotMateAppProvider>
   );
 }

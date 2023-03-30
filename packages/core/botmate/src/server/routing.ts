@@ -2,7 +2,6 @@
 
 import { Router } from 'express';
 import _ from 'lodash';
-import { has } from 'lodash/fp';
 import { yup } from '@botmate/utils';
 
 import createEndpointComposer from './compose-endpoint';
@@ -34,7 +33,7 @@ const routeSchema = yup.object({
       return yup.array().required();
     }
 
-    return yup.mixed().isFunction().required();
+    return yup.mixed().required();
   }),
   config: yup
     .object({
@@ -85,7 +84,6 @@ const createRouteManager = (botmate, opts: any) => {
       routes.forEach((route) => createRoute(route, router));
     } else if (routes.routes) {
       routes.routes.forEach((route) => {
-        // const hasPrefix = has('prefix', route.config);
         createRoute(route, router);
       });
       return router;

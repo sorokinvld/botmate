@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react-swc';
 import { isUsingTypeScript } from '@botmate/typescript-utils';
 import WebpackDevServer from 'webpack-dev-server';
 import { getAlias } from './alias';
+import EnvironmentPlugin from 'vite-plugin-environment';
 
 import { shouldBuildAdmin, createCacheDir, getCustomWebpackConfig, watchAdminFiles } from './utils';
 
@@ -33,7 +34,13 @@ const build = async ({ appDir, buildDestDir, env, forceBuild, optimize, options,
     build: {
       outDir: path.resolve(buildDestDir, 'build'),
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      EnvironmentPlugin({
+        NODE_ENV: 'production',
+        BACKEND: options.backend,
+      }),
+    ],
     resolve: {
       alias,
     },

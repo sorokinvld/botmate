@@ -64,7 +64,7 @@ function createEndpointComposer(botmate) {
       // const middlewares = resolveRouteMiddlewares(route, botmate);
       // const policies = resolvePolicies(route);
 
-      const action = getAction(route, botmate);
+      const action = getAction(route, botmate); // getAction gets controller
 
       // const routeHandler = compose([
       //   createRouteInfoMiddleware(route),
@@ -78,8 +78,10 @@ function createEndpointComposer(botmate) {
 
       // TODO: Add authentication
 
+      // router.get('/api', (req, res) => res.json({}));
       router[method](path, action);
     } catch (error) {
+      console.log('error', error);
       error.message = `Error creating endpoint ${route.method} ${route.path}: ${error.message}`;
       throw error;
     }
@@ -114,22 +116,22 @@ const extractHandlerParts = (name) => {
 };
 
 const getAction = (route, botmate) => {
-  // const { handler, info = {} } = route;
-  // const { pluginName, apiName, type } = info;
-  // if (Array.isArray(handler) || typeof handler === 'function') {
-  //   return handler;
-  // }
-  // const { controllerName, actionName } = extractHandlerParts(trim(handler));
-  // const controller = getController(controllerName, { pluginName, apiName }, botmate);
-  // if (typeof controller[actionName] !== 'function') {
-  //   throw new Error(`Handler not found "${handler}"`);
-  // }
-  // if (has(Symbol.for('__type__'), controller[actionName])) {
-  //   controller[actionName][Symbol.for('__type__')].push(type);
-  // } else {
-  //   controller[actionName][Symbol.for('__type__')] = [type];
-  // }
-  // return controller[actionName].bind(controller);
+  const { handler, info = {} } = route;
+  const { pluginName, apiName, type } = info;
+  if (Array.isArray(handler) || typeof handler === 'function') {
+    return handler;
+  }
+  const { controllerName, actionName } = extractHandlerParts(trim(handler));
+  const controller = getController(controllerName, { pluginName, apiName }, botmate);
+  if (typeof controller[actionName] !== 'function') {
+    throw new Error(`Handler not found "${handler}"`);
+  }
+  if (has(Symbol.for('__type__'), controller[actionName])) {
+    controller[actionName][Symbol.for('__type__')].push(type);
+  } else {
+    controller[actionName][Symbol.for('__type__')] = [type];
+  }
+  return controller[actionName].bind(controller);
 };
 
 export default createEndpointComposer;

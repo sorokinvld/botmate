@@ -31,16 +31,16 @@ function registerAllRoutes(botmate: BotMate.BotMateInstance) {
 const registerAdminRoutes = (botmate) => {
   const generateRouteScope = createRouteScopeGenerator(`admin::`);
 
-  // botmate.admin.routes.forEach((route) => {
-  //   generateRouteScope(route);
-  //   route.info = { pluginName: 'admin' };
-  // });
+  botmate.admin.routes.forEach((route) => {
+    generateRouteScope(route);
+    route.info = { pluginName: 'admin' };
+  });
 
-  // botmate.server.routes({
-  //   type: 'admin',
-  //   prefix: '/admin',
-  //   routes: botmate.admin.routes,
-  // });
+  botmate.server.routes({
+    type: 'admin',
+    prefix: '/admin',
+    routes: botmate.admin.routes,
+  });
 };
 
 /**

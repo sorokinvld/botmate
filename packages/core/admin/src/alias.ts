@@ -13,6 +13,7 @@ const aliasExactMatch = [
   'react-icons',
   '@loadable/component',
   'react-hook-form',
+  'moment',
 ];
 
 const alias = {

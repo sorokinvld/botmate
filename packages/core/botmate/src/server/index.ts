@@ -1,32 +1,37 @@
+import path from 'path';
 import { Router } from 'express';
-import { createAdminAPI } from './admin-api';
 import { createExpressApp } from './express';
 import createPluginApi from './plugin-api';
-import path from 'path';
+import { createRouteManager } from './routing';
+import registerAllRoutes from './register-routes';
 
 const createServer = (botmate: BotMate.BotMateInstance) => {
   const app = createExpressApp();
 
-  const router = Router();
-
-  const apis = {
-    admin: createAdminAPI(botmate),
-  };
+  const apiRouter = Router();
+  const routeManager = createRouteManager(botmate, {});
 
   return {
     app,
-    router,
+    apiRouter,
     routes(routes) {
+      routeManager.addRoutes(routes, apiRouter);
       return this;
     },
     initRouting() {
-      app.get('*', (req, res) => {
-        res.sendFile(path.join(process.cwd(), 'dist', 'build', 'index.html'));
-      });
+      registerAllRoutes(botmate);
     },
     listen(...args) {
       const pluginApi = createPluginApi(botmate);
+
+      app.use('/api', apiRouter);
       app.use('/api/plugins', pluginApi);
+
+      const buildDir = path.resolve(botmate.dirs.dist.root, 'build');
+
+      app.get('*', (req, res) => {
+        res.sendFile(path.join(buildDir, 'index.html'));
+      });
 
       return app.listen(...args);
     },

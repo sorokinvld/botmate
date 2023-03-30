@@ -7,33 +7,27 @@ import { createRouteManager } from './routing';
 const createAPI = (botmate, opts: any) => {
   const { prefix, type } = opts;
 
-  const api = Router();
-
-  api.get('/api', (req, res) => {
-    res.json({
-      x: true,
-    });
-  });
+  const apiRouter = Router();
 
   const routeManager = createRouteManager(botmate, { type });
 
   return {
     listRoutes() {
-      return [...api.stack];
+      return [...apiRouter.stack];
     },
 
     use(fn) {
-      api.use(fn);
+      apiRouter.use(fn);
       return this;
     },
 
     routes(routes) {
-      routeManager.addRoutes(routes, api);
+      routeManager.addRoutes(routes, apiRouter);
       return this;
     },
 
     mount(router: Router) {
-      router.use(api);
+      router.use(apiRouter);
       return this;
     },
   };
