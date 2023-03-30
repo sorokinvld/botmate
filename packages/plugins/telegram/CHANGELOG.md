@@ -1,5 +1,14 @@
 # @botmate/plugin.telegram
 
+## 0.0.7
+
+### Patch Changes
+
+- latest build
+- Updated dependencies
+  - @botmate/ui@0.0.7
+  - @botmate/utils@0.0.3
+
 ## 0.0.6
 
 ### Patch Changes

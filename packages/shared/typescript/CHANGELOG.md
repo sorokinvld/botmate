@@ -1,5 +1,11 @@
 # @botmate/typescript-utils
 
+## 0.0.7
+
+### Patch Changes
+
+- latest build
+
 ## 0.0.6
 
 ### Patch Changes

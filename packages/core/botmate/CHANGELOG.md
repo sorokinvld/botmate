@@ -1,5 +1,20 @@
 # @botmate/core
 
+## 0.0.17
+
+### Patch Changes
+
+- latest build
+- Updated dependencies
+  - @botmate/admin@0.0.10
+  - @botmate/bots@0.0.3
+  - @botmate/database@0.0.8
+  - @botmate/scripts@0.0.3
+  - @botmate/plugin.telegram@0.0.7
+  - @botmate/logger@0.0.4
+  - @botmate/typescript-utils@0.0.7
+  - @botmate/utils@0.0.3
+
 ## 0.0.16
 
 ### Patch Changes

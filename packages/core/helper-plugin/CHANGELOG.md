@@ -1,5 +1,11 @@
 # @botmate/helper-plugin
 
+## 0.0.6
+
+### Patch Changes
+
+- latest build
+
 ## 0.0.5
 
 ### Patch Changes

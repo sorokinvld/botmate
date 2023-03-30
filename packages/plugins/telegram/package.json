@@ -1,6 +1,6 @@
 {
   "name": "@botmate/plugin.telegram",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "files": [
     "lib",
     "admin"

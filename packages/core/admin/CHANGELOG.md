@@ -1,5 +1,18 @@
 # @botmate/admin
 
+## 0.0.10
+
+### Patch Changes
+
+- latest build
+- Updated dependencies
+  - @botmate/helper-plugin@0.0.6
+  - @botmate/eslint-config@0.0.3
+  - @botmate/types@0.0.3
+  - @botmate/typescript-utils@0.0.7
+  - @botmate/ui@0.0.7
+  - @botmate/utils@0.0.3
+
 ## 0.0.9
 
 ### Patch Changes
