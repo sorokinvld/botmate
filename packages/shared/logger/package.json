@@ -1,18 +1,18 @@
 {
   "name": "@botmate/logger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "files": [
     "lib"
   ],
   "description": "BotMate's logger",
   "homepage": "https://botmate.app",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "build:ts": "tsc",
     "watch": "tsc -w --preserveWatchOutput",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./lib",
     "prepublishOnly": "yarn clean && yarn build",
     "lint": "eslint ."
   },
