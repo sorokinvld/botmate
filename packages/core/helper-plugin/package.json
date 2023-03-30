@@ -1,6 +1,6 @@
 {
   "name": "@botmate/helper-plugin",
-  "version": "0.0.1-prerelease.24",
+  "version": "0.0.1",
   "files": [
     "lib"
   ],
