@@ -15,7 +15,6 @@
     "@botmate/bots": "workspace:^0.0.1",
     "@botmate/database": "workspace:^0.0.1",
     "@botmate/plugin.telegram": "workspace:^1.0.0",
-    "@botmate/schemas": "workspace:^1.0.0",
     "@botmate/scripts": "workspace:*",
     "@botmate/typescript-utils": "workspace:^1.0.0",
     "@botmate/utils": "workspace:*",

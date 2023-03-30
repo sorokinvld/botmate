@@ -1,10 +1,9 @@
 {
-	"name": "@botmate/types",
-	"dependencies": {
-		"@types/react": "^18.0.28"
-	},
-	"devDependencies": {
-		"@botmate/schemas": "workspace:^1.0.0",
-		"@types/loadable__component": "^5.13.4"
-	}
+  "name": "@botmate/types",
+  "dependencies": {
+    "@types/react": "^18.0.28"
+  },
+  "devDependencies": {
+    "@types/loadable__component": "^5.13.4"
+  }
 }
