@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -11,7 +12,8 @@ const createExpressApp = () => {
   app.use(cors());
   app.use(express.json());
   app.use(express.static('public'));
-  app.use(express.static('dist/build'));
+  const buildDir = path.resolve(botmate.dirs.dist.root, 'build');
+  app.use(express.static(buildDir));
 
   return app;
 };

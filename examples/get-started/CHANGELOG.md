@@ -5,6 +5,20 @@
 ### Patch Changes
 
 - Updated dependencies
+  - @botmate/core@0.0.19
+
+## null
+
+### Patch Changes
+
+- Updated dependencies
+  - @botmate/core@0.0.18
+
+## null
+
+### Patch Changes
+
+- Updated dependencies
   - @botmate/core@0.0.17
 
 ## null

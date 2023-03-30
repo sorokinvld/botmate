@@ -1,5 +1,17 @@
 # @botmate/core
 
+## 0.0.19
+
+### Patch Changes
+
+- add server config
+
+## 0.0.18
+
+### Patch Changes
+
+- fix build path
+
 ## 0.0.17
 
 ### Patch Changes
