@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@botmate/ui": "workspace:^1.0.0",
+    "@botmate/utils": "workspace:*",
     "grammy": "^1.15.3",
     "mongoose": "^7.0.3",
     "react": "^18.2.0"

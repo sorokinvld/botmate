@@ -3,6 +3,7 @@ import { Platform } from '@botmate/types/admin';
 import { BotMateAppProvider, BotsProvider, useAuth } from '@botmate/helper-plugin';
 import { Route, Routes } from 'react-router-dom';
 import loadable from '@loadable/component';
+import { Center, Loader } from '@botmate/ui';
 
 const LoginPage = loadable(() => import('../../pages/Login'));
 const RegisterPage = loadable(() => import('../../pages/Register'));
@@ -21,7 +22,11 @@ function Providers({ menu, plugins, children, platforms }: Props) {
   const { isLoading, user } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Center h="100vh">
+        <Loader text="loading user data..." />
+      </Center>
+    );
   }
 
   if (!user) {

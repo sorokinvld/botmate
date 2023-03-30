@@ -5,7 +5,8 @@ export interface IBot {
   secrets: object;
   config: object;
   platform: string;
-  status: string;
+  status: 'active' | 'inactive';
+  errors: any[];
   createdAt: string;
   updatedAt: string;
 }

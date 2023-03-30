@@ -3,6 +3,7 @@ import { isFunction } from 'lodash';
 import { createLogger } from '@botmate/logger';
 import { initDb } from '@botmate/database';
 import mongoose from 'mongoose';
+import EventEmitter2 from 'eventemitter2';
 
 import loadConfiguration from './core/app-configuration';
 import createConfigProvider from './core/registeries/config';
@@ -16,7 +17,6 @@ import * as utils from './utils';
 import * as loaders from './core/loaders';
 import LIFECYCLES from './utils/lifecycles';
 import { createServer } from './server';
-import botsRegistry from './core/registeries/bots';
 import controllersRegistry from './core/registeries/controllers';
 
 const resolveWorkingDirectories = (opts: { appDir?: any; distDir?: any }) => {
@@ -37,6 +37,7 @@ class BotMate {
   admin: any;
   db: typeof mongoose;
   log: ReturnType<typeof createLogger>;
+  eventHub: EventEmitter2;
 
   constructor(opts = {}) {
     const rootDirs = resolveWorkingDirectories(opts);
@@ -51,7 +52,6 @@ class BotMate {
     this.container.register('config', createConfigProvider(appConfig));
     this.container.register('modules', modulesRegistry(this));
     this.container.register('hooks', hooksRegistry());
-    this.container.register('bots', botsRegistry(this));
     this.container.register('services', servicesRegistry(this));
     this.container.register('plugins', pluginsRegistry(this));
     this.container.register('controllers', controllersRegistry());
@@ -61,6 +61,9 @@ class BotMate {
     this.server = createServer(this);
     this.isLoaded = false;
     this.log = createLogger({});
+    this.eventHub = new EventEmitter2({
+      delimiter: '.',
+    });
   }
 
   async bootstrap() {
@@ -119,10 +122,6 @@ class BotMate {
     return this.container.get('bots').get(id);
   }
 
-  async loadBots() {
-    await loaders.loadBots(this);
-  }
-
   async register() {
     const config = this.config.get('database');
     this.db = await initDb(config.url);
@@ -130,7 +129,6 @@ class BotMate {
     await Promise.all([
       //
       this.loadApp(),
-      this.loadBots(),
       this.loadAmin(),
       this.loadPlugins(),
     ]);

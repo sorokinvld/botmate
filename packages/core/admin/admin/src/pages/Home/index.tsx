@@ -1,5 +1,5 @@
 import Chart from 'react-apexcharts';
-import { TbCheck, TbPlayerPlay } from 'react-icons/tb';
+import { TbCheck, TbPlayerPause, TbPlayerPlay } from 'react-icons/tb';
 import {
   AppHeader,
   Box,
@@ -11,10 +11,12 @@ import {
   StatsCard,
 } from '@botmate/ui';
 import { useBots, useService } from '@botmate/helper-plugin';
+import { useState } from 'react';
 
 function HomePage() {
-  const botsService = useService('bots');
   const { activeBot } = useBots();
+  const botsService = useService('bots');
+  const [status, setStatus] = useState(activeBot.status);
 
   return (
     <Box flex={1}>
@@ -26,13 +28,22 @@ function HomePage() {
             <Spacer />
             <ButtonGroup>
               <Button
-                variant="success"
-                leftIcon={<TbPlayerPlay />}
+                variant={status === 'active' ? 'danger' : 'success'}
+                leftIcon={
+                  status === 'active' ? <TbPlayerPause size={16} /> : <TbPlayerPlay size={16} />
+                }
                 onClick={() => {
-                  botsService.runService('bot.start', { botId: activeBot._id });
+                  if (status === 'active') {
+                    botsService.runService('bot.stop', { botId: activeBot._id }).then(() => {
+                      setStatus('inactive');
+                    });
+                  } else
+                    botsService.runService('bot.start', { botId: activeBot._id }).then(() => {
+                      setStatus('active');
+                    });
                 }}
               >
-                Start
+                {status === 'active' ? 'Stop' : 'Start'}
               </Button>
             </ButtonGroup>
           </>
