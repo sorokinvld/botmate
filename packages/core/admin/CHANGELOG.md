@@ -1,5 +1,11 @@
 # @botmate/admin
 
+## 0.0.11
+
+### Patch Changes
+
+- use bcryptjs
+
 ## 0.0.10
 
 ### Patch Changes

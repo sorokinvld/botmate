@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { createDebug } from '@botmate/utils';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const debug = createDebug('botmate:core:admin:services');
