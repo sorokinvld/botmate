@@ -1,5 +1,11 @@
 # @botmate/core
 
+## 0.0.15
+
+### Patch Changes
+
+- fix admin server file
+
 ## 0.0.14
 
 ### Patch Changes

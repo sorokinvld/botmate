@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export default (botmate) => {
-  botmate.admin = require('@botmate/admin/lib/server');
+  botmate.admin = require('@botmate/admin/botmate-server.js');
 
   botmate.container.get('services').add(`admin::`, botmate.admin.services);
   botmate.container.get('controllers').add(`admin::`, botmate.admin.controllers);
