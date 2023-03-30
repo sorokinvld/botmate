@@ -1,5 +1,11 @@
 # @botmate/admin
 
+## 0.0.3
+
+### Patch Changes
+
+- fix dependencies
+
 ## 0.0.2
 
 ### Patch Changes

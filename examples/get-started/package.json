@@ -16,5 +16,6 @@
     "@botmate/typescript-utils": "workspace:*",
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.28"
-  }
+  },
+  "version": null
 }
