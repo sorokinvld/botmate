@@ -10,7 +10,7 @@
   "author": "xencodes",
   "license": "ISC",
   "devDependencies": {
-    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@botmate/typescript-utils": "workspace:*",
     "@types/node": "^18.15.7"
   },
   "botmate": {

@@ -14,7 +14,7 @@
     "kind": "plugin"
   },
   "dependencies": {
-    "@botmate/ui": "workspace:^1.0.0",
+    "@botmate/ui": "workspace:*",
     "@botmate/utils": "workspace:*",
     "grammy": "^1.15.3",
     "mongoose": "^7.0.3",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@botmate/types": "workspace:*",
-    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@botmate/typescript-utils": "workspace:*",
     "@grammyjs/types": "3.0.3",
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.28",

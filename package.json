@@ -13,8 +13,8 @@
   "author": "xencodes",
   "license": "ISC",
   "devDependencies": {
-    "@botmate/core": "workspace:^1.0.0",
-    "@botmate/eslint-config": "workspace:^0.0.1",
+    "@botmate/core": "workspace:*",
+    "@botmate/eslint-config": "workspace:*",
     "@changesets/cli": "^2.26.1",
     "@nrwl/nx-cloud": "latest",
     "@swc/cli": "^0.1.62",

@@ -1,6 +1,6 @@
 {
   "name": "@botmate/logger",
-  "version": "4.8.2",
+  "version": "0.0.1-prerelease.24",
   "description": "BotMate's logger",
   "homepage": "https://botmate.app",
   "main": "./dist/index.js",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "rimraf": "3.0.2",
-    "tsconfig": "workspace:^0.0.0"
+    "tsconfig": "workspace:*"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",

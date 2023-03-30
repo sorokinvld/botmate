@@ -10,11 +10,11 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@botmate/eslint-config": "workspace:^0.0.1",
+    "@botmate/eslint-config": "workspace:*",
     "@botmate/helper-plugin": "workspace:*",
     "@botmate/types": "workspace:*",
-    "@botmate/typescript-utils": "workspace:1.0.0",
-    "@botmate/ui": "workspace:^1.0.0",
+    "@botmate/typescript-utils": "workspace:*",
+    "@botmate/ui": "workspace:*",
     "@botmate/utils": "workspace:*",
     "@chakra-ui/react": "^2.5.3",
     "@emotion/react": "^11.10.6",

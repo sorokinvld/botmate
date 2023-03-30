@@ -12,7 +12,7 @@
     "yup": "1.0.2"
   },
   "devDependencies": {
-    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@botmate/typescript-utils": "workspace:*",
     "@types/debug": "^4.1.7",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.15.7"
