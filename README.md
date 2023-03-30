@@ -10,9 +10,6 @@
 
 **Tech Stack**: React JS + Chakra-UI & Express + MongoDB.
 
-Plugin system is heavily inspired by [Strapi CMS](https://strapi.io/).
-
-
 ### Features
 - 🤖 Build and deploy custom chat bots with ease
 - 🔌 Flexible plugin system allows for easy extension and customization of your bots
@@ -25,6 +22,8 @@ Plugin system is heavily inspired by [Strapi CMS](https://strapi.io/).
 ### Getting Started
 To get started with BotMate, simply clone the repository and follow the setup instructions in the README.
 
+> Plugin system is heavily inspired by [Strapi CMS](https://docs.strapi.io/dev-docs/plugins-development).
+
 ### Contributing
 We welcome contributions from developers of all skill levels! Please see the CONTRIBUTING.md file for guidelines on how to contribute to BotMate.
 
@@ -33,4 +32,6 @@ BotMate is open-source software licensed under the MIT License. See the LICENSE 
 
 ### Contact
 For questions or feedback, please contact the BotMate team at hi@botmate.app. We look forward to hearing from you!
+
+Meanwhile you can also join our [official Telegram group](https://t.me/chatbotmate) for quick discussion.
 
