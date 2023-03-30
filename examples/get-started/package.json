@@ -1,5 +1,6 @@
 {
   "name": "get-started",
+  "private": true,
   "scripts": {
     "dev": "botmate develop",
     "build": "botmate build",

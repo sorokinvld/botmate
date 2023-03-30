@@ -1,9 +1,6 @@
 {
   "name": "@botmate/admin",
-  "version": "0.0.1",
-  "files": [
-    "lib"
-  ],
+  "version": "0.0.2",
   "files": [
     "lib",
     "admin"
