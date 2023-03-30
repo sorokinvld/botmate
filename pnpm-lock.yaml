@@ -296,6 +296,14 @@ importers:
       inquirer: 8.2.5
       plop: 3.1.2
 
+  packages/generators/cli/templates/js:
+    specifiers:
+      '@botmate/core': latest
+      '@botmate/plugin.telegram': latest
+    dependencies:
+      '@botmate/core': link:../../../../core/botmate
+      '@botmate/plugin.telegram': link:../../../../plugins/telegram
+
   packages/plugins/discord:
     specifiers:
       '@botmate/types': workspace:*
@@ -441,7 +449,6 @@ importers:
       '@emotion/styled': ^11.10.6
       '@fontsource/roboto': ^4.5.8
       '@fontsource/ubuntu': ^4.5.11
-      '@monaco-editor/react': ^4.4.6
       '@rollup/plugin-typescript': ^11.0.0
       '@storybook/addon-actions': ^6.5.16
       '@storybook/addon-essentials': ^6.5.16
@@ -476,7 +483,6 @@ importers:
       '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
       '@fontsource/roboto': 4.5.8
       '@fontsource/ubuntu': 4.5.11
-      '@monaco-editor/react': 4.4.6_react@18.2.0
       '@uiw/codemirror-theme-aura': 4.19.11
       '@uiw/react-codemirror': 4.19.11_react@18.2.0
       framer-motion: 10.9.1_react@18.2.0
@@ -4184,26 +4190,6 @@ packages:
       filenamify: 5.1.1
       got: 11.8.6
       os-filter-obj: 2.0.0
-
-  /@monaco-editor/loader/1.3.2:
-    resolution: {integrity: sha512-BTDbpHl3e47r3AAtpfVFTlAi7WXv4UQ/xZmz8atKl4q7epQV5e7+JbigFDViWF71VBi4IIBdcWP57Hj+OWuc9g==}
-    peerDependencies:
-      monaco-editor: '>= 0.21.0 < 1'
-    dependencies:
-      state-local: 1.0.7
-    dev: false
-
-  /@monaco-editor/react/4.4.6_react@18.2.0:
-    resolution: {integrity: sha512-Gr3uz3LYf33wlFE3eRnta4RxP5FSNxiIV9ENn2D2/rN8KgGAD8ecvcITRtsbbyuOuNkwbuHYxfeaz2Vr+CtyFA==}
-    peerDependencies:
-      monaco-editor: '>= 0.25.0 < 1'
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@monaco-editor/loader': 1.3.2
-      prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
 
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -15478,10 +15464,6 @@ packages:
   /stackframe/1.3.4:
     resolution: {integrity: sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==}
     dev: true
-
-  /state-local/1.0.7:
-    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
-    dev: false
 
   /state-toggle/1.0.3:
     resolution: {integrity: sha512-d/5Z4/2iiCnHw6Xzghyhb+GcmF89bxwgXG60wjIiZaxnymbyOmI8Hk4VqHXiVVp6u2ysaskFfXg3ekCj4WNftQ==}

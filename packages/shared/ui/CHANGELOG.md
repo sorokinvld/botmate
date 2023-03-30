@@ -1,5 +1,11 @@
 # @botmate/ui
 
+## 0.0.6
+
+### Patch Changes
+
+- remove monaco-editor
+
 ## 0.0.5
 
 ### Patch Changes
