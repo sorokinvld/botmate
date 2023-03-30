@@ -1,9 +1,20 @@
 {
-	"name": "@botmate/utils",
-	"main": "lib/index.js",
-	"dependencies": {
-		"@sindresorhus/slugify": "1.1.0",
-		"lodash": "^4.17.21",
-		"yup": "1.0.2"
-	}
+  "name": "@botmate/utils",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@sindresorhus/slugify": "1.1.0",
+    "debug": "^4.3.4",
+    "lodash": "^4.17.21",
+    "yup": "1.0.2"
+  },
+  "devDependencies": {
+    "@botmate/typescript-utils": "workspace:^1.0.0",
+    "@types/debug": "^4.1.7",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.15.7"
+  }
 }

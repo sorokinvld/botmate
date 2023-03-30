@@ -1,45 +1,43 @@
-'use strict';
+import _ from 'lodash';
 
-const _ = require('lodash');
-
-function env(key, defaultValue) {
+function env(key: string, defaultValue?: string): string | undefined {
   return _.has(process.env, key) ? process.env[key] : defaultValue;
 }
 
 const utils = {
-  int(key, defaultValue) {
+  int(key: string, defaultValue?: number): number | undefined {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    const value = process.env[key];
+    const value: any = process.env[key];
     return parseInt(value, 10);
   },
 
-  float(key, defaultValue) {
+  float(key: string, defaultValue?: number): number | undefined {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    const value = process.env[key];
+    const value: any = process.env[key];
     return parseFloat(value);
   },
 
-  bool(key, defaultValue) {
+  bool(key: string, defaultValue?: boolean): boolean | undefined {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    const value = process.env[key];
+    const value: any = process.env[key];
     return value === 'true';
   },
 
-  json(key, defaultValue) {
+  json(key: string, defaultValue?: any): any {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    const value = process.env[key];
+    const value: any = process.env[key];
     try {
       return JSON.parse(value);
     } catch (error) {
@@ -47,12 +45,12 @@ const utils = {
     }
   },
 
-  array(key, defaultValue) {
+  array(key: string, defaultValue?: string[]): string[] | undefined {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    let value = process.env[key];
+    let value: any = process.env[key];
 
     if (value.startsWith('[') && value.endsWith(']')) {
       value = value.substring(1, value.length - 1);
@@ -63,12 +61,12 @@ const utils = {
     });
   },
 
-  date(key, defaultValue) {
+  date(key: string, defaultValue?: Date): Date | undefined {
     if (!_.has(process.env, key)) {
       return defaultValue;
     }
 
-    const value = process.env[key];
+    const value: any = process.env[key];
     return new Date(value);
   },
 
@@ -79,7 +77,7 @@ const utils = {
    * @param {string|undefined} defaultValue
    * @returns {string|undefined}
    */
-  oneOf(key, expectedValues, defaultValue) {
+  oneOf(key: string, expectedValues: string[], defaultValue?: string): string | undefined {
     if (!expectedValues) {
       throw new Error(`env.oneOf requires expectedValues`);
     }
@@ -88,11 +86,11 @@ const utils = {
       throw new Error(`env.oneOf requires defaultValue to be included in expectedValues`);
     }
 
-    const rawValue = env(key, defaultValue);
+    const rawValue: any = env(key, defaultValue);
     return expectedValues.includes(rawValue) ? rawValue : defaultValue;
   },
 };
 
 Object.assign(env, utils);
 
-module.exports = env;
+export default env;

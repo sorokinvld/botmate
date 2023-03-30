@@ -1,6 +1,6 @@
 'use strict';
 
-const { isString, isPlainObject } = require('lodash');
+import { isString, isPlainObject } from 'lodash';
 
 const regex = /\$\{[^()]*\}/g;
 const excludeConfigPaths = ['info.scripts'];
@@ -8,7 +8,7 @@ const excludeConfigPaths = ['info.scripts'];
 /**
  * Allow dynamic config values through the native ES6 template string function.
  */
-const templateConfiguration = (obj, configPath = '') => {
+const templateConfiguration = (obj: any, configPath = ''): any => {
   // Allow values which looks like such as an ES6 literal string without parenthesis inside (aka function call).
   // Exclude config with conflicting syntax (e.g. npm scripts).
   return Object.keys(obj).reduce((acc, key) => {
@@ -29,4 +29,4 @@ const templateConfiguration = (obj, configPath = '') => {
   }, {});
 };
 
-module.exports = templateConfiguration;
+export default templateConfiguration;

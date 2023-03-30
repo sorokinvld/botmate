@@ -1,21 +1,29 @@
-'use strict';
+import { get, trim } from 'lodash';
+import { getCommonPath } from './string-formatting';
 
-const _ = require('lodash');
-const { getCommonPath } = require('./string-formatting');
+interface Config {
+  get(key: string): any;
+}
 
-const getConfigUrls = (config, forAdminBuild = false) => {
+interface ConfigUrls {
+  serverUrl: string;
+  adminUrl: string;
+  adminPath: string;
+}
+
+export const getConfigUrls = (config: Config, forAdminBuild = false): ConfigUrls => {
   const serverConfig = config.get('server');
   const adminConfig = config.get('admin');
 
   // Defines serverUrl value
-  let serverUrl = _.get(serverConfig, 'url', '');
-  serverUrl = _.trim(serverUrl, '/ ');
+  let serverUrl = get(serverConfig, 'url', '') as string;
+  serverUrl = trim(serverUrl, '/ ');
   if (typeof serverUrl !== 'string') {
     throw new Error('Invalid server url config. Make sure the url is a string.');
   }
   if (serverUrl.startsWith('http')) {
     try {
-      serverUrl = _.trim(new URL(serverConfig.url).toString(), '/');
+      serverUrl = trim(new URL(serverConfig.url).toString(), '/');
     } catch (e) {
       throw new Error(
         'Invalid server url config. Make sure the url defined in server.js is valid.'
@@ -26,14 +34,14 @@ const getConfigUrls = (config, forAdminBuild = false) => {
   }
 
   // Defines adminUrl value
-  let adminUrl = _.get(adminConfig, 'url', '');
-  adminUrl = _.trim(adminUrl, '/ ');
+  let adminUrl = get(adminConfig, 'url', '') as string;
+  adminUrl = trim(adminUrl, '/ ');
   if (typeof adminUrl !== 'string') {
     throw new Error('Invalid admin url config. Make sure the url is a non-empty string.');
   }
   if (adminUrl.startsWith('http')) {
     try {
-      adminUrl = _.trim(new URL(adminUrl).toString(), '/');
+      adminUrl = trim(new URL(adminUrl).toString(), '/');
     } catch (e) {
       throw new Error('Invalid admin url config. Make sure the url defined in server.js is valid.');
     }
@@ -50,7 +58,7 @@ const getConfigUrls = (config, forAdminBuild = false) => {
     !forAdminBuild
   ) {
     adminPath = adminUrl.replace(getCommonPath(serverUrl, adminUrl), '');
-    adminPath = `/${_.trim(adminPath, '/')}`;
+    adminPath = `/${trim(adminPath, '/')}`;
   } else if (adminUrl.startsWith('http')) {
     adminPath = new URL(adminUrl).pathname;
   }
@@ -62,9 +70,10 @@ const getConfigUrls = (config, forAdminBuild = false) => {
   };
 };
 
-const getAbsoluteUrl =
-  (adminOrServer) =>
-  (config, forAdminBuild = false) => {
+type GetAbsoluteUrlFn = (config: Config, forAdminBuild?: boolean) => string;
+
+const getAbsoluteUrl = (adminOrServer: 'admin' | 'server'): GetAbsoluteUrlFn => {
+  return (config: Config, forAdminBuild = false): string => {
     const { serverUrl, adminUrl } = getConfigUrls(config, forAdminBuild);
     const url = adminOrServer === 'server' ? serverUrl : adminUrl;
 
@@ -80,9 +89,7 @@ const getAbsoluteUrl =
 
     return `http://${hostname}:${config.get('server.port')}${url}`;
   };
-
-module.exports = {
-  getConfigUrls,
-  getAbsoluteAdminUrl: getAbsoluteUrl('admin'),
-  getAbsoluteServerUrl: getAbsoluteUrl('server'),
 };
+
+export const getAbsoluteAdminUrl = getAbsoluteUrl('admin');
+export const getAbsoluteServerUrl = getAbsoluteUrl('server');

@@ -1,27 +1,28 @@
 'use strict';
 
-const _ = require('lodash');
-const { trimChars, trimCharsEnd, trimCharsStart } = require('lodash/fp');
-const slugify = require('@sindresorhus/slugify');
-const { kebabCase } = require('lodash');
+import _ from 'lodash';
+import { trimChars, trimCharsEnd, trimCharsStart } from 'lodash/fp';
+import slugify from '@sindresorhus/slugify';
+import { kebabCase } from 'lodash';
 
-const nameToSlug = (name, options = { separator: '-' }) => slugify(name, options);
+const nameToSlug = (name: string, options: { separator: string } = { separator: '-' }) =>
+  slugify(name, options);
 
-const nameToCollectionName = (name) => slugify(name, { separator: '_' });
+const nameToCollectionName = (name: string) => slugify(name, { separator: '_' });
 
-const toRegressedEnumValue = (value) =>
+const toRegressedEnumValue = (value: string) =>
   slugify(value, {
     decamelize: false,
     lowercase: false,
     separator: '_',
   });
 
-const getCommonBeginning = (...strings) =>
+const getCommonBeginning = (...strings: string[]) =>
   _.takeWhile(strings[0], (char, index) => strings.every((string) => string[index] === char)).join(
     ''
   );
 
-const getCommonPath = (...paths) => {
+const getCommonPath = (...paths: string[]) => {
   const [segments, ...otherSegments] = paths.map((it) => _.split(it, '/'));
   return _.join(
     _.takeWhile(segments, (str, index) => otherSegments.every((it) => it[index] === str)),
@@ -29,7 +30,7 @@ const getCommonPath = (...paths) => {
   );
 };
 
-const escapeQuery = (query, charsToEscape, escapeChar = '\\') => {
+const escapeQuery = (query: string, charsToEscape: string[], escapeChar = '\\'): string => {
   return query
     .split('')
     .reduce(
@@ -41,13 +42,14 @@ const escapeQuery = (query, charsToEscape, escapeChar = '\\') => {
     );
 };
 
-const stringIncludes = (arr, val) => arr.map(String).includes(String(val));
-const stringEquals = (a, b) => String(a) === String(b);
-const isCamelCase = (value) => /^[a-z][a-zA-Z0-9]+$/.test(value);
-const isKebabCase = (value) => /^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/.test(value);
-const startsWithANumber = (value) => /^[0-9]/.test(value);
+const stringIncludes = (arr: unknown[], val: unknown): boolean =>
+  arr.map(String).includes(String(val));
+const stringEquals = (a: unknown, b: unknown): boolean => String(a) === String(b);
+const isCamelCase = (value: string): boolean => /^[a-z][a-zA-Z0-9]+$/.test(value);
+const isKebabCase = (value: string): boolean => /^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/.test(value);
+const startsWithANumber = (value: string): boolean => /^[0-9]/.test(value);
 
-const joinBy = (joint, ...args) => {
+const joinBy: (joint: string, ...args: string[]) => string = (joint, ...args) => {
   const trim = trimChars(joint);
   const trimEnd = trimCharsEnd(joint);
   const trimStart = trimCharsStart(joint);
@@ -60,9 +62,9 @@ const joinBy = (joint, ...args) => {
   }, '');
 };
 
-const toKebabCase = (value) => kebabCase(value);
+const toKebabCase = (value: string): string => kebabCase(value);
 
-module.exports = {
+export {
   nameToSlug,
   nameToCollectionName,
   getCommonBeginning,
