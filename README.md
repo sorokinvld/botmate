@@ -38,7 +38,7 @@ Here is a quick overview of the roadmap, for more information visit the project 
 - [x] Multiple bots
 - [ ] Marketplace page
 - [ ] Plugins page
-- [ ] Script sandboxing
+- [ ] GitHub Integeration
 - [ ] and more...
 
 ### Goal
