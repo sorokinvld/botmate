@@ -1,14 +1,20 @@
-# BotMate  🤖🔌🚀
+# BotMate App
 > Streamline your bot development with BotMate. Highly extendible with plugin system. Multiple platform support including Telegram and Discord.
 
-[Telegram Group](https://t.me/chatbotmate)
+[Telegram Group](https://t.me/chatbotmate) • [Tech Stack](https://docs.botmate.app/tech-stack)
 
 ⚠️ **Note**: This project is still under active development. Feel free to contribute to it.
 
 ![image](https://user-images.githubusercontent.com/31907722/228914057-85772b90-9719-409f-bcba-842af7883874.png)
 
+To create a BotMate project, run the following command - 
 
-**Tech Stack**: React JS + Chakra-UI & Express + MongoDB.
+```bash
+npx create-botmate
+# OR
+pnpm create botmate
+```
+
 
 ### Features
 - 🤖 Build and deploy custom chat bots with ease
@@ -27,6 +33,14 @@ To get started with BotMate, simply clone the repository and follow the setup in
 ### Roadmap
 
 To view the roadmap and planned tasks, visit the project tab or [click here](https://github.com/orgs/botmate/projects/3).
+
+### Goal
+
+🚀 The goal of building BotMate is to make it easier for developers to manage and deploy multiple chat bots. We understand that managing multiple bots can be a daunting task, requiring switching between multiple projects and setting up separate databases. In fact, it's not uncommon to end up writing duplicate code for multiple bots, leading to increased development time and effort.
+
+That's where BotMate comes in. With our flexible plugin system and centralized dashboard, you can easily manage all your bots in one place. No more switching between multiple projects or setting up separate databases. Plus, BotMate provides inbuilt functions like accessing databases and common utility functions to speed up the development process.
+
+🤖 Our mission is to streamline bot development and make it accessible to developers of all skill levels. Try BotMate today and see how we can simplify your bot development workflow!
 
 ### Contributing
 We welcome contributions from developers of all skill levels! Please see the CONTRIBUTING.md file for guidelines on how to contribute to BotMate.
