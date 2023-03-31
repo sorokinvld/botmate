@@ -1,7 +1,6 @@
 import path from 'path';
 import { isFunction } from 'lodash';
 import { createLogger } from '@botmate/logger';
-import { initDb } from '@botmate/database';
 import mongoose from 'mongoose';
 import EventEmitter2 from 'eventemitter2';
 
@@ -124,7 +123,7 @@ class BotMate {
 
   async register() {
     const config = this.config.get('database');
-    this.db = await initDb(config.url);
+    this.db = await mongoose.connect(config.url);
 
     await Promise.all([
       //
