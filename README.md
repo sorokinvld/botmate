@@ -32,7 +32,14 @@ To get started with BotMate, simply clone the repository and follow the setup in
 
 ### Roadmap
 
-To view the roadmap and planned tasks, visit the project tab or [click here](https://github.com/orgs/botmate/projects/3).
+Here is a quick overview of the roadmap, for more information visit the project tab or [click here](https://github.com/orgs/botmate/projects/3).
+
+- [x] Authentication
+- [x] Multiple bots
+- [ ] Marketplace page
+- [ ] Plugins page
+- [ ] Script sandboxing
+- [ ] and more...
 
 ### Goal
 
