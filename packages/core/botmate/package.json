@@ -11,13 +11,13 @@
   "types": "./lib/index.d.ts",
   "scripts": {
     "dev": "tsc -w",
-    "build": "swc src -d lib && tsc --emitDeclarationOnly"
+    "build": "swc src -d lib && tsc --emitDeclarationOnly",
+    "build:watch": "tsc -w"
   },
   "dependencies": {
     "@botmate/admin": "workspace:*",
     "@botmate/bots": "workspace:*",
     "@botmate/logger": "workspace:*",
-    "@botmate/plugin.telegram": "workspace:*",
     "@botmate/scripts": "workspace:*",
     "@botmate/typescript-utils": "workspace:*",
     "@botmate/utils": "workspace:*",
