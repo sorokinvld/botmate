@@ -20,9 +20,13 @@
 - 🚀 Manage all your bots from a single dashboard
 
 ### Getting Started
-To get started with BotMate, simply clone the repository and follow the setup instructions in the README.
+To get started with BotMate, simply clone the repository and follow the setup instructions on our [documentation website](https://docs.botmate.app/getting-started).
 
 > Plugin system is heavily inspired by [Strapi CMS](https://docs.strapi.io/dev-docs/plugins-development).
+
+### Roadmap
+
+To view the roadmap and planned tasks, visit the project tab or [click here](https://github.com/orgs/botmate/projects/3).
 
 ### Contributing
 We welcome contributions from developers of all skill levels! Please see the CONTRIBUTING.md file for guidelines on how to contribute to BotMate.
