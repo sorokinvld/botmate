@@ -1,0 +1,15 @@
+{
+  "extends": "@botmate/typescript-utils/tsconfigs/server",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "./src",
+    "declaration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["./src/**/*.ts", "src/global.d.ts"],
+  "exclude": ["node_modules/", "./lib/", "**/*.test.ts"]
+}

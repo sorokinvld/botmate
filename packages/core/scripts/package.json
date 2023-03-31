@@ -2,7 +2,8 @@
   "name": "@botmate/scripts",
   "version": "0.0.3",
   "files": [
-    "lib"
+    "lib",
+    "entry.js"
   ],
   "botmate": {
     "displayName": "Scripts APIs",
@@ -13,6 +14,7 @@
     "core": true
   },
   "dependencies": {
+    "@botmate/typescript-utils": "workspace:^0.0.7",
     "mongoose": "^7.0.3"
   }
 }

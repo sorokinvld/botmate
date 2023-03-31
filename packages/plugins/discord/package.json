@@ -3,7 +3,8 @@
   "version": "0.0.4",
   "files": [
     "lib",
-    "admin"
+    "admin",
+    "entry.js"
   ],
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

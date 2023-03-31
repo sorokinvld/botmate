@@ -2,7 +2,8 @@
   "name": "@botmate/bots",
   "version": "0.0.3",
   "files": [
-    "lib"
+    "lib",
+    "entry.js"
   ],
   "description": "",
   "main": "lib/index.js",

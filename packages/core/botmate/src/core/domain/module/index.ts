@@ -22,7 +22,7 @@ const createModule = (namespace: string, rawModule: any, botmate: BotMate.BotMat
   try {
     validateModule(rawModule);
   } catch (e) {
-    throw new Error(`botmate-server.js is invalid for '${namespace}'.\n${e.errors.join('\n')}`);
+    throw new Error(`entry.js is invalid for '${namespace}'.\n${e.errors.join('\n')}`);
   }
 
   const called: any = {};
