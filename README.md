@@ -1,10 +1,12 @@
 # BotMate App
 
+⚠️ **Note**: This project is still under active development. Expect bugs and breaking changes. Right now, I am refactoring the codes.
+
+
 > Streamline your bot development with BotMate. Highly extendible with plugin system. Multiple platform support including Telegram and Discord.
 
 [Telegram Group](https://t.me/chatbotmate) • [Tech Stack](https://docs.botmate.app/tech-stack)
 
-⚠️ **Note**: This project is still under active development. Expect bugs and breaking changes.
 
 ![image](https://user-images.githubusercontent.com/31907722/228914057-85772b90-9719-409f-bcba-842af7883874.png)
 
